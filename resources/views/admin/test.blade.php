@@ -13,18 +13,7 @@
                         <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
-                <div class="box-body">
-                    @foreach($tasks as $task)
-                        <h5>
-                            {{ $task['name'] }}
-                            <small class="label label-{{$task['color']}} pull-right">{{$task['progress']}}%</small>
-                        </h5>
-                        <div class="progress progress-xxs">
-                            <div class="progress-bar progress-bar-{{$task['color']}}" style="width: {{$task['progress']}}%"></div>
-                        </div>
-                    @endforeach
-
-                </div><!-- /.box-body -->
+                <!--  -->
                 <div class="box-footer">
                     <form action='#'>
                         <input type='text' placeholder='New task' class='form-control input-sm' />

@@ -24,8 +24,8 @@
 
     </div>
     <br/>
-    <div class="panel panel-card">
-    <table class="table table-striped" style="align:center">
+     <div class="box-body table-responsive margin">                   
+    <table id="data" class="table table-bordered table-hover dataTable table-striped">
       <thead>
         <tr>
           <th>ID</th>
@@ -38,11 +38,11 @@
        
        @foreach ($data as $row)
         <tr>
-          <td>{{ $row->id_ukuran }}</td>
+          <td>{{ $row->id }}</td>
           <td>{{ $row->nama_ukuran }}</td>
          <td>{{ $row->status }}</td>
           <td>
-            <a class="btn btn-warning" href="{{ url('ukuran/edit/'.$row->id_ukuran) }}">Edit</a>
+            <a class="btn btn-default" href="{{ url('ukuran/edit/'.$row->id_ukuran) }}">Edit</a>
             
          </td>
         </tr>

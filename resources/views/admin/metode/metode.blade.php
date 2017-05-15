@@ -15,8 +15,8 @@
   <a href="{{ url('metode/tambah') }}" class="btn btn-fw btn-info waves-effect waves-effect">Tambah</a>
 </section>
 </div>
-    <div class="panel panel-card">
-    <table class="table table-striped" style="align:center">
+     <div class="box-body table-responsive margin">                   
+    <table id="data" class="table table-bordered table-hover dataTable table-striped">
       <thead>
         <tr>
           <th>ID</th>
@@ -33,7 +33,7 @@
        
        @foreach ($data as $row)
         <tr>
-          <td>{{ $row->id_metode_bayar }}</td>
+          <td>{{ $row->id }}</td>
           <td>{{ $row->metode }}</td>
           <td>{{ $row->nama_rekening }}</td>
           <td>{{ $row->nomor }}</td>

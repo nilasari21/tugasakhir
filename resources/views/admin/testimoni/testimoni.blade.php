@@ -2,11 +2,11 @@
 
 
 @section('content')
-
+<div class="panel panel-card" >
   <h2 tyle="align:center"><b >Daftar Testimoni</b><br/></h2>
 
-    <div class="panel panel-card">
-    <table class="table table-striped" style="align:center">
+     <div class="box-body table-responsive margin">                   
+    <table id="data" class="table table-bordered table-hover dataTable table-striped">
       <thead>
         <tr>
           <th>Tanggal</th>
@@ -21,20 +21,30 @@
        
        @foreach ($data as $row)
         <tr>
-          <td>{{ $row->tanggal_membuat }}</td>
+          <td>{{ $row->created_at }}</td>
           <td>{{ $row->id_testi }}</td>
-          <td>{{ $row->nama_user }}</td>
-          <td>{{ $row->foto }}</td>
-          <td>{{ $row->keterangan }}</td>
-          <td>{{ $row->status }}</td>
+          <td>{{ $row->name }}</td>
+          <?php 
+          if(count($row->foto_testi)==0){?>
+            <td></td>
+            <?php
+          }else{?>
+          <td><img src=".img/produk/client/{{ $row->foto_testi }}" ></td>
+          <?php
+          }
+          ?>
+          
+          <td>{{ $row->Keterangan }}</td>
+          
 
           <td>
-             <a class="btn btn-info" href="#">Edit</a>
-            <a class="btn btn-danger" href="#" onclick="return confirm('Are you sure to delete this data?')">Delete</a>
+             
+            <a class="btn btn-default" href="#" onclick="return confirm('Are you sure to delete this data?')"><i class="fa fa-remove"></i>  Delete</a>
          </td>
         </tr>
        @endforeach
       </tbody>
     </table>
     </div>
+  </div>
     @endsection

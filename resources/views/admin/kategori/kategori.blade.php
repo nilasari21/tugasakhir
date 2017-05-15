@@ -26,8 +26,9 @@
 
 
 <br/>
-    <div class="panel panel-card">
-    <table class="table table-striped" style="align:center">
+  <div class="box-body table-responsive margin">                   
+    <table id="data" class="table table-bordered table-hover dataTable table-striped">
+       
       <thead>
         <tr>
           <th>ID</th>
@@ -50,7 +51,11 @@
         </tr>
        @endforeach
       </tbody>
-    </table>
+     </table>
+        </div>
+            <!-- /.box-body -->
+    
+
     </div>
    
     @endsection

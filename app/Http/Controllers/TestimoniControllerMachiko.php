@@ -11,8 +11,11 @@ class TestimoniControllerMachiko extends Controller {
 
    public function index()
     {
-        $data = Testimoni::all();
-        return view('machiko.testimoni');
+        $data = Testimoni::join('users','testimoni.users_id','users.id')
+                          ->select('testimoni.*','users.name')
+                          ->get();
+                          dd($data);
+        return view('machiko.testimoni')->with('data',$data);
        //
     }
     /*public function tambah()

@@ -26,9 +26,9 @@ Route::get('machiko', function () {
 
 Route::get('toko', 'TestControllerMachiko@index');
 
-Route::get('beranda', 'TestController@index');
+Route::get('beranda', 'BerandaController@index');
 
-Route::get('test', 'BerandaController@index');
+Route::get('testmachiko', 'ProdukController@index');
 
 Route::get('kategori', 'KategoriController@index');
 Route::post('kategori/simpan', 'KategoriController@tambah');
@@ -51,6 +51,19 @@ Route::get('customer', 'UserController@index');
 Route::get('testimoni', 'TestimoniController@index');
 
 Route::get('preorder', 'PreorderController@index');
+Route::get('preorder/tambahpo', 'PreorderController@tambah');
+Route::post('preorder/simpannonukuran', 'PreorderController@simpannonukuran');
+Route::post('preorder/simpanukuran', 'PreorderController@simpanukuran');
+
 Route::get('readystock', 'ReadystockController@index');
+Route::get('readystock/tambahrs', 'ReadystockController@tambah');
+Route::post('readystock/simpannonukuran', 'ReadystockController@simpannonukuran');
+Route::post('readystock/simpanukuran', 'ReadystockController@simpanukuran');
 
 Route::get('testimonimachiko', 'TestimoniControllerMachiko@index');
+
+Route::get('transaksi', 'KelolaTransaksiController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

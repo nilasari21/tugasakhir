@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nama', 'email', 'kata_sandi',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -24,6 +24,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'kata_sandi', 'remember_token',
+        'password', 'remember_token',
     ];
-}
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+    public function keranjang()
+    {
+        return $this->hasMany('App\keranjang');
+     }

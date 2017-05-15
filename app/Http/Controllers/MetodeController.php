@@ -24,7 +24,7 @@ class MetodeController extends Controller {
     public function simpan(Request $request)
     {
         
-        $data = new Metode; // new Model
+      $data = new Metode; // new Model
     	$data->metode = $request->metode;
       $data->nama_rekening = $request->nama_rekening;
       $data->nomor = $request->nomor;

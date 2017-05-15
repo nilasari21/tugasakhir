@@ -11,7 +11,11 @@ class TestimoniController extends Controller {
 
    public function index()
     {
-        $data = Testimoni::all();
+        $data = Testimoni::join('users','testimoni.users_id','users.id')
+                          ->select('testimoni.*','users.name')
+                          // ->orderby('testimoni.id_testi',desc())
+                          ->get();
+                          // dd($data);
         return view('admin.testimoni.testimoni')->with('data',$data);
        //
     }
