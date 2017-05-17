@@ -1,7 +1,19 @@
 @extends('machiko.machiko_template')
 @section('css')
 <link href="{{ asset("/adminlte/plugins/datepicker/datepicker3.css") }}" rel="stylesheet" type="text/css" />
-    
+    <style type="text/css">
+.krajee-default.file-preview-frame {
+    position: relative;
+    display: table;
+    margin: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 1px 1px 5px 0 #a2958a;
+    padding: 6px;
+    float: left;
+    text-align: center;
+    width: 97%;
+}
+</style>
 @endsection
 
 @section('content')

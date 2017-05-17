@@ -52,7 +52,7 @@
                         <p>gram</p>
                      
                       </div>
-                      <div class="form-group">
+                     <!--  <div class="form-group">
                       
                       <div class="col-sm-8" style="padding-left:25%">
                          <div class="row" style="width: 500px; height: 50px; margin-left: 100px;">
@@ -71,7 +71,7 @@
 
                            </div>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="form-group">
                       
                       <div class="col-sm-8" style="padding-left:25%">
@@ -139,10 +139,10 @@ function getOngkir() {
       var kota_tujuan = $('#kota_asal').val();
       console.log(kota_tujuan);
       var berat =$('#berat').val();
-       var radio = $('input[name=optionsRadio]:checked', '.radio-inline').val();
-       console.log(radio)
+       /*var radio = $('input[name=optionsRadio]:checked', '.radio-inline').val();
+       console.log(radio)*/
       var service, des, etd, value;
-       $.get("cekongkir/hasil/"+kota_tujuan+"/"+radio+"/"+berat,
+       $.get("cekongkir/hasil/"+kota_tujuan+"/"+berat,
         function(hasil){
             $('#ongkos').empty();
             $.each(hasil, function(index, hasil){

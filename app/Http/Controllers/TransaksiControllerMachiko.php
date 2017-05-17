@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Transaksi;
 use App\Penerima;
 use App\Keranjang;
+use App\Users;
 use App\Metode;
 use App\DetailTransaksi;
 use DB;
@@ -75,7 +76,7 @@ class TransaksiControllerMachiko extends Controller {
                         
         return view('machiko.checkout')->with(compact('keranjang',$keranjang,'data',$data,'penerima',$penerima,'metodebanyak',$metodebanyak,'beratharga',$beratharga,'kota',$kota));
     }
- public function hasil($kota_tujuan,$radio,$berat) {
+ public function hasil($kota_tujuan,$berat) {
         $data = RajaOngkir::Kota()->all();
 
        
@@ -83,13 +84,14 @@ class TransaksiControllerMachiko extends Controller {
             'origin'        => 501, // id kota asal
             'destination'   => $kota_tujuan, // id kota tujuan
             'weight'        => $berat, // berat satuan gram
-            'courier'       => $radio, // kode kurir pengantar ( jne / tiki / pos )
+            'courier'       => 'jne', // kode kurir pengantar ( jne / tiki / pos )
         ])->get();
          
         // return $hasil;
         return $hasil;
 
     }
+     
     public function getId($kota_asal) {
         
 
@@ -119,11 +121,20 @@ class TransaksiControllerMachiko extends Controller {
        
        $metode=  Metode::where('id','=',$metode)
                             ->get();
+                            // dd($metode);
                             return $metode;
+
 
     }
     public function tambah(Request $request)
     {
+      if($request->jenis_pesan=="Dropshipper"){
+      $toko= Users::where('id','=',2)
+                  ->first();
+      $toko->toko=$request->nama_toko;
+      $toko->save();  
+      }
+      
       $transaksi = new Transaksi; 
      
       
@@ -140,6 +151,7 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_bayar=$request->total;
       
       $transaksi->save();
+
       $keranjang = Keranjang::where('user_id','=',2)
                          ->get();
     // dd($transaksi);

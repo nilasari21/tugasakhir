@@ -35,76 +35,61 @@ hr {
                     <h5 class="box-title"><i class="fa fa-user"></i> Data diri</a></h5>
                     
                 <div class="row">
-                    
-              
-                    <div class="col-sm-12">
-
-                        <div class="col-md-12">
-                            <div class="box-body box-profile">
-                                <?php     
-                                if(count($data->foto)==0){?>
-                                <img class="profile-user-img img-responsive img-circle" 
-                                            src="{{asset("/machikoo/img/mauedit.png")}}" 
-                                            style="height:200px; width:200px" alt="User profile picture">      
-                                            <?php
-                            }else{?>
-                            <img class="profile-user-img img-responsive img-circle" 
-                                            src="{{asset("/.img/produk/client/". $data->foto )}}" 
-                                            style="height:200px; width:200px" alt="User profile picture">      
-                            <?php } ?>
-                            <br/>
-                        </div>
-                    
-                    
-                    <br/>
-                    </div>
-                </div>
-                <div class="col-md-4" >
+                <div class="row">
+                        <div class="col-sm-offset-1 col-xs-12">
                         
-                    </div>
-                 <div class="col-md-4" dtyle="text-align:center">
-                        <button  id="edit_data_diri" class="btn btn-fw btn-info waves-effect waves-effect"><i class="fa fa-edit"></i>  Edit Data diri</button>
-                    </div>
-                    <div class="col-md-4" >
-                        
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-offset-1 col-xs-10">
-                        
-                        <form method="POST"  enctype="multipart/form-data" files="true" action="#">
-                             <div class="row">
+                        <form method="POST" action="#">
+                             <div class="row" sty>
                                           {{ csrf_field() }}
                                           <div class="col-md-12">
                                             
                                             <!-- <input type="text" id="idtrans" name="idtrans"> -->
+                                            <br/>
+                                            <br/>
                                             <div class="form-group">
-                                                <label for="exampleInputFile">Foto Profil</label>
-                                                <input id="input-2" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">
+                                            <label for="inputName" class="col-sm-3 control-label">Nama lengkap</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" name="nama" value="{{$data->name}}" required/>
                                             </div>
+                                            </div>
+                                            <br/>
                                             <div class="form-group">
-                                                <label >Nama lengkap</label>
-                                                <input  name='nama' type="text" value="{{$data->name}}">
+                                            <label for="inputName" class="col-sm-3 control-label">No Handphone</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" name="nama" value="{{$data->no_hp}}" required/>
                                             </div>
+                                            </div>
+                                            <br/>
                                             <div class="form-group">
-                                                <label >No Handphone</label>
-                                                <input  name='no_hp' type="text" value="{{$data->no_hp}}">
+                                            <label for="inputName" class="col-sm-3 control-label">Email</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" name="nama" value="{{$data->email}}" required/>
                                             </div>
-                                            <div class="form-group">
-                                                <label >Email</label>
-                                                <input  name='no_hp' type="text" value="{{$data->email}}">
                                             </div>
-                                           
-                                             <div class="form-group">
-                                            <label >Tanggal lahir</label>
-                                            <!-- <div class="col-sm-8"> -->
+                                            <br/>
+                                           <div class="form-group">
+                                            <label for="inputName" class="col-sm-3 control-label">Tanggal lahir</label>
+                                            <div class="col-sm-8">
                                                 <div class='input-group date' >
                                             <input type='text' name="tanggal_transfer" value="{{$data->tgl_lahir}}" class="form-control" id="datepicker" required >
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
                                         </div>
-                                            <!-- </div> -->
+                                            </div>
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="inputName" class="col-sm-3 control-label">Jenis kelamin</label>
+                                            <div class="col-sm-8">
+                                                <div class='input-group date' >
+                                            <input type='text' name="tanggal_transfer" value="{{$data->tgl_lahir}}" class="form-control" id="datepicker" required >
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
                                         </div>
+                                            </div>
+                                            </div>
+                                            
                                        
                                 
                                  </div>

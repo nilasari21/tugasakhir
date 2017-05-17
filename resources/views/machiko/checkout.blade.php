@@ -95,13 +95,13 @@
             <div class="panel panel-default">
             <div class="panel-heading" align="center" style="font-size:20px;background:#66CC99;font-family:Raleway"><b>Checkout Keranjang</b></div>
                 <div class="panel-body">
-                <!--  -->
+                
                 <div class="row" style="margin-top:15px">
                   <div class="col-md-12">
                                 <div class="product-content-right">
                                     <div class="woocommerce">
                                         <form method="post" action="#" name="autoSumForm">
-                                            <div class="table-responsive">
+                                            <div class="table-responsive" style="display:none">
                                             <table cellspacing="0" class="shop_table cart" style="width:100%;align:center" >
                                                 <thead >
                                                     <tr >
@@ -111,8 +111,7 @@
                                                         <th class="product-quantity" style="background:#66CC99;font-family:Raleway">Harga</th>
                                                         <th class="product-price" style="background:#66CC99;font-family:Raleway">Harga Tambah</th>
                                                         <th class="product-price" style="background:#66CC99;font-family:Raleway">Jumlah</th>
-                                                        <!-- <th class="product-price" style="background:#66CC99;font-family:Raleway">Berat</th>
-                                                        <th class="product-subtotal" style="background:#66CC99;font-family:Raleway">Total</th> -->
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -164,13 +163,7 @@
                                                                 <input type="text" id="minimal_beli{{$i}}" value="{{ $b->minimal_beli }}">
                                                                 
                                                             </div>
-                                                        </td><!-- 
-                                                        <td class="product-name">
-                                                            <span class="amount" >{{ $b->berat_total }} gram</span> 
                                                         </td>
-                                                       <td class="product-subtotal" >
-                                                            <span class="amount" >{{ $b->Total_harga }}</span> 
-                                                        </td> -->
                                                     </tr></tr>
                                                     @php
                                                     $i++
@@ -199,11 +192,11 @@
                                       
                                     </div>                        
                                 </div>                    
-                            </div>
+                            </div> 
                 <form class="form-horizontal" action="{{ url('checkout/simpan') }}" method="post">
                   {{ csrf_field() }}
                 <input type="hidden" class="form-control" id="berat" name="berat" value="{{ $b->berat }} " readonly>  
-                    <input type="text" class="form-control" id="level" name="nama_produk" value="{{$data->level}}">
+                    <input type="hidden" class="form-control" id="level" name="nama_produk" value="{{$data->level}}">
                     
                     <input type="hidden" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
                     <div class="form-group">
@@ -211,7 +204,7 @@
                       <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>  
                       <!-- </div> -->
                       <div class="col-sm-4">
-                        <input type="hidden" class="form-control" id="status" name="status" value="">
+                        <input type="text" class="form-control" id="status" name="status" value="">
                         <select class="form-control" style="width: 100%;" id="pesan" name="jenis_pesan" onChange="a()" data-toggle="modal" required/>
                             <option>Pilih jenis pemesanan</option>
                               <option value="Customer">Customer biasa</option>
@@ -243,7 +236,7 @@
                       <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Tujuan Pengiriman</label>
                       <div class="col-sm-8">
-                          <input type="hidden" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$data->id_penerima}}" class="form-control"/>
+                          <input type="text" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$data->id_penerima}}" class="form-control"/>
                           <textarea id="alamat" rows='5'style="border: 1px;width:100%;" value="" disabled >{{$data->nama_penerima}}&#13;&#10;{{$data->no_hp_penerima}},&#13;&#10;{{$data->alamat_lengkap}},{{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}} </textarea>
                           <input type="hidden" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$data->kabupaten}}" class="form-control"/>
                           <input type="hidden" id="kota_asal"  name="kota_asal" value="" />
@@ -254,7 +247,7 @@
                       <div class="col-sm-3 control-label">
                       </div>
                       <div class="col-sm-4">
-                        <select class="form-control" style="width: 100%;" onChange="getAlamat()" id="alamat_pilih" name="alamat_pilih" />
+                        <select class="form-control" style="width: 100%;" onChange="getAlamat();getOngkir()" id="alamat_pilih" name="alamat_pilih" />
                             <option>Pilih alamat lain</option>
                               @foreach($penerima as $row)
                                     <option value="{{$row->kabupaten}}" >
@@ -275,7 +268,7 @@
                         <input type="hidden" class="form-control" id="metode_pilih" name="metode_pilih" value="">
                         <input type="hidden" class="form-control" id="jenis_metode" name="jenis_metode" value="">
                         <div class="col-sm-4">
-                        <select class="form-control" style="width: 100%;" onChange="b()" id="metode" name="metode" required/>
+                        <select class="form-control" style="width: 100%;" onChange="b();getTotal()" id="metode" name="metode" required/>
                             <option>Pilih metode pembayaran</option>
                               @foreach($metodebanyak as $row)
                                     <option value="{{$row->id}}" >
@@ -287,25 +280,7 @@
                       </div>
                       </div>
                         <div class="form-group">
-                      <div class="col-sm-3 control-label">
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="row" style="width: 500px; height: 50px; margin-left: 100px;">
-                           <div class="radio-inline" onChange="getOngkir()">
-                          <label>
-                           <input type="radio" class="radio" name="optionsRadio" id="optionsRadios1" value="jne" >
-                             JNE
-                           </label>
-                            </div>
-                            <div class="radio-inline" onChange="getOngkir()">
-                          <label>
-                           <input type="radio" class="radio"name="optionsRadio" id="optionsRadios1" value="pos" >
-                            POS
-                           </label>
-                            </div>
-
-                           </div>
-                      </div>
+                      
                       <div class="col-sm-12">
                         <div class="col-sm-2">
                       </div>
@@ -344,6 +319,7 @@
                         <input type="hidden" class="form-control" id="total1" name="total" value="{{$d->total}}" readonly>
                         <input type="hidden" class="form-control" id="total2" name="total" value="{{$d->total}}" readonly>
                         <input type="text" class="form-control" id="total" name="total" value="{{$d->total}}" readonly>
+                        <input type="text" class="form-control" id="total3" name="total3" value="{{$d->total}}" readonly>
                       </div>
                       
                     </div>
@@ -418,19 +394,20 @@
         status_pesan.value="Tunda";
         document.getElementById('nama_toko').style.display = 'none';
       }
+      
+      
+       
+     }if(pembanding==false){
       if(level=="Reseller" && option=="Reseller"){
         $('#modal3').modal('hide');
         var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
+        
         status_pesan.value="Terima";
+        console.log(status_pesan);
         document.getElementById('nama_toko').style.display = 'none';
 
         
       }
-      
-       
-     }if(pembanding==false){
-
       if(level=="Customer" && option=="Reseller"  ){
         $('#modal').modal('show');
         var setlevel=document.getElementById('getlevel');
@@ -517,39 +494,86 @@ function b() {
       var metode = $('#metode').val();
       var metode_pilih = $('#metode_pilih').val();
       console.log(metode);
+
        $.get("metode/"+metode,
-        function(hasil){
-          $.each(hasil, function(index, hasil){
+        function(hasil2){
+          $.each(hasil2, function(index, hasil2){
             // $.each(hasil, function(index, hasil){
             
-                $('#metode_pilih').val(hasil.rate);
-                $('#jenis_metode').val(hasil.jenis);
+                $('#metode_pilih').val(hasil2.rate);
+                $('#jenis_metode').val(hasil2.jenis);
                 /*if(hasil.jenis=="Pulsa"){
                 $('#total2').val(parseFloat($('#total').val())*parseFloat(hasil.rate)); 
                  
                 }*/
-                
-              console.log(hasil);
+        getTotal();         
+              console.log(hasil2);
               // });
             });
           });
+
             };
 </script>
     <script type="text/javascript">
 $(document).ready(function (){
+ getOngkir();      
+
+     
+            });
+</script>
+<script type="text/javascript">
+function getOngkir() {
+      // event.preventDefault();
       
 
-      var kota_asal = $('#kota').val();
+       var kota_asal = $('#kota').val();
        $.get("getId/"+kota_asal,
         function(hasil){
           $.each(hasil, function(index, hasil){
-            $('#kota_asal').empty();
+           
             
                 $('#kota_asal').val(hasil.city_id)
               console.log(hasil.city_id);
+                var id = $('#user').val();
+      console.log(id);
+      var kota_tujuan = $('#kota_asal').val();
+      console.log(kota_tujuan);
+      var berat =$('#berat').val();
+       /*var radio = $('input[name=optionsRadio]:checked', '.radio-inline').val();
+       console.log(radio)*/
+      var service, des, etd, value;
+       $.get("hasil/"+kota_tujuan+"/"+berat,
+        function(hasil){
+            $('#ongkos').empty();
+            $.each(hasil, function(index, hasil){
+              console.log(hasil.costs.length);
+              if(hasil.costs.length == 0){
+                $('#ongkos').append('<p>Pengiriman dari Yogyakarta Tidak Tersedia</p>')
+              }else{
+                $.each(hasil.costs, function(index, hasil){
+                  service = hasil.service;
+                  des = hasil.description;
+                  $.each(hasil.cost, function(index, hasil){
+                    console.log(service);
+                    $('#ongkos').append(
+                      
+                     '<tr><td><input type="radio" id="ongkir" name="ongkir" onChange="getTotal()" value="'+hasil.value+'" class="ongkir"></td>'+
+                    '<td style="color:#000">'+service+' '+'</td>'+
+                    '<td>'+des+'</td>'+
+                    '<td>'+hasil.etd+'</td>'+
+                    '<td>'+(hasil.value)+'</td></tr>'
+                     
+                    );
+                  }); 
+                }); 
+              }
+            }); 
+            
+        });
               });
           });
-            });
+     
+            };
 </script>
 <script type="text/javascript">
 function idalamat() {
@@ -592,49 +616,7 @@ function getAlamat() {
           });
             };
 </script>
-<script type="text/javascript">
-function getOngkir() {
-      event.preventDefault();
 
-      //var kota_asal = $('#kota').val();
-      var id = $('#user').val();
-      console.log(id);
-      var kota_tujuan = $('#kota_asal').val();
-      console.log(kota_tujuan);
-      var berat =$('#berat').val();
-       var radio = $('input[name=optionsRadio]:checked', '.radio-inline').val();
-       console.log(radio)
-      var service, des, etd, value;
-       $.get("hasil/"+kota_tujuan+"/"+radio+"/"+berat,
-        function(hasil){
-            $('#ongkos').empty();
-            $.each(hasil, function(index, hasil){
-              console.log(hasil.costs.length);
-              if(hasil.costs.length == 0){
-                $('#ongkos').append('<p>Pengiriman dari Yogyakarta Tidak Tersedia</p>')
-              }else{
-                $.each(hasil.costs, function(index, hasil){
-                  service = hasil.service;
-                  des = hasil.description;
-                  $.each(hasil.cost, function(index, hasil){
-                    console.log(service);
-                    $('#ongkos').append(
-                      
-                     '<tr><td><input type="radio" id="ongkir" name="ongkir" onChange="getTotal()" value="'+hasil.value+'" class="ongkir"></td>'+
-                    '<td style="color:#000">'+service+' '+'</td>'+
-                    '<td>'+des+'</td>'+
-                    '<td>'+hasil.etd+'</td>'+
-                    '<td>'+(hasil.value)+'</td></tr>'
-                     
-                    );
-                  }); 
-                }); 
-              }
-            }); 
-            
-        });
-    };
-</script>
 <script type="text/javascript">
             function getTotal() {
       event.preventDefault();
@@ -652,15 +634,33 @@ function getOngkir() {
             var ongkir = $('input[name=ongkir]:checked', '#ongkos').val(); 
             console.log(ongkir);
             var rate = document.getElementById("metode_pilih").value; 
-            var jenis = document.getElementById("jenis_metode").value; 
-            
-            if(jenis=="Pulsa"){
-              
+            var jenis = $("#jenis_metode").val(); 
+            console.log(jenis);
+            if(jenis=="Pulsa" ){
+              if(ongkir){
+              console.log('hai');
               var hasil = document.getElementById("total").value=( (parseFloat(total1)+ parseFloat(ongkir))*parseFloat(rate)).toFixed(0);
+              var hasil = document.getElementById("total3").value=( (parseFloat(total1)+ parseFloat(ongkir))*parseFloat(rate)).toFixed(0);  
+              }
+              
+            }if(jenis=="Pulsa" ){
+              if(!ongkir){
+              console.log('hallo');
+              var hasil = document.getElementById("total").value=( (parseFloat(total1)+ 0)*parseFloat(rate)).toFixed(0);
+              var hasil = document.getElementById("total3").value=( (parseFloat(total1)+ 0)*parseFloat(rate)).toFixed(0);  
+              }
+              
             }
-            else{
+            if(jenis=="Bank" && ongkir){
+              if(ongkir){
+              console.log('hallo haa');
               var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(ongkir));
+              var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(ongkir));  
+              }
+              
             }
+            
+
             /*$('#total2').val(parseFloat(parseFloat(total1)+ parseFloat(ongkir))*parseFloat(hasil.rate)); 
              console.log(hasil);*/
               /*@php

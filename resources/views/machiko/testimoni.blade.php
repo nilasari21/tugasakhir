@@ -1,6 +1,20 @@
 @extends('machiko.machiko_template')
 
-
+@section('css')
+<style type="text/css">
+.krajee-default.file-preview-frame {
+    position: relative;
+    display: table;
+    margin: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 1px 1px 5px 0 #a2958a;
+    padding: 6px;
+    float: left;
+    text-align: center;
+    width: 97%;
+}
+</style>
+@endsection
 @section('content')
 <div class="single-product-area">
     <div class="zigzag-bottom">
@@ -56,10 +70,10 @@
                                     <form method="POST"  enctype="multipart/form-data" files="true" action="{{ url('testimoni/simpan') }}">
                                       <div class="row">
                                           {{ csrf_field() }}
-                                          <div class="col-md-12">
+                                          <div class="col-md-12" >
                                             <div class="form-group">
                                                 <label for="exampleInputFile">Upload gambar</label>
-                                                <input id="input-2" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">
+                                                <input style="width:97%"id="input-2" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">
                                             </div>
                                               <div class="form-group">
                                                   <label for="exampleInputFile">Testimoni produk</label><br/>
