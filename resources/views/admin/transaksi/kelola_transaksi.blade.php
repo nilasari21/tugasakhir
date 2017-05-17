@@ -80,7 +80,7 @@
               <div class="tab-pane" id="timeline">
                 <!-- The timeline -->
                 <div class="box-body table-responsive margin">                   
-                <table id="example3" class="table table-bordered table-hover dataTable table-striped">
+                <table id="data2" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
                     <tr>
                       <th>Id Transaksi</th>
@@ -128,7 +128,7 @@
 
               <div class="tab-pane" id="settings">
                 <div class="box-body table-responsive margin">                   
-                <table id="example4" class="table table-bordered table-hover dataTable table-striped">
+                <table id="data3" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
                     <tr>
                       <th>Id Transaksi</th>
@@ -175,7 +175,7 @@
 
               <div class="tab-pane" id="pengiriman">
                 <div class="box-body table-responsive margin">                   
-                <table id="example5" class="table table-bordered table-hover dataTable table-striped">
+                <table id="data4" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
                     <tr>
                       <th>Id Transaksi</th>
@@ -222,7 +222,7 @@
 
               <div class="tab-pane" id="selesai">
                 <div class="box-body table-responsive margin">                   
-                <table id="example6" class="table table-bordered table-hover dataTable table-striped">
+                <table id="data5" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
                     <tr>
                       <th>Id Transaksi</th>

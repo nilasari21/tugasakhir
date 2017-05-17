@@ -4,39 +4,50 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 use App\Testimoni;
 use Illuminate\Http\Request;
-
+use Image;
+// cause Illuminate\Support\Fades\Input;
 class TestimoniControllerMachiko extends Controller {
 
-   public function index()
-    {
-        $data = Testimoni::join('users','testimoni.users_id','users.id')
-                          ->select('testimoni.*','users.name')
-                          ->get();
-                          dd($data);
+    public function index() {
+        // $data=[];
+        
+        $data = Testimoni::join('users','users.id','=','testimoni.users_id')
+                         ->where('users_id','=','2')
+                         ->get();
+       
         return view('machiko.testimoni')->with('data',$data);
-       //
     }
-    /*public function tambah()
+    public function showtambah()
     {
+        return view('machiko.tambah_testi');
         
-        return view('admin.metode.tambah');
-       //
     }
-    public function simpan(Request $request)
+public function simpan(Request $request)
     {
-        
-        $data = new Metode; // new Model
-    	$data->metode = $request->metode;
-      $data->nama_rekening = $request->nama_rekening;
-      $data->nomor = $request->nomor;
-      $data->rate = $request->rate;
-      $data->status = $request->status;
-    	$data->save();
-    	return redirect('metode');
+      $testi = new Testimoni; 
+     
+      
+      $thumb = ('.img/produk/client');
+
+      if($request->hasFile('image')){
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $images = $request->file('image');
+        $imageName = time().'.'.$request->image->getClientOriginalExtension();
+       
+        Image::make($images)->resize('150', '150')->save($thumb . '/' . $imageName);
+
+        }
+      $testi->users_id= 2;
+      $testi->foto_testi=$imageName;
+      $testi->Keterangan=$request->keterangan;
+      $testi->save();
+     return redirect('testimoni');
 
        //
-    }*/
-
+    }
 }

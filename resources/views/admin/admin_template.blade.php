@@ -15,8 +15,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- <link href="{{ asset("/adminlte/plugins/datatables/dataTables.bootstrap.css") }}" rel="stylesheet" type="text/css" /> -->
     <link rel="stylesheet" href="{{ asset('/adminlte/') }}/plugins/datatables/dataTables.bootstrap.css"  >
-    <!-- bootstrap datepicker -->
-    <link href="{{ asset('/adminlte') }}/plugins/datepicker/datepicker3.css" rel="stylesheet"  >
+        <!-- bootstrap datepicker -->
+<link href="{{ asset('/adminlte') }}/plugins/datepicker/datepicker3.css" rel="stylesheet"  >
      
     
     
@@ -108,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset ("/adminlte/dist/js/app.min.js") }}"></script>
 <script src="{{ asset ("/adminlte/plugins/slimScroll/jquery.slimscroll.min.js") }}"></script>
 <script src="{{ asset ("/adminlte/dist/js/demo.js") }}"></script>
-<script src="{{ asset('/adminlte') }}/plugins/fastclick/fastclick.js"></script>
+<script src="{{ asset("/adminlte/plugins/fastclick/fastclick.js") }}"></script>
 <script src="{{ asset("/adminlte/bootstrap/js/bootstrap2-toggle.js")}}"  ></script>
 <script src="{{ asset("/adminlte/plugins/datatables/jquery.dataTables.min.js") }}" > </script>
 <script src="{{ asset("/adminlte/plugins/datatables/dataTables.bootstrap.min.js") }}"  > </script>
@@ -127,7 +127,99 @@ scratch. This page gets rid of all links and provides the needed markup only.
   $(function () { 
       // Data Table
     $("#data").dataTable({
-      "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+      "order": [[ 1, "desc" ]],
+      // sscrollX: true
+      "oLanguage": {
+        "sLengthMenu": "Tampilkan _MENU_ data",
+        "sZeroRecords": "Maaf, Data tidak ditemukan",
+        "sSearch": "cari",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "sInfoEmpty": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "sInfoFiltered": "(Memfilter dari _MAX_ total records)",
+        "oPaginate": {
+            "sPrevious": "sebelum",
+            "sNext": "selanjutnya",
+        }
+    },
+
+    });   
+  });
+</script>
+<script>
+  $(function () { 
+      // Data Table
+    $("#data2").dataTable({
+      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+      "order": [[ 1, "desc" ]],
+      // sscrollX: true
+      "oLanguage": {
+        "sLengthMenu": "Tampilkan _MENU_ data",
+        "sZeroRecords": "Maaf, Data tidak ditemukan",
+        "sSearch": "cari",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "sInfoEmpty": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "sInfoFiltered": "(Memfilter dari _MAX_ total records)",
+        "oPaginate": {
+            "sPrevious": "sebelum",
+            "sNext": "selanjutnya",
+        }
+    },
+
+    });   
+  });
+</script>
+<script>
+  $(function () { 
+      // Data Table
+    $("#data3").dataTable({
+      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+      "order": [[ 1, "desc" ]],
+      // sscrollX: true
+      "oLanguage": {
+        "sLengthMenu": "Tampilkan _MENU_ data",
+        "sZeroRecords": "Maaf, Data tidak ditemukan",
+        "sSearch": "cari",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "sInfoEmpty": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "sInfoFiltered": "(Memfilter dari _MAX_ total records)",
+        "oPaginate": {
+            "sPrevious": "sebelum",
+            "sNext": "selanjutnya",
+        }
+    },
+
+    });   
+  });
+</script>
+<script>
+  $(function () { 
+      // Data Table
+    $("#data4").dataTable({
+      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+      "order": [[ 1, "desc" ]],
+      // sscrollX: true
+      "oLanguage": {
+        "sLengthMenu": "Tampilkan _MENU_ data",
+        "sZeroRecords": "Maaf, Data tidak ditemukan",
+        "sSearch": "cari",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "sInfoEmpty": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "sInfoFiltered": "(Memfilter dari _MAX_ total records)",
+        "oPaginate": {
+            "sPrevious": "sebelum",
+            "sNext": "selanjutnya",
+        }
+    },
+
+    });   
+  });
+</script>
+<script>
+  $(function () { 
+      // Data Table
+    $("#data5").dataTable({
+      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
       "order": [[ 1, "desc" ]],
       // sscrollX: true
       "oLanguage": {

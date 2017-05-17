@@ -163,7 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-       
+       rizalafani\rajaongkirlaravel\RajaOngkirServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -228,7 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'RajaOngkir' => rizalafani\rajaongkirlaravel\RajaOngkirFacade::class,
     ],
 
 ];

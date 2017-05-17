@@ -48,8 +48,8 @@
             </li>
             <li><a href="{{ url('metode') }}"> <i class="fa fa-credit-card" ></i> <span>Metode Bayar</span></a></li>
             <li><a href="{{ url('customer')}}"> <i class="fa fa-user"></i> <span>User</span></a></li>
-            <li><a href="{{ url('testimoni')}}"> <i class="fa fa-commenting"></i> <span>Testimoni</span></a></li>
-            <li><a href="{{ url('machiko')}}">  <i class="fa fa-dashcube"></i><span>Toko</span></a></li>
+            <li><a href="{{ url('testimoniadmin')}}"> <i class="fa fa-commenting"></i> <span>Testimoni</span></a></li>
+            <li><a href="{{ url('machikokstore')}}">  <i class="fa fa-home"></i><span>Toko</span></a></li>
         </ul> 
 </section>
     
