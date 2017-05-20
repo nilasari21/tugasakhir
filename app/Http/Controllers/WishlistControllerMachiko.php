@@ -14,7 +14,10 @@ class WishlistControllerMachiko extends Controller {
         // $data=[];
         
         $data = Wishlist::join('produk','produk.id','=','wishlist.id_produk')
-                         ->where('id_user','=','1')
+                        ->rightjoin('produk_ukuran','produk_ukuran.produk_id','=','produk.id')
+                         ->where('id_user','=','2')
+                         ->select('wishlist.*','produk.*','produk_ukuran.*')->distinct()
+                         ->groupby('wishlist.id_wishlist')
                          ->get();
        // dd($data);
         return view('machiko.wishlist')->with('data',$data);
@@ -25,7 +28,7 @@ class WishlistControllerMachiko extends Controller {
         $data = new Wishlist; // new Model
         
         $data->id_produk = $request->produk_id;
-        $data->id_user = 1;
+        $data->id_user = 2;
         
         $data->save();
 

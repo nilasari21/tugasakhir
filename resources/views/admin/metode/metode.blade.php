@@ -42,7 +42,7 @@
           <td>{{ $row->status }}</td>
 
           <td>
-             <a class="btn btn-warning" href="{{ url('metode/edit/'.$row->id_metode_bayar) }}">Edit</a>
+             <a class="btn btn-warning" href="{{ url('metode/edit/'.$row->id) }}">Edit</a>
             
          </td>
         </tr>

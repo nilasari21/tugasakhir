@@ -20,7 +20,7 @@ class Produk extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    protected $fillable = ['id','id_kategori','nama_produk','harga','stock_total','berat','minimal_beli','status',
+    protected $fillable = ['id','id_kategori','nama_produk','berat','minimal_beli','jenis',
     'tgl_awal_po','tgl_akhir_po','batas_waktu_bayar','batas_jam','foto','keterangan'];
 
     // protected $hidden = [];

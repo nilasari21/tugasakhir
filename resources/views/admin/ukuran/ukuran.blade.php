@@ -42,7 +42,7 @@
           <td>{{ $row->nama_ukuran }}</td>
          <td>{{ $row->status }}</td>
           <td>
-            <a class="btn btn-default" href="{{ url('ukuran/edit/'.$row->id_ukuran) }}">Edit</a>
+            <a class="btn btn-default" href="{{ url('ukuran/edit/'.$row->id) }}">Edit</a>
             
          </td>
         </tr>

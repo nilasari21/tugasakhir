@@ -18,8 +18,11 @@ class PreorderController extends Controller {
    public function index()
     {
         $data = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
+                ->join('produk_ukuran','produk_ukuran.produk_id','=','produk.id')
+                ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
+                ->select('produk.*','kategori_produk.*','produk_ukuran.*','ukuran.nama_ukuran')
                 ->select('produk.*','kategori_produk.*')
-                ->where('produk.status','=','PreOrder')
+                ->where('produk.jenis','=','PreOrder')
                 ->get();
 
         return view('admin.produk.preorder')->with('data',$data);
@@ -77,18 +80,27 @@ class PreorderController extends Controller {
          //    }
             
       $produk->nama_produk= $request->nama_produk;
-      $produk->harga= $request->harga;
+      // $produk->harga= $request->harga;
       $produk->tgl_awal_po= $request->tgl_awal_po;
       $produk->tgl_akhir_po= $request->tgl_akhir_po;
       $produk->berat= $request->berat;
       $produk->minimal_beli= $request->minimal_beli;
       $produk->batas_waktu_bayar= $request->batas_bayar;
-      $produk->status="PreOrder";
+      $produk->jenis="PreOrder";
       $produk->foto=$imageName;
       $produk->id_kategori=$request->id_kategori;
       $produk->keterangan=$request->editor1;
       $produk->save();
       $produk->metode()->attach($request->metode_id);
+
+      $ProdukUkuran = new ProdukUkuran();
+          $ProdukUkuran->produk_id = $produk->id;
+          $ProdukUkuran->ukuran_id = 6;
+          $ProdukUkuran->harga_pokok = $request->harga_pokok;
+          $ProdukUkuran->stock = 0;
+          $ProdukUkuran->harga_tambah= 0;
+          $ProdukUkuran->save();
+
       return redirect()
                 ->back()
                 ->with('status', 'Gambar Berhasil di Upload');
@@ -124,13 +136,13 @@ class PreorderController extends Controller {
         // return $imageName;
         }
       $produk->nama_produk= $request->nama_produk;
-      $produk->harga= $request->harga;
+      // $produk->harga= $request->harga;
       $produk->tgl_awal_po= $request->tgl_awal_po;
       $produk->tgl_akhir_po= $request->tgl_akhir_po;
       $produk->berat= $request->berat;
       $produk->minimal_beli= $request->minimal_beli;
       $produk->batas_waktu_bayar= $request->batas_bayar;
-      $produk->status="PreOrder";
+      $produk->jenis="PreOrder";
       $produk->foto=$imageName;
       $produk->keterangan=$request->editor1;
       $produk->id_kategori=$request->id_kategori;
@@ -158,7 +170,8 @@ class PreorderController extends Controller {
           $ProdukUkuran = new ProdukUkuran();
           $ProdukUkuran->produk_id = $produk->id;
           $ProdukUkuran->ukuran_id = $val;
-          $ProdukUkuran->stock = $request->stock_[$key];
+          $ProdukUkuran->harga_pokok = $request->harga_pokok;
+          $ProdukUkuran->stock = 0;
           $ProdukUkuran->harga_tambah= $request->harga_tambah[$key];
           $ProdukUkuran->save();
       }

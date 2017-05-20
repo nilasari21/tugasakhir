@@ -19,6 +19,7 @@
                     <option>Pilih jenis metode</option>
                     <option>Bank</option>
                     <option>Pulsa</option>
+                    <option>COD</option>
                     </select>
     <br/>
  <button type="submit"  class="btn btn-fw btn-info waves-effect waves-effect">Tambah</button>

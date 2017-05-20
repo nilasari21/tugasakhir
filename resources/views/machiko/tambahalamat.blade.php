@@ -49,11 +49,12 @@
                                 </div>
                               </div>
                             </div>
+                              <!-- end of modal -->
                              <!-- modal -->
                           <div class="modal fade" id="modal" role="dialog" style="padding-top:100px">
                                 <div class="modal-dialog">
                                 
-                                  
+                                  <!-- Modal content-->
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -74,7 +75,9 @@
                                   
                                 </div>
                               </div>
-                              
+                              <!-- end of modal -->
+
+                            <!-- modal -->
                           <div class="modal fade" id="modal2" role="dialog" style="padding-top:100px">
                                 <div class="modal-dialog">
                                 
@@ -100,7 +103,8 @@
                                   
                                 </div>
                               </div>
-                              
+                              <!-- end of modal -->
+                               <!-- modal -->
                           <div class="modal fade" id="modal3" role="dialog" style="padding-top:100px">
                                 <div class="modal-dialog">
                                 
@@ -235,15 +239,15 @@
                                     </div>                        
                                 </div>                    
                             </div> 
-                <form class="form-horizontal" action="{{ url('checkout/simpan') }}" method="post">
+                <form class="form-horizontal" action="{{ url('checkout/simpan2') }}" method="post">
                   {{ csrf_field() }}
                 <input type="hidden" class="form-control" id="berat" name="berat" value="{{ $b->berat }} " readonly>  
-                    <input type="hidden" class="form-control" id="level" name="level" value="{{$data->level}}">
+                    <input type="text" class="form-control" id="level" name="level" value="{{$data->level}}">
                     <input type="text" class="form-control" id="status" name="status" value="">
                     <input type="hidden" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
                     <div class="form-group">
                      <!--  <div class="col-sm-3 control-label"> -->
-                      <!-- <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>   -->
+                      <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>  
                       <!-- </div> -->
                       <!-- <div class="col-sm-4">
                         
@@ -256,55 +260,75 @@
 
                        
                               
-                            </div> --> 
+                            </div>  -->
 
                         <div class="col-sm-4"  id="toko">
                           <input style="display:none" type="text" class="form-control" id="nama_toko" name="nama_toko" placeholder="Nama Toko" >
-                        </div>                    
+                        </div> 
+
+                        <div class="col-sm-4"  id="toko">
+                          <input style="display:none" type="text" class="form-control" id="n_toko" name="n_toko" value="{{$user->toko}}"placeholder="Nama Toko" readonly>
+                        </div>
                       </div>
 
-                    
-                      <?php
-                      if(!$data){?>
                       <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Tujuan Pengiriman</label>
-                      <div class="col-sm-8">
-                          <textarea style="border: 1px;width:100%;" disabled >Belum ada alamat </textarea>
-
+                      <div class="col-sm-4">
+                        <input type="text" placeholder="Nama Alamat. contoh: Alamat rumah" name="nama_alamat" id="nama_alamat" required="" value="" class="form-control"/><br/>
+                          
+                          </div>
+                          <div class="form-group">
+                      
+                      <div class="col-sm-12">
+                           <div class="col-sm-3">
+                          
+                          </div>
+                         <div class="col-sm-4">
+                        
+                          <input type="text" placeholder="Nama Penerima" name="nama_penerima" id="nama_penerima" required value="" class="form-control"/>
+                         
+                          </div>
+                      <div class="col-sm-4">
+                          <input type="text" placeholder="No Hp Penerima"  name="no_hp_penerima" id="no_hp_penerima" required value="" class="form-control"/>
+                         
+                          </div>
+                      
                         </div>
-                      </div>
-                        <?php
-                      }else{?>
+                        </div>
                       <div class="form-group">
-                      <label for="inputName" class="col-sm-3 control-label" >Tujuan Pengiriman</label>
-                      <div class="col-sm-8">
-                          <input type="text" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$data->id_penerima}}" class="form-control"/>
-                          <textarea id="alamat" rows='5'style="border: 1px;width:100%;" value="" disabled >{{$data->nama_penerima}}&#13;&#10;{{$data->no_hp_penerima}},&#13;&#10;{{$data->alamat_lengkap}},{{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}} </textarea>
-                          <input type="hidden" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$data->kabupaten}}" class="form-control"/>
-                          <input type="hidden" id="kota_asal"  name="kota_asal" value="" />
+                      
+                      <div class="col-sm-12">
+                           <div class="col-sm-3">
+                          
+                          </div>
+                         <div class="col-sm-4">
+                        
+                          <input type="text" placeholder="Provinsi" name="provinsi" id="provinsi" required="" value="" class="form-control"/>
+                          <input type="hidden" id="provinsi_asal" name="provinsi_asal" value="" />
+                          </div>
+                      <div class="col-sm-4">
+                          <input type="text" placeholder="Kabupaten/kota" onChange="getOngkir();cod()" name="kabupaten" id="kabupaten" required="" value="" class="form-control"/>
+                          <input type="hidden" id="kota_asal" name="kota_asal" value="" />
+                          </div>
+                      
+                        </div>
                         </div>
                         </div>
 
-                        <div class="form-group">
-                      <div class="col-sm-3 control-label">
-                      </div>
-                      <div class="col-sm-4">
-                        <select class="form-control" style="width: 100%;" onChange="getAlamat();getOngkir()" id="alamat_pilih" name="alamat_pilih" />
-                            <option>Pilih alamat lain</option>
-                              @foreach($penerima as $row)
-                                    <option value="{{$row->kabupaten}}" >
-                                        {{$row->nama_alamat}}
-                                    </option>
-                              @endforeach
-                        </select>
-                      </div>
-                      <div class="col-sm-4">
-                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/alamatbaru/2') }}">Tujuan pengiriman baru</a>
-                      </div>
-                    </div>
-                        <?php
-                      }
-                      ?>
+                      <div class="form-group">
+                      
+                      <div class="col-sm-12">
+                           <div class="col-sm-3">
+                          
+                          </div>
+                          <div class="col-sm-8">
+                          <textarea placeholder="Alamat lengkap. Contoh: Jalan Mangkubumi no 64, Depok" name="alamat_lengkap" id="alamat" rows='5'style="border: solid 1px;width:100%;" value=""  ></textarea>
+                          
+                        </div>
+                        </div>
+                        </div>
+
+                       
                        <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Metode pembayaran</label>
                         <input type="hidden" class="form-control" id="metode_pilih" name="metode_pilih" value="">
@@ -321,6 +345,8 @@
                         
                       </div>
                       <span id="span" style="display:none">Anda memilih metode pembayaran pulsa, maka total pembayaran akan dikalikan rate</span>
+                      </div>
+                      
                       </div>
                       <div class="form-group" style="display:none" id="ratee">
                         <label for="inputName" class="col-sm-3 control-label" >Rate</label>
@@ -350,26 +376,29 @@
                           <tr>
                               <td colspan="9">
                                                             
-                                   Belum Cek ongkir                         
+                                   Mohon Tunggu proses untuk memilih Kurir                        
                             </td>
                           </tr>
                       </tbody>
-                      <tbody id="ongkos2" >
-                          <tr>
+                       <!-- <tbody id="ongkos2" style="display:block"> -->
+                          <!-- <tr>
                             <td><input type="radio" id="ongkir" name="ongkir"  onChange="pecah2();getTotal();"value="0,COD" class="ongkir"></td>
-                              <td colspan="9">
+                              <td colspan="4">
                                                             
                                    COD                         
                             </td>
-                          </tr>
-                      </tbody>
+                          </tr> -->
+                          <tr><td id="ongkos2" style="display:none"><input type="radio" id="ongkir" name="ongkir"  onChange="pecah2();getTotal();"value="0,COD" class="ongkir"></td></td>
+                    <td style="color:#000" id="co"colspan="4" style="display:none">COD</td>
+                    </tr>
+                      <!-- </tbody> -->
                     </table>
                   </div>
                       </div>
                       
                       
                     </div>
-                    <input type="text" id="kurir" name="kurir"  value="" class="ongkir">
+                     <input type="text" id="kurir" name="kurir"  value="" class="ongkir">
                     @foreach($beratharga as $d)
                     <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Total pembayaran</label>
@@ -377,7 +406,6 @@
                         <input type="hidden" class="form-control" id="total1" name="total" value="{{$d->total}}" readonly>
                         <input type="hidden" class="form-control" id="total2" name="total" value="{{$d->total}}" readonly>
                         <input type="text" class="form-control" id="total" name="total" value="{{$d->total}}" readonly>
-                        <input type="text" class="form-control" id="total3" name="total3" value="{{$d->total}}" readonly>
                       </div>
                       
                     </div>
@@ -399,7 +427,81 @@
 @endsection
 
 @section('js')
+<script src="{{asset("machikoo/js/jquery.autocomplete.min.js")}}"></script>
+<script>
+var dataCities = [
+     @foreach($kota as $datas)
+      {"value": "{{ $datas['city_name']}}", "data": "{{ $datas['city_id']}}"}, 
+        @endforeach
+]
+$(document).ready(function () {
+$('#kabupaten').autocomplete({
+    lookup: dataCities,
+    onSelect: function (suggestion) {
+        $("input[name=kota_asal]").val(suggestion.data);
+    }
+});
+// getKota();
 
+
+});
+</script>
+<script>
+function getKota() {
+var dataCities = [
+     @foreach($kota as $datas)
+      {"value": "{{ $datas['city_name']}}", "data": "{{ $datas['city_id']}}"}, 
+        @endforeach
+]
+$(document).ready(function () {
+$('#kabupaten').autocomplete({
+    lookup: dataCities,
+    onSelect: function (suggestion) {
+        $("input[name=kota_asal]").val(suggestion.data);
+    }
+});
+});
+var kota_asal=$('#kota_asal').val();
+console.log(kota_asal);
+getOngkir();
+pecah();
+getTotal();
+};
+</script>
+<script>
+var dataProv = [
+     @foreach($prov as $datas)
+      {"value": "{{ $datas['province']}}", "data": "{{ $datas['province_id']}}"}, 
+        @endforeach
+]
+$(document).ready(function () {
+$('#provinsi').autocomplete({
+    lookup: dataProv,
+    onSelect: function (suggestion) {
+        $("input[name=provinsi_asal]").val(suggestion.data);
+        console.log(suggestion.data);
+    }
+});
+});
+</script>
+<script type="text/javascript">
+function cod() {
+      
+      
+
+     var asal=$('#kota_asal').val();
+     console.log(asal);
+                if(asal==39 || asal==501 ||asal==419 ||asal==210 ||asal==135 ){
+                  document.getElementById('ongkos2').style.display = 'block';
+                  
+                } else{
+                  document.getElementById('ongkos2').style.display = 'none';
+                  document.getElementById('co').style.display = 'none';
+                }
+        
+
+            };
+</script>
     <script type="text/javascript">
    $(document).ready(function(){
     var pembanding=false;                                          
@@ -461,122 +563,6 @@
         }
       }
    })
-                                                  
-      
-      /*if(pembanding==true){
-
-
-
-
-      
-      if(level=="Customer" && option=="Reseller" ){
-        $('#modal3').modal('show');
-        var setlevel=document.getElementById('getlevel');
-        setlevel.value=option;
-        var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
-        status_pesan.value="Tunda";
-        document.getElementById('nama_toko').style.display = 'none';
-      }
-      if(level=="Dropshipper" && option=="Reseller" ){
-        $('#modal3').modal('show');
-        var setlevel=document.getElementById('getlevel');
-        setlevel.value=option;
-        status.value="Tunda";var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
-        status_pesan.value="Tunda";
-        document.getElementById('nama_toko').style.display = 'none';
-      }
-if(level=="Reseller" && option=="Reseller"){
-        $('#modal4').modal('show');
-        var status_pesan = document.getElementById('status');
-        
-        status_pesan.value="Terima";
-        console.log(status_pesan);
-        document.getElementById('nama_toko').style.display = 'none';
-
-        
-      }
-      
-       
-     }if(pembanding==false){
-      
-      if(level=="Customer" && option=="Reseller"  ){
-        $('#modal').modal('show');
-        var setlevel=document.getElementById('getlevel');
-        setlevel.value=option;
-        var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
-        status_pesan.value="Tunda";
-        document.getElementById('nama_toko').style.display = 'none';
-      }
-      if(level=="Dropshipper" && option=="Reseller"  ){
-        $('#modal2').modal('show');
-        var setlevel=document.getElementById('getlevel');
-        setlevel.value=option;
-        var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
-        status_pesan.value="Tunda";
-        document.getElementById('nama_toko').style.display = 'none';
-      }
-     }
-     if(level=="Customer" && option=="Customer" ){
-        $('#modal3').modal('hide');
-        var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
-        status_pesan.value="Terima";
-        document.getElementById('nama_toko').style.display = 'none';
-      }
-      if(level=="Dropshipper" && option=="Dropshipper" ){
-        $('#modal3').modal('hide');
-        var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
-        status_pesan.value="Terima";
-        document.getElementById('nama_toko').style.display = 'block';
-
-        
-      }
-      
-     if(level=="Dropshipper" && option=="Customer"){
-        $('#modal2').modal('show');
-        var setlevel=document.getElementById('getlevel');
-        setlevel.value=option;
-        var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
-        status_pesan.value="Tunda";
-        document.getElementById('nama_toko').style.display = 'none';
-      }
-      if(level=="Customer" && option=="Dropshipper"){
-        $('#modal').modal('show');
-        var setlevel=document.getElementById('getlevel');
-        setlevel.value=option;
-        var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
-        status_pesan.value="Tunda";
-         document.getElementById('nama_toko').style.display = 'block';
-      }
-
-      if(level=="Reseller" && option=="Customer" ){
-        $('#modal2').modal('show');
-        // $('.modal-backdrop').remove();
-        var setlevel=document.getElementById('getlevel');
-        setlevel.value=option;
-        var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
-        status_pesan.value="Tunda";
-        document.getElementById('nama_toko').style.display = 'none';
-      }
-      if(level=="Reseller" && option=="Dropshipper" ){
-        $('#modal2').modal('show');
-        var setlevel=document.getElementById('getlevel');
-        setlevel.value=option;
-        var status_pesan = document.getElementById('status');
-        console.log(status_pesan);
-        status_pesan.value="Tunda";
-        document.getElementById('nama_toko').style.display = 'block';
-      }*/
-    
-             
         
     </script>
      <script type="text/javascript">
@@ -598,18 +584,7 @@ function b() {
                 var jenis=$('#jenis_metode').val(hasil2.jenis);
                 /*if(hasil.jenis=="Pulsa"){
                 $('#total2').val(parseFloat($('#total').val())*parseFloat(hasil.rate)); 
-                
-                }*/
-                /*console.log(jenis);
-                if(jenis == "Pulsa"){
-                  document.getElementById('span').style.display = 'block';
-                  document.getElementById('rate').style.display = 'block';
-                } if(jenis== "Bank"){
-                  document.getElementById('span').style.display = 'block';
-                  document.getElementById('rate').style.display = 'block';
-                } if(jenis == "COD"){
-                  document.getElementById('span').style.display = 'block';
-                  document.getElementById('rate').style.display = 'block';
+                 
                 }*/
                 span();
         getTotal();         
@@ -626,8 +601,7 @@ function span() {
       
 
      var jenis=$('#jenis_metode').val();
-     console.log(jenis);
-                var kota_tujuan=$('#kota_asal').val();
+     var kota_tujuan=$('#kota_asal').val();
      console.log(jenis);
                 if(jenis == "COD" && (kota_tujuan!=135||kota_tujuan!=419||kota_tujuan!=210||kota_tujuan!=39||kota_tujuan!=501)){
                   document.getElementById('span').style.display = 'none';
@@ -650,32 +624,16 @@ function span() {
                   $('#cod').modal('hide');
                 } 
         
-        
 
             };
-</script>
-    <script type="text/javascript">
-$(document).ready(function (){
- getOngkir();      
-
-     
-            });
 </script>
 <script type="text/javascript">
 function getOngkir() {
       // event.preventDefault();
       
 
-       var kota_asal = $('#kota').val();
-       $.get("getId/"+kota_asal,
-        function(hasil){
-          $.each(hasil, function(index, hasil){
-           
-            
-                $('#kota_asal').val(hasil.city_id)
-              console.log(hasil.city_id);
-                var id = $('#user').val();
-      console.log(id);
+      
+       
       var kota_tujuan = $('#kota_asal').val();
       console.log(kota_tujuan);
       var berat =$('#berat').val();
@@ -687,9 +645,17 @@ function getOngkir() {
             $('#ongkos').empty();
             $.each(hasil, function(index, hasil){
               console.log(hasil.costs.length);
-              if(hasil.costs.length == 0){
-                $('#ongkos').append('<p>Pengiriman dari Yogyakarta Tidak Tersedia</p>')
-              }else{
+              if(hasil.costs.length == 0 && (kota_tujuan!=135||kota_tujuan!=419||kota_tujuan!=210)){
+                $('#ongkos').append('<tr><tdPengiriman dari Yogyakarta Tidak Tersedia</td></tr>')
+              }if(hasil.costs.length == 0 && (kota_tujuan==135 ||  kota_tujuan==210)){
+                $('#ongkos').append('<tr><td colspan="5">Pengiriman melalui kurir tidak ada</td></tr>')
+                
+              }
+              /*if(hasil.costs.length != 0 && kota_tujuan==419){
+                $('#ongkos').append('<tr><td colspan="5">Pengiriman melalui kurir tidak ada</td></tr>')
+                
+              }*/
+              if(hasil.costs.length != 0 && (kota_tujuan!=419)){
                 $.each(hasil.costs, function(index, hasil){
                   service = hasil.service;
                   des = hasil.description;
@@ -697,7 +663,7 @@ function getOngkir() {
                     console.log(service);
                     $('#ongkos').append(
                       
-                     '<tr><td><input type="radio" id="ongkir" name="ongkir" onChange="pecah();getTotal();" value="'+hasil.value+','+service+'" class="ongkir"></td>'+
+                     '<tr><td><input type="radio" id="ongkir" name="ongkir" onChange="pecah();getTotal()" value="'+hasil.value+','+service+'" class="ongkir"></td>'+
                     '<td style="color:#000">'+service+' '+'</td>'+
                     '<td>'+des+'</td>'+
                     '<td>'+hasil.etd+'</td>'+
@@ -710,8 +676,8 @@ function getOngkir() {
             }); 
             
         });
-              });
-          });
+              
+         
      
             };
 </script>
@@ -742,49 +708,6 @@ function getOngkir() {
   }
 </script>
 <script type="text/javascript">
-function idalamat() {
-      event.preventDefault();
-      
-
-      var kota_asal = $('#kota').val();
-      // console.log(kota_asal);
-       $.get("getId/"+kota_asal,
-        function(hasil){
-          $.each(hasil, function(index, hasil){
-            $('#kota_asal').empty();
-            
-                $('#kota_asal').val(hasil.city_id)
-              console.log(hasil.city_id);
-              });
-          });
-       getOngkir();
-            };
-</script>
-    <script type="text/javascript">
-function getAlamat() {
-      event.preventDefault();
-      
-
-      var alamat = $('#alamat_pilih').val();
-      var kota_asal = $('#kota').val();
-       $.get("getAlamat/"+alamat,
-        function(hasil){
-          $.each(hasil, function(index, hasil){
-            // $.each(hasil, function(index, hasil){
-            $('#alamat').empty();
-            
-                $('#alamat').val(hasil.nama_penerima+'\n'+hasil.no_hp_penerima+'\n'+hasil.alamat_lengkap+','+hasil.kecamatan+','+hasil.kabupaten+','+hasil.provinsi);
-                $('#kota').val(hasil.kabupaten);
-                $('#idpenerima').val(hasil.id_penerima);
-                $('#kota_asal').val(idalamat())
-              console.log(hasil);
-              // });
-            });
-          });
-            };
-</script>
-
-<script type="text/javascript">
             function getTotal() {
       event.preventDefault();
             
@@ -800,13 +723,7 @@ function getAlamat() {
             console.log(total1);
             var okurir=$('#kurir').val();
             console.log(okurir);
-            var ongkos=$("#ongkos").val();
-            console.log(ongkos);
-            var ongkos2=$("#ongkos2").val();
-            if((!ongkos2) && (!ongkos) &&  (!okurir)){
-             var b=0;
-             var ongkir=0;
-          }
+            // var ongkos=$('#ongkos').val();
             if('input[name=ongkir]:checked', '#ongkos2' && okurir=="COD"){
             var ongkir = $('input[name=ongkir]:checked', '#ongkos2').val(); 
             console.log(ongkir);
@@ -821,57 +738,48 @@ function getAlamat() {
             var b=array[0];
             console.log(b);
           }
-            
             var rate = document.getElementById("metode_pilih").value; 
-            console.log(rate);
             var jenis = $("#jenis_metode").val(); 
             console.log(jenis);
             if(jenis=="Pulsa" ){
               if(ongkir){
               console.log('hai');
-              var hasil = document.getElementById("total").value=( (parseFloat(total1)+ parseFloat(b))*parseFloat(rate)).toFixed(0);
-              var hasil = document.getElementById("total3").value=( (parseFloat(total1)+ parseFloat(b))*parseFloat(rate)).toFixed(0);  
+              var hasil = document.getElementById("total").value=( (parseFloat(total1)+ parseFloat(ongkir))*parseFloat(rate)).toFixed(0);
+              // var hasil = document.getElementById("total3").value=( (parseFloat(total1)+ parseFloat(ongkir))*parseFloat(rate)).toFixed(0);  
               }
               
             }if(jenis=="Pulsa" ){
               if(!ongkir){
               console.log('hallo');
               var hasil = document.getElementById("total").value=( (parseFloat(total1)+ 0)*parseFloat(rate)).toFixed(0);
-              var hasil = document.getElementById("total3").value=( (parseFloat(total1)+ 0)*parseFloat(rate)).toFixed(0);  
+              // var hasil = document.getElementById("total3").value=( (parseFloat(total1)+ 0)*parseFloat(rate)).toFixed(0);  
               }
               
             }
             if(jenis=="Bank" ){
               if(ongkir){
               console.log('hallo haa');
-              var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(b));
-              var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(b));  
+              var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(ongkir));
+              // var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(ongkir));  
               }
               
             }
-            /*if(jenis=="Bank" ){
+            if(jenis=="Bank" ){
               if(!ongkir){
               console.log('hallo huuu');
               var hasil = document.getElementById("total").value=( parseFloat(total1)+ 0);
-              var hasil = document.getElementById("total3").value=( parseFloat(total1)+ 0);  
+              // var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(ongkir));  
               }
               
             }if(!jenis ){
               if(ongkir){
               console.log('hallo hahaha');
               var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(ongkir));
-              var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(ongkir));  
-              }
-              
-            }*/
-            if(!jenis ){
-              if(ongkir){
-              console.log('hallo hahaha');
-              var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(ongkir));
-              var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(ongkir));  
+              // var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(ongkir));  
               }
               
             }
+            
 
             /*$('#total2').val(parseFloat(parseFloat(total1)+ parseFloat(ongkir))*parseFloat(hasil.rate)); 
              console.log(hasil);*/

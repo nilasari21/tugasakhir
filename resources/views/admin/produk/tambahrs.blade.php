@@ -25,8 +25,8 @@
                         @endforeach
         </select>
             
-    <label> Harga </label><br/>
-        <input type="text" class="form-control" name="harga" placeholder="Harga Produk" required>
+   <!--  <label> Harga </label><br/>
+        <input type="text" class="form-control" name="harga" placeholder="Harga Produk" required> -->
     
     <label> Ukuran Tersedia </label>
     <div class="form-group"  >
@@ -43,7 +43,19 @@
             </label>
         </div>
     </div>
-
+    <div class="harga_pokok1" id="harga_pokok1" style="display:block" >
+           
+            <input type="text" id="harga_pokok1" name="harga_pokok1" placeholder="harga pokok produk" style="padding:5px; width:25%;display:block" >
+            </div><br/>
+    <div  class="stock1" id="stock1" > 
+            <input type="text" id="stock1" name="stock1"  placeholder="stock" style="padding:5px; width:25%;" >
+        </div>
+            
+    <div class="harga_pokok" id="harga_pokok" style="display:none" >
+           
+            <input type="text" id="harga_pokok" name="harga_pokok" placeholder="harga pokok produk" style="padding:5px; width:25%;display:block" >
+            </div>    
+    <br/>
     <div class="formukuran" id="ukuran" style="display:none" >
         @foreach($ukuran as $ukuran)    
             <input type="checkbox" name="id[]" value="{{$ukuran->id}}" > &nbsp;
@@ -53,8 +65,8 @@
             <br/><br/>
         @endforeach     
     </div>
-    <label>Stock Total</label>
-        <input type="text" class="form-control" name="stock_total" placeholder="Berat" required>
+    <!-- <label>Stock Total</label>
+        <input type="text" class="form-control" name="stock_total" placeholder="Berat" required> -->
     <label>Berat(gram)</label>
         <input type="text" class="form-control" name="berat" placeholder="Berat" required>
     <label>Minimal beli (Reseller)</label>

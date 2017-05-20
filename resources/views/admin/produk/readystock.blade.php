@@ -31,6 +31,7 @@
           <th>ID</th>
           <th>Nama Produk</th>
           <th>Kategori</th>
+          <th>Ukuran</th>
           <th>Stock Total</th>
           <th>Aksi</th>
         </tr>
@@ -42,7 +43,8 @@
           <td>{{ $row->id }}</td>
           <td>{{ $row->nama_produk }}</td>
           <td>{{ $row->nama_kategori }}</td>
-          <td>{{ $row->stock_total }}</td>
+          <td>{{ $row->nama_ukuran }}</td>
+          <td>{{ $row->stock }}</td>
           
           <td>
              <a class="btn btn-default" href="#">Detail</a>

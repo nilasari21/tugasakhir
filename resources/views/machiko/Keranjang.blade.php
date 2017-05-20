@@ -2,6 +2,12 @@
 
 
 @section('content')
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+<!-- Session::get('success'); -->
 <div class="modal fade" id="modal" role="dialog" >
                                 <div class="modal-dialog">
                                 
@@ -9,17 +15,16 @@
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Upgrade user</h4>
+                                      <h4 class="modal-title">Pemberitahuan</h4>
                                     </div>
                                     <div class="modal-body">
                                       
                                       <input type="text" class="form-control" id="getlevel" name="iduser" value="">
-                                      <p>Anda menggunakan pemesanan tidak sesuai dengan level user anda. Apakah anda ingin mengupgrade level user?</p>
-                                      <p style="font-size:12px">Catatan: Perubahan level user memerlukan persetujuan admin. Mohon tunggu sampai admin menyetujui permintaan perubaha level.
-                                        Pembayaran hanya dapat dilakukan apabila permintaan telah disetujui.</p>
+                                      <p>Reseller memiliki jumlah minimal pembelian tiap produk, silahkan periksa kembali jumlah produk anda.
+
                                     </div>
                                     <div class="modal-footer">
-                                      <button type="button" class="btn btn-success" data-dismiss="modal">Ya</button>
+                                      <button type="button" class="btn btn-success" data-dismiss="modal">kembali</button>
                                       <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
                                     </div>
                                   </div>
@@ -77,9 +82,9 @@
                                                         <td class="product-name">
                                                             <a href="#">{{ $row->nama_produk }}</a> 
                                                             <input name="status[]" type="hidden" id="status"  value="{{$row->status}}" style="width:100px"readonly>
-                                                            <input name="idproduk[{{$i}}]" type="text" id="idproduk"  value="{{$row->id}}" style="width:100px"readonly>
+                                                            <input name="idproduk[{{$i}}]" type="text" id="idproduk"  value="{{$row->id_produk_ukuran}}" style="width:100px"readonly>
                                                             <input name="min_beli" type="text" id="min_beli{{$i}}"  value="{{$row->minimal_beli}}" style="width:100px"readonly>
-                                                            <input name="stock" type="text" id="stock"  value="{{$row->stock_total}}" style="width:100px"readonly>
+                                                            <input name="stock" type="text" id="stock"  value="{{$row->stock}}" style="width:100px"readonly>
                                                         </td>
                                                        <?php 
                                                            if(count($row->nama_ukuran)==0){
@@ -100,7 +105,7 @@
 
                                                         <input name="idkeranjang[{{$i}}]" type="hidden" id="idkeranjang"  value="{{$row->id_keranjang}}" style="width:100px"readonly>
                                                          <td class="product-price">
-                                                            <span class="amount"  ><input type="hidden" name="harga[]" id="nilai2{{$i}}" value="{{ $row->harga }}" onFocus="startCalc();" onBlur="stopCalc();">{{ $row->harga }}</span> 
+                                                            <span class="amount"  ><input type="hidden" name="harga[]" id="nilai2{{$i}}" value="{{ $row->harga_pokok }}" onFocus="startCalc();" onBlur="stopCalc();">{{ $row->harga_pokok }}</span> 
                                                         </td>
                                                         <?php 
                                                            if(count($row->nama_ukuran)==0){
@@ -157,7 +162,7 @@
                                                             
                                                        </form>
                                         
-                                                        <a class="add_to_cart_button" onClick="b()" id="buttoncheckout" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#">Checkout</a>
+                                                        <a class="add_to_cart_button" id="buttoncheckout" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/2') }}">Checkout</a>
                                                         </td>
 
                                                     </tr>
@@ -218,7 +223,7 @@
              
         
     </script>
- <script type="text/javascript">
+ <!--<script type="text/javascript">
         function b(){
         var level=document.getElementById('level').value;
         console.log(level);
@@ -258,5 +263,5 @@
 
           
         };
-       </script>
+       </script>-->
     @endsection

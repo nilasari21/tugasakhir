@@ -54,28 +54,27 @@
                 </div> -->
                 <div class="form-group">
             <div class="panel panel-default">
-            <div class="panel-heading" align="center" style="font-size:20px"><b>Masuk </b></div>
+            <!-- <div class="panel-heading" align="center" style="font-size:20px"><b>Masuk </b></div> -->
                <div class="panel-body">
-                <!--  -->
+                
                 <div class="row" style="margin-top:15px">
                 <form class="form-horizontal" action="#" method="post">  
                     
                     
-                    <!-- <div class="panel-group category-products" id="accordian">
-                       <div class="panel panel-default"> -->
+                    
                                  @foreach($kategori as $kate)
                                  
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordian" href="{{url('kategori/'. $kate->id)}}">
                                    <li class="treeview">
-                                        <a href="#">{{$kate->nama_kategori}}<i class="fa fa-angle-left pull-right"></i></a>
+                                        <!-- <a href="#">{{$kate->nama_kategori}}<i class="fa fa-angle-left pull-right"></i></a>
                                         <ul class="treeview-menu">
                                             <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/preorder') }}">Pre-order</a></li>
                                             <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/preorder') }}">Ready Stock</a></li>
                                             <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/preorder') }}">Semua</a></li>
                                            
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                     <span class="label label-success pull-right"></span>
                                 </a>
@@ -84,8 +83,7 @@
                                   
                                   
                                   @endforeach
-                        <!-- </div>
-                    </div> -->
+                       
 
     </div>
 
@@ -115,11 +113,11 @@
         </br>
     </br> -->
     <h4><p style="font-family:Roboto">{{ $row->nama_produk }}</p></h4>
-    <h5><span>{{ "Rp ".number_format($row->harga,2, ',', '.') }} </span>  </h5>
+    <h5><span>{{ "Rp ".number_format($row->harga_pokok,2, ',', '.') }} </span>  </h5>
     <p>
         <hr>
         <center>
-            <form method="POST"  action="{{ url('wishlist/tambah') }}">
+            <form action="{{ url('wishlist/tambah') }}" method="POST">
                         {{ csrf_field() }}
                             <input type="hidden" size="4" name="produk_id" value="{{ $row->id }}">
                             <button type="submit" class="add_to_cart_button " style="background:#F09BA0 !important;text-transform:capitalize !important"  value="Submit"  style="text-transform:capitalize;font-family:Raleway;padding: 11px 20px;"><i class="fa fa-heart" color="#0000" ></i> Tambah Wishlist</button><br/><br/>
@@ -133,7 +131,7 @@
 <p style="text-align:center;color:#66CC99;font-family:Roboto">
 <a href="{{ url('machikokstore/detailProduk/'.$row->id ) }}"><strong>{{ $row->nama_produk }}</strong></a>
 <br/>
-<span>{{ "Rp ".number_format($row->harga,2, ',', '.') }} </span> 
+<span>{{ "Rp ".number_format($row->harga_pokok,2, ',', '.') }} </span> 
 </p>
  <br/>
  <br/>

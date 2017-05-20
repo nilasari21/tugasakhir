@@ -36,7 +36,7 @@
         </br>
     </br> -->
     <h4><p style="font-family:Roboto">{{ $row->nama_produk }}</p></h4>
-    <h5><p>Rp {{ $row->harga }},00</p></h5>
+    <h5><p>Rp {{ $row->harga_pokok }},00</p></h5>
     <p>
         <hr>
         <center>
@@ -54,7 +54,7 @@
 <p style="text-align:center;color:#66CC99;font-family:Roboto">
 <a href="{{ url('machikokstore/detailProduk/'.$row->id ) }}"><strong>{{ $row->nama_produk }}</strong></a>
 <br/>
-Rp {{ $row->harga }},00
+Rp {{ $row->harga_pokok }},00
 </p>
  <br/>
  <br/>

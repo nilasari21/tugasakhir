@@ -22,6 +22,7 @@
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Pending</a></li>
+              <li><a href="#menunggu" data-toggle="tab">Menunggu</a></li>
               <li><a href="#timeline" data-toggle="tab">Produksi</a></li>
               <li><a href="#settings" data-toggle="tab">Packing</a></li>
               <li><a href="#pengiriman" data-toggle="tab">Pengiriman</a></li>
@@ -36,6 +37,7 @@
                     <tr>
                       <th>Id Transaksi</th>
                       <th>Tanggal Pesan</th>
+                      <th>Jenis produk</th>
                       <th>Nama Pemesan</th>
                       <th>Nama Produk</th>
                       <th>Ukuran</th>
@@ -50,6 +52,57 @@
                       
                       <td>{{ $row->id_transaksi }}</td>
                       <td>{{ $row->tgl_transaksi  }}</td>
+                      <td>{{ $row->jenis }}</td>
+                      <td>{{ $row->name }}</td>
+                      <td>{{ $row->nama_produk }}</td>
+                      <?php 
+                      if(count($row->nama_ukuran)==0){?>
+                      <td>-</td>
+                      <?php
+                      }else{?>
+                      <td>{{ $row->nama_ukuran }}</td>
+                      <?php
+                      }
+                      ?>
+                      
+                      <td>{{ $row->jumlah_beli }}</td>
+                      <td>{{ $row->status_bayar }}</td>
+                      <td>
+                         <a class="btn btn-success" href="#">Detail</a>
+                        <a class="btn btn-info" href="#">Edit Status pesan</a>
+                        
+                     </td>
+                    </tr>
+                   @endforeach
+                   <!--  -->
+                  </tbody>
+                </table>
+              </div>
+              </div>
+              <div class="active tab-pane" id="menunggu">
+                <!-- Post -->
+               <div class="box-body table-responsive margin">                   
+                <table id="tu2" class="table table-bordered table-hover dataTable table-striped">
+                  <thead>
+                    <tr>
+                      <th>Id Transaksi</th>
+                      <th>Tanggal Pesan</th>
+                      <th>Jenis produk</th>
+                      <th>Nama Pemesan</th>
+                      <th>Nama Produk</th>
+                      <th>Ukuran</th>
+                      <th>Jumlah</th>
+                      <th>Pembayaran</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   @foreach ($tunggu as $row)
+                    <tr>
+                      
+                      <td>{{ $row->id_transaksi }}</td>
+                      <td>{{ $row->tgl_transaksi  }}</td>
+                      <td>{{ $row->jenis }}</td>
                       <td>{{ $row->name }}</td>
                       <td>{{ $row->nama_produk }}</td>
                       <?php 

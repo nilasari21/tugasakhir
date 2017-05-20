@@ -43,7 +43,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{ url('transaksi') }}">Kelola transaksi</a></li>
                     <li><a href="#">Kelola pembayaran</a></li>
-                    <li><a href="#">Transaksi reseller</a></li>
+                    <li><a href="{{ url('transaksi_reseller') }}">Transaksi reseller</a></li>
                 </ul>
             </li>
             <li><a href="{{ url('metode') }}"> <i class="fa fa-credit-card" ></i> <span>Metode Bayar</span></a></li>

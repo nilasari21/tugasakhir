@@ -63,6 +63,9 @@ Route::post('readystock/simpanukuran', 'ReadystockController@simpanukuran');
 Route::get('testimonimachiko', 'TestimoniControllerMachiko@index');
 
 Route::get('transaksi', 'KelolaTransaksiController@index');
+Route::get('transaksi_reseller', 'KelolaTransaksiController@transReseller');
+Route::get('/transaksi_reseller/detail/{id}', 'KelolaTransaksiController@detail');
+
 
 Auth::routes();
 
@@ -101,12 +104,17 @@ Route::get('testimoni/tambah', 'TestimoniControllerMachiko@showtambah');
 Route::post('testimoni/simpan', 'TestimoniControllerMachiko@simpan');
 
 Route::get('checkout/{id}', 'TransaksiControllerMachiko@checkout');
+Route::get('checkout/alamatbaru/{id}', 'TransaksiControllerMachiko@checkout2');
+Route::get('checkout/alamatbaru/hasil/{kota_tujuan}/{berat}', 'TransaksiControllerMachiko@hasil');
 Route::get('checkout/hasil/{kota_tujuan}/{berat}', 'TransaksiControllerMachiko@hasil');
 Route::get('checkout/getId/{kota_asal}', 'TransaksiControllerMachiko@getId');
 Route::get('checkout/hasil/{kota_tujuan}/{radio}/{berat}', 'TransaksiControllerMachiko@hasil');
 Route::get('checkout/getAlamat/{alamat}', 'TransaksiControllerMachiko@alamat');
 Route::post('checkout/simpan', 'TransaksiControllerMachiko@tambah');
+Route::post('checkout/simpan2', 'TransaksiControllerMachiko@tambah2');
 Route::get('checkout/metode/{metode}', 'TransaksiControllerMachiko@metode');
+Route::get('checkout/alamatbaru/metode/{metode}', 'TransaksiControllerMachiko@metode');
+Route::get('rekap_pemesanan', 'TransaksiControllerMachiko@rekap');
 
 Route::get('cekongkir', 'CekongkirControllerMachiko@index');
 Route::get('cekongkir/hasil/{kota_tujuan}/{berat}', 'CekongkirControllerMachiko@hasil');

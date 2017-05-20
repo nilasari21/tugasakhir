@@ -4,6 +4,11 @@
 
 @endsection
 @section('content')
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 <div class="single-product-area">
         <!-- <div class="zigzag-bottom"></div> -->
         <div class="container animated infinite slideInUp" style="animation-iteration-count: inherit;">
@@ -48,7 +53,7 @@
                         </form>
             <p>
                 <span>  
-                    <span>{{ "Rp ".number_format($data->harga,2, ',', '.') }} </span>  
+                    <span>{{ "Rp ".number_format($harga_pokok->harga_pokok,2, ',', '.') }} </span>  
                 </span>
            
             </p>
@@ -66,14 +71,17 @@
                         <input type="hidden"  name="status" value="{{ $data->status }}">
                     
                         
-               <div class="alert alert-success" style="font-family:Roboto">
+               <div class="alert alert-success" style="font-family:Roboto;padding-bottom: 100px;padding-left: 15px;">
                 {{ $data->status }}
                  <?php 
                         if( $data->status =="Ready Stock"){ ?>
                          
                          <div class="col-md-12">
-                          <strong>Stok</strong>
-                        {{ $data->stock_total }} item
+                          <strong>Stok</strong><br/>
+                        @foreach($ukuran as $row)  
+                        <!-- {{ $data->stock }} item -->
+                        {{$row->nama_ukuran}}  :  {{$row->stock}} <br/>
+                        @endforeach
                         </div>   
                         <?php
                         }else{ ?>
@@ -86,11 +94,9 @@
                     ?>
                     <br/><br/>
                </div>
-                   <?php 
-                        if( count($ukuran)==0){ ?>
-                        <?php
-                        }else{ ?>
-                    <div>
+               
+               
+                    <div id="ukuran" style="display:block">
                     <div class="col-md-6"style="font-family:Roboto;padding-left:0px">
                         Pilih Ukuran
                     </div>
@@ -100,9 +106,9 @@
                                 
                                 <select class="form-control" name="id_produk_ukuran" style="border: 1px solid #66CC99;font-family:Roboto">
                                     
-                                    @foreach($ukuran as $uku)
-                                    <option value="{{$uku->id_detail}}" >
-                                        {{$uku->nama_ukuran}}
+                                    @foreach($ukuran as $row)
+                                    <option value="{{$row->id_produk_ukuran}}" >
+                                        {{$row->nama_ukuran}}
                                         
                                     </option>
 
@@ -112,10 +118,9 @@
                             
                         </div>
                          </div>
-                    <?php
-                        }
-                    ?>
-                    
+                  
+               
+               
                     
                <label>Jumlah:</label>
                <div class="form-group">
@@ -156,5 +161,51 @@
             @endsection
 
             @section('js')
-           
+           <script>
+  @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch(type){
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+        
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+  @endif
+</script>
+ <!--<script type="text/javascript">
+            $(document).ready(function (){
+            var pembanding=false;                                          
+       @php
+         $i=1;
+       foreach($ukuran as $a){
+
+        @endphp
+        if($a->nama_ukuran=="Tidak ada ukuran"){
+            pembanding=true;
+        }
+ console.log(pembanding);
+         @php 
+      $i++; }
+      @endphp
+
+      if(pembanding==true){
+        document.getElementById('ukuran').style.display = 'none';
+    }else{
+        document.getElementById('ukuran').style.display = 'block';
+    }
+        });
+             
+        
+    </script>-->
             @endsection

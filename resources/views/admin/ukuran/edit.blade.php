@@ -14,7 +14,7 @@
             <br/>
           </div>
           
-         <form method="post" action="{{ url('ukuran/update/'.$data->id_ukuran) }}" style="margin-left:10px">
+         <form method="post" action="{{ url('ukuran/update/'.$data->id) }}" style="margin-left:10px">
           <div class="row">
     {{ csrf_field() }}
     <div class="col-lg-4 col-md-4 col-sm-4">

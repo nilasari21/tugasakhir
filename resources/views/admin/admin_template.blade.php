@@ -122,7 +122,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset("/adminlte/plugins/input-mask/jquery.inputmask.extensions.js") }}"  > </script>
 <!-- bootstrap time picker -->
 
- 
+@yield('js') 
 <script>
   $(function () { 
       // Data Table
@@ -238,11 +238,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });   
   });
 </script>
+<script>
+  $(function () { 
+      // Data Table
+    $("#tu2").dataTable({
+      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+      "order": [[ 1, "desc" ]],
+      // sscrollX: true
+      "oLanguage": {
+        "sLengthMenu": "Tampilkan _MENU_ data",
+        "sZeroRecords": "Maaf, Data tidak ditemukan",
+        "sSearch": "cari",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "sInfoEmpty": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "sInfoFiltered": "(Memfilter dari _MAX_ total records)",
+        "oPaginate": {
+            "sPrevious": "sebelum",
+            "sNext": "selanjutnya",
+        }
+    },
+
+    });   
+  });
+</script>
 <script type="text/javascript">
            function displayForm(c){
             
             if (c.value=="option1"){
                 jQuery('#ukuran').hide();
+                jQuery('#harga_pokok1').toggle('show');
+                jQuery('#stock1').toggle('show');  
+                jQuery('#harga_pokok').hide();
                 jQuery('#buttonukuran').hide();  
                 jQuery('#buttonnonukuran').toggle('show'); 
                 
@@ -250,6 +276,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }
             if (c.value=="option2"){
                 jQuery('#ukuran').toggle('show');
+                 jQuery('#harga_pokok1').hide();
+                jQuery('#stock1').hide(); 
+                jQuery('#harga_pokok').toggle('show');
                 jQuery('#buttonukuran').toggle('show');
                 jQuery('#buttonnonukuran').hide();
                  

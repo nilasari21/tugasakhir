@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="col-lg-8 col-md-8 col-sm-8">
-<form method="post" action="{{ url('metode/update/'.$data->id_metode_bayar) }}">
+<form method="post" action="{{ url('metode/update/'.$data->id) }}">
    <div class="panel panel-card" style="padding:10px; ">
 {{ csrf_field() }}
     <label> Metode</label><br/>
@@ -20,9 +20,15 @@
                         <?php if($data['jenis']=='Bank'): ?>
                                                             <option value="Bank" selected>Bank</option>
                                                             <option value="Pulsa">Pulsa</option>
-                        <?php else: ?>
+                                                            <option value="COD">COD</option>
+                        <?php  elseif($data['jenis']=='Pulsa'): ?>
                         <option value="Bank">Bank</option>
                         <option value="Pulsa" selected>Pulsa</option>
+                        <option value="COD">COD</option>
+                        <?php elseif($data['jenis']=='COD'): ?>
+                        <option value="Bank">Bank</option>
+                        <option value="Pulsa" >Pulsa</option>
+                        <option value="COD" selected>COD</option>
                         <?php endif; ?>
                                                         </select>
    <label> Status</label><br/>

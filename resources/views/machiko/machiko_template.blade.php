@@ -36,6 +36,9 @@
 
     <!-- animated -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
     @yield('css')
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -103,7 +106,7 @@
     <!-- upload gambar -->
     <script src="{{asset("dropzone/dropzone.js")}}"></script>
     <script type="text/javascript" src="{{asset("/machikoo/fileinput/js/fileinput.min.js")}}" ></script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js"></script>
      </script>
 @yield('js')
         <!-- hover effek -->

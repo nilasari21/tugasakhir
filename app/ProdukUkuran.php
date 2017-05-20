@@ -17,10 +17,10 @@ class ProdukUkuran extends Model
     */
 
     protected $table = 'produk_ukuran';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_produk_ukuran';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id','produk_id','ukuran_id','stock','harga_total','created_at','updated_at'];
+    protected $fillable = ['id_produk_ukuran','produk_id','ukuran_id','stock','harga_total','harga_pokok','created_at','updated_at'];
     // protected $hidden = [];
     // protected $dates = [];
 

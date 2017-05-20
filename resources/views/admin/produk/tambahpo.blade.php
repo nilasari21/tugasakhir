@@ -23,9 +23,9 @@
                         </option>
                         @endforeach
         </select>
-    <label> Harga </label><br/>
+    <!-- <label> Harga </label><br/>
         <input type="text" class="form-control" name="harga" placeholder="Harga Produk" required>
-    
+     -->
     <label> Ukuran Tersedia </label>
     <div class="form-group"  >
         <div class="radio">
@@ -41,7 +41,10 @@
             </label>
         </div>
     </div>
-
+    <div class="harga_pokok" id="harga_pokok"  >
+           
+            <input type="text" id="harga_pokok" name="harga_pokok" placeholder="harga pokok produk" style="padding:5px; width:25%;" >
+            </div>
     <div class="formukuran" id="ukuran1" style="display:none" >
         @foreach($ukuran as $ukuran)    
             <input type="checkbox" name="id[]" value="{{$ukuran->id}}" > &nbsp;

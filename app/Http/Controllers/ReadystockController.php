@@ -18,8 +18,10 @@ class ReadystockController extends Controller {
    public function index()
     {
         $data = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
-                ->select('produk.*','kategori_produk.*')
-                ->where('produk.status','=','Ready Stock')
+                ->join('produk_ukuran','produk_ukuran.produk_id','=','produk.id')
+                ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
+                ->select('produk.*','kategori_produk.*','produk_ukuran.*','ukuran.nama_ukuran')
+                ->where('produk.jenis','=','Ready Stock')
                 ->get();
 
         return view('admin.produk.readystock')->with('data',$data);
@@ -28,7 +30,7 @@ class ReadystockController extends Controller {
     public function tambah()
     {
         $kategori = Kategori::all()-> where('status','=','Aktif');
-        $ukuran = Ukuran::all()-> where('status','=','Aktif');
+        $ukuran = Ukuran::all()-> where('status','=','Aktif')->where('nama_ukuran','!=','Tidak ada ukuran');
         $metode = Metode::all();
         
         return view('admin.produk.tambahrs')->with(compact('kategori',$kategori,'ukuran',$ukuran,'metode',$metode));
@@ -77,17 +79,26 @@ class ReadystockController extends Controller {
          //    }
             
       $produk->nama_produk= $request->nama_produk;
-      $produk->harga= $request->harga;
-      $produk->stock_total= $request->stock_total;
+      // $produk->harga= $request->harga;
+      // $produk->stock_total= $request->stock_total;
       $produk->berat= $request->berat;
       $produk->minimal_beli= $request->minimal_beli;
       $produk->batas_jam= $request->batas_jam;
-      $produk->status="Ready Stock";
+      $produk->jenis="Ready Stock";
       $produk->foto=$imageName;
       $produk->id_kategori=$request->id_kategori;
       $produk->keterangan=$request->editor1;
       $produk->save();
       $produk->metode()->attach($request->metode_id);
+
+      $ProdukUkuran = new ProdukUkuran();
+          $ProdukUkuran->produk_id = $produk->id;
+          $ProdukUkuran->ukuran_id = 6;
+          $ProdukUkuran->harga_pokok = $request->harga_pokok1;
+          $ProdukUkuran->stock = $request->stock1;
+          $ProdukUkuran->harga_tambah= 0;
+          $ProdukUkuran->save();
+
       return redirect()
                 ->back()
                 ->with('status', 'Gambar Berhasil di Upload');
@@ -123,12 +134,12 @@ class ReadystockController extends Controller {
         // return $imageName;
         }
       $produk->nama_produk= $request->nama_produk;
-      $produk->harga= $request->harga;
-      $produk->stock_total= $request->stock_total;
+      // $produk->harga= $request->harga;
+      // $produk->stock_total= $request->stock_total;
       $produk->berat= $request->berat;
       $produk->minimal_beli= $request->minimal_beli;
       $produk->batas_jam= $request->batas_jam;
-      $produk->status="Ready Stock";
+      $produk->jenis="Ready Stock";
       $produk->foto=$imageName;
       $produk->keterangan=$request->editor1;
       $produk->id_kategori=$request->id_kategori;
@@ -156,6 +167,7 @@ class ReadystockController extends Controller {
           $ProdukUkuran = new ProdukUkuran();
           $ProdukUkuran->produk_id = $produk->id;
           $ProdukUkuran->ukuran_id = $val;
+          $ProdukUkuran->harga_pokok = $request->harga_pokok;
           $ProdukUkuran->stock = $request->stock_[$key];
           $ProdukUkuran->harga_tambah= $request->harga_tambah[$key];
           $ProdukUkuran->save();

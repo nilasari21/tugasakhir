@@ -30,6 +30,7 @@ class MetodeController extends Controller {
       $data->nomor = $request->nomor;
       $data->rate = $request->rate;
       $data->jenis = $request->jenis;
+      $data->status = "Aktif";
     	$data->save();
     	return redirect('metode');
 
@@ -38,7 +39,7 @@ class MetodeController extends Controller {
      public function showEdit($id_metode_bayar)
     {
         // cari data yang akan diedit
-       $data = Metode::where('id_metode_bayar',$id_metode_bayar)->first();
+       $data = Metode::where('id','=',$id_metode_bayar)->first();
         // tampilkan view beserta data yang akan diedit
         return view('admin.metode.edit')->with('data',$data);
     }
@@ -46,7 +47,7 @@ class MetodeController extends Controller {
     public function postUpdate($id_metode_bayar, Request $request)
     {
         // proses update data
-        $data = Metode::where('id_metode_bayar',$id_metode_bayar)->first();
+        $data = Metode::where('id',$id_metode_bayar)->first();
         $data->metode = $request->metode;
         $data->nama_rekening = $request->nama_rekening;
         $data->nomor = $request->nomor;

@@ -19,7 +19,7 @@ class Keranjang extends Model
     protected $primaryKey = 'id_keranjang';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id_keranjang','produk_id','user_id','id_produk_ukuran',
+    protected $fillable = ['id_keranjang','user_id','id_produk_ukuran',
     'jumlah'];
     // protected $hidden = [];
     // protected $dates = [];

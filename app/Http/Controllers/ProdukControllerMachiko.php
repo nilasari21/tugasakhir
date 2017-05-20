@@ -15,7 +15,8 @@ class ProdukControllerMachiko extends Controller {
     public function index() {
       
         $data = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
-                ->select('produk.*','kategori_produk.*')
+                ->join('produk_ukuran','produk_ukuran.produk_id','produk.id')
+                ->select('produk.*','kategori_produk.*','produk_ukuran.*')
                 // ->where('produk.status','=','Ready Stock')
                 ->orderby('produk.id','desc')
                  ->GROUPBY('produk.nama_produk','produk.id')
@@ -23,7 +24,7 @@ class ProdukControllerMachiko extends Controller {
                 ->paginate(9);
         $kategori = Kategori::where('kategori_produk.status','=','Aktif')
                 ->get();
-        
+        // dd($data);
         return view('machiko.produk2')->with(compact('data',$data,'kategori',$kategori));
     }
     public function index2() {
@@ -51,14 +52,22 @@ class ProdukControllerMachiko extends Controller {
    
     public function detail($id) {
       
-        $data = Produk::where('id',$id)->first();
+        $data = Produk::where('id',$id)
+                        ->first();
+
         $kat=Produk::where('id','=',$id)
                     ->select('id_kategori')
                     ->get();
                     // dd($kat);
         $ukuran= ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
                             ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
+                            ->select('produk_ukuran.*','ukuran.*')
                             ->get();
+
+                            // dd($ukuran);
+        $harga_pokok=ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
+                            ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
+                            ->first();
         /*$terkait = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
                 ->select('produk.*','kategori_produk.*')
                 ->where('produk.id_kategori','=',2)
@@ -67,7 +76,7 @@ class ProdukControllerMachiko extends Controller {
                 ->limit(5)*/
                 // ->get();*/
                 // dd($terkait);
-        return view('machiko.detailProduk')->with(compact('data',$data,'ukuran',$ukuran));
+        return view('machiko.detailProduk')->with(compact('data',$data,'ukuran',$ukuran,'harga_pokok',$harga_pokok));
     }
     public function search(Request $request){
         
