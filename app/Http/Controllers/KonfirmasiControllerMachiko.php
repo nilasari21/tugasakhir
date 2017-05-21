@@ -18,8 +18,11 @@ class KonfirmasiControllerMachiko extends Controller {
         
         $data = Transaksi::leftjoin('konfirmasi','transaksi.id_konfirmasi','=','konfirmasi.id_konfirmasi')
                          ->join('users','users.id','=','transaksi.id_user')
+                         ->join('metode','metode.id','=','transaksi.id_metode')
                          ->select('transaksi.*','konfirmasi.*','users.*')
                          ->where('id_user','=','2')
+                         ->where('konfirmasi.status','!=','Terima')
+                         // ->groupby('transaksi.id_transaksi')
                     // ->where('produk.status','=','Ready Stock')
                          ->get();
                          // dd($data);
@@ -45,7 +48,7 @@ class KonfirmasiControllerMachiko extends Controller {
         $images = $request->file('image');
         $imageName = time().'.'.$request->image->getClientOriginalExtension();
        
-        Image::make($images)->resize('150', '150')->save($thumb . '/' . $imageName);
+        Image::make($images)->resize('500', '500')->save($thumb . '/' . $imageName);
 
         }
       $konfirmasi->total_transfer= $request->total_transfer;

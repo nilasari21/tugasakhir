@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ProdukControllerMachiko@index');
 
 
 Route::get('admin', function () {
@@ -49,6 +47,7 @@ Route::post('metode/update/{id}', 'MetodeController@postUpdate');
 Route::get('customer', 'UserController@index');
 
 Route::get('testimoniadmin', 'TestimoniController@index');
+Route::get('testimoniadmin/delete/{id}', 'TestimoniController@getDelete');
 
 Route::get('preorder', 'PreorderController@index');
 Route::get('preorder/tambahpo', 'PreorderController@tambah');
@@ -65,8 +64,10 @@ Route::get('testimonimachiko', 'TestimoniControllerMachiko@index');
 Route::get('transaksi', 'KelolaTransaksiController@index');
 Route::get('transaksi_reseller', 'KelolaTransaksiController@transReseller');
 Route::get('/transaksi_reseller/detail/{id}', 'KelolaTransaksiController@detail');
-
-
+Route::post('/transaksi_reseller/detail/update/{id}', 'KelolaTransaksiController@postUpdate');
+Route::get('konfirmasibayar', 'KonfirmasiPembayaranController@index');
+Route::post('konfirmasibayar/simpan', 'KonfirmasiPembayaranController@simpan');
+Route::get('pembayaran_cod', 'PembayaranCODController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -80,7 +81,7 @@ Route::get('/daftar', function () {
     return view('vendor.machiko.register');
 });
 Route::get('/masuk', function () {
-    return view('vendor.machiko.login');
+    return view('machiko.login');
 });
 
 Route::get('profil', 'ProfilControllerMachiko@index');

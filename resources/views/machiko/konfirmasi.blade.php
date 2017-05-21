@@ -26,14 +26,14 @@
                                     <div class="woocommerce">
                                         
                                             <div class="table-responsive">
-                                            <table cellspacing="0" class="shop_table cart" style="width:100%;align:center" >
+                                            <table cellspacing="0" class="shop_table cart" style="width:100%;align:center;font-size:12px" >
                                                 <thead >
                                                     <tr >
                                                         
                                                         
                                                         <th class="product-name" style="background:#66CC99">Id Transaksi</th>
                                                         <th class="product-price" style="background:#66CC99">Tanggal transaksi</th>
-                                                        
+                                                        <th class="product-price" style="background:#66CC99">Total yang harus dibayarkan</th>
                                                         <th class="product-price" style="background:#66CC99">Status</th>
                                                         <th class="product-price" style="background:#66CC99">Keterangan</th>
                                                         <th class="product-price" style="background:#66CC99" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -54,6 +54,9 @@
                                                         <td class="product-name">
                                                             {{ $row->tgl_transaksi}}
                                                         </td>
+                                                        <td class="product-name">
+                                                            {{ $row->total_bayar}}
+                                                        </td>
                                                         <?php 
                                                         if(count($row->id_konfirmasi)==0){?>
                                                         <td class="product-name">
@@ -68,16 +71,43 @@
                                                             
                                                         </td>
                                                         <?php
-                                                        }else{?>
+                                                        }if(count($row->id_konfirmasi)==1 && $row->status=="Pending"){?>
                                                         <td class="product-name">
                                                             {{$row->status}}
                                                         </td>
                                                         <td class="product-name">
-                                                            {{ $row->keterangan}} 
+                                                            Bukti berhasil diupload, silahkan tunggu persetujuan admin.
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <!-- <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="#">Ubah bukti</a> -->
+                                                            
+                                                        </td>
+                                                        <?php
+                                                      }if(count($row->id_konfirmasi)==1 && $row->status=="Tolak"){?>
+                                                        <td class="product-name">
+                                                            {{$row->status}}
+                                                        </td>
+                                                        <td class="product-name">
+                                                            {{$row->alasan_tolak}}<br/>
+                                                            Silahkan upload bukti yang seuai.
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
                                                             <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="#">Ubah bukti</a>
+                                                            
+                                                        </td>
+                                                        <?php
+                                                      }if(count($row->id_konfirmasi)==0 && $row->status=="Pending" && $row->jenis=="COD"){?>
+                                                        <td class="product-name">
+                                                            {{$row->status}}
+                                                        </td>
+                                                        <td class="product-name">
+                                                            Silahkan hubungi contact admin yang tersedia untuk koordinasi tempat dan waktu pembayaran.
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <!-- <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="#">Ubah bukti</a> -->
                                                             
                                                         </td>
                                                         <?php

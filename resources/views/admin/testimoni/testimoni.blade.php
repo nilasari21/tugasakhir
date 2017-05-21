@@ -39,7 +39,7 @@
 
           <td>
              
-            <a class="btn btn-default" href="#" onclick="return confirm('Are you sure to delete this data?')"><i class="fa fa-remove"></i>  Delete</a>
+            <a class="btn btn-default" href="{{ url('testimoniadmin/delete/'.$row->id_testi) }}" onclick="return confirm('Yakin ingin menghapus testimoni?')"><i class="fa fa-remove"></i>  Delete</a>
          </td>
         </tr>
        @endforeach

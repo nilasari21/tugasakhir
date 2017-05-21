@@ -17,7 +17,7 @@ class ProdukControllerMachiko extends Controller {
         $data = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
                 ->join('produk_ukuran','produk_ukuran.produk_id','produk.id')
                 ->select('produk.*','kategori_produk.*','produk_ukuran.*')
-                // ->where('produk.status','=','Ready Stock')
+                // ->where('produk_ukuran.stock','!=','0')
                 ->orderby('produk.id','desc')
                  ->GROUPBY('produk.nama_produk','produk.id')
                 
@@ -60,6 +60,7 @@ class ProdukControllerMachiko extends Controller {
                     ->get();
                     // dd($kat);
         $ukuran= ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
+                            // ->where('produk_ukuran.stock','!=','0')
                             ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                             ->select('produk_ukuran.*','ukuran.*')
                             ->get();

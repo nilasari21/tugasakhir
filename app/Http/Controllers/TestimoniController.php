@@ -18,6 +18,11 @@ class TestimoniController extends Controller {
                           // dd($data);
         return view('admin.testimoni.testimoni')->with('data',$data);
        //
+    }public function getDelete($id)
+    {
+        $data = Testimoni::where('id_testi','=',$id);
+        $data->delete();
+        return redirect('testimoniadmin');
     }
     /*public function tambah()
     {

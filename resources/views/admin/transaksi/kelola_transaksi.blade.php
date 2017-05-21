@@ -17,7 +17,7 @@
           </section>
       @endsection
 
-        
+    
     <div class="col-md-12">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -31,6 +31,7 @@
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
                 <!-- Post -->
+                <a class="btn btn-success" href="#">Detail</a>
                <div class="box-body table-responsive margin">                   
                 <table id="data" class="table table-bordered table-hover dataTable table-striped">
                   <thead>

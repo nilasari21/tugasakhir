@@ -74,7 +74,7 @@
                <div class="alert alert-success" style="font-family:Roboto;padding-bottom: 100px;padding-left: 15px;">
                 {{ $data->status }}
                  <?php 
-                        if( $data->status =="Ready Stock"){ ?>
+                        if( $data->jenis =="Ready Stock"){ ?>
                          
                          <div class="col-md-12">
                           <strong>Stok</strong><br/>
@@ -86,7 +86,7 @@
                         <?php
                         }else{ ?>
                         <div class="col-md-12">
-                          
+                          <strong>Pre Order</strong><br/>
                         {{ $data->tgl_awal_po }} sampai {{ $data->tgl_akhir_po }}
                         </div> 
                     <?php
@@ -105,23 +105,41 @@
                             <div class="quantity buttons_added">
                                 
                                 <select class="form-control" name="id_produk_ukuran" style="border: 1px solid #66CC99;font-family:Roboto">
-                                    
                                     @foreach($ukuran as $row)
+                                    <?php if($row->stock != 0 && $data->jenis=="Ready Stock"){?>
+                                    
                                     <option value="{{$row->id_produk_ukuran}}" >
                                         {{$row->nama_ukuran}}
                                         
                                     </option>
 
-                                    @endforeach
+                                    
+                                    <?php } ?>
+                                    <?php if( $data->jenis=="PreOrder"){?>
+                                    
+                                    <option value="{{$row->id_produk_ukuran}}" >
+                                        {{$row->nama_ukuran}}
+                                        
+                                    </option>
+
+                                    
+                                    <?php } ?>
+                                    @endforeach    
                                 </select>
                             </div>
                             
                         </div>
                          </div>
-                  
-               
-               
-                    
+                         @php
+                         $i=1;
+                         @endphp
+                  @foreach($ukuran as $row)
+               <input type="hidden" name="ukuuu" id="ukuuu{{$i}}" value="{{$row->nama_ukuran}}">
+               @php
+               $i++;
+               @endphp
+               @endforeach
+               <!--  -->
                <label>Jumlah:</label>
                <div class="form-group">
                 <?php 
@@ -183,29 +201,38 @@
     }
   @endif
 </script>
- <!--<script type="text/javascript">
+ <script type="text/javascript">
             $(document).ready(function (){
-            var pembanding=false;                                          
-       @php
-         $i=1;
-       foreach($ukuran as $a){
-
-        @endphp
-        if($a->nama_ukuran=="Tidak ada ukuran"){
-            pembanding=true;
-        }
- console.log(pembanding);
-         @php 
-      $i++; }
-      @endphp
-
-      if(pembanding==true){
-        document.getElementById('ukuran').style.display = 'none';
-    }else{
-        document.getElementById('ukuran').style.display = 'block';
-    }
-        });
+       
+      var pembanding=false;
+@php
+            $i=1;
+            
+            @endphp
              
+      var ukuuu = $('#ukuuu{{$i}}').val();
+      // var status_pesan = $('#status_pesan').val();
+      console.log(ukuran);
+     if(ukuuu=="Tidak ada ukuran"){
+
+        pembanding = true;
+      }
+      console.log(pembanding);
+      
         
-    </script>-->
+       @php
+             $i++;
+             
+             @endphp
+             if(pembanding==true){
+              document.getElementById('ukuran').style.display = 'none';
+             }if(pembanding==false ){
+              document.getElementById('ukuran').style.display = 'block';
+             }
+             
+     
+
+            });
+        
+    </script>
             @endsection

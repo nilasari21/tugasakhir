@@ -9,7 +9,7 @@ use App\Produk;
 use App\ProdukUkuran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-
+use Auth;
 class KeranjangControllerMachiko extends Controller {
 
     public function index() {
@@ -20,7 +20,7 @@ class KeranjangControllerMachiko extends Controller {
                         ->leftjoin('produk','produk.id','=','produk_ukuran.produk_id')
                         ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                          ->select('keranjang.*','produk.*','produk.jenis','produk_ukuran.*','ukuran.nama_ukuran','users.level')
-                         ->where('user_id','=','2')
+                         ->where('user_id',Auth::user()->id)
                     // ->where('produk.status','=','Ready Stock')
                          ->get();
                           // dd($data);
@@ -38,12 +38,12 @@ class KeranjangControllerMachiko extends Controller {
     {
         
         // dd($status);
-        $keranjang= Keranjang::where('user_id','=',2)
+        $keranjang= Keranjang::where('user_id','=',Auth::user()->id)
                             ->where('id_produk_ukuran','=',$request->id_produk_ukuran)
                             ->first();
                             // dd($keranjang);
         if(count($keranjang)!=0){
-            $keranjang1= Keranjang::where('user_id','=',2)
+            $keranjang1= Keranjang::where('user_id','=',Auth::user()->id)
                             ->where('id_produk_ukuran','=',$request->id_produk_ukuran)
                             ->first();
             $keranjang1->jumlah=$keranjang1->jumlah + $request->jumlah;

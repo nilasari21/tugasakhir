@@ -42,8 +42,9 @@
                 <a href="#"> <i><i class="fa fa-cc-discover"></i> </i><span>Transaksi</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('transaksi') }}">Kelola transaksi</a></li>
-                    <li><a href="#">Kelola pembayaran</a></li>
+                    <li><a href="{{ url('konfirmasibayar') }}">Kelola pembayaran</a></li>
                     <li><a href="{{ url('transaksi_reseller') }}">Transaksi reseller</a></li>
+                    <li><a href="{{ url('pembayaran_cod') }}">Pembayaran COD</a></li>
                 </ul>
             </li>
             <li><a href="{{ url('metode') }}"> <i class="fa fa-credit-card" ></i> <span>Metode Bayar</span></a></li>

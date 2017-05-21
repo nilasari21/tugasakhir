@@ -4,11 +4,16 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="user-menu">
+
                         <ul>
+                           
+
                             <li><a href="{{ url('machikokstore') }}"><img src="{{asset("/machikoo/img/mauedit.png")}}" width="60px" height="60px" ><span>  Machiko K-Store</span></a></li>
+                             @if (Auth::guest())
+                            @else
                             <li><a href="{{ url('wishlist') }}"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="{{ url('keranjang') }}"><i class="fa fa-shopping-cart"></i> Keranjang</a></li>
-                           
+                           @endif
                         </ul>
                     </div>
                 </div>
@@ -17,17 +22,29 @@
                     <div class="header-right" style="padding-top:5%">
                         <div class="user-menu">
                         <ul class="list-unstyled list-inline">
+                            
+                            @if (Auth::guest())
+                            <li><a href="{{ url('masuk') }}"><i class="fa fa-sign-in"></i> Masuk</a></li>
+                            <li><a href="{{ url('daftar') }}"><i class="fa  fa-sign-out"></i> Daftar</a></li>
+                            @else
                             <li class="dropdown dropdown-small">
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"><i class="fa fa-user"></i> Profil </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url('profil') }}">Lihat profil</a></li>
                                     <li><a href="{{ url('konfirmasi') }}">Konfirmasi pembayaran</a></li>
                                     <li><a href="#">Status pemesanan</a></li>
-                                    <li><a href="#">Keluar</a></li>
+                                    <li> <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form></li>
                                 </ul>
+                                @endif
                             </li>
-                            <li><a href="{{ url('masuk') }}"><i class="fa fa-sign-in"></i> Masuk</a></li>
-                            <li><a href="{{ url('daftar') }}"><i class="fa  fa-sign-out"></i> Daftar</a></li>
                         </ul>
                     </div>
                     </div>

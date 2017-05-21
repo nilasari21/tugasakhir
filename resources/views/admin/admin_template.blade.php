@@ -64,6 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   
 
     </style>
+    @yield('js')
 </head>
 <body class="skin-blue sidebar-mini">
 <div class="wrapper">
@@ -76,6 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+    
         <!-- Content Header (Page header) -->
         <!-- <section class="content-header">
             <h1>
@@ -88,6 +90,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Main content -->
         <section class="content">
+
             <!-- Your Page Content Here -->
             @yield('content')
         </section><!-- /.content -->
