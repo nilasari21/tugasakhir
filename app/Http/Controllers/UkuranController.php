@@ -11,7 +11,8 @@ class UkuranController extends Controller {
 
    public function index()
     {
-        $data = Ukuran::all();
+        $data = Ukuran::where('nama_ukuran','!=','Tidak ada ukuran')
+                        ->get();
         return view('admin.ukuran.ukuran')->with('data',$data);
        //
     }

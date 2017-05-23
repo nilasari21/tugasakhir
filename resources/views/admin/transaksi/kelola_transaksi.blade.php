@@ -31,7 +31,8 @@
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
                 <!-- Post -->
-                <a class="btn btn-success" href="#">Detail</a>
+                <span>Merupakan daftar transaksi dimana produk belum diproduksi dan belum lunas</span>
+                <!-- <a class="btn btn-success" href="#">Detail</a> -->
                <div class="box-body table-responsive margin">                   
                 <table id="data" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
@@ -80,8 +81,10 @@
                 </table>
               </div>
               </div>
-              <div class="active tab-pane" id="menunggu">
+              <div class="tab-pane" id="menunggu">
                 <!-- Post -->
+                <span>Merupakan daftar transaksi dimana produk belum diproduksi dan sudah lunas. Serta daftar transaksi untuk produk
+                  ready stock yang menunggu packing</span>
                <div class="box-body table-responsive margin">                   
                 <table id="tu2" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
@@ -133,6 +136,7 @@
               <!-- /.tab-pane -->
               <div class="tab-pane" id="timeline">
                 <!-- The timeline -->
+                <span>Merupakan daftar transaksi dimana produk sedang dalam proses produksi</span>
                 <div class="box-body table-responsive margin">                   
                 <table id="data2" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
@@ -181,6 +185,7 @@
               <!-- /.tab-pane -->
 
               <div class="tab-pane" id="settings">
+                <span>Merupakan daftar transaksi dimana produk sedang dipacking</span>
                 <div class="box-body table-responsive margin">                   
                 <table id="data3" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
@@ -228,6 +233,7 @@
               </div>
 
               <div class="tab-pane" id="pengiriman">
+                <span>Merupakan daftar transaksi dimana produk dimana produk baru diambil oleh kurir JNE tetapi belum ada nomor resi</span>
                 <div class="box-body table-responsive margin">                   
                 <table id="data4" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
@@ -275,6 +281,7 @@
               </div>
 
               <div class="tab-pane" id="selesai">
+                <span>Merupakan daftar transaksi dimana produk sudah dikirimkan oleh kurir JNE dan sudah memiliki nomor resi</span>
                 <div class="box-body table-responsive margin">                   
                 <table id="data5" class="table table-bordered table-hover dataTable table-striped">
                   <thead>

@@ -31,18 +31,23 @@
        $i=1;
        @endphp
        @foreach ($data as $row)
+       
+
         <tr>
+          <form method="post" action="{{ url('pembayaran_cod/lunas/'.$row->id_transaksi) }}">
           <!-- <td>{{ $row->tgl_transfer }}</td> -->
+          {{ csrf_field() }}
           <td>{{ $row->id_transaksi }}</td>
           <td>{{ $row->name }}</td>
           <!-- <td>{{ $row->nama_produk }}</td> -->
           <!-- <td>{{ $row->total_transfer }}</td> -->
-          <td>{{ $row->total_bayar }}</td>
+          <td>{{ $row->total_bayar }}<input type="hidden" name="lunas" value="Lunas"></td>
           
 
           <td>
              
-            <a class="btn btn-default" href="#" onclick="return confirm('Are you sure to delete this data?')"><i class="fa  fa-check-square-o"></i>  Lunas</a>
+            <button type="submit"  class="btn btn-default"><i class="fa  fa-check-square-o"></i>  Lunas</button>
+            </form>
          </td>
         </tr>
         @php

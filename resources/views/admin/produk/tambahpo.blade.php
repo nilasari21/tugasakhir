@@ -2,14 +2,18 @@
 <!--  -->
 
 @section('content')
-
+@if(session()->has('message'))
+    <div class="alert alert-danger">
+        {{ session()->get('message') }}
+    </div>
+@endif
 <form method="POST"  enctype="multipart/form-data" files="true">
    
     <div class="panel panel-card" style="padding:10px; ">
 {{ csrf_field() }}
     <div class="form-group"  >
         <label for="exampleInputFile">Gambar Produk</label>
-        <input id="input-2" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">
+         <input id="input-2" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">
     </div>
    
     <label> Nama Produk</label><br/>
@@ -101,4 +105,28 @@
 
 </form>  
 </div>  
+@endsection
+@section('js')
+<script>
+  @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch(type){
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+        
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+  @endif
+</script>
 @endsection

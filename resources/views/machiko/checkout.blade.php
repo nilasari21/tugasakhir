@@ -4,130 +4,7 @@
 <link rel="stylesheet" href="{{asset("/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
 @endsection
 @section('content')
-<div class="modal fade" id="modal4" role="dialog" >
-                                <div class="modal-dialog">
-                                
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Pemberitahuan</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      
-                                      <!-- <input type="text" class="form-control" id="getlevel" name="iduser" value=""> -->
-                                      <p>Reseller memiliki jumlah minimal pembelian tiap produk, silahkan periksa kembali jumlah pembelian di setiap produk anda.
-
-                                    </div>
-                                    <div class="modal-footer">
-                                      <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('keranjang' ) }}">Ke keranjang</a>
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                    </div>
-                                  </div>
-                                  
-                                </div>
-                              </div>
-<div class="modal fade" id="cod" role="dialog" style="padding-top:100px" aria-hidden="true">
-                                <div class="modal-dialog">
-                                
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Pemberitahuan</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      
-                                      <p>Mohon maaf, metode pembayaran melalui COD hanya berlaku untuk wilayah Daerah Istimewa Yogyakarta. Silahkan pilih metode pembayaran lain. Terimakasih</p>
-                                      
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-success" data-dismiss="modal">Ya</button>
-                                      
-                                    </div>
-                                  </div>
-                                  
-                                </div>
-                              </div>
-                            </div>
-                             <!-- modal -->
-                          <div class="modal fade" id="modal" role="dialog" style="padding-top:100px">
-                                <div class="modal-dialog">
-                                
-                                  
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Upgrade user</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      <input type="text" class="form-control" id="id" name="iduser" value="{{$data->id}}">
-                                      <input type="text" class="form-control" id="getlevel" name="iduser" value="">
-                                      <p>Anda menggunakan pemesanan tidak sesuai dengan level user anda. Apakah anda ingin mengupgrade level user?</p>
-                                      <p style="font-size:12px">Catatan: Perubahan level user memerlukan persetujuan admin. Mohon tunggu sampai admin menyetujui permintaan perubaha level.
-                                        Pembayaran hanya dapat dilakukan apabila permintaan telah disetujui.</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-success" data-dismiss="modal">Ya</button>
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                                    </div>
-                                  </div>
-                                  
-                                </div>
-                              </div>
-                              
-                          <div class="modal fade" id="modal2" role="dialog" style="padding-top:100px">
-                                <div class="modal-dialog">
-                                
-                                  
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Pemberitahuan</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      <input type="hidden" class="form-control" id="id" name="iduser" value="{{$data->id}}">
-                                      <input type="hidden" class="form-control" id="getlevel" name="iduser" value="">
-                                      <p>Anda menggunakan pemesanan tidak sesuai dengan level user anda.</p>
-                                      <p >Jika anda tetap memilih pilihan ini, anda harus menunggu persetujuan admin terlebih dahulu agar dapat melakukan pembayaran.
-                                      </p>
-                                      <p style="font-size:12px">Jika anda memilih Reseller, total pembayaran akan dihitung oleh admin (untuk mendapat potongan harga)
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-success" data-dismiss="modal">Ya</button>
-                                      
-                                    </div>
-                                  </div>
-                                  
-                                </div>
-                              </div>
-                              
-                          <div class="modal fade" id="modal3" role="dialog" style="padding-top:100px">
-                                <div class="modal-dialog">
-                                
-                                  
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Pemberitahuan</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      <input type="hidden" class="form-control" id="id" name="iduser" value="{{$data->id}}">
-                                      <input type="hidden" class="form-control" id="getlevel" name="iduser" value="">
-                                      </p>
-                                      <p>Reseller memiliki minimal pembelian tiap  barang. Jumlah barang anda tidak sesuai minimal pembelian. silahkan kembali ke keranjang
-                                      <p>Anda menggunakan pemesanan tidak sesuai dengan level user anda.</p>
-                                      <p >Jika anda tetap memilih pilihan ini, anda harus menunggu persetujuan admin terlebih dahulu agar dapat melakukan pembayaran setelah anda melakukan <i>checkout</i>.
-                                        atau gunakan jenis pemesanan lain.
-                                      
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-success" data-dismiss="modal">Ya</button>
-                                      
-                                    </div>
-                                  </div>
-                                  
-                                </div>
-                              </div>
+<!--  -->
 <div class="single-product-area">
     <div class="zigzag-bottom">
     </div>
@@ -143,7 +20,7 @@
                                 <div class="product-content-right">
                                     <div class="woocommerce">
                                         <form method="post" action="#" name="autoSumForm">
-                                            <div class="table-responsive" style="display:none">
+                                            <div class="table-responsive" style="display:block">
                                             <table cellspacing="0" class="shop_table cart" style="width:100%;align:center" >
                                                 <thead >
                                                     <tr >
@@ -238,9 +115,9 @@
                 <form class="form-horizontal" action="{{ url('checkout/simpan') }}" method="post">
                   {{ csrf_field() }}
                 <input type="hidden" class="form-control" id="berat" name="berat" value="{{ $b->berat }} " readonly>  
-                    <input type="hidden" class="form-control" id="level" name="level" value="{{$data->level}}">
+                    <input type="text" class="form-control" id="level" name="level" value="{{$data->level}}">
                     <input type="text" class="form-control" id="status" name="status" value="">
-                    <input type="hidden" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
+                    <input type="text" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
                     <div class="form-group">
                      <!--  <div class="col-sm-3 control-label"> -->
                       <!-- <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>   -->
@@ -264,8 +141,8 @@
                       </div>
 
                     
-                      <?php
-                      if(!$data){?>
+                      
+                      @if(count($penerima)==0)
                       <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Tujuan Pengiriman</label>
                       <div class="col-sm-8">
@@ -273,14 +150,16 @@
 
                         </div>
                       </div>
-                        <?php
-                      }else{?>
+                         <div class="col-sm-4">
+                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/alamatbaru/'.Auth::user()->id) }}">Tujuan pengiriman baru</a>
+                      </div>
+                      @else
                       <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Tujuan Pengiriman</label>
                       <div class="col-sm-8">
-                          <input type="text" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$data->id_penerima}}" class="form-control"/>
-                          <textarea id="alamat" rows='5'style="border: 1px;width:100%;" value="" disabled >{{$data->nama_penerima}}&#13;&#10;{{$data->no_hp_penerima}},&#13;&#10;{{$data->alamat_lengkap}},{{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}} </textarea>
-                          <input type="hidden" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$data->kabupaten}}" class="form-control"/>
+                          <input type="text" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$penerima->id_penerima}}" class="form-control"/>
+                          <textarea id="alamat" rows='5'style="border: 1px;width:100%;" value="" disabled >{{$penerima->nama_penerima}}&#13;&#10;{{$penerima->no_hp_penerima}},&#13;&#10;{{$penerima->alamat_lengkap}},{{$penerima->kecamatan}}, {{$penerima->kabupaten}}, {{$penerima->provinsi}} </textarea>
+                          <input type="hidden" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$penerima->kabupaten}}" class="form-control"/>
                           <input type="hidden" id="kota_asal"  name="kota_asal" value="" />
                         </div>
                         </div>
@@ -299,12 +178,10 @@
                         </select>
                       </div>
                       <div class="col-sm-4">
-                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/alamatbaru/2') }}">Tujuan pengiriman baru</a>
+                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/alamatbaru/'.Auth::user()->id) }}">Tujuan pengiriman baru</a>
                       </div>
                     </div>
-                        <?php
-                      }
-                      ?>
+                        @endif
                        <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Metode pembayaran</label>
                         <input type="hidden" class="form-control" id="metode_pilih" name="metode_pilih" value="">

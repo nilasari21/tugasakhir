@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'ProdukControllerMachiko@index');
-
+Route::get('/home', 'ProdukControllerMachiko@index');
 
 Route::get('admin', function () {
     return view('admin.beranda.beranda');
@@ -26,7 +26,7 @@ Route::get('toko', 'TestControllerMachiko@index');
 
 Route::get('beranda', 'BerandaController@index');
 
-Route::get('testmachiko', 'ProdukController@index');
+// Route::get('testmachiko', 'ProdukController@index');
 
 Route::get('kategori', 'KategoriController@index');
 Route::post('kategori/simpan', 'KategoriController@tambah');
@@ -45,16 +45,28 @@ Route::get('metode/edit/{id}', 'MetodeController@showEdit');
 Route::post('metode/update/{id}', 'MetodeController@postUpdate');
 
 Route::get('customer', 'UserController@index');
+Route::post('customer/status/{id}', 'UserController@postUpdate');
 
 Route::get('testimoniadmin', 'TestimoniController@index');
 Route::get('testimoniadmin/delete/{id}', 'TestimoniController@getDelete');
 
 Route::get('preorder', 'PreorderController@index');
+Route::post('preorder/simpan', 'PreorderController@simpanukurandetail');
+Route::get('preorder/detail/{id}', 'PreorderController@detail');
 Route::get('preorder/tambahpo', 'PreorderController@tambah');
+Route::post('preorder/ubahgambar', 'PreorderController@ubahgambar');
 Route::post('preorder/simpannonukuran', 'PreorderController@simpannonukuran');
 Route::post('preorder/simpanukuran', 'PreorderController@simpanukuran');
+Route::post('preorder/status/{id}', 'PreorderController@postUpdate');
+Route::get('preorder/edit/{id}', 'PreorderController@showEdit');
+Route::post('preorder/edit/simpan/{id}', 'PreorderController@edit');
 
+Route::get('readystock/detail/{id}', 'ReadystockController@detail');
+Route::post('readystock/ubahgambar', 'ReadystockController@ubahgambar');
+Route::get('readystock/edit/{id}', 'ReadystockController@showEdit');
+Route::post('readystock/edit/simpan/{id}', 'ReadystockController@edit');
 Route::get('readystock', 'ReadystockController@index');
+Route::post('readystock/status/{id}', 'ReadystockController@postUpdate');
 Route::get('readystock/tambahrs', 'ReadystockController@tambah');
 Route::post('readystock/simpannonukuran', 'ReadystockController@simpannonukuran');
 Route::post('readystock/simpanukuran', 'ReadystockController@simpanukuran');
@@ -68,6 +80,7 @@ Route::post('/transaksi_reseller/detail/update/{id}', 'KelolaTransaksiController
 Route::get('konfirmasibayar', 'KonfirmasiPembayaranController@index');
 Route::post('konfirmasibayar/simpan', 'KonfirmasiPembayaranController@simpan');
 Route::get('pembayaran_cod', 'PembayaranCODController@index');
+Route::post('pembayaran_cod/lunas/{id}', 'PembayaranCODController@postUpdate');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -78,7 +91,7 @@ Route::get('/home', 'HomeController@index');
 // front end
 
 Route::get('/daftar', function () {
-    return view('vendor.machiko.register');
+    return view('machiko.register');
 });
 Route::get('/masuk', function () {
     return view('machiko.login');
@@ -98,8 +111,9 @@ Route::post('keranjang/edit', 'KeranjangControllerMachiko@postUpdate');
 
 Route::get('wishlist', 'WishlistControllerMachiko@index');
 Route::post('wishlist/tambah', 'WishlistControllerMachiko@tambah');
+Route::get('wishlist/tambah', 'WishlistControllerMachiko@tambah');
 Route::get('wishlist/delete/{id}', 'WishlistControllerMachiko@getDelete');
-
+// Route::resource('wenay', 'WenayController');
 Route::get('testimoni', 'TestimoniControllerMachiko@index');
 Route::get('testimoni/tambah', 'TestimoniControllerMachiko@showtambah');
 Route::post('testimoni/simpan', 'TestimoniControllerMachiko@simpan');
@@ -128,3 +142,7 @@ Route::get('konfirmasi', 'KonfirmasiControllerMachiko@index');
 Route::post('konfirmasi/simpan', 'KonfirmasiControllerMachiko@simpan');
 
 Route::get('pencarian', 'ProdukControllerMachiko@search');
+
+
+Route::post('register', 'Auth\RegisterController@create');
+Route::get('register/verify/{confirmationCode}', 'Auth\RegisterController@confirm');

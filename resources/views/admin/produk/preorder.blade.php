@@ -47,9 +47,9 @@
           <td>{{ $row->tgl_akhir_po }}</td>
           
           <td>
-             <a class="btn btn-default" href="#"><i class="fa fa-eye"></i> Detail</a>
-            <a class="btn btn-default" href="#"><i class="fa fa-edit"></i>  Edit</a>
-            <a class="btn btn-default" href="#" onclick="return confirm('Are you sure to delete this data?')"><i class="fa fa-remove"></i>  Hapus</a>
+             <a class="btn btn-default" href="{{ url('preorder/detail/'.$row->id ) }}"><i class="fa fa-eye"></i> Detail</a>
+            <a class="btn btn-default" href="{{ url('preorder/edit/'.$row->id) }}"><i class="fa fa-edit"></i>  Edit</a>
+            <!-- <a class="btn btn-default" href="#" onclick="return confirm('Are you sure to delete this data?')"><i class="fa fa-remove"></i>  Hapus</a> -->
          </td>
         </tr>
        @endforeach

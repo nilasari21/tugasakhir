@@ -15,7 +15,7 @@
            <div class="col-sm-12 padding-right">
     <div class="features_items"><!--features_items-->
         
-        <br/> 
+        <br/>
        <!-- <div class="row padding-right" > -->
                 @foreach ($data as $row)
         <!-- <div class=" col-sm-4">
@@ -61,6 +61,8 @@ Rp {{ $row->harga_pokok }},00
 </div>
 </div>
 @endforeach
+
+        {{ session('id') }} 
 </div>
 </div>
 

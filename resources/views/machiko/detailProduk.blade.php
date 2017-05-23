@@ -46,11 +46,15 @@
             <i class="item_price" style="display:none"></i>
             <div>
               <h1 class="item_name" style="font-family:Roboto;color:#66CC99">{{ $data->nama_produk }}</h1><br/>
+              @if (Auth::guest())
+              
+              @else
             <form method="POST"  action="{{ url('wishlist/tambah') }}">
                         {{ csrf_field() }}
                             <input type="hidden" size="4" name="produk_id" value="{{ $data->id }}">
                             <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Tambah Wishlist</button>
                         </form>
+                        @endif
             <p>
                 <span>  
                     <span>{{ "Rp ".number_format($harga_pokok->harga_pokok,2, ',', '.') }} </span>  
@@ -68,7 +72,7 @@
                 <form method="POST"  action="{{ url('keranjang/tambah') }}">
                         {{ csrf_field() }}
                         <input type="hidden" size="4" name="produk_id" value="{{ $data->id }}">
-                        <input type="hidden"  name="status" value="{{ $data->status }}">
+                        <input type="hidden"  name="status" value="{{ $data->jenis }}">
                     
                         
                <div class="alert alert-success" style="font-family:Roboto;padding-bottom: 100px;padding-left: 15px;">

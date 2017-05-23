@@ -247,7 +247,7 @@
                     <input type="hidden" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
                     <div class="form-group">
                      <!--  <div class="col-sm-3 control-label"> -->
-                      <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>  
+                      <!-- <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>   -->
                       <!-- </div> -->
                       <!-- <div class="col-sm-4">
                         
@@ -335,7 +335,7 @@
                         <input type="hidden" class="form-control" id="jenis_metode" name="jenis_metode" value="">
                         <div class="col-sm-4">
                         <select class="form-control" style="width: 100%;" onChange="b();span();getTotal()" id="metode" name="metode" required/>
-                            <option>Pilih metode pembayaran</option>
+                            
                               @foreach($metodebanyak as $row)
                                     <option value="{{$row->id}}" >
                                         {{$row->metode}}

@@ -69,14 +69,7 @@ class ProdukControllerMachiko extends Controller {
         $harga_pokok=ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
                             ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                             ->first();
-        /*$terkait = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
-                ->select('produk.*','kategori_produk.*')
-                ->where('produk.id_kategori','=',2)
-                /*->orderby('produk.id','desc')
-                ->GROUPBY('produk.id')
-                ->limit(5)*/
-                // ->get();*/
-                // dd($terkait);
+       
         return view('machiko.detailProduk')->with(compact('data',$data,'ukuran',$ukuran,'harga_pokok',$harga_pokok));
     }
     public function search(Request $request){

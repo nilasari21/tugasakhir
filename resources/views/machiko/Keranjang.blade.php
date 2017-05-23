@@ -10,7 +10,7 @@
 <!-- Session::get('success'); -->
 <div class="modal fade" id="modal" role="dialog" >
                                 <div class="modal-dialog">
-                                
+                           <!-- {{Auth::user()->name}}      -->
                                   <!-- Modal content-->
                                   <div class="modal-content">
                                     <div class="modal-header">
@@ -162,7 +162,7 @@
                                                             
                                                        </form>
                                         
-                                                        <a class="add_to_cart_button" id="buttoncheckout" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/2') }}">Checkout</a>
+                                                        <a class="add_to_cart_button" id="buttoncheckout" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/'.Auth::user()->id) }}">Checkout</a>
                                                         </td>
 
                                                     </tr>

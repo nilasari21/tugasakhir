@@ -42,7 +42,22 @@
           <td>{{ $row->email }}</td>
           <td>{{ $row->status_user }}</td>
           <td>
-            <a class="btn btn-info" href="{{ url('user/edit/'.$row->id_kategori) }}" id="myBtn">Edit</a>
+            
+            @if($row->status_user=="Aktif")
+            <form method="post" action="{{ url('customer/status/'.$row->id) }}">
+              {{ csrf_field() }}
+              <input type="hidden" name="status" value="Tidak Aktif">
+            <button type="submit"  class="btn btn-default"><i class="fa  fa-check-square-o"></i>  Tidak Aktif</button>
+            </form>
+            @else
+            <form method="post" action="{{ url('customer/status/'.$row->id) }}">
+              {{ csrf_field() }}
+              <input type="hidden" name="status" value="Aktif">
+            <button type="submit"  class="btn btn-default"><i class="fa  fa-check-square-o"></i>  Aktif</button>
+            </form>
+            @endif
+            
+            
             
          </td>
         </tr>

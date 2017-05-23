@@ -41,19 +41,12 @@ class KeranjangControllerMachiko extends Controller {
         $keranjang= Keranjang::where('user_id','=',Auth::user()->id)
                             ->where('id_produk_ukuran','=',$request->id_produk_ukuran)
                             ->first();
-                            // dd($keranjang);
-        if(count($keranjang)!=0){
-            $keranjang1= Keranjang::where('user_id','=',Auth::user()->id)
-                            ->where('id_produk_ukuran','=',$request->id_produk_ukuran)
-                            ->first();
-            $keranjang1->jumlah=$keranjang1->jumlah + $request->jumlah;
-            
-            $keranjang1->save();
-            $status=$request->status;
-            // dd($status);
-            if($status=="Ready Stock"){
+        // dd($request->jumlah, $request->id_produk_ukuran);
+        $status=$request->status;
+        if($status=="Ready Stock"){
             $produk= ProdukUkuran::where('id_produk_ukuran','=',$request->id_produk_ukuran)->first();
-            $produk->stock=$produk->stock - $request->jumlah;
+            // dd($produk);
+            $produk->stock= $produk->stock- $request->jumlah;
             $produk->save();
 
         }  else{
@@ -62,11 +55,21 @@ class KeranjangControllerMachiko extends Controller {
             $produk->stock="NULL";
             $produk->save();
         }
+        if(count($keranjang)!=0){
+            $keranjang1= Keranjang::where('user_id','=',Auth::user()->id)
+                            ->where('id_produk_ukuran','=',$request->id_produk_ukuran)
+                            ->first();
+            $keranjang1->jumlah=$keranjang1->jumlah + $request->jumlah;
+            
+            $keranjang1->save();
+            
+            // dd($status);
+            
         }else{
           $data = new Keranjang; // new Model
 
         // $data->produk_id = $request->produk_id;
-        $data->user_id = 2;
+        $data->user_id = Auth::user()->id;
         $data->id_produk_ukuran = $request->id_produk_ukuran;
         $data->jumlah = $request->jumlah;
         $data->keterangan = $request->keterangan;
@@ -78,20 +81,15 @@ class KeranjangControllerMachiko extends Controller {
                     ->first();
                     // dd($produkukuran);
         $hargatambah=$produkukuran->harga_tambah;
-        /*if(count($produkukuran)!=0){
-            $hargatambah=$produkukuran->harga_tambah;
-        }else{
-            $hargatambah=0;
-        }*/
-        // $produk= Produk::find($request->produk_id);
+        
         $data->Total_harga=($produkukuran->harga_pokok * $request->jumlah)+$hargatambah;
         $data->save();
-
+        // dd();
         $status=$request->status;
         // dd($status);
-        if($status=="Ready Stock"){
+        /*if($status=="Ready Stock"){
             $produk= ProdukUkuran::where('id_produk_ukuran','=',$request->id_produk_ukuran)->first();
-            $produk->stock=$produk->stock - $request->jumlah;
+            $produk->stock=$produk->stock - 1;
             $produk->save();
 
         }  else{
@@ -99,7 +97,7 @@ class KeranjangControllerMachiko extends Controller {
             // dd($produk);
             $produk->stock="NULL";
             $produk->save();
-        }
+        }*/
         }
         $notification = array(
                     'message' => 'Produk berhasil disimpan di keranjang', 
@@ -119,6 +117,7 @@ class KeranjangControllerMachiko extends Controller {
     {
         $data = Keranjang::where('id_keranjang','=',$id);
         $data->delete();
+        /**/
         return redirect('keranjang');
     }
 

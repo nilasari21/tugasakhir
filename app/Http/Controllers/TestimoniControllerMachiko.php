@@ -41,7 +41,18 @@ public function simpan(Request $request)
        
         Image::make($images)->resize('150', '150')->save($thumb . '/' . $imageName);
 
-        }
+        }else{
+      $notification = array(
+                    'message' => 'Ukuran file terlalu besar. max: 2mb', 
+                    'alert-type' => 'danger'
+                );
+        
+        // $request->session()->flash('alert-success', 'User was successful added!');
+        return redirect()
+                ->back()
+                ->with($notification);
+                
+    } 
       $testi->users_id= 2;
       $testi->foto_testi=$imageName;
       $testi->Keterangan=$request->keterangan;

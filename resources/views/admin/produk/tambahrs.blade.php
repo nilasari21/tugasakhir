@@ -2,6 +2,11 @@
 <!--  -->
 
 @section('content')
+@if(session()->has('message'))
+    <div class="alert alert-danger">
+        {{ session()->get('message') }}
+    </div>
+@endif
 <!-- <div class="col-md-9"> -->
 <form method="POST"  enctype="multipart/form-data" files="true">
 {{ csrf_field() }}   
@@ -95,4 +100,28 @@
 
 </form>  
 <!-- </div>   -->
+@endsection
+@section('js')
+<script>
+  @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch(type){
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+        
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+  @endif
+</script>
 @endsection

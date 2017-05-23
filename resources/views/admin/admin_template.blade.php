@@ -24,6 +24,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <link href="{{ asset('/adminlte')}}/dist/css/AdminLTE.min.css" rel="stylesheet"  >
     <link href="{{ asset("/adminlte/dist/css/skins/skin-blue.min.css")}}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
     <style type="text/css">
     .main-sidebar { background-color: #06587D !important }
     .main-header .navbar{ background-color: #de6262 !important }
@@ -116,7 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset("/adminlte/plugins/datatables/jquery.dataTables.min.js") }}" > </script>
 <script src="{{ asset("/adminlte/plugins/datatables/dataTables.bootstrap.min.js") }}"  > </script>
 
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js"></script>
 
 <!-- bootstrap datepicker -->
 <script src="{{ asset("/adminlte/plugins/datepicker/bootstrap-datepicker.js") }}"  > </script>

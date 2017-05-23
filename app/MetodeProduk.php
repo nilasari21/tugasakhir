@@ -18,7 +18,7 @@ class MetodeProduk extends Model
     protected $primaryKey = 'id_metode';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id_metode','produk_id','metode_id';
+    protected $fillable = ['id_metode','produk_id','metode_id'];
     // protected $hidden = [];
     // protected $dates = [];
 

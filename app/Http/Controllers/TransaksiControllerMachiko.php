@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\MetodeProduk;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Transaksi;
@@ -13,6 +13,7 @@ use App\DetailTransaksi;
 use DB;
 use Carbon\Carbon;
 use RajaOngkir;
+use Auth;
 // use App\Models\Penerima;
 
 
@@ -51,31 +52,45 @@ class TransaksiControllerMachiko extends Controller {
                     // ->where('produk.status','=','Ready Stock')
                          ->get();
         // dd($beratharga);
-         $data = Penerima::join('users','users.id','=','penerima.id_user')
+         $data = Users::where('id','=',$id)
+                      ->first();
                         
-                        ->where('penerima.id_user','=',$id)
-                        ->first();
+                        
                         // dd($data);
         $penerima = Penerima::where('penerima.id_user','=',$id)
                         ->get();
        // dd($penerima);
                         // return $jumlahkeranjang;
-        $metodebanyak=  Metode::select('*',(DB::raw ('count(metode.metode) as c')))
+      /*  $metodebanyak=  Metode::select('*',(DB::raw ('count(metode.metode)')))
                               ->join ('metode_produk','metode_produk.metode_id','=','metode.id' )
                               ->join('produk_ukuran','produk_ukuran.produk_id','=','metode_produk.produk_id')
                               ->JOIN ('keranjang' ,'produk_ukuran.id_produk_ukuran','=','keranjang.id_produk_ukuran')
                               ->where('keranjang.user_id','=',$id)
+                              ->where('metode.status','=','Aktif')
+                              ->where('metode_produk.status','=','Aktif')
                               ->GROUPBY ('metode.metode','metode.id')
-                              ->HAVING ('c' ,'=',Keranjang::count('id_produk_ukuran'))
+                              ->HAVING ((DB::raw ('count(metode.metode)')) ,'=',(DB::raw ('count(keranjang.id_produk_ukuran)')))
+                              ->get();*/
+            $metodebanyak=  MetodeProduk::select('*',(DB::raw ('count(metode_produk.metode_id)')))
+                              ->join ('metode','metode_produk.metode_id','=','metode.id' )
+                              ->join('produk_ukuran','produk_ukuran.produk_id','=','metode_produk.produk_id')
+                              ->JOIN ('keranjang' ,'produk_ukuran.id_produk_ukuran','=','keranjang.id_produk_ukuran')
+                              ->where('keranjang.user_id','=',$id)
+                              ->where('metode.status','=','Aktif')
+                              // ->ORwhere('metode_produk.status','=','Aktif')
+                              ->GROUPBY ('metode.metode','metode.id')
+                              ->HAVING ((DB::raw ('count(metode_produk.metode_id)')) ,'=',(DB::raw ('count(keranjang.id_produk_ukuran)')))
                               ->get();
                               // dd($metodebanyak);
+          // $metodebanyak=Metode::all();
+          // dd($metodebanyak);
 // return $metodebanyak;
 // dd($keranjang);
          
          $kota = RajaOngkir::Kota()->all();
         // return $hasil;
                         
-        return view('machiko.checkout')->with(compact('keranjang',$keranjang,'data',$data,'penerima',$penerima,'metodebanyak',$metodebanyak,'beratharga',$beratharga,'kota',$kota));
+        return view('machiko.checkout')->with(compact('keranjang','data',$data,$keranjang,'penerima',$penerima,'metodebanyak',$metodebanyak,'beratharga',$beratharga,'kota',$kota));
     }
      public function checkout2($id) {
         $keranjang = Keranjang::leftJoin('produk_ukuran','produk_ukuran.id_produk_ukuran','=','keranjang.id_produk_ukuran')
@@ -91,42 +106,42 @@ class TransaksiControllerMachiko extends Controller {
                         ->join('produk','produk.id','=','produk_ukuran.produk_id')
                          ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                          ->select((DB::raw ('SUM((keranjang.berat_total)) as berat')),(DB::raw ('SUM(keranjang.Total_harga) as total')))
-                         ->where('user_id','=','2')
+                         ->where('user_id','=',$id)
                     // ->where('produk.status','=','Ready Stock')
                          ->get();
         // dd($beratharga);
-        $data = Penerima::join('users','users.id','=','penerima.id_user')
+        $data = Users::where('id','=',$id)
+                      ->first();
                         
-                        ->where('penerima.id_user','=',$id)
-                        ->first();
                         // dd($data);
-        $penerima = Penerima::where('penerima.id_user','=',$id)
-                        ->get();
+       /* $penerima = Penerima::where('penerima.id_user','=',$id)
+                        ->get();*/
        // dd($penerima);
 
                         // return $jumlahkeranjang;
-        $metodebanyak=  Metode::select('*',(DB::raw ('count(metode.metode) as c')))
-                              ->join ('metode_produk','metode_produk.metode_id','=','metode.id' )
+       $metodebanyak=  MetodeProduk::select('*',(DB::raw ('count(metode_produk.metode_id)')))
+                              ->join ('metode','metode_produk.metode_id','=','metode.id' )
                               ->join('produk_ukuran','produk_ukuran.produk_id','=','metode_produk.produk_id')
                               ->JOIN ('keranjang' ,'produk_ukuran.id_produk_ukuran','=','keranjang.id_produk_ukuran')
                               ->where('keranjang.user_id','=',$id)
+                              ->where('metode.status','=','Aktif')
+                              // ->ORwhere('metode_produk.status','=','Aktif')
                               ->GROUPBY ('metode.metode','metode.id')
-                              ->HAVING ('c' ,'=',Keranjang::count('id_produk_ukuran'))
+                              ->HAVING ((DB::raw ('count(metode_produk.metode_id)')) ,'=',(DB::raw ('count(keranjang.id_produk_ukuran)')))
                               ->get();
-                              // dd($metodebanyak);
-// dd($keranjang);
-         $user=Users::where('id','=',2)
+                              
+         $user=Users::where('id','=',$id)
                     ->first();
          $kota = RajaOngkir::Kota()->all();
          $prov = RajaOngkir::Provinsi()->all();
         // return $hasil;
                         
-        return view('machiko.tambahalamat')->with(compact('keranjang',$keranjang,'data',$data,'penerima',$penerima,'metodebanyak',$metodebanyak,'beratharga',$beratharga,'kota',$kota,'prov',$prov,
+        return view('machiko.tambahalamat')->with(compact('keranjang',$keranjang,'data',$data,'metodebanyak',$metodebanyak,'beratharga',$beratharga,'kota',$kota,'prov',$prov,
                                               'user',$user));
     }
     public function rekap() {
         $data = Transaksi::select('transaksi.id_transaksi')
-                          ->where('id_user','=',2)
+                          ->where('id_user','=',Auth::user()->id)
                           ->orderby('id_transaksi','desc')
                           ->first();
                           // dd($data);
@@ -213,7 +228,7 @@ class TransaksiControllerMachiko extends Controller {
     public function tambah(Request $request)
     {
       if($request->jenis_pesan=="Dropshipper"){
-      $toko= Users::where('id','=',2)
+      $toko= Users::where('id','=',Auth::user()->id)
                   ->first();
       $toko->toko=$request->nama_toko;
       $toko->save();  
@@ -222,7 +237,7 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi = new Transaksi; 
      
       
-      $transaksi->id_user=2;
+      $transaksi->id_user=Auth::user()->id;
       $transaksi->tgl_transaksi= Carbon::now(7);
       $transaksi->id_metode= $request->metode;
       $transaksi->total_berat= $request->berat;
@@ -237,7 +252,7 @@ class TransaksiControllerMachiko extends Controller {
       
       $transaksi->save();
 
-      $keranjang = Keranjang::where('user_id','=',2)
+      $keranjang = Keranjang::where('user_id','=',Auth::user()->id)
                          ->get();
     // dd($transaksi);
         foreach ($keranjang as $key ) {
@@ -248,7 +263,7 @@ class TransaksiControllerMachiko extends Controller {
           $detailtransaksi->status_pesan= "Pending";
           $detailtransaksi->jumlah_beli= $key->jumlah;
           $detailtransaksi->save();
-          $data = Keranjang::where('user_id','=',2);
+          $data = Keranjang::where('user_id','=',Auth::user()->id);
           $data->delete();
       }
       
@@ -265,14 +280,14 @@ class TransaksiControllerMachiko extends Controller {
      public function tambah2(Request $request)
     {
       if($request->jenis_pesan=="Dropshipper"){
-      $toko= Users::where('id','=',2)
+      $toko= Users::where('id','=',Auth::user()->id)
                   ->first();
       $toko->toko=$request->nama_toko;
       $toko->save();  
       }
       $penerima = new Penerima;
       
-    $penerima->id_user=2;
+    $penerima->id_user=Auth::user()->id;
     $penerima->provinsi=$request->provinsi;
     $penerima->kabupaten=$request->kabupaten;
     $penerima->nama_alamat=$request->nama_alamat;
@@ -285,7 +300,7 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi = new Transaksi; 
      
       
-      $transaksi->id_user=2;
+      $transaksi->id_user=Auth::user()->id;
       $transaksi->tgl_transaksi= Carbon::now(7);
       $transaksi->id_metode= $request->metode;
       $transaksi->total_berat= $request->berat;
@@ -300,7 +315,7 @@ class TransaksiControllerMachiko extends Controller {
       
       $transaksi->save();
 
-      $keranjang = Keranjang::where('user_id','=',2)
+      $keranjang = Keranjang::where('user_id','=',Auth::user()->id)
                          ->get();
     // dd($transaksi);
         foreach ($keranjang as $key ) {
@@ -311,7 +326,7 @@ class TransaksiControllerMachiko extends Controller {
           $detailtransaksi->status_pesan= "Pending";
           $detailtransaksi->jumlah_beli= $key->jumlah;
           $detailtransaksi->save();
-          $data = Keranjang::where('user_id','=',2);
+          $data = Keranjang::where('user_id','=',Auth::user()->id);
           $data->delete();
       }
       

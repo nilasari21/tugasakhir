@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Metode;
+use App\MetodeProduk;
 use Illuminate\Http\Request;
+use PDF;
 
 class MetodeController extends Controller {
 
@@ -55,6 +57,11 @@ class MetodeController extends Controller {
         $data->jenis = $request->jenis;
         $data->status = $request->status;
         $data->save();
+
+        /*$metode= MetodeProduk:: where('metode_id','=',$data->id)
+                              ->get();
+        $metode->status=$data->status;
+        $metode->saveMany();*/
         // kembali ke halaman kategori
         return redirect('metode');//route
     }

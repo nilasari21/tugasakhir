@@ -16,25 +16,14 @@ class UserController extends Controller {
         return view('admin.user.user')->with('data',$data);
        //
     }
-    /*public function tambah()
+    public function postUpdate($id, Request $request)
     {
+        // proses update data
+        $data = Users::where('id','=',$id)->first();
+        $data->status_user=$request->status;
+        $data->save();
         
-        return view('admin.metode.tambah');
-       //
+        return redirect('customer');
     }
-    public function simpan(Request $request)
-    {
-        
-        $data = new Metode; // new Model
-    	$data->metode = $request->metode;
-      $data->nama_rekening = $request->nama_rekening;
-      $data->nomor = $request->nomor;
-      $data->rate = $request->rate;
-      $data->status = $request->status;
-    	$data->save();
-    	return redirect('metode');
-
-       //
-    }*/
 
 }

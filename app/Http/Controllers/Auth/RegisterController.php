@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+// use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+// use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Input;
+use Hash,Mail;
+use Validator, Redirect, Session;
 class RegisterController extends Controller
 {
     /*
@@ -60,12 +63,73 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    protected function create()
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+            $rules = [
+          'name' => 'required|max:255',
+          'email' => 'required|email|max:255|unique:users',
+          'password' => 'required|confirmed|min:6',
+        ];
+ 
+        $input = Input::only(
+            'name',
+            'email',
+            'password',
+            'password_confirmation'
+        );
+ 
+        $validator = Validator::make($input, $rules);
+ 
+        if($validator->fails())
+        {
+          return Redirect::to('daftar')->withInput()->withErrors($validator);
+        }
+
+        $confirmation_code = str_random(30);
+ 
+        $user = User::create([
+        // return User::create([
+            'name' => Input::get('name'),
+            'email' => Input::get('email'),
+            'password' => Hash::make(Input::get('password')),
+            'confirmation_code' => $confirmation_code,
+            'no_hp' => Input::get ('nohp'),
+            'jenis_kelamin' => Input::get('jenis_kelamin'),
+            'tgl_lahir' =>Input::get ('tgl_lahir'),
+            'konfirm_admin' => Input::get('konfirm'),
+            'level' => Input::get('customer'),
+            ]);
+      Mail::send('auth.verify', ['confirmation_code' => $confirmation_code], function($m) {
+            $m->from('admin1@admin.com', 'Toko');
+            $m->to(Input::get('email'), Input::get('name'))
+                ->subject('Konfirmasi alamat email anda');
+        });
+ 
+        Session::flash('message', 'Terima kasih telah mendaftar! Silahkan cek email anda untuk konfirmasi.');
+        // ]);
+        return Redirect::to('daftar');
+    }
+// }
+     public function confirm($confirmation_code)
+    {
+        if(!$confirmation_code)
+        {
+            return "link tidak terdaftar";
+        }
+ 
+        $user = User::where('confirmation_code', $confirmation_code)->first();
+ 
+        if (!$user)
+        {
+            return "link tidak terdaftar";
+        }
+ 
+        $user->konfirm_email = Konfirm;
+        $user->confirmation_code = null;
+        $user->save();
+ 
+        Session::flash('message', 'Akun anda telah berhasil di verifikasi, silahkan login!');
+ 
+        return Redirect::to('login');
     }
 }

@@ -31,8 +31,8 @@
           <th>ID</th>
           <th>Nama Produk</th>
           <th>Kategori</th>
-          <th>Ukuran</th>
-          <th>Stock Total</th>
+          <!-- <th>Ukuran</th>
+          <th>Stock Total</th> -->
           <th>Aksi</th>
         </tr>
       </thead>
@@ -43,13 +43,13 @@
           <td>{{ $row->id }}</td>
           <td>{{ $row->nama_produk }}</td>
           <td>{{ $row->nama_kategori }}</td>
-          <td>{{ $row->nama_ukuran }}</td>
-          <td>{{ $row->stock }}</td>
+          <!-- <td>{{ $row->nama_ukuran }}</td>
+          <td>{{ $row->stock }}</td> -->
           
           <td>
-             <a class="btn btn-default" href="#">Detail</a>
-            <a class="btn btn-default" href="#">Edit</a>
-            <a class="btn btn-default" href="#" onclick="return confirm('Are you sure to delete this data?')">Hapus</a>
+             <a class="btn btn-default" href="{{ url('readystock/detail/'.$row->id ) }}"><i class="fa fa-eye"></i>  Detail</a>
+            <a class="btn btn-default" href="{{ url('readystock/edit/'.$row->id) }}"><i class="fa fa-edit"></i>  Edit</a>
+            <!-- <a class="btn btn-default" href="#" onclick="return confirm('Are you sure to delete this data?')">Hapus</a> -->
          </td>
         </tr>
        @endforeach
