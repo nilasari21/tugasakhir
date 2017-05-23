@@ -398,6 +398,7 @@
                       
                       
                     </div>
+                    <input type="text" id="ongkoskirim" name="ongkoskirim"  value="" class="ongkir">
                      <input type="text" id="kurir" name="kurir"  value="" class="ongkir">
                     @foreach($beratharga as $d)
                     <div class="form-group">
@@ -655,7 +656,9 @@ function getOngkir() {
                 $('#ongkos').append('<tr><td colspan="5">Pengiriman melalui kurir tidak ada</td></tr>')
                 
               }*/
-              if(hasil.costs.length != 0 && (kota_tujuan!=419)){
+              if(hasil.costs.length == 0){
+                $('#ongkos').append('<p>Pengiriman dari Yogyakarta Tidak Tersedia</p>')
+              }else{
                 $.each(hasil.costs, function(index, hasil){
                   service = hasil.service;
                   des = hasil.description;
@@ -663,14 +666,14 @@ function getOngkir() {
                     console.log(service);
                     $('#ongkos').append(
                       
-                     '<tr><td><input type="radio" id="ongkir" name="ongkir" onChange="pecah();getTotal()" value="'+hasil.value+','+service+'" class="ongkir"></td>'+
+                     '<tr><td><input type="radio" id="ongkir" name="ongkir" onChange="pecah();getTotal();" value="'+hasil.value+','+service+'" class="ongkir"></td>'+
                     '<td style="color:#000">'+service+' '+'</td>'+
                     '<td>'+des+'</td>'+
                     '<td>'+hasil.etd+'</td>'+
                     '<td>'+(hasil.value)+'</td></tr>'
                      
                     );
-                  }); 
+                  });
                 }); 
               }
             }); 
@@ -688,9 +691,10 @@ function getOngkir() {
             console.log(ongkir);
             var array=ongkir.split(',');
             var b=array[1];
+            var a=array[0];
             console.log(b);
     $('#kurir').val(b);  
- 
+    $('#ongkoskirim').val(a);
     
   }
 </script>
@@ -702,7 +706,9 @@ function getOngkir() {
             var array=ongkir.split(',');
             var b=array[1];
             console.log(b);
+            var a=array[0];
     $('#kurir').val(b);  
+    $('#ongkoskirim').val(a);
  
     
   }
@@ -712,18 +718,18 @@ function getOngkir() {
       event.preventDefault();
             
             
-         /* @php
-            $i=1;
-            
-            @endphp
-            var  hasil=0;
-            
-            @foreach ($data as $row)*/
+        
             var total1 = document.getElementById("total1").value; 
             console.log(total1);
             var okurir=$('#kurir').val();
             console.log(okurir);
-            // var ongkos=$('#ongkos').val();
+            var ongkos=$("#ongkos").val();
+            console.log(ongkos);
+            var ongkos2=$("#ongkos2").val();
+            if((!ongkos2) && (!ongkos) &&  (!okurir)){
+             var b=0;
+             var ongkir=0;
+          }
             if('input[name=ongkir]:checked', '#ongkos2' && okurir=="COD"){
             var ongkir = $('input[name=ongkir]:checked', '#ongkos2').val(); 
             console.log(ongkir);
@@ -738,14 +744,16 @@ function getOngkir() {
             var b=array[0];
             console.log(b);
           }
+            
             var rate = document.getElementById("metode_pilih").value; 
+            console.log(rate);
             var jenis = $("#jenis_metode").val(); 
             console.log(jenis);
             if(jenis=="Pulsa" ){
               if(ongkir){
               console.log('hai');
-              var hasil = document.getElementById("total").value=( (parseFloat(total1)+ parseFloat(ongkir))*parseFloat(rate)).toFixed(0);
-              // var hasil = document.getElementById("total3").value=( (parseFloat(total1)+ parseFloat(ongkir))*parseFloat(rate)).toFixed(0);  
+              var hasil = document.getElementById("total").value=( (parseFloat(total1)+ parseFloat(b))*parseFloat(rate)).toFixed(0);
+              // var hasil = document.getElementById("total3").value=( (parseFloat(total1)+ parseFloat(b))*parseFloat(rate)).toFixed(0);  
               }
               
             }if(jenis=="Pulsa" ){
@@ -759,19 +767,13 @@ function getOngkir() {
             if(jenis=="Bank" ){
               if(ongkir){
               console.log('hallo haa');
-              var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(ongkir));
-              // var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(ongkir));  
+              var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(b));
+              // var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(b));  
               }
               
             }
-            if(jenis=="Bank" ){
-              if(!ongkir){
-              console.log('hallo huuu');
-              var hasil = document.getElementById("total").value=( parseFloat(total1)+ 0);
-              // var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(ongkir));  
-              }
-              
-            }if(!jenis ){
+            
+            if(!jenis ){
               if(ongkir){
               console.log('hallo hahaha');
               var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(ongkir));
@@ -779,15 +781,8 @@ function getOngkir() {
               }
               
             }
-            
 
-            /*$('#total2').val(parseFloat(parseFloat(total1)+ parseFloat(ongkir))*parseFloat(hasil.rate)); 
-             console.log(hasil);*/
-              /*@php
-             $i++;
-             
-             @endphp
-             @endforeach*/
+           
              
 
         };

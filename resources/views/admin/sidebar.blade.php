@@ -49,6 +49,14 @@
             </li>
             <li><a href="{{ url('metode') }}"> <i class="fa fa-credit-card" ></i> <span>Metode Bayar</span></a></li>
             <li><a href="{{ url('customer')}}"> <i class="fa fa-user"></i> <span>User</span></a></li>
+            <li class="treeview">
+                <a href="#"> <i class="fa fa-user"></i><span>User</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('customer') }}">Data User</a></li>
+                    <li><a href="{{ url('konfirmasibayar') }}">Upgrade user</a></li>
+                    
+                </ul>
+            </li>
             <li><a href="{{ url('testimoniadmin')}}"> <i class="fa fa-commenting"></i> <span>Testimoni</span></a></li>
             <li><a href="{{ url('machikokstore')}}">  <i class="fa fa-home"></i><span>Toko</span></a></li>
         </ul> 

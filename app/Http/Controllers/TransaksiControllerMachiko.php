@@ -55,7 +55,11 @@ class TransaksiControllerMachiko extends Controller {
          $data = Users::where('id','=',$id)
                       ->first();
                         
-                        
+         $data2=Transaksi::join('penerima','penerima.id_penerima','transaksi.id_penerima')
+                          ->where('transaksi.id_user','=',$id)      
+                          ->orderby('transaksi.id_transaksi','desc')         
+                          
+                          ->first();
                         // dd($data);
         $penerima = Penerima::where('penerima.id_user','=',$id)
                         ->get();
@@ -90,7 +94,7 @@ class TransaksiControllerMachiko extends Controller {
          $kota = RajaOngkir::Kota()->all();
         // return $hasil;
                         
-        return view('machiko.checkout')->with(compact('keranjang','data',$data,$keranjang,'penerima',$penerima,'metodebanyak',$metodebanyak,'beratharga',$beratharga,'kota',$kota));
+        return view('machiko.checkout')->with(compact('data2',$data2,'keranjang','data',$data,$keranjang,'penerima',$penerima,'metodebanyak',$metodebanyak,'beratharga',$beratharga,'kota',$kota));
     }
      public function checkout2($id) {
         $keranjang = Keranjang::leftJoin('produk_ukuran','produk_ukuran.id_produk_ukuran','=','keranjang.id_produk_ukuran')
@@ -278,8 +282,10 @@ class TransaksiControllerMachiko extends Controller {
        //
     }
      public function tambah2(Request $request)
-    {
+    // { dd($request->ongkoskirim);
+     {
       if($request->jenis_pesan=="Dropshipper"){
+
       $toko= Users::where('id','=',Auth::user()->id)
                   ->first();
       $toko->toko=$request->nama_toko;
@@ -309,7 +315,7 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->jenis_pemesanan=$request->level;
       $transaksi->status_jenis_pesan=$request->status;
       $transaksi->total_berat=$request->berat;
-      $transaksi->ongkir=$request->ongkir;
+      $transaksi->ongkir=$request->ongkoskirim;
       $transaksi->kurir=$request->kurir;
       $transaksi->total_bayar=$request->total;
       

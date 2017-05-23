@@ -74,6 +74,8 @@ Route::post('readystock/simpanukuran', 'ReadystockController@simpanukuran');
 Route::get('testimonimachiko', 'TestimoniControllerMachiko@index');
 
 Route::get('transaksi', 'KelolaTransaksiController@index');
+Route::get('/transaksi/detail/{id}', 'KelolaTransaksiController@detailtrans');
+Route::post('/transaksi/ubah', 'KelolaTransaksiController@ubahstatus');
 Route::get('transaksi_reseller', 'KelolaTransaksiController@transReseller');
 Route::get('/transaksi_reseller/detail/{id}', 'KelolaTransaksiController@detail');
 Route::post('/transaksi_reseller/detail/update/{id}', 'KelolaTransaksiController@postUpdate');

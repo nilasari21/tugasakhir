@@ -157,9 +157,9 @@
                       <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Tujuan Pengiriman</label>
                       <div class="col-sm-8">
-                          <input type="text" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$penerima->id_penerima}}" class="form-control"/>
-                          <textarea id="alamat" rows='5'style="border: 1px;width:100%;" value="" disabled >{{$penerima->nama_penerima}}&#13;&#10;{{$penerima->no_hp_penerima}},&#13;&#10;{{$penerima->alamat_lengkap}},{{$penerima->kecamatan}}, {{$penerima->kabupaten}}, {{$penerima->provinsi}} </textarea>
-                          <input type="hidden" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$penerima->kabupaten}}" class="form-control"/>
+                          <input type="text" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$data2->id_penerima}}" class="form-control"/>
+                          <textarea id="alamat" rows='5'style="border: 1px;width:100%;" value="" disabled >{{$data2->nama_penerima}}&#13;&#10;{{$data2->no_hp_penerima}},&#13;&#10;{{$data2->alamat_lengkap}}, {{$data2->kabupaten}}, {{$data2->provinsi}} </textarea>
+                          <input type="hidden" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$data2->kabupaten}}" class="form-control"/>
                           <input type="hidden" id="kota_asal"  name="kota_asal" value="" />
                         </div>
                         </div>
@@ -666,13 +666,7 @@ function getAlamat() {
       event.preventDefault();
             
             
-         /* @php
-            $i=1;
-            
-            @endphp
-            var  hasil=0;
-            
-            @foreach ($data as $row)*/
+        
             var total1 = document.getElementById("total1").value; 
             console.log(total1);
             var okurir=$('#kurir').val();
@@ -726,21 +720,7 @@ function getAlamat() {
               }
               
             }
-            /*if(jenis=="Bank" ){
-              if(!ongkir){
-              console.log('hallo huuu');
-              var hasil = document.getElementById("total").value=( parseFloat(total1)+ 0);
-              var hasil = document.getElementById("total3").value=( parseFloat(total1)+ 0);  
-              }
-              
-            }if(!jenis ){
-              if(ongkir){
-              console.log('hallo hahaha');
-              var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(ongkir));
-              var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(ongkir));  
-              }
-              
-            }*/
+            
             if(!jenis ){
               if(ongkir){
               console.log('hallo hahaha');
@@ -750,13 +730,7 @@ function getAlamat() {
               
             }
 
-            /*$('#total2').val(parseFloat(parseFloat(total1)+ parseFloat(ongkir))*parseFloat(hasil.rate)); 
-             console.log(hasil);*/
-              /*@php
-             $i++;
-             
-             @endphp
-             @endforeach*/
+           
              
 
         };

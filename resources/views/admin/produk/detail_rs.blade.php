@@ -152,7 +152,7 @@
                         </table>
                         
 
-                      <table id="example1" class="table dataTable table-striped"style="width: 80%;margin-left: 15%;" >
+                      <!-- <table id="example1" class="table dataTable table-striped"style="width: 80%;margin-left: 15%;" >
                             <thead>
                               <th>Nama Metode</th>
                               
@@ -184,7 +184,7 @@
                             </td>
                             </tr>
                             @endforeach
-                        </table>
+                        </table> -->
                         <hr>
                         </div>
             </div>

@@ -1,6 +1,16 @@
 @extends('admin.admin_template')
 
 
+@section('css')
+<style type="text/css">
+.btn {
+    border-radius: 3px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #999 !important;
+}
+</style>
+@endsection
 
 @section('content')
 
@@ -32,7 +42,7 @@
               <div class="active tab-pane" id="activity">
                 <!-- Post -->
                 <span>Merupakan daftar transaksi dimana produk belum diproduksi dan belum lunas</span>
-                <!-- <a class="btn btn-success" href="#">Detail</a> -->
+                <!-- <a class="btn btn-default" href="#"><i class="fa fa-eye"></i>   Detail</a> -->
                <div class="box-body table-responsive margin">                   
                 <table id="data" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
@@ -55,7 +65,7 @@
                       <td>{{ $row->id_transaksi }}</td>
                       <td>{{ $row->tgl_transaksi  }}</td>
                       <td>{{ $row->jenis }}</td>
-                      <td>{{ $row->name }}</td>
+                      <td>{{ $row->name }} {{ $row->id_detail_transaksi  }}</td>
                       <td>{{ $row->nama_produk }}</td>
                       <?php 
                       if(count($row->nama_ukuran)==0){?>
@@ -70,8 +80,8 @@
                       <td>{{ $row->jumlah_beli }}</td>
                       <td>{{ $row->status_bayar }}</td>
                       <td>
-                         <a class="btn btn-success" href="#">Detail</a>
-                        <a class="btn btn-info" href="#">Edit Status pesan</a>
+                         <a class="btn btn-default" style="border:1px solid #999 !important" href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}"style="border:1px solid #999 !important" href="#"><i class="fa fa-edit"></i>   edit status </a>
                         
                      </td>
                     </tr>
@@ -122,8 +132,8 @@
                       <td>{{ $row->jumlah_beli }}</td>
                       <td>{{ $row->status_bayar }}</td>
                       <td>
-                         <a class="btn btn-success" href="#">Detail</a>
-                        <a class="btn btn-info" href="#">Edit Status pesan</a>
+                         <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
                         
                      </td>
                     </tr>
@@ -172,8 +182,8 @@
                       <td>{{ $row->jumlah_beli }}</td>
                       <td>{{ $row->status_bayar }}</td>
                       <td>
-                         <a class="btn btn-success" href="#">Detail</a>
-                        <a class="btn btn-info" href="#">Edit Status pesan</a>
+                         <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
                      </td>
                     </tr>
                    @endforeach
@@ -221,8 +231,8 @@
                       <td>{{ $row->jumlah_beli }}</td>
                       <td>{{ $row->status_bayar }}</td>
                       <td>
-                         <a class="btn btn-success" href="#">Detail</a>
-                        <a class="btn btn-info" href="#">Edit Status pesan</a>
+                         <a class="btn btn-default"style="border:1px solid #999 !important" href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
                      </td>
                     </tr>
                    @endforeach
@@ -269,8 +279,8 @@
                       <td>{{ $row->jumlah_beli }}</td>
                       <td>{{ $row->status_bayar }}</td>
                       <td>
-                         <a class="btn btn-success" href="#">Detail</a>
-                        <a class="btn btn-info" href="#">Edit Status pesan</a>
+                         <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
                      </td>
                     </tr>
                    @endforeach
@@ -302,7 +312,7 @@
                       
                       <td>{{ $row->id_transaksi }}</td>
                       <td>{{ $row->tgl_transaksi  }}</td>
-                      <td>{{ $row->name }}</td>
+                      <td>{{ $row->name }} {{ $row->id_detail_transaksi  }}</td>
                       <td>{{ $row->nama_produk }}</td>
                       <?php 
                       if(count($row->nama_ukuran)==0){?>
@@ -317,8 +327,8 @@
                       <td>{{ $row->jumlah_beli }}</td>
                       <td>{{ $row->status_bayar }}</td>
                       <td>
-                         <a class="btn btn-default" href="#">Detail</a>
-                        <a class="btn btn-default" href="#">Edit Status pesan</a>
+                         <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                        <a class="btn btn-default2" data-id="{{ $row->id_detail_transaksi  }}" data-idt="{{ $row->id_transaksi }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
                      </td>
                     </tr>
                    @endforeach
@@ -334,5 +344,89 @@
           <!-- /.nav-tabs-custom -->
         </div>
    
+<div class="modal fade" id="modal3" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                 
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Edit Status</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                     
+                                    <form method="POST"   action="{{ url('transaksi/ubah') }}">
+                                      <div class="row">
+                                          {{ csrf_field() }}
+                                          <div class="col-md-12" >
+                                            <input class="form-control"type="text" name="iddetail" id="iddetail" value="">
+                                            <input class="form-control"type="text" name="idtrans" id="idtrans" value="">
+                                            <!-- <input type="hidden" name="idkonfirm" id="idkonfirm" value=""> -->
+                                              <div class="form-group">
+                                                  <label for="exampleInputFile">Pilih Status</label><br/>
+                                                     <select class="form-control" style="width: 100%;" id="status_pesan" name="status_pesan" onChange="a()" data-toggle="modal" required/>
+                                                        <option>Pilih Status </option>
+                                                          <option value="Pending">Pending</option>
+                                                          <!-- <option value="Menunggu" >Menunggu</option> -->
+                                                          <option value="Produksi" >Produksi</option>
+                                                          <option value="Packing" >Packing</option>
+                                                          <option value="Pengiriman" >Pengiriman</option>
+                                                          <option value="Selesai" >Selesai</option>
+                                                          <option value="Batal" >Batal</option>
+                                                    </select>
+                                            
+                                        </div>
+                                        <div class="form-group" id="resi" style="display:none">
+                                          <label for="exampleInputFile">Nomor resi</label><br/>
+                                          <input type="text" style="width: 100%;" name="resi" id="resi" value="">
+                                        </div>
+                                        <div class="form-group" id="editor1" >
+                                          <label for="exampleInputFile">Keterangan</label><br/>
+                                        <textarea  name="keterangan" rows="10"  style="border: 1px solid #DF5E96;width:100%;">
+                                            </textarea>
+                                          </div>
+                                         </div>
+
+                                    </div>
+                                  </div>
+                                    <div class="modal-footer">
+                                      <button type="submit"  class="btn btn-info">Simpan</button>
+                                      </form> 
+                                       <button    class="btn btn-warning" style="text-transform:capitalize" data-dismiss="modal">Batal</button>
+                                      
+                                    </div>
+                            </div>
+                                  
+                                </div>
+                              </div>  
+    <!-- </div> -->
 
 @endsection
+@section('js')
+<script type="text/javascript">
+        $(document).ready(function(){
+          $(".btn-default2").click(function(){
+          $('#iddetail').val($(this).data('id'));
+          $('#idtrans').val($(this).data('idt'));
+          $('#modal3').modal('show');
+        });
+        });
+           
+    </script>
+<script type="text/javascript">
+    function a(){
+       var status=$('#status_pesan').val();
+       console.log(status);
+       if(status=="Selesai"){
+        document.getElementById('resi').style.display = 'block';
+       }else{
+        document.getElementById('resi').style.display = 'none';
+       }
+        
+      
+    }
+             
+        
+    </script>
+   
+    @endsection
