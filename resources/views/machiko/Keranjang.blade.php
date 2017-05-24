@@ -3,7 +3,10 @@
 
 @section('content')
 @if(session()->has('message'))
-    <div class="alert alert-success">
+    <!-- <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div> -->
+    <div class="alert alert-danger">
         {{ session()->get('message') }}
     </div>
 @endif
@@ -81,7 +84,7 @@
 
                                                         <td class="product-name">
                                                             <a href="#">{{ $row->nama_produk }}</a> 
-                                                            <input name="status[]" type="hidden" id="status"  value="{{$row->status}}" style="width:100px"readonly>
+                                                            <input name="status[]" type="text" id="status"  value="{{$row->jenis}}" style="width:100px"readonly>
                                                             <input name="idproduk[{{$i}}]" type="text" id="idproduk"  value="{{$row->id_produk_ukuran}}" style="width:100px"readonly>
                                                             <input name="min_beli" type="text" id="min_beli{{$i}}"  value="{{$row->minimal_beli}}" style="width:100px"readonly>
                                                             <input name="stock" type="text" id="stock"  value="{{$row->stock}}" style="width:100px"readonly>

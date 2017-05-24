@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Testimoni;
 use Illuminate\Http\Request;
 use Image;
+use Auth;
 // cause Illuminate\Support\Fades\Input;
 class TestimoniControllerMachiko extends Controller {
 
@@ -15,7 +16,8 @@ class TestimoniControllerMachiko extends Controller {
         // $data=[];
         
         $data = Testimoni::join('users','users.id','=','testimoni.users_id')
-                         ->where('users_id','=','2')
+                         // ->where('users_id','=',Auth::user()->id)
+                         ->select('testimoni.*','users.*')
                          ->get();
        
         return view('machiko.testimoni')->with('data',$data);
@@ -53,7 +55,7 @@ public function simpan(Request $request)
                 ->with($notification);
                 
     } 
-      $testi->users_id= 2;
+      $testi->users_id= Auth::user()->id;
       $testi->foto_testi=$imageName;
       $testi->Keterangan=$request->keterangan;
       $testi->save();

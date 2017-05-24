@@ -124,12 +124,12 @@ class RegisterController extends Controller
             return "link tidak terdaftar";
         }
  
-        $user->konfirm_email = Konfirm;
+        $user->confirmed  = 1;
         $user->confirmation_code = null;
         $user->save();
  
         Session::flash('message', 'Akun anda telah berhasil di verifikasi, silahkan login!');
  
-        return Redirect::to('login');
+        return Redirect::to('masuk');
     }
 }

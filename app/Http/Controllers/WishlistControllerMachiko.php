@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Wishlist;
 use App\ProdukUkuran;
 use Illuminate\Http\Request;
+use Auth;
 
 class WishlistControllerMachiko extends Controller {
 
@@ -15,7 +16,7 @@ class WishlistControllerMachiko extends Controller {
         
         $data = Wishlist::join('produk','produk.id','=','wishlist.id_produk')
                         ->rightjoin('produk_ukuran','produk_ukuran.produk_id','=','produk.id')
-                         ->where('id_user','=','2')
+                         ->where('id_user','=',Auth::user()->id)
                          ->select('wishlist.*','produk.*','produk_ukuran.*')
                          ->groupby('wishlist.id_wishlist')
                          ->get();
@@ -34,7 +35,7 @@ class WishlistControllerMachiko extends Controller {
 
         $data = new Wishlist(array(
             'id_produk' => $id,
-            'id_user' => 2
+            'id_user' => Auth::user()->id
             ));
         // $data->id_produk = $request->produk_id;
         // $data->id_user = 2;        

@@ -42,11 +42,17 @@
                                                 </thead>
                                                 <tbody>
                                                     
-                                                   
+                                                    @if(count($data)==0)
+                                                    <tr>
+                                                      <td colspan="8" style="font-size:15px"> Belum ada transaksi</td>
+                                                    </tr>
+                                                    @else
                                                     @php
                                                     $i=1;
                                                     @endphp
                                                     @foreach ($data as $row)
+                                                   
+
                                                     <tr class="cart_item">
                                                         <td class="product-name">
                                                             {{ $row->id_transaksi}}
@@ -67,7 +73,7 @@
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
-                                                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a>
+                                                            <a class="add_to_cart_button" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a>
                                                             
                                                         </td>
                                                         <?php
@@ -94,7 +100,7 @@
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
-                                                            <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="#">Ubah bukti</a>
+                                                            <a class="add_to_cart_button"  id="ubahbukti" data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="#">Ubah bukti</a>
                                                             
                                                         </td>
                                                         <?php
@@ -115,12 +121,13 @@
                                                        
 
                                                     </tr>
+                                                    
                                                     @php
                                                     $i++;
                                                     @endphp
                                                     @endforeach
                                                     
-                                                    
+                                                    @endif
                                                        
                                                      
                                                 </tbody>
@@ -196,7 +203,62 @@
                                   
                                 </div>
                               </div>
-            
+            <div class="modal fade" id="modal" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Konfirmasi pembayaran</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                      <!-- <div class="col-md-10 " >
+                                      <div class="product-details">
+                                      
+                               
+                                  <div class="col-sm-12 simpleCart_shelfItem anotherCart_shelfItem">
+                                      <div class="product-information"  style="width:100%">  -->
+                                        
+                                    <form method="POST"  enctype="multipart/form-data" files="true" action="{{ url('konfirmasi/ubahBukti') }}">
+                                      <div class="row">
+                                          {{ csrf_field() }}
+                                          <div class="col-md-12">
+                                            
+                                            <input type="text" id="idtrans2" name="idtrans2">
+                                            <div class="form-group">
+                                                <label for="exampleInputFile">Upload bukti</label>
+                                                <input id="input-3" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">
+                                            </div>
+                                             <div class="form-group">
+                                            <label for="exampleInputFile">Tanggal transfer</label>
+                                            <!-- <div class="col-sm-8"> -->
+                                                <div class='input-group date' >
+                                            <input type='text' name="tanggal_transfer" class="form-control" id="datepicker2" required >
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                            <!-- </div> -->
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="exampleInputFile">Total transfer</label>
+                                               <input  type="number" name="total_transfer" class="form-control" placeholder="Total transfer" min=1 required> 
+                                            </div>   
+                
+                 </div>
+
+            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="submit" class="add_to_wishlist" style="text-transform:capitalize">Kirim bukti</button>
+                                       </form>  
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
             @endsection
 
             @section('js')
@@ -214,19 +276,30 @@
     })
      });
     </script>
+    <script>
+  $(function () {
+   $('#datepicker2').datepicker({
+    format: 'yyyy-mm-dd',
+    // startDate: '-3d'
+    })
+     });
+    </script>
     <script type="text/javascript">
         $(document).ready(function(){
-          $(".add_to_cart_button").click(function(){
+          $("#konfirmbukti").click(function(){
           $('#idtrans').val($(this).data('id'));
         $('#modal3').modal('show');
         });
         });
         
-        
-        
-      
-    
-             
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $("#ubahbukti").click(function(){
+          $('#idtrans2').val($(this).data('id'));
+        $('#modal').modal('show');
+        });
+        });
         
     </script>
 <script type="text/javascript">
@@ -244,6 +317,19 @@
               </script>
               <script type="text/javascript">
               $("#input-2").fileinput({
+                uploadUrl: "",
+                uploadAsync: true,
+                minFileCount: 1,
+                maxFileCount: 5,
+                allowedFileExtensions: ["jpg", "gif", "png", "jpeg"],
+                uploadExtraData: function() {  // callback example
+                    var out = {_token: "{{ csrf_token() }}"};
+                    return out;
+                }
+            });
+              </script>
+               <script type="text/javascript">
+              $("#input-3").fileinput({
                 uploadUrl: "",
                 uploadAsync: true,
                 minFileCount: 1,

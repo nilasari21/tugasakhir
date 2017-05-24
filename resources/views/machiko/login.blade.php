@@ -86,12 +86,12 @@
 </html>
 
     
-    <script src="{{asset("vendor/adminlte/bootstrap/js/bootstrap.min.js")}}"></script>
-    <script src="{{asset("vendor/adminlte/plugins/jQuery/jQuery-2.2.3.min.js")}}"></script>
-    <script src="{{ asset("vendor/adminlte/plugins/datepicker/bootstrap-datepicker.js") }}"  > </script>
-	<script src="{{ asset("vendor/adminlte/plugins/input-mask/jquery.inputmask.js") }}"  > </script>
-	<script src="{{ asset("vendor/adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js") }}"  > </script>
-	<script src="{{ asset("vendor/adminlte/plugins/input-mask/jquery.inputmask.extensions.js") }}"  > </script>
+    <script src="{{asset("/adminlte/bootstrap/js/bootstrap.min.js")}}"></script>
+    <script src="{{asset("/adminlte/plugins/jQuery/jQuery-2.2.3.min.js")}}"></script>
+    <script src="{{ asset("/adminlte/plugins/datepicker/bootstrap-datepicker.js") }}"  > </script>
+	<script src="{{ asset("/adminlte/plugins/input-mask/jquery.inputmask.js") }}"  > </script>
+	<script src="{{ asset("/adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js") }}"  > </script>
+	<script src="{{ asset("/adminlte/plugins/input-mask/jquery.inputmask.extensions.js") }}"  > </script>
 
     <script>
   $(function () {

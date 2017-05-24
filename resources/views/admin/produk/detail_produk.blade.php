@@ -10,6 +10,7 @@
     border: 1px solid #777 !important;
 }
 </style>
+@endsection
 @section('content')
 @if(session()->has('message'))
     <div class="alert alert-danger">

@@ -245,6 +245,7 @@
                     <input type="text" class="form-control" id="level" name="level" value="{{$data->level}}">
                     <input type="text" class="form-control" id="status" name="status" value="">
                     <input type="hidden" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
+                    <input type="text" class="form-control" id="konfirm_admin" name="konfirm_admin" value="{{Auth::user()->konfirm_admin}}">
                     <div class="form-group">
                      <!--  <div class="col-sm-3 control-label"> -->
                       <!-- <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>   -->

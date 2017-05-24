@@ -125,28 +125,31 @@ class KeranjangControllerMachiko extends Controller {
     {
         $i=0;
 
-        // dd($request->berat);
+        
         foreach ($request->idproduk as $key=>$index ) {
-// dd($request->harga_tambah);
-            // dd($request->idproduk);
-            // dd($key);
-           /* $i=1;
-            
-            foreach ($request->jumlahawal as $val) {*/
+
               $tambah=$request->jumlah1[$i] - $request->jumlahawal[$i] ;
-                // dd($tambah);
-            /*$data=Keranjang::where('id_keranjang','=',$request->idkeranjang[$i])->first();
-            $data->jumlah=$key;
-            
-            $data->save();*/
+             
             if($request->status[$i]=="Ready Stock"){
             $produk= ProdukUkuran::where('id_produk_ukuran','=',$index)->first();
-            // dd($produk->stock_total);
-            
-          $produk->stock = $produk->stock - $tambah;
+           if($produk->stock<$tambah){
+             $notification = array(
+                    'message' => 'stock kurang', 
+                    'alert-type' => 'warning'
+                );
+        
+        
+        return redirect()
+                ->back()
+                ->with($notification);
+                
+           }else{
+            $produk->stock = $produk->stock - $tambah;
             
             $produk->save(); 
-            // dd($tambah);
+           }
+          
+           
             }   
             
             $i++;       
@@ -155,10 +158,7 @@ class KeranjangControllerMachiko extends Controller {
         $i=0;
 
         foreach ($request->idkeranjang as $key=>$index ) {
-           /* $i=1;
-            foreach ($request->jumlahawal as $val) {*/
-              /*$tambah=$key - $request->jumlahawal ;
-            dd($tambah);*/
+           
 
             $data=Keranjang::where('id_keranjang','=',$index)->first();
             $data->jumlah=$request->jumlah1[$i];
@@ -167,14 +167,7 @@ class KeranjangControllerMachiko extends Controller {
             $data->Total_harga=(($request->harga[$i]*$request->jumlah1[$i]) + $harga_tambah );
 
             $data->save();
-            /*if($request->status="Ready Stock"){
-            $produk= Produk::where('id','=',$request->idproduk)->first();
-            
-            $produk->stock_total=$produk->stock_total - $tambah;
-            
-            $produk->save(); 
-            }   
-            */
+           
             $i++;       
         }
         

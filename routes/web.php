@@ -100,7 +100,10 @@ Route::get('/masuk', function () {
 });
 
 Route::get('profil', 'ProfilControllerMachiko@index');
-Route::get('profil/edit/{id}', 'ProfilControllerMachiko@showEdit');
+Route::post('profil/simpan', 'ProfilControllerMachiko@store');
+Route::post('profil/alamat', 'ProfilControllerMachiko@alamat');
+Route::post('profil/editAlamat', 'ProfilControllerMachiko@editAlamat');
+Route::post('profil/upgrade', 'ProfilControllerMachiko@upgrade');
 
 Route::get('machikokstore', 'ProdukControllerMachiko@index');
 Route::get('machikok', 'ProdukControllerMachiko@index');
@@ -142,9 +145,13 @@ Route::get('checkout/hasil/{kota_tujuan}/{radio}/{berat}', 'TransaksiControllerM
 
 Route::get('konfirmasi', 'KonfirmasiControllerMachiko@index');
 Route::post('konfirmasi/simpan', 'KonfirmasiControllerMachiko@simpan');
+Route::post('konfirmasi/ubahBukti', 'KonfirmasiControllerMachiko@ubahbukti');
 
 Route::get('pencarian', 'ProdukControllerMachiko@search');
 
 
 Route::post('register', 'Auth\RegisterController@create');
-Route::get('register/verify/{confirmationCode}', 'Auth\RegisterController@confirm');
+Route::get('register/verify/{confirmationCode}',[
+    'as' => 'confirmation_path',
+    'uses' => 'Auth\RegisterController@confirm'
+]); 

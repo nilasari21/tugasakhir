@@ -55,10 +55,7 @@ class TransaksiControllerMachiko extends Controller {
          $data = Users::where('id','=',$id)
                       ->first();
                         
-         $data2=Transaksi::join('penerima','penerima.id_penerima','transaksi.id_penerima')
-                          ->where('transaksi.id_user','=',$id)      
-                          ->orderby('transaksi.id_transaksi','desc')         
-                          
+         $data2=Penerima::where('penerima.id_user','=',$id)
                           ->first();
                         // dd($data);
         $penerima = Penerima::where('penerima.id_user','=',$id)
@@ -237,8 +234,26 @@ class TransaksiControllerMachiko extends Controller {
       $toko->toko=$request->nama_toko;
       $toko->save();  
       }
+      if(Auth::user()->konfirm_admin == "Pending"){
+        $transaksi = new Transaksi; 
+     
       
-      $transaksi = new Transaksi; 
+      $transaksi->id_user=Auth::user()->id;
+      $transaksi->tgl_transaksi= Carbon::now(7);
+      $transaksi->id_metode= $request->metode;
+      $transaksi->total_berat= $request->berat;
+      $transaksi->id_penerima=$request->idpenerima;
+      $transaksi->status_bayar="Belum lunas";
+      $transaksi->jenis_pemesanan="Customer";
+      $transaksi->status_jenis_pesan=$request->status;
+      $transaksi->total_berat=$request->berat;
+      $transaksi->ongkir=$request->ongkir;
+      $transaksi->kurir=$request->kurir;
+      $transaksi->total_bayar=$request->total;
+      
+      $transaksi->save();
+      }else{
+        $transaksi = new Transaksi; 
      
       
       $transaksi->id_user=Auth::user()->id;
@@ -255,6 +270,8 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_bayar=$request->total;
       
       $transaksi->save();
+      }
+      
 
       $keranjang = Keranjang::where('user_id','=',Auth::user()->id)
                          ->get();
@@ -297,12 +314,30 @@ class TransaksiControllerMachiko extends Controller {
     $penerima->provinsi=$request->provinsi;
     $penerima->kabupaten=$request->kabupaten;
     $penerima->nama_alamat=$request->nama_alamat;
-    $penerima->alamat_lengkap=$request->nama_alamat;
+    $penerima->alamat_lengkap=$request->alamat_lengkap;
     $penerima->nama_penerima=$request->nama_penerima;
     $penerima->no_hp_penerima=$request->no_hp_penerima;
 
     $penerima->save();
-
+    if(Auth::user()->konfirm_admin == "Pending"){
+     $transaksi = new Transaksi; 
+     
+      
+      $transaksi->id_user=Auth::user()->id;
+      $transaksi->tgl_transaksi= Carbon::now(7);
+      $transaksi->id_metode= $request->metode;
+      $transaksi->total_berat= $request->berat;
+      $transaksi->id_penerima=$penerima->id_penerima;
+      $transaksi->status_bayar="Belum lunas";
+      $transaksi->jenis_pemesanan="Customer";
+      $transaksi->status_jenis_pesan=$request->status;
+      $transaksi->total_berat=$request->berat;
+      $transaksi->ongkir=$request->ongkoskirim;
+      $transaksi->kurir=$request->kurir;
+      $transaksi->total_bayar=$request->total;
+      
+      $transaksi->save(); 
+    }else{
       $transaksi = new Transaksi; 
      
       
@@ -320,6 +355,8 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_bayar=$request->total;
       
       $transaksi->save();
+    }
+      
 
       $keranjang = Keranjang::where('user_id','=',Auth::user()->id)
                          ->get();
