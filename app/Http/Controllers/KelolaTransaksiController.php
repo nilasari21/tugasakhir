@@ -17,6 +17,9 @@ use App\Models\ProdukUkuran;
 
 
 class KelolaTransaksiController extends Controller {
+public function __construct(){
+        $this->middleware('levelAdmin');
+    }
 
    public function index()
     {

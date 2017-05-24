@@ -9,11 +9,10 @@
                            
 
                             <li><a href="{{ url('machikokstore') }}"><img src="{{asset("/machikoo/img/mauedit.png")}}" width="60px" height="60px" ><span>  Machiko K-Store</span></a></li>
-                             @if (Auth::guest())
-                            @else
+                           
                             <li><a href="{{ url('wishlist') }}"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="{{ url('keranjang') }}"><i class="fa fa-shopping-cart"></i> Keranjang</a></li>
-                           @endif
+                           
                         </ul>
                     </div>
                 </div>
@@ -32,11 +31,11 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url('profil') }}">Lihat profil</a></li>
                                     <li><a href="{{ url('konfirmasi') }}">Konfirmasi pembayaran</a></li>
-                                    <li><a href="#">Status pemesanan</a></li>
+                                    <li><a href="{{ url('status_pesan') }}">Status pemesanan</a></li>
                                     <li> <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Keluar
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

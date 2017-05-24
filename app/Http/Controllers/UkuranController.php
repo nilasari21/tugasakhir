@@ -8,6 +8,9 @@ use App\Ukuran;
 use Illuminate\Http\Request;
 
 class UkuranController extends Controller {
+public function __construct(){
+        $this->middleware('levelAdmin');
+    }
 
    public function index()
     {

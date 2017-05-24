@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use PDF;
 
 class MetodeController extends Controller {
+public function __construct(){
+    $this->middleware('levelAdmin');
+  }
 
    public function index()
     {

@@ -1,0 +1,38 @@
+    public function postUpdate(Request $request)
+    {
+        $i=0;
+
+        // dd($request->berat);
+        foreach ($request->idproduk as $key=>$index ) {
+              $tambah=$request->jumlah1[$i] - $request->jumlahawal[$i] ;
+            if($request->status[$i]=="Ready Stock"){
+            $produk= ProdukUkuran::where('id_produk_ukuran','=',$index)->first();
+            
+          $produk->stock = $produk->stock - $tambah;
+            
+            $produk->save(); 
+            // dd($tambah);
+            }   
+            
+            $i++;       
+        }
+        
+        $i=0;
+
+        foreach ($request->idkeranjang as $key=>$index ) {
+           
+
+            $data=Keranjang::where('id_keranjang','=',$index)->first();
+            $data->jumlah=$request->jumlah1[$i];
+            $data->berat_total=$request->berat[$i]*$request->jumlah1[$i];
+            $harga_tambah=($request->harga_tambah[$i]*$request->jumlah1[$i]);
+            $data->Total_harga=(($request->harga[$i]*$request->jumlah1[$i]) + $harga_tambah );
+
+            $data->save();
+           
+            $i++;       
+        }
+        
+        
+        return redirect('keranjang');
+    }

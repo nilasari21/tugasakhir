@@ -10,6 +10,9 @@ use App\Transaksi;
 use Illuminate\Http\Request;
 
 class KonfirmasiPembayaranController extends Controller {
+public function __construct(){
+    $this->middleware('levelAdmin');
+  }
 
    public function index()
     {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Auth;
 class LoginController extends Controller
 {
     /*
@@ -25,9 +25,23 @@ class LoginController extends Controller
      *
      * @var string
      */
-  
+    /*if(Auth::user()->level == "Admin"){
+    return redirect('admin');    
+    }else{
+        return redirect('/machikokstore');
+    }*/
     protected $redirectTo = '/machikokstore';
-
+/*protected function redirectTo(){
+    if(Auth::user()->level == "Admin"){
+        return redirect('admin');
+    }if(Auth::user()->level == "Customer"){
+        return redirect('/machikokstore');
+    }if(Auth::user()->level == "Dropshipper"){
+        return redirect('/machikokstore');
+    }if(Auth::user()->level == "Reseller"){
+        return redirect('/machikokstore');
+    }
+}*/
     /**
      * Create a new controller instance.
      *

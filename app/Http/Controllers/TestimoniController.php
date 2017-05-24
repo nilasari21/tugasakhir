@@ -8,6 +8,9 @@ use App\Testimoni;
 use Illuminate\Http\Request;
 
 class TestimoniController extends Controller {
+public function __construct(){
+    $this->middleware('levelAdmin');
+  }
 
    public function index()
     {

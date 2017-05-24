@@ -27,6 +27,7 @@
           <th>Jenis Kelamin</th>
           <th>No Handphone</th>
           <th>Email</th>
+          <th>Level</th>
           <th>Status</th>
           <th>Aksi</th>
         </tr>
@@ -40,6 +41,7 @@
           <td>{{ $row->jenis_kelamin }}</td>
           <td>{{ $row->no_hp }}</td>
           <td>{{ $row->email }}</td>
+          <td>{{ $row->level }}</td>
           <td>{{ $row->status_user }}</td>
           <td>
             

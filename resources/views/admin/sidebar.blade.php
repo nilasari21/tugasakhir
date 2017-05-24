@@ -53,7 +53,7 @@
                 <a href="#"> <i class="fa fa-user"></i><span>User</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('customer') }}">Data User</a></li>
-                    <li><a href="{{ url('konfirmasibayar') }}">Upgrade user</a></li>
+                    <li><a href="{{ url('upgrade_user') }}">Upgrade user</a></li>
                     
                 </ul>
             </li>

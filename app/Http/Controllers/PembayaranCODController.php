@@ -16,6 +16,9 @@ use App\Models\ProdukUkuran;
 
 
 class PembayaranCODController extends Controller {
+public function __construct(){
+        $this->middleware('levelAdmin');
+    }
 
    public function index()
     {

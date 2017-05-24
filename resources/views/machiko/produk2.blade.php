@@ -120,11 +120,9 @@
             <form action="{{ url('wishlist/tambah') }}" method="POST">
             {{ csrf_field() }}
                 <input type="hidden" size="4" name="produk_id" value="{{ $row->id }}"/>
-                 @if (Auth::guest())
-              
-              @else
+                 
                 <button type="submit" class="add_to_cart_button " style="background:#F09BA0 !important;text-transform:capitalize !important;"  value="Submit"  style="text-transform:capitalize;font-family:Raleway;padding: 11px 20px;"><i class="fa fa-heart" color="#0000" ></i> Tambah Wishlist</button><br/><br/>
-                @endif
+                
                 <a class="add_to_cart_button "  style="background:#F09BA0 !important" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('machikokstore/detailProduk/'.$row->id ) }}"><i class="fa fa-link"></i> Lihat Detail</a>
             </form>
         </center>

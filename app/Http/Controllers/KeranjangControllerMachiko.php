@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Auth;
 class KeranjangControllerMachiko extends Controller {
+public function __construct(){
+    $this->middleware('levelCustomer');
+  }
 
     public function index() {
         // $data=[];

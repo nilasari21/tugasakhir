@@ -10,7 +10,10 @@ use Illuminate\Http\Request;
 use Auth;
 
 class WishlistControllerMachiko extends Controller {
-
+public function __construct()
+    {
+        $this->middleware('levelCustomer');
+    }
     public function index() {
         // $data=[];
         

@@ -17,6 +17,9 @@ Route::get('/home', 'ProdukControllerMachiko@index');
 Route::get('admin', function () {
     return view('admin.beranda.beranda');
 });
+Route::get('/forbidden', function () {
+    return view('admin.salahHakAkses');
+});
 
 Route::get('machiko', function () {
     return view('machiko.test');
@@ -45,7 +48,9 @@ Route::get('metode/edit/{id}', 'MetodeController@showEdit');
 Route::post('metode/update/{id}', 'MetodeController@postUpdate');
 
 Route::get('customer', 'UserController@index');
+Route::get('upgrade_user', 'UserController@upgrade_user');
 Route::post('customer/status/{id}', 'UserController@postUpdate');
+Route::post('customer/upgrade/', 'UserController@upgrade');
 
 Route::get('testimoniadmin', 'TestimoniController@index');
 Route::get('testimoniadmin/delete/{id}', 'TestimoniController@getDelete');
@@ -83,9 +88,12 @@ Route::get('konfirmasibayar', 'KonfirmasiPembayaranController@index');
 Route::post('konfirmasibayar/simpan', 'KonfirmasiPembayaranController@simpan');
 Route::get('pembayaran_cod', 'PembayaranCODController@index');
 Route::post('pembayaran_cod/lunas/{id}', 'PembayaranCODController@postUpdate');
+
+
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// Route::get('/home', 'HomeController@index');
 
 
 
@@ -149,6 +157,9 @@ Route::post('konfirmasi/ubahBukti', 'KonfirmasiControllerMachiko@ubahbukti');
 
 Route::get('pencarian', 'ProdukControllerMachiko@search');
 
+
+Route::get('status_pesan', 'StatusPemesananControllerMachiko@index');
+Route::get('status_pesan/detail/{id}', 'StatusPemesananControllerMachiko@detail');
 
 Route::post('register', 'Auth\RegisterController@create');
 Route::get('register/verify/{confirmationCode}',[

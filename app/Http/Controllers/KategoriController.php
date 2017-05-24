@@ -8,7 +8,9 @@ use App\Kategori;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller {
-
+public function __construct(){
+        $this->middleware('levelAdmin');
+    }
    public function index()
     {
         $data = Kategori::all();

@@ -16,6 +16,9 @@ use Redirect;
 
 
 class PreorderController extends Controller {
+public function __construct(){
+    $this->middleware('levelAdmin');
+  }
 
    public function index()
     {
