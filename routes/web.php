@@ -14,20 +14,21 @@
 Route::get('/', 'ProdukControllerMachiko@index');
 Route::get('/home', 'ProdukControllerMachiko@index');
 
-Route::get('admin', function () {
+/*Route::get('admin', function () {
     return view('admin.beranda.beranda');
-});
+});*/
 Route::get('/forbidden', function () {
     return view('admin.salahHakAkses');
 });
 
-Route::get('machiko', function () {
+/*Route::get('machiko', function () {
     return view('machiko.test');
-});
+});*/
+Route::get('/front',['middleware'=>'auth','uses'=>'FrontController@depan']);
 
 Route::get('toko', 'TestControllerMachiko@index');
 
-Route::get('beranda', 'BerandaController@index');
+Route::get('admin', 'HeaderController@index');
 
 // Route::get('testmachiko', 'ProdukController@index');
 
@@ -80,10 +81,12 @@ Route::get('testimonimachiko', 'TestimoniControllerMachiko@index');
 
 Route::get('transaksi', 'KelolaTransaksiController@index');
 Route::get('/transaksi/detail/{id}', 'KelolaTransaksiController@detailtrans');
+Route::get('/transaksi/detailNotif/{id}', 'KelolaTransaksiController@detailtrans');
 Route::post('/transaksi/ubah', 'KelolaTransaksiController@ubahstatus');
 Route::get('transaksi_reseller', 'KelolaTransaksiController@transReseller');
 Route::get('/transaksi_reseller/detail/{id}', 'KelolaTransaksiController@detail');
-Route::post('/transaksi_reseller/detail/update/{id}', 'KelolaTransaksiController@postUpdate');
+
+Route::post('/transaksi_reseller/detail/update/', 'KelolaTransaksiController@postUpdate');
 Route::get('konfirmasibayar', 'KonfirmasiPembayaranController@index');
 Route::post('konfirmasibayar/simpan', 'KonfirmasiPembayaranController@simpan');
 Route::get('pembayaran_cod', 'PembayaranCODController@index');

@@ -59,7 +59,7 @@
                                                        }
                                                        ?>
                                                        <td class="product-price">
-                                                            <span class="amount"  >{{ $b->harga }}</span> 
+                                                            <span class="amount"  >{{ $b->harga_pokok }}</span> 
                                                         </td>
                                                         <?php 
                                                            if(count($b->nama_ukuran)==0){
@@ -253,8 +253,8 @@
                     <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Total pembayaran</label>
                       <div class="col-sm-4">
-                        <input type="hidden" class="form-control" id="total1" name="total" value="{{$d->total}}" readonly>
-                        <input type="hidden" class="form-control" id="total2" name="total" value="{{$d->total}}" readonly>
+                        <input type="text" class="form-control" id="total1" name="total" value="{{$d->total}}" readonly>
+                        <input type="text" class="form-control" id="total2" name="total" value="{{$d->total}}" readonly>
                         <input type="text" class="form-control" id="total" name="total" value="{{$d->total}}" readonly>
                         <input type="text" class="form-control" id="total3" name="total3" value="{{$d->total}}" readonly>
                       </div>

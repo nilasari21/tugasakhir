@@ -14,7 +14,7 @@
             <br/>
           </div>
           
-         <form method="post" action="{{ url('kategori/update/'.$data->id_kategori) }}" style="margin-left:10px">
+         <form method="post" action="{{ url('admin/kategori/update/'.$data->id_kategori) }}" style="margin-left:10px">
           <div class="row">
     {{ csrf_field() }}
     <div class="col-lg-4 col-md-4 col-sm-4">

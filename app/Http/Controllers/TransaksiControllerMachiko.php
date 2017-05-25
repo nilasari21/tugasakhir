@@ -48,7 +48,7 @@ class TransaksiControllerMachiko extends Controller {
                         ->join('produk','produk.id','=','produk_ukuran.produk_id')
                          ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                          ->select((DB::raw ('SUM((keranjang.berat_total)) as berat')),(DB::raw ('SUM(keranjang.Total_harga) as total')))
-                         ->where('user_id','=','2')
+                         ->where('user_id','=',Auth::user()->id)
                     // ->where('produk.status','=','Ready Stock')
                          ->get();
         // dd($beratharga);

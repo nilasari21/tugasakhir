@@ -28,8 +28,9 @@
         $i=1
         @endphp
        @foreach ($data as $row)
+        
         <tr>
-           <td >{{$row->nama_produk}}</td>
+           <td >{{$row->nama_produk}} <input type="hidden" id="id_produk_ukuran{{$i}}" value="{{$row->minimal_beli}}"></td>
            <!-- <td >{{$row->nama_ukuran}}</td>
            <td >{{ "Rp ".number_format($row->harga_pokok,2, ',', '.') }}</td>
            <td >{{ "Rp ".number_format($row->harga_tambah,2, ',', '.') }}</td> -->
@@ -53,12 +54,48 @@
       </tbody>
     </table>
     <!--  <div class="col-sm-3 control-label"> -->
-    <form action="{{ url('/transaksi_reseller/detail/update/'.$row->id_transaksi) }}" method="post">
+   <form action="{{ url('/transaksi_reseller/detail/update/') }}" method="post">
       {{ csrf_field() }}
+                      
                        <input type="text" class="form-control" name="idtrans" value="{{$row->id_transaksi}}">
                        <input type="text" class="form-control" name="total" value="{{$row->total_bayar}}">
                       <label for="inputName" class="col-sm-3 control-label" >Pilih persetujuan</label>  
                       <!-- </div> -->
+        <table>
+          
+          <tr>
+          <th>Id produk ukuran</td>
+          <th>Jumlah</td>
+          </tr>
+           @php
+                                                    $i=1
+                                                    @endphp
+          @foreach($data2 as $row)
+          <tr>
+            <td><input type="text" class="form-control" name="iduser[]" value="{{$row->id_user}}"></td>
+            <td><input type="text" class="form-control" name="idproUku[]" value="{{$row->id_produk_ukuran}}"></td>
+            <td><input type="text" class="form-control" id="nilai1{{$i}}" name="jum_beli[]" value="{{$row->jumlah_beli}}"></td>
+            <!-- <td><input type="text" class="form-control" name="jum_beli{{$i}}" value="{{$row->jumlah_beli}}"></td> -->
+            <td class="product-name">
+              <span class="amount" ><input name="berat[]" type="text" id="berat{{$i}}"  value="{{ $row->berat }} " style="width:70px" readonly></span> 
+              <span class="amount" ><input name="berat2[]" type="text" id="beratto{{$i}}"  value="" style="width:70px" readonly></span> 
+            </td>
+             <td class="product-price">
+                                                            <span class="amount"  ><input type="text" name="harga[]" id="nilai2{{$i}}" value="{{ $row->harga_pokok }}" onFocus="startCalc();" onBlur="stopCalc();"></span> 
+                                                        </td>
+            <td class="product-price">
+              <span class="amount" ><input type="text" name="harga_tambah[]" id="nilai3{{$i}}"  onFocus="startCalc();" onBlur="stopCalc();" value="{{ $row->harga_tambah }}" ></span> 
+            </td>
+            <td class="product-subtotal" >
+                                                            <span class="amount" ><input name="total[]" type="text" id="total{{$i}}"  value="" style="width:100px" readonly></span> 
+                                                        </td>
+            <tr>
+              @php
+                                                    $i++
+                                                    @endphp
+              @endforeach
+        </table>
+
                       <div class="col-sm-3">
                         
                         <select class="form-control" style="width: 100%;" id="status_pesan" name="status_pesan" onChange="b()" data-toggle="modal" required/>
@@ -164,4 +201,37 @@ function b() {
 
             };
 </script>
+<script type="text/javascript">
+            $(document).ready(function (){
+            @php
+            $i=1;
+            
+            @endphp
+            var  total=0;
+            var  berat_total=0;
+            @foreach ($data as $row)
+
+            var satu = document.getElementById("nilai1{{$i}}").value; 
+             console.log(satu);
+            var dua = document.getElementById("nilai2{{$i}}").value; 
+            console.log(dua);
+             var tiga = document.getElementById("nilai3{{$i}}").value; 
+             console.log(tiga);
+             var berat = document.getElementById("berat{{$i}}").value; 
+             console.log(berat);
+             var beratto=document.getElementById("beratto{{$i}}").value=(parseInt(satu)* parseInt(berat));
+             console.log(beratto);
+             var hasil = document.getElementById("total{{$i}}").value=( parseInt(satu)* parseInt(dua))+ (parseInt(tiga)*parseInt(satu));
+
+             
+             @php
+             $i++;
+             
+             @endphp
+             @endforeach
+
+        });
+             
+        
+    </script>
     @endsection

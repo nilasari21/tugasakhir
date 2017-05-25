@@ -64,7 +64,7 @@
                                                             {{ $row->total_bayar}}
                                                         </td>
                                                         <?php 
-                                                        if(count($row->id_konfirmasi)==0){?>
+                                                        if(count($row->id_konfirmasi)==0 && $row->jenis_pemesanan != "Reseller"){?>
                                                         <td class="product-name">
                                                             Pending 
                                                         </td>
@@ -77,7 +77,48 @@
                                                             
                                                         </td>
                                                         <?php
-                                                        }if(count($row->id_konfirmasi)==1 && $row->status=="Pending"){?>
+                                                        }if(count($row->id_konfirmasi)==0 && $row->jenis_pemesanan == "Reseller" && $row->status_jenis_pesan=="Tunggu"){?>
+                                                        <td class="product-name">
+                                                            Pending 
+                                                        </td>
+                                                        <td class="product-name">
+                                                            Transaksi anda belum mendapat persetujuan admin. Silahkan tunggu beberapa saat untuk memperoleh persetujuan admin.
+                                                            setelah disetujui, cek total harga yang harus anda bayarkan. 
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <!-- <a class="add_to_cart_button" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a> -->
+                                                            
+                                                        </td>
+                                                        <?php
+                                                        }if(count($row->id_konfirmasi)==0 && $row->jenis_pemesanan == "Reseller" && $row->status_jenis_pesan=="Terima"){?>
+                                                        <td class="product-name">
+                                                            Pending 
+                                                        </td>
+                                                        <td class="product-name">
+                                                            Silahkan upload bukti transfer dengan memilih tombol konfirmasi. Cek total harga yang harus anda bayarkan. 
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <a class="add_to_cart_button" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a>
+                                                            
+                                                        </td>
+                                                        <?php
+                                                        }if(count($row->id_konfirmasi)==0 && $row->jenis_pemesanan == "Reseller" && $row->status_jenis_pesan=="Tolak"){?>
+                                                        <td class="product-name">
+                                                            Tolak 
+                                                        </td>
+                                                        <td class="product-name">
+                                                            Transaksi anda di tolak oleh admin, karena jumlah pembelian kurang dari jumlah minimal beli oleh reseller. Transaksi anda
+                                                            dikembalikan di keranjang. Silahkan cek keranjang anda, dan penuhi jumlah minimal pembelian.
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <a class="add_to_cart_button" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a>
+                                                            
+                                                        </td>
+                                                        <?php
+                                                        }if(count($row->id_konfirmasi)==1 && $row->status=="Pending" ){?>
                                                         <td class="product-name">
                                                             {{$row->status}}
                                                         </td>

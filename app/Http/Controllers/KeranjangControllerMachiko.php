@@ -118,10 +118,23 @@ public function __construct(){
 
     public function getDelete($id)
     {
+        
+        $keranjang=Keranjang::select('id_produk_ukuran','jumlah')
+                            ->where('id_keranjang',$id)
+                            ->first();
+        $produk=ProdukUkuran::where('id_produk_ukuran',$keranjang->id_produk_ukuran)
+                            ->join('produk','produk.id','produk_ukuran.produk_id')
+                            ->first();
+        if($produk->jenis=="Ready Stock"){
+        $produk->stock=$produk->stock + $keranjang->jumlah;
+        $produk->save();    
+        }
+        
+
         $data = Keranjang::where('id_keranjang','=',$id);
         $data->delete();
-        /**/
         return redirect('keranjang');
+        
     }
 
     public function postUpdate(Request $request)

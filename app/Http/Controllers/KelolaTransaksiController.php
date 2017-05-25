@@ -4,24 +4,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use App\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HeaderController;
 use App\Transaksi;
 use App\Kategori;
+use App\Keranjang;
 use App\Metode;
 use App\Ukuran;
+use App\ProdukUkuran;
 use App\Penerima;
 use App\DetailTransaksi;
 use Image;
 use DB;
+use Carbon\Carbon;
 // cause Illuminate\Support\Fades\Input;
-use App\Models\ProdukUkuran;
+// use App\Models\ProdukUkuran;
 
 
 class KelolaTransaksiController extends Controller {
+    // private HeaderController;
 public function __construct(){
         $this->middleware('levelAdmin');
+        // $this->HeaderController->index();
+        // $result= HeaderController::index();
     }
 
-   public function index()
+   public function index ()
     {
         
       $data = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
@@ -122,8 +129,18 @@ public function __construct(){
                         ->where('transaksi.id_transaksi','=',$id)
                         ->get();
      // dd($data); 
-
-        return view('admin.transaksi.detail_trans_reseller')->with('data',$data);
+     $data2 =Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
+                        ->leftjoin('users','users.id','transaksi.id_user')
+                        ->leftjoin('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
+                        ->leftjoin('produk','produk.id','produk_ukuran.produk_id')
+                        ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
+                        ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
+                        
+                        // ->distinct()
+                        ->where('transaksi.id_transaksi','=',$id)
+                        ->get();
+     // dd($data2); 
+        return view('admin.transaksi.detail_trans_reseller')->with(compact('data',$data,'data2',$data));
     }
     public function detailtrans($id) {
 
@@ -153,25 +170,46 @@ public function __construct(){
         return view('admin.transaksi.detail_transaksi')->with(compact('data',$data,'penerima',$penerima,'detail',$detail));
     }
 
-    public function postUpdate($id_transaksi, Request $request)
+    public function postUpdate(Request $request)
     {
+        // dd($request->idtrans);
         // proses update data
       if($request->status_pesan == "Terima"){
-        $data = Transaksi::where('id_transaksi',$id_transaksi)->first();
+        $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
         $data->total_bayar=$request->total - $request->diskon;
         $data->status_jenis_pesan = $request->status_pesan;
         $data->save();
       }if($request->status_pesan == "Tolak"){
-        $data = Transaksi::where('id_transaksi',$id_transaksi)->first();
+        
+
+        $det=DetailTransaksi::where('id_transaksi',$request->idtrans)
+                            
+                            ->update([
+                                'status_pesan'=>"Batal"
+                            ]);
+                            
+       
+        foreach ($request->iduser as $key=>$val ) {
+          $keranjang = new Keranjang();
+          $keranjang->user_id = $val;
+          $keranjang->id_produk_ukuran = $request->idproUku[$key];
+          $keranjang->jumlah = $request->jum_beli[$key];
+          $keranjang->berat_total = $request->berat2[$key];
+          $keranjang->Total_harga= $request->total[$key];
+          $keranjang->created_at= Carbon::now(7);
+          $keranjang->updated_at= Carbon::now(7);
+          $keranjang->save();
+      }
+        }
+       $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
         $data->status_jenis_pesan = $request->status_pesan;
         $data->save();
-
-        
+        return redirect('transaksi');
       }
         
         // kembali ke halaman kategori
-        return redirect('transaksi');//route
-    }
+        //route
+    // }
      public function ubahstatus(Request $request)
     {
         // dd($request->keterangan);
