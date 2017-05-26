@@ -10,6 +10,7 @@ use App\ProdukUkuran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use Carbon\Carbon;
 class KeranjangControllerMachiko extends Controller {
 public function __construct(){
     $this->middleware('levelCustomer');
@@ -63,7 +64,8 @@ public function __construct(){
                             ->where('id_produk_ukuran','=',$request->id_produk_ukuran)
                             ->first();
             $keranjang1->jumlah=$keranjang1->jumlah + $request->jumlah;
-            
+            $keranjang->created_at= Carbon::now(7);
+          $keranjang->updated_at= Carbon::now(7);
             $keranjang1->save();
             
             // dd($status);
@@ -86,6 +88,8 @@ public function __construct(){
         $hargatambah=$produkukuran->harga_tambah;
         
         $data->Total_harga=($produkukuran->harga_pokok * $request->jumlah)+$hargatambah;
+        $data->created_at= Carbon::now(7);
+          $data->updated_at= Carbon::now(7);
         $data->save();
         // dd();
         $status=$request->status;

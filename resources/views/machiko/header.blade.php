@@ -72,8 +72,8 @@
                         <li><a href="{{ url('machikokstore') }}">Produk</a></li>
                         <li ><a href="{{ url('cekongkir') }}">Ongkos Kirim</a></li>
                         <li><a href="{{ url('testimoni') }}">Testimoni</a></li>
-                        <li><a href="#">Tentang Kami</a></li>
-                        <li><a href="#">Bantuan</a></li>
+                        <li><a href="{{ url('about') }}">Tentang Kami</a></li>
+                        <li><a href="{{ url('faq') }}">Bantuan</a></li>
                         <li>
                             <div class="col-sm-4" style="float:right" >
                                 <form action="{{ url('pencarian') }}" method="GET" style="margin-top:8px; width:300px">

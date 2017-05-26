@@ -3,16 +3,19 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use DB;
 use Carbon\Carbon;
-class DemoCron extends Command
+use DB;
+use App\Transaksi;
+use App\DetailTransaksi;
+use App\ProdukUkuran;
+class TrsanBat extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'demo:cron';
+    protected $signature = 'trans:bat';
 
     /**
      * The console command description.
@@ -38,20 +41,21 @@ class DemoCron extends Command
      */
     public function handle()
     {
-        //
-         $waktu = Carbon::now(8);
+        $waktu = Carbon::now(8);
 
-       $produk= DB::table('detail_transaksi')
-            ->join('transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
+        
+
+           $produk= DB::table('transaksi')
+            ->join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
             ->join('produk_ukuran','detail_transaksi.id_produk_ukuran','produk_ukuran.id_produk_ukuran')
             ->join('produk','produk.id','produk_ukuran.produk_id')
-            // ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
+            ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
             ->whereNULL('transaksi.id_konfirmasi')
             ->where('produk.jenis','=','Ready Stock')
-            ->where('transaksi.id_transaksi','<=',$waktu)
-            ->update(['produk_ukuran.stock'=>'produk_ukuran.stock'+'detail_transaksi.jumlah_beli']);
-        // DB::table('detail_transaksi')->update(['status_pesan'=>'Batal'])
-        //                            ->where('updated_at','');
-        $this->info('Demo:Cron Cummand Run successfully!');
+            ->where('transaksi.updated_at','<=',$waktu)->update(['status_pesan'=>'Batal']);
+       
+                                    
+        $this->info('Batal:trans Cummand Run successfully!');
+       
     }
 }

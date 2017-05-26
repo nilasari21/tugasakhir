@@ -149,9 +149,10 @@ class TransaksiControllerMachiko extends Controller {
                           $id=$data->id_transaksi;
         $trans = Transaksi::leftjoin('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                           // ->leftjoin('penerima','penerima.id_penerima','transaksi.id_penerima')
-                          ->leftjoin('produk','produk.id','detail_transaksi.id_produk')
+                          
                           // ->leftjoin('metode','metode.id','transaksi.id_metode')
                            ->leftJoin('produk_ukuran','produk_ukuran.id_produk_ukuran','=','detail_transaksi.id_produk_ukuran')
+                           ->leftjoin('produk','produk.id','produk_ukuran.produk_id')
                          ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                          ->select('transaksi.*','detail_transaksi.*','produk.*','produk_ukuran.*','ukuran.*')
                          ->where('transaksi.id_transaksi','=',$id)
@@ -165,6 +166,33 @@ class TransaksiControllerMachiko extends Controller {
        // dd($transak);
         
         return view('machiko.rekap_pemesanan')->with(compact('data',$data,'trans',$trans,'transak',$transak));
+    }
+    public function cetak() {
+        $data = Transaksi::select('transaksi.id_transaksi')
+                          ->where('id_user','=',Auth::user()->id)
+                          ->orderby('id_transaksi','desc')
+                          ->first();
+                          // dd($data);
+                          $id=$data->id_transaksi;
+        $trans = Transaksi::leftjoin('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
+                          // ->leftjoin('penerima','penerima.id_penerima','transaksi.id_penerima')
+                          
+                          // ->leftjoin('metode','metode.id','transaksi.id_metode')
+                           ->leftJoin('produk_ukuran','produk_ukuran.id_produk_ukuran','=','detail_transaksi.id_produk_ukuran')
+                           ->leftjoin('produk','produk.id','produk_ukuran.produk_id')
+                         ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
+                         ->select('transaksi.*','detail_transaksi.*','produk.*','produk_ukuran.*','ukuran.*')
+                         ->where('transaksi.id_transaksi','=',$id)
+                         ->where('detail_transaksi.id_transaksi','=',$id)
+                         ->get();
+        $transak=Transaksi::leftjoin('penerima','penerima.id_penerima','transaksi.id_penerima')
+                          ->leftjoin('metode','metode.id','transaksi.id_metode')
+                          ->where('transaksi.id_transaksi','=',$id)
+                          ->select('transaksi.*','penerima.*','metode.*')
+                          ->get();
+       // dd($transak);
+        
+        return view('machiko.cetak_invoice')->with(compact('data',$data,'trans',$trans,'transak',$transak));
     }
  public function hasil($kota_tujuan,$berat) {
         $data = RajaOngkir::Kota()->all();
@@ -250,7 +278,8 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->ongkir=$request->ongkir;
       $transaksi->kurir=$request->kurir;
       $transaksi->total_bayar=$request->total;
-      
+      $transaksi->created_at= Carbon::now(7);
+      $transaksi->updated_at= Carbon::now(7);
       $transaksi->save();
       }else{
         $transaksi = new Transaksi; 
@@ -268,6 +297,8 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->ongkir=$request->ongkir;
       $transaksi->kurir=$request->kurir;
       $transaksi->total_bayar=$request->total;
+      $transaksi->created_at= Carbon::now(7);
+      $transaksi->updated_at= Carbon::now(7);
       
       $transaksi->save();
       }
@@ -293,7 +324,7 @@ class TransaksiControllerMachiko extends Controller {
       
 
       
-      return redirect('keranjang');
+      return redirect('rekap_pemesanan');
                 
                 
        //
@@ -335,7 +366,8 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->ongkir=$request->ongkoskirim;
       $transaksi->kurir=$request->kurir;
       $transaksi->total_bayar=$request->total;
-      
+      $transaksi->created_at= Carbon::now(7);
+      $transaksi->updated_at= Carbon::now(7);
       $transaksi->save(); 
     }else{
       $transaksi = new Transaksi; 
@@ -353,7 +385,8 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->ongkir=$request->ongkoskirim;
       $transaksi->kurir=$request->kurir;
       $transaksi->total_bayar=$request->total;
-      
+      $transaksi->created_at= Carbon::now(7);
+      $transaksi->updated_at= Carbon::now(7);
       $transaksi->save();
     }
       
@@ -378,7 +411,7 @@ class TransaksiControllerMachiko extends Controller {
       
 
       
-      return redirect('keranjang');
+      return redirect('rekap_pemesanan');
                 
                 
        //

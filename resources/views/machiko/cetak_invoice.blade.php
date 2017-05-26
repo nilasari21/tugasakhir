@@ -1,12 +1,34 @@
-@extends('machiko.machiko_template')
-@section('css')
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Machiko K-Store | Invoice</title>
+   <link rel="stylesheet" href="{{asset("/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
+    <!-- <link rel="stylesheet" href="{{asset("/machikoo/bootstrap-3.2.0/dist/css/bootstrap-modal-bs3patch.css")}}">
+    <link rel="stylesheet" href="{{asset("/machikoo/bootstrap-3.2.0/dist/css/bootstrap-modal.css")}}"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  -->
+    <!-- Font Awesome -->
+    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+     <link rel="stylesheet" href="{{asset("/machikoo/css/font-awesome.min.css")}}" rel="stylesheet" type="text/css" >
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{asset("/machikoo/css/owl.carousel.css")}}">
+    <link rel="stylesheet" href="{{asset("/machikoo/style.css")}}">
+    
+    <link rel="stylesheet" href="{{asset("/machikoo/css/responsive.css")}}">
+    <link rel="stylesheet" href="{{asset("/machikoo/css/dropdown.css")}}">
 
-<link rel="stylesheet" href="{{asset("/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
-<!-- https://printjs-4de6.kxcdn.com/print.min.js -->
-<link href='https://printjs-4de6.kxcdn.com/print.min.css' rel='stylesheet' type='text/css'>
-@endsection
-@section('content')
+    <!-- <link rel="stylesheet" href="{{asset("imageUpload/dist/css/bootstrap-imageupload.min.css")}}"> -->
+    <link rel="stylesheet" href="{{asset("/machikoo/etalage.css")}}">    
 
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body onload="window.print();">
 <div class="single-product-area">
     <div class="zigzag-bottom">
     </div>
@@ -166,7 +188,7 @@
 <!-- </body> -->
 <div class="row no-print">
         <div class="col-xs-12">
-          <a href="{{url('cetak')}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
          <!--  <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
           </button>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
@@ -174,11 +196,13 @@
           </button> -->
         </div>
       </div>
-@endsection
+<!-- @endsection
 
 @section('js')
 <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 
     @endsection
 
-
+ -->
+ </body>
+</html>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use App\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\HeaderController;
+// use App\Http\Controllers\HeaderController;
 use App\Transaksi;
 use App\Kategori;
 use App\Keranjang;
@@ -40,6 +40,7 @@ public function __construct(){
                         ->where('transaksi.status_bayar','=','Belum lunas')
                         ->where('detail_transaksi.status_pesan','=','Pending')
                         ->get();
+    // dd( );
       $tunggu = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         ->leftjoin('users','users.id','transaksi.id_user')
                         ->leftjoin('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
@@ -50,6 +51,16 @@ public function __construct(){
                         ->where('detail_transaksi.status_pesan','=','Pending')
                         ->get();
                         // dd($data);
+                        $waktu = Carbon::now(8);
+        $produk= DB::table('detail_transaksi')
+            ->join('transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
+            ->join('produk_ukuran','detail_transaksi.id_produk_ukuran','produk_ukuran.id_produk_ukuran')
+            ->join('produk','produk.id','produk_ukuran.produk_id')
+            // ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
+            ->whereNULL('transaksi.id_konfirmasi')
+            ->where('produk.jenis','=','Ready Stock')
+            ->where('transaksi.id_transaksi','<=',$waktu)->get();
+            dd($produk);
       $produksi = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
                         ->leftjoin('users','users.id','transaksi.id_user')
@@ -90,6 +101,7 @@ public function __construct(){
                         ->where('transaksi.status_bayar','=','Lunas')
                         ->where('detail_transaksi.status_pesan','=','Selesai')
                         ->get();
+                       
         return view('admin.transaksi.kelola_transaksi')->with(compact('data',$data,'produksi',$produksi,'packing',$packing,'pengiriman',$pengiriman,'selesai',$selesai,'tunggu',$tunggu));
        //
     }
@@ -178,6 +190,8 @@ public function __construct(){
         $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
         $data->total_bayar=$request->total - $request->diskon;
         $data->status_jenis_pesan = $request->status_pesan;
+        // $transaksi->created_at= Carbon::now(7);
+      $data->updated_at= Carbon::now(7);
         $data->save();
       }if($request->status_pesan == "Tolak"){
         

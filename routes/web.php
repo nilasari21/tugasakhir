@@ -20,6 +20,15 @@ Route::get('/home', 'ProdukControllerMachiko@index');
 Route::get('/forbidden', function () {
     return view('admin.salahHakAkses');
 });
+Route::get('cetak', function () {
+    return view('machiko.cetak_invoice');
+});
+Route::get('about', function () {
+    return view('machiko.tentang_kami');
+});
+Route::get('faq', function () {
+    return view('machiko.faq');
+});
 
 /*Route::get('machiko', function () {
     return view('machiko.test');
@@ -28,7 +37,8 @@ Route::get('/front',['middleware'=>'auth','uses'=>'FrontController@depan']);
 
 Route::get('toko', 'TestControllerMachiko@index');
 
-Route::get('admin', 'HeaderController@index');
+Route::get('admin', 'BerandaController@index');
+Route::get('beranda', 'BerandaController@index');
 
 // Route::get('testmachiko', 'ProdukController@index');
 

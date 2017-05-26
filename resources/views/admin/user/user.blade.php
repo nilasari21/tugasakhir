@@ -28,8 +28,8 @@
           <th>No Handphone</th>
           <th>Email</th>
           <th>Level</th>
-          <th>Status</th>
-          <th>Aksi</th>
+          <!-- <th>Status</th>
+          <th>Aksi</th> -->
         </tr>
       </thead>
       <tbody>
@@ -42,7 +42,7 @@
           <td>{{ $row->no_hp }}</td>
           <td>{{ $row->email }}</td>
           <td>{{ $row->level }}</td>
-          <td>{{ $row->status_user }}</td>
+         <!--  <td>{{ $row->status_user }}</td>
           <td>
             
             @if($row->status_user=="Aktif")
@@ -61,7 +61,7 @@
             
             
             
-         </td>
+         </td> -->
         </tr>
        @endforeach
       </tbody>
