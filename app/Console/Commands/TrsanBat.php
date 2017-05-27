@@ -52,7 +52,7 @@ class TrsanBat extends Command
             ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
             ->whereNULL('transaksi.id_konfirmasi')
             ->where('produk.jenis','=','Ready Stock')
-            ->where('transaksi.updated_at','<=',$waktu)->update(['status_pesan'=>'Batal']);
+            ->where('transaksi.updated_at','<=',$waktu)->update(['status_pesan'=>'Pending']);
        
                                     
         $this->info('Batal:trans Cummand Run successfully!');

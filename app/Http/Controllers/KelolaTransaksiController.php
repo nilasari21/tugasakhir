@@ -51,16 +51,33 @@ public function __construct(){
                         ->where('detail_transaksi.status_pesan','=','Pending')
                         ->get();
                         // dd($data);
-                        $waktu = Carbon::now(8);
-        $produk= DB::table('detail_transaksi')
-            ->join('transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
+                     $waktu = Carbon::now(8)->subHour(5); 
+
+        $trans= Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
             ->join('produk_ukuran','detail_transaksi.id_produk_ukuran','produk_ukuran.id_produk_ukuran')
             ->join('produk','produk.id','produk_ukuran.produk_id')
-            // ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
-            ->whereNULL('transaksi.id_konfirmasi')
+            ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
+            ->where('transaksi.status_bayar','=','Belum lunas')
             ->where('produk.jenis','=','Ready Stock')
-            ->where('transaksi.id_transaksi','<=',$waktu)->get();
-            dd($produk);
+            ->where('transaksi.updated_at','<',$waktu)
+            
+            ->get();
+/*$trans2= Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
+            ->join('produk_ukuran','detail_transaksi.id_produk_ukuran','produk_ukuran.id_produk_ukuran')
+            ->join('produk','produk.id','produk_ukuran.produk_id')
+            ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
+            ->where('transaksi.status_bayar','=','Belum lunas')
+            ->where('produk.jenis','=','Ready Stock')
+            ->where('transaksi.updated_at','<',$waktu)
+            
+            ->get();*/
+        foreach ($trans as $detail) {
+                $produk = ProdukUkuran::find($detail->id_produk_ukuran);
+                $produk->stock = $produk->stock + $detail->jumlah_beli;
+                dd($produk->stock = $produk->stock + $detail->jumlah_beli);
+                $produk->save();
+                $trans->update(['status_pesan'=>'Batal']);
+            }
       $produksi = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
                         ->leftjoin('users','users.id','transaksi.id_user')

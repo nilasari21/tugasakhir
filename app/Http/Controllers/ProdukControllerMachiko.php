@@ -77,8 +77,11 @@ class ProdukControllerMachiko extends Controller {
         
         $query = $request->get('cari');
          $data = Produk::join('kategori_produk','produk.id_kategori','=','kategori_produk.id_kategori')
-                ->select('produk.*','kategori_produk.*')
+                ->join('produk_ukuran','produk_ukuran.produk_id','produk.id')
+                ->select('produk.*','kategori_produk.*','produk_ukuran.*')
                 ->where('produk.nama_produk', 'like' ,'%' . $query . '%')
+                ->orderby('produk.id','desc')
+                 ->GROUPBY('produk.nama_produk','produk.id')
                 // ->GROUPBY('produk.id')
                 
                 ->paginate(9);

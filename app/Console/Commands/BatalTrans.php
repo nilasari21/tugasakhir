@@ -50,13 +50,16 @@ class BatalTrans extends Command
             ->where('transaksi.status_bayar','=','Belum lunas')
             ->where('produk.jenis','=','Ready Stock')
             ->where('transaksi.updated_at','<',$waktu)
-            ->first();
- // foreach ($trans->id_produk_ukuran as $detail) {
-                $produk = ProdukUkuran::find($trans->id_produk_ukuran);
-                $produk->stock = $produk->stock + $trans->jumlah_beli;
+            
+            ->get();
+
+        foreach ($trans as $detail) {
+                $produk = ProdukUkuran::find($detail->id_produk_ukuran);
+                $produk->stock = $produk->stock + $detail->jumlah_beli;
                 $produk->save();
-            // }
-            $trans->update(['status_pesan'=>'Batal']);
+                $trans->update(['status_pesan'=>'Batal']);
+            }
+        
         // DB::table('detail_transaksi')->where('id_transaksi','=',$trans->id_transaksi)
                                     
         $this->info('Batal:trans Cummand Run successfully!');

@@ -19,7 +19,10 @@ class LevelAdmin
             if(Auth::user()->level != "Admin"){
                 return redirect ('/forbidden');
             }
-        }
+        }if(Auth::guest() ){
+                return redirect ('/forbidden')->send();
+            }
+        
         return $next($request);
     }
 }
