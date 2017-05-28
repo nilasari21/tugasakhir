@@ -11,7 +11,8 @@ use App\ProdukUkuran;
 use Illuminate\Http\Request;
 use Image;
 use Auth;
-
+use App\User;
+use App\Notifications\KonfirmasiPembayaran;
 class KonfirmasiControllerMachiko extends Controller {
 
     public function index() {
@@ -30,6 +31,7 @@ class KonfirmasiControllerMachiko extends Controller {
                       // ->join('users','users.id','transaksi.id_user')
                       ->where('transaksi.id_user','=',Auth::user()->id)
                       ->where('transaksi.status_bayar','Belum lunas')
+                      // ->where('transaksi.status_jenis_pesan','!=','Tolak')
                       ->get();
                          // dd($data);
         // $data->ukuran= new ProdukUkuran;
@@ -67,7 +69,14 @@ class KonfirmasiControllerMachiko extends Controller {
 //dd($data);
           $transaksi->id_konfirmasi=$konfirmasi->id_konfirmasi;
           // dd($konfirmasi->id);
-          $transaksi->save();
+           if($transaksi->save()){
+       
+        $admin=User::where('level', '=', 'Admin')->get();
+         foreach ($admin as $admin) {
+        // $transaksi;
+        \Notification::send($admin, new KonfirmasiPembayaran($transaksi));
+       }  
+      }
      return redirect('konfirmasi');
 
        //
@@ -105,7 +114,15 @@ class KonfirmasiControllerMachiko extends Controller {
 //dd($data);
           $transaksi->id_konfirmasi=$konfirmasi->id_konfirmasi;
           // dd($konfirmasi->id);
-          $transaksi->save();
+          // ();
+           if($transaksi->save()){
+       
+        $admin=User::where('level', '=', 'Admin')->get();
+         foreach ($admin as $admin) {
+        // $transaksi;
+        \Notification::send($admin, new KonfirmasiPembayaran($transaksi));
+       }  
+      }
      return redirect('konfirmasi');
 
        //

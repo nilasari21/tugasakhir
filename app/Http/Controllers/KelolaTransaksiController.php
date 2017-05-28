@@ -14,11 +14,12 @@ use App\ProdukUkuran;
 use App\Penerima;
 use App\DetailTransaksi;
 use Image;
+use App\User;
 use DB;
 use Carbon\Carbon;
 // cause Illuminate\Support\Fades\Input;
 // use App\Models\ProdukUkuran;
-
+use App\Notifications\ResellerTolak;
 
 class KelolaTransaksiController extends Controller {
     // private HeaderController;
@@ -71,13 +72,13 @@ public function __construct(){
             ->where('transaksi.updated_at','<',$waktu)
             
             ->get();*/
-        foreach ($trans as $detail) {
+       /* foreach ($trans as $detail) {
                 $produk = ProdukUkuran::find($detail->id_produk_ukuran);
                 $produk->stock = $produk->stock + $detail->jumlah_beli;
                 dd($produk->stock = $produk->stock + $detail->jumlah_beli);
                 $produk->save();
                 $trans->update(['status_pesan'=>'Batal']);
-            }
+            }*/
       $produksi = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
                         ->leftjoin('users','users.id','transaksi.id_user')
@@ -204,8 +205,9 @@ public function __construct(){
         // dd($request->idtrans);
         // proses update data
       if($request->status_pesan == "Terima"){
+        // dd($request->total1);
         $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
-        $data->total_bayar=$request->total - $request->diskon;
+        $data->total_bayar=($request->total1 - $request->diskon);
         $data->status_jenis_pesan = $request->status_pesan;
         // $transaksi->created_at= Carbon::now(7);
       $data->updated_at= Carbon::now(7);
@@ -230,11 +232,23 @@ public function __construct(){
           $keranjang->created_at= Carbon::now(7);
           $keranjang->updated_at= Carbon::now(7);
           $keranjang->save();
+         /* if( $keranjang->save()){
+       
+        $user=User::all();
+       foreach ($user as $user) {
+           
+       
+       \Notification::send($user, new ResellerTolak($keranjang));
+       
+      }
+  }*/
       }
         }
        $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
+       // dd($data->name);
         $data->status_jenis_pesan = $request->status_pesan;
-        $data->save();
+       $data->save();
+        
         return redirect('transaksi');
       }
         

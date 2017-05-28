@@ -119,7 +119,7 @@
        @foreach ($data as $row)
         <tr>
           <td>{{ $row->tgl_transfer }}</td>
-          <td>{{ $row->id_transaksi }}<input type="hidden" name="idk" id="idk" value="{{$row->id_konfirmasi}}"></td>
+          <td>{{ $row->id_transaksi }}<input type="hidden" name="idk" id="idk" value="{{$row->id_konfirmasi}}"> <input type="hidden" name="idu" id="idu" value="{{$row->id_user}}"></td>
           <td>{{ $row->name }}</td>
           <?php 
           if(count($row->foto)==0){?>
@@ -138,7 +138,7 @@
 
           <td>
              
-            <a class="btn btn-default" href="#" data-id="{{$row->id_konfirmasi}}" ><i class="fa fa-edit"></i>  Edit status</a>
+            <a class="btn btn-default" href="#" data-idu="{{$row->id_user}}" data-id="{{$row->id_konfirmasi}}" ><i class="fa fa-edit"></i>  Edit status</a>
          </td>
         </tr>
         @php
@@ -165,6 +165,7 @@
                                           {{ csrf_field() }}
                                           <div class="col-md-12" >
                                             <input type="hidden" name="idkonfirm" id="idkonfirm" value="">
+                                            <input type="text" name="iduser" id="iduser" value="">
                                               <div class="form-group">
                                                   <label for="exampleInputFile">Pilih persetujuan</label><br/>
                                                      <select class="form-control" style="width: 100%;" id="status_pesan" name="status_pesan" onChange="a()" data-toggle="modal" required/>
@@ -235,6 +236,7 @@ span.onclick = function() {
         $(document).ready(function(){
           $(".btn-default").click(function(){
           $('#idkonfirm').val($(this).data('id'));
+          $('#iduser').val($(this).data('idu'));
         $('#modal3').modal('show');
         });
         });

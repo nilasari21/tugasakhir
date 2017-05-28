@@ -8,13 +8,16 @@ use App\Transaksi;
 use App\Penerima;
 use App\Keranjang;
 use App\Users;
+use App\User;
 use App\Metode;
 use App\DetailTransaksi;
 use DB;
 use Carbon\Carbon;
 use RajaOngkir;
 use Auth;
-// use App\Models\Penerima;
+// use Notification;
+use App\Notifications\PostNewNotification;
+
 
 
 use Illuminate\Http\Request;
@@ -280,7 +283,15 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_bayar=$request->total;
       $transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);
-      $transaksi->save();
+      
+     /* if($transaksi->save()){
+       
+        $admin=User::where('level', '=', 'Admin')->get();
+         foreach ($admin as $admin) {
+        
+        \Notification::send($admin, new PostNewNotification($transaksi));
+       }  
+      }*/
       }else{
         $transaksi = new Transaksi; 
      
@@ -299,8 +310,8 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_bayar=$request->total;
       $transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);
-      
       $transaksi->save();
+      
       }
       
 
@@ -316,7 +327,15 @@ class TransaksiControllerMachiko extends Controller {
           $detailtransaksi->jumlah_beli= $key->jumlah;
           $detailtransaksi->save();
           $data = Keranjang::where('user_id','=',Auth::user()->id);
-          $data->delete();
+          // ;
+          if($data->delete()){
+       
+        $admin=User::where('level', '=', 'Admin')->get();
+         foreach ($admin as $admin) {
+        
+        \Notification::send($admin, new PostNewNotification($data));
+       }  
+      }
       }
       
      
@@ -368,7 +387,14 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_bayar=$request->total;
       $transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);
-      $transaksi->save(); 
+      if($transaksi->save()){
+       
+        $admin=User::where('level', '=', 'Admin')->get();
+         foreach ($admin as $admin) {
+        // $transaksi;
+        \Notification::send($admin, new PostNewNotification($transaksi));
+       }  
+      }
     }else{
       $transaksi = new Transaksi; 
      
@@ -387,7 +413,14 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_bayar=$request->total;
       $transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);
-      $transaksi->save();
+      if($transaksi->save()){
+       
+        $admin=User::where('level', '=', 'Admin')->get();
+         foreach ($admin as $admin) {
+        // $transaksi;
+        \Notification::send($admin, new PostNewNotification($transaksi));
+       }  
+      }
     }
       
 

@@ -1,8 +1,10 @@
 <?php
 
 namespace App;
+// namespace App\Notifications;
 
 use Illuminate\Database\Eloquent\Model;
+
 // use Backpack\CRUD\CrudTrait;
 
 class Users extends Model
@@ -29,7 +31,10 @@ class Users extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-
+/* public function routeNotificationFor()
+    {
+        return $this->id;
+    }*/
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

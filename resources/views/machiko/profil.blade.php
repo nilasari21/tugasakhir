@@ -269,6 +269,7 @@ hr {
                                             <label for="inputName" class="col-sm-6 control-label">Pilih Level user</label><br/>
                                             <div class="col-sm-12">
                                                  <select name="level" id="leveluser" onChange="toko()"class="form-control">
+                                                    <option value="">Pilih Level User</option>
                                                 <option value="Reseller">Reseller</option>
                                                 <option value="Dropshipper">Dropshipper</option>
                                                 
@@ -278,7 +279,7 @@ hr {
                                              <div class="form-group" id="nama_toko" style="display:none">
                                             <label for="inputName" class="col-sm-6 control-label">Nama Toko</label><br/>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control"  name="nama_toko" id="nama_toko" placeholder="Nama Toko" value="" required/>
+                                                <input type="text" class="form-control"  name="nama_toko" id="nama_toko" placeholder="Nama Toko" value="" />
                                             </div>
                                             </div>
                                             </div>
@@ -530,6 +531,30 @@ hr {
      </div>
     </div>
 @else
+<div class="box box-solid">
+                    <div class="box-header with-border">
+                    
+                    <h5 class="box-title"><i class="fa fa-user-secret"></i> Level user</a></h5>
+                    
+                <div class="row">
+               
+                    
+
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-xs-10">
+                        
+                        <div class="col-xs-8">
+                        <span>{{$data->level}}</span>
+                        </div>
+                        <div class="col-xs-4">
+                        
+                    </div>
+                       
+            </div>
+            </div>
+    </div>
+     </div>
+    </div>
 @endif
 </div>
 </div>

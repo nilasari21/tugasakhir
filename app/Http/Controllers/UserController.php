@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Users;
+use App\User;
 use Illuminate\Http\Request;
-
+use App\Notifications\UpgradeUser;
+use App\Notifications\UpgradeDitolak;
 class UserController extends Controller {
 public function __construct(){
         $this->middleware('levelAdmin');
@@ -43,11 +45,27 @@ public function __construct(){
         $data = Users::where('id','=',$request->iduser)->first();
         if($request->konfirm_admin=="Terima"){
         $data->konfirm_admin="Terima";
-        $data->save();    
+        // $data->save(); 
+        if($data->save()){
+       
+        $admin=User::where('id','=',$request->iduser)->first();
+         // foreach ($admin as $admin) {
+        
+        \Notification::send($admin, new UpgradeUser($data));
+       // }  
+      }    
         }if($request->konfirm_admin=="Tolak"){
         $data->konfirm_admin="Terima";
         $data->level="Customer";
-        $data->save();    
+        // $data->save(); 
+          if($data->save()){
+       
+        $admin=User::where('id','=',$request->iduser)->first();
+         // foreach ($admin as $admin) {
+        
+        \Notification::send($admin, new UpgradeDitolak($data));
+       // }  
+      }   
         }
         
         

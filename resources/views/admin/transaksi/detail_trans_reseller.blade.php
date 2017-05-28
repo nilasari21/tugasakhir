@@ -58,7 +58,7 @@
       {{ csrf_field() }}
                       
                        <input type="text" class="form-control" name="idtrans" value="{{$row->id_transaksi}}">
-                       <input type="text" class="form-control" name="total" value="{{$row->total_bayar}}">
+                       <input type="text" class="form-control" name="total1" value="{{$row->total_bayar}}">
                       <label for="inputName" class="col-sm-3 control-label" >Pilih persetujuan</label>  
                       <!-- </div> -->
         <table>

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Illuminate\Contracts\Auth\CanResetPassword;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','id_user','level','nama_lengkap','no_hp','tgl_lahir','jenis_kelamin'
+        'name', 'email', 'password','id','level','nama_lengkap','no_hp','tgl_lahir','jenis_kelamin'
     ,'remember_token','status_user','toko','foto','confirmation_code','konfirm_admin'
     ];
 
@@ -30,5 +30,10 @@ class User extends Authenticatable
     /*public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }*/
+
+    /*public function routeNotificationFor()
+    {
+        return $this->id;
     }*/
     }

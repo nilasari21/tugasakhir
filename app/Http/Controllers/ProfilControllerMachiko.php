@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Image;
 use Auth;
 use RajaOngkir;
+use App\User;
+use App\Notifications\PermintaanUpgrade;
 // cause Illuminate\Support\Fades\Input;
 class ProfilControllerMachiko extends Controller {
 
@@ -35,6 +37,7 @@ class ProfilControllerMachiko extends Controller {
         $data->email=$request->email;
         $data->jenis_kelamin=$request->jenis_kelamin;
         $data->save();
+       
         return redirect('profil');
     }
   public function upgrade(Request $request)
@@ -43,8 +46,15 @@ class ProfilControllerMachiko extends Controller {
                       ->first();
         $data->level=$request->level;
         $data->konfirm_admin="Pending";
-        
-        $data->save();
+        $data->toko=$request->nama_toko;
+       if($data->save()){
+       
+        $admin=User::where('level', '=', 'Admin')->get();
+         foreach ($admin as $admin) {
+        // $transaksi;
+        \Notification::send($admin, new PermintaanUpgrade($data));
+       }  
+      }
         return redirect('profil');
     }
     public function alamat(Request $request) {
