@@ -39,7 +39,7 @@ class DemoCron extends Command
     public function handle()
     {
         //
-         $waktu = Carbon::now(8);
+         $waktu = Carbon::now();
 
        $produk= DB::table('detail_transaksi')
             ->join('transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')

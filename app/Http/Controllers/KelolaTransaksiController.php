@@ -52,17 +52,23 @@ public function __construct(){
                         ->where('detail_transaksi.status_pesan','=','Pending')
                         ->get();
                         // dd($data);
-                     $waktu = Carbon::now(8)->subHour(5); 
-
-        $trans= Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
+ $waktu = Carbon::now()->subHour(5);
+         $detail=DB::table('detail_transaksi')->get();
+         // dd($detail);
+         foreach ($detail as $key ) {
+            $trans= DB::table('transaksi')
+            ->join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
             ->join('produk_ukuran','detail_transaksi.id_produk_ukuran','produk_ukuran.id_produk_ukuran')
             ->join('produk','produk.id','produk_ukuran.produk_id')
             ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
             ->where('transaksi.status_bayar','=','Belum lunas')
+            ->where('detail_transaksi.id_detail_transaksi','=',$key->id_detail_transaksi)
             ->where('produk.jenis','=','Ready Stock')
-            ->where('transaksi.updated_at','<',$waktu)
-            
-            ->get();
+            ->update(['produk_ukuran.stock'=>3]); 
+            dd($trans);
+         }
+        
+            // dd()
 /*$trans2= Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
             ->join('produk_ukuran','detail_transaksi.id_produk_ukuran','produk_ukuran.id_produk_ukuran')
             ->join('produk','produk.id','produk_ukuran.produk_id')

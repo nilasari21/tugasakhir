@@ -5,10 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
 use DB;
-use App\Transaksi;
-use App\DetailTransaksi;
-use App\ProdukUkuran;
-class TrsanBat extends Command
+
+class TransBat extends Command
 {
     /**
      * The name and signature of the console command.
@@ -41,21 +39,9 @@ class TrsanBat extends Command
      */
     public function handle()
     {
-        $waktu = Carbon::now(8);
-
         
-
-           $produk= DB::table('transaksi')
-            ->join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
-            ->join('produk_ukuran','detail_transaksi.id_produk_ukuran','produk_ukuran.id_produk_ukuran')
-            ->join('produk','produk.id','produk_ukuran.produk_id')
-            ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
-            ->whereNULL('transaksi.id_konfirmasi')
-            ->where('produk.jenis','=','Ready Stock')
-            ->where('transaksi.updated_at','<=',$waktu)->update(['status_pesan'=>'Pending']);
-       
                                     
         $this->info('Batal:trans Cummand Run successfully!');
-       
-    }
+    }   
+       ⁠⁠⁠
 }

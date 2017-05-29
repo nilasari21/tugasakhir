@@ -39,7 +39,7 @@ class KeranjangBatal extends Command
     public function handle()
     {
         //
-        $waktu = Carbon::now(8)->AddHour(5);
+        $waktu = Carbon::now()->SubHour(5);
 
         $trans= DB::table('keranjang')
             ->where('updated_at','<',$waktu);

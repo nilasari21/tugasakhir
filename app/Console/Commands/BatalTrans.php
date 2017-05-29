@@ -41,7 +41,7 @@ class BatalTrans extends Command
     public function handle()
     {
         //
-         $waktu = Carbon::now(8)->subHour(5); 
+         $waktu = Carbon::now()->subHour(5); 
 
         $trans= Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
             ->join('produk_ukuran','detail_transaksi.id_produk_ukuran','produk_ukuran.id_produk_ukuran')
