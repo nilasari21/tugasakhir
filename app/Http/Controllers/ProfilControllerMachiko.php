@@ -86,4 +86,40 @@ class ProfilControllerMachiko extends Controller {
         return redirect('profil');
 
     }
+    public function ubahgambar(Request $request){
+     $profil = Users::where('id','=',Auth::user()->id)->first();
+     $thumb = ('.img/produk/client');
+
+      if($request->hasFile('image')){
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $images = $request->file('image');
+        $imageName = time().'.'.$request->image->getClientOriginalExtension();
+        // $foto=$request->image->move(public_path('.img/produk/client'), $imageName);
+       // Image::make($request->hasFile('image')))->save();
+        Image::make($images)->resize('500', '500')->save($thumb . '/' . $imageName);
+
+        // $foto->resize(100, 100);
+        // $foto->save();
+        // return $imageName;
+        }else{
+      $notification = array(
+                    'message' => 'Ukuran file terlalu besar. max: 2mb', 
+                    'alert-type' => 'danger'
+                );
+        
+        // $request->session()->flash('alert-success', 'User was successful added!');
+        return redirect()
+                ->back()
+                ->with($notification);
+                
+    }
+    $profil->foto=$imageName;
+    // dd($imageName);
+    $profil->save();
+      return redirect()
+                ->back()
+                ->with('succes', 'Gambar Berhasil di Upload');
+   }
 }

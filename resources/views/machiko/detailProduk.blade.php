@@ -4,11 +4,23 @@
 
 @endsection
 @section('content')
+<div class="product-big-title-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-bit-title text-center">
+                            <h2>Detail Produk</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
 @endif
+
 <div class="single-product-area">
         <!-- <div class="zigzag-bottom"></div> -->
         <div class="container animated infinite slideInUp" style="animation-iteration-count: inherit;">
@@ -144,8 +156,8 @@
                @endphp
                @endforeach
                <!--  -->
-               <label>Jumlah:</label>
-               <div class="form-group">
+               
+               <!-- <div class="form-group">
                 <?php 
                 if($data->status=="Ready Stock"){?>
                 <input type="number" name="jumlah" class="item_quantity" min="1" max="{{$data->stock_total}}"  value="1">
@@ -153,11 +165,38 @@
                 }else{?>
                 <input type="number" name="jumlah" class="item_quantity" min="1" value="1">
                 <?php }
-                ?>
+                ?> -->
                 
                 
-                <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Masukan Ke Keranjang</button>
+                <!-- <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Masukan Ke Keranjang</button> -->
+                     
+                                    <?php if($b->st != 0 && $data->jenis=="Ready Stock"){?>
+                                    <label>Jumlah:</label>
+                                    <input type="number" name="jumlah" class="item_quantity" min="1" max="{{$data->stock_total}}"  value="1">
+                                    <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Masukan Ke Keranjang</button>
 
+                                    
+                                    <?php } ?>
+                                    <?php if($b->st == 0 && $data->jenis=="Ready Stock"){?>
+                                    
+                                    <!-- <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Masukan Ke Keranjang</button> -->
+                                    <span>Stock Habis</span>
+                                    
+                                    <?php } ?>
+                                    <?php if( $data->jenis=="PreOrder"&& count($a)!=0){?>
+                                    <label>Jumlah:</label>
+                                    <input type="number" name="jumlah" class="item_quantity" min="1"  value="1">
+                                   <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Masukan Ke Keranjang</button>
+
+                                    
+                                    <?php } ?>
+                                    <?php if( $data->jenis=="PreOrder"&& count($a)==0){?>
+                                    
+                                   <!-- <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Masukan Ke Keranjang</button> -->
+                                   <span>Masa Pre-Order habis</span>
+                                    
+                                    <?php } ?>
+                                     
           </div>
 
       </form>

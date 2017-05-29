@@ -125,6 +125,7 @@ Route::post('profil/simpan', 'ProfilControllerMachiko@store');
 Route::post('profil/alamat', 'ProfilControllerMachiko@alamat');
 Route::post('profil/editAlamat', 'ProfilControllerMachiko@editAlamat');
 Route::post('profil/upgrade', 'ProfilControllerMachiko@upgrade');
+Route::post('profil/ubahgambar', 'ProfilControllerMachiko@ubahgambar');
 
 Route::get('machikokstore', 'ProdukControllerMachiko@index');
 Route::get('machikok', 'ProdukControllerMachiko@index');
@@ -169,6 +170,7 @@ Route::post('konfirmasi/simpan', 'KonfirmasiControllerMachiko@simpan');
 Route::post('konfirmasi/ubahBukti', 'KonfirmasiControllerMachiko@ubahbukti');
 
 Route::get('pencarian', 'ProdukControllerMachiko@search');
+Route::get('carikategori/{id}', 'ProdukControllerMachiko@showKategori');
 
 
 Route::get('status_pesan', 'StatusPemesananControllerMachiko@index');

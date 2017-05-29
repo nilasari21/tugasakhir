@@ -3,7 +3,8 @@
 @section('css')
 <!-- <link rel="stylesheet" href="{{ asset('/adminlte/') }}/bootstrap/css/bootstrap.min.css"> -->
 <link href="{{ asset("/adminlte/plugins/datepicker/datepicker3.css") }}" rel="stylesheet" type="text/css" />
-
+<link rel="stylesheet" href="{{asset("dropzone/dropzone.css")}}">
+    <link  rel="stylesheet" type="text/css" href="{{asset("/machikoo/fileinput/css/fileinput.min.css")}}" />
 <link rel="stylesheet" href="{{ asset('machikoo/') }}/profil.css">
 
 <style type="text/css">
@@ -12,6 +13,14 @@ hr {
     margin-bottom: 20px;
     border: 1px;
     border-top: 1px solid #666;
+}
+.content {
+    min-height: 250px !important;
+     padding-top: 15px !important; 
+     margin-right: auto !important; 
+     margin-left: auto !important; 
+     padding-left: 0px !important; 
+     padding-right: 0px !important; 
 }
 </style>
 @endsection
@@ -300,9 +309,19 @@ hr {
                               </div>
   <!-- <section class="content" style="padding-top:225px"> -->
 
+ <div class="product-big-title-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-bit-title text-center">
+                            <h2>Profil</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
  
- 
-    <div class="row animated infinite slideInUp" style="animation-iteration-count: inherit;padding-top:250px;" >
+    <div class="row animated infinite slideInUp" style="animation-iteration-count: inherit;padding-top:50px;" >
         <!-- <div class="col-md-2" >
         </div> -->
             <!-- Profile Image -->
@@ -401,6 +420,21 @@ hr {
                     <br/>
                     </div>
                 </div>
+                <form method="POST"  enctype="multipart/form-data" files="true" action="{{ url('profil/ubahgambar') }}">
+                        {{ csrf_field() }}
+                <div class="col-sm-12">
+                    
+                <div class="form-group">
+                     <label for="exampleInputFile">Ganti foto profil</label>
+                     <input id="input-2" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">
+                     <button type="submit"  style="background-color:#66CC99"class="btn btn-default6"><i class="fa  fa-check-square-o"></i>  Ganti</button>
+                                            </div>
+                                             
+                
+              
+          </form>
+                                            </div>
+               
                 <div class="col-md-4" >
                         
                     </div>
@@ -580,6 +614,32 @@ hr {
   <script src="{{ asset("adminlte/plugins/input-mask/jquery.inputmask.extensions.js") }}"  > </script>
 
     <script>
+    <script type="text/javascript">
+              Dropzone.options.myAwesomeDropzone = {
+              paramName: "image", // The name that will be used to transfer the file
+              maxFilesize: 2, // MB
+              accept: function(file, done) {
+                if (file.name == "justinbieber.jpg") {
+                  done("Naha, you don't.");
+                }
+                else { done(); }
+              }
+            };
+            // var myDropzone = new Dropzone("div#myId", { url: "/file/post"});
+              </script>
+              <script type="text/javascript">
+              $("#input-2").fileinput({
+                uploadUrl: "",
+                uploadAsync: true,
+                minFileCount: 1,
+                maxFileCount: 5,
+                allowedFileExtensions: ["jpg", "gif", "png", "jpeg"],
+                uploadExtraData: function() {  // callback example
+                    var out = {_token: "{{ csrf_token() }}"};
+                    return out;
+                }
+            });
+              </script>
   $(function () {
    $('#datepicker').datepicker({
     format: 'yyyy-mm-dd',

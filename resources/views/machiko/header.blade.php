@@ -31,7 +31,7 @@
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"><i class="fa fa-user"></i> Profil </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url('profil') }}">Lihat profil</a></li>
-                                    <li><a href="{{ url('konfirmasi') }}">Konfirmasi pembayaran</a></li>
+                                    <li><a href="{{ url('konfirmasi') }}">Konfirmasi pembayaran </a></li>
                                     <li><a href="{{ url('status_pesan') }}">Status pemesanan</a></li>
                                     <li> <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -122,16 +122,6 @@
         </div>
     </div> <!-- End mainmenu area -->
 
-    <div class="product-big-title-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="product-bit-title text-center">
-                            <h2>Shop</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
     
   </header>  

@@ -9,8 +9,8 @@
           <img src="{{asset("/machikoo/img/mauedit.png")}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p>{{Auth::user()->name}}</p>
+          <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
         </div>
       </div>
                    

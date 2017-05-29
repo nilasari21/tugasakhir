@@ -5,9 +5,20 @@
 @endsection
 
 @section('content')
+<div class="product-big-title-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-bit-title text-center">
+                            <h2>Ongkos Kirim</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 <div class="single-product-area">
-    <div class="zigzag-bottom">
-    </div>
+    <!-- <div class="zigzag-bottom"> -->
+    <!-- </div> -->
     <div class="container animated infinite slideInUp" style="animation-iteration-count: inherit;">
     <div class="col-sm-10" style="padding-left:20%">       
             <div class="form-group">

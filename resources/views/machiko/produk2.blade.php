@@ -17,7 +17,17 @@
 </style>
 @endsection
 @section('content')
-
+<div class="product-big-title-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-bit-title text-center">
+                            <h2>Produk</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 <div class="single-product-area">
 
         <!-- <div class="zigzag-bottom"></div> -->
@@ -52,43 +62,28 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="form-group">
+                <div class="form-group" style="margin-top: 50px;">
             <div class="panel panel-default">
-            <!-- <div class="panel-heading" align="center" style="font-size:20px"><b>Masuk </b></div> -->
-               <div class="panel-body">
+            <div class="panel-heading" align="center" style="font-size:20px;background:#66CC99;font-family:Roboto;"><b>Filter</b></div>
+                <div class="panel-body">
+                <!--  -->
+                <div class="row">
                 
-                <div class="row" style="margin-top:15px">
-                <form class="form-horizontal" action="#" method="post">  
-                    
-                    
-                    
-                                 @foreach($kategori as $kate)
-                                 
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordian" href="{{url('kategori/'. $kate->id)}}">
-                                   <li class="treeview">
-                                        <!-- <a href="#">{{$kate->nama_kategori}}<i class="fa fa-angle-left pull-right"></i></a>
-                                        <ul class="treeview-menu">
-                                            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/preorder') }}">Pre-order</a></li>
-                                            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/preorder') }}">Ready Stock</a></li>
-                                            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/preorder') }}">Semua</a></li>
-                                           
-                                        </ul> -->
-                                    </li>
-                                    <span class="label label-success pull-right"></span>
-                                </a>
-                            </h4>
-                        </div>
-                                  
-                                  
-                                  @endforeach
+                    <div class="form-group">
+                     
+                      <div class="col-sm-12" style="padding-left:25%">
+                        @foreach($kategori as $kate)
+                        
+                            <!-- <a data-toggle="collapse" data-parent="#accordian" href="{{url('carikategori/'. $kate->id)}}"> -->
+                        
+                        <a href="{{url('carikategori/'.$kate->id_kategori)}}">{{$kate->nama_kategori}}</a><br/>
                        
-
-    </div>
-
-</div>
-            </div></div></div>
+                         @endforeach
+                        </div>
+                      </div>
+                     
+                
+  </div></div></div></div></div>
 <div class="col-sm-9 padding-right">
     <div class="features_items"><!--features_items-->
         <h2 class="title text-center"><p style="font-family:Roboto;color:#66CC99">Produk</p></h2>
@@ -104,8 +99,8 @@
                             <div class=" col-md-4 col-sm-6 ">
             <div class="thumbnail">
                 <div class="hover01 column"> 
-                    <figure> <img src=".img/produk/client/{{ $row->foto }}" class="animated infinite slideInUp" style="width:200%;animation-iteration-count: inherit;transition-duration: 3s;"></figure>   
-{{ $row->id }}
+                    <figure> <img src="{{asset('.img/produk/client/'.$row->foto) }}" class="animated infinite slideInUp" style="width:200%;animation-iteration-count: inherit;transition-duration: 3s;"></figure>   
+
                 </div>
                 <div class="caption">
                 </br>

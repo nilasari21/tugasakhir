@@ -36,6 +36,14 @@
         transform: rotate(90deg);
         color: #454444;
     }
+    .content {
+    min-height: 250px !important;
+     padding-top: 15px !important; 
+     margin-right: auto !important; 
+     margin-left: auto !important; 
+     padding-left: 0px !important; 
+     padding-right: 0px !important; 
+}
 </style>
 @endsection
 
@@ -43,9 +51,19 @@
 
   <!-- <section class="content" style="padding-top:225px"> -->
 
+ <div class="product-big-title-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-bit-title text-center">
+                            <h2>Bantuan</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
  
- 
-    <div class="row animated infinite slideInUp" style="animation-iteration-count: inherit;padding-top:200px;" >
+    <div class="row animated infinite slideInUp" style="animation-iteration-count: inherit;padding-top:30px;" >
       
 
         <div class="container">

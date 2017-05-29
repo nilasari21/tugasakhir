@@ -2,6 +2,17 @@
 
 
 @section('content')
+<div class="product-big-title-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-bit-title text-center">
+                            <h2>Keranjang Belanja</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 @if(session()->has('message'))
     <!-- <div class="alert alert-success">
         {{ session()->get('message') }}
@@ -35,8 +46,9 @@
                                 </div>
                               </div>
 <p id="demo"></p>
+
 <div class="single-product-area">
-        <div class="zigzag-bottom"></div>
+        <!-- <div class="zigzag-bottom"></div> -->
         <div class="container animated infinite slideInUp" style="animation-iteration-count: inherit;">
              <div class="col-md-12">
                                 <div class="product-content-right">

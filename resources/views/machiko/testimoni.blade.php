@@ -16,14 +16,26 @@
 </style>
 @endsection
 @section('content')
+<div class="product-big-title-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-bit-title text-center">
+                            <h2>Testimoni</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 @if(session()->has('message'))
     <div class="alert alert-danger">
         {{ session()->get('message') }}
     </div>
 @endif
+
 <div class="single-product-area">
-    <div class="zigzag-bottom">
-    </div>
+    <!-- <div class="zigzag-bottom">
+    </div> -->
     <div class="container ">
         <div class="row">
             <div class="col-md-12 col-sm-12 animated infinite slideInUp" style="animation-iteration-count: inherit;">

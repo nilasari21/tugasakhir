@@ -19,6 +19,14 @@ hr {
     padding: 3px !important;
      border: 0px !important; 
 }
+.content {
+    min-height: 250px !important;
+     padding-top: 15px !important; 
+     margin-right: auto !important; 
+     margin-left: auto !important; 
+     padding-left: 0px !important; 
+     padding-right: 0px !important; 
+}
 </style>
 @endsection
 
@@ -26,12 +34,22 @@ hr {
 
   <!-- <section class="content" style="padding-top:225px"> -->
 
+ <div class="product-big-title-area" style="padding-left:0px;padding-right:0px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-bit-title text-center">
+                            <h2>Tentang Kami</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
  
- 
-    <div class="row animated infinite slideInUp" style="animation-iteration-count: inherit;padding-top:200px;" >
+    <div class="row animated infinite slideInUp" style="animation-iteration-count: inherit;padding-top:50px;" >
       
 
-        <div class="col-md-12">
+        <div class="col-md-12" style="padding-top:0px !important">
         <div class="nav-tabs-custom">
             
             <!-- <div class="tab-content">
