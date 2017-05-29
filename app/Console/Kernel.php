@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     
     Commands\CobaCron::class,
     // Commands\TrsanBat::class,
+    Commands\KeranjangHapus::class,
     ];
 
     /**
@@ -30,6 +31,8 @@ class Kernel extends ConsoleKernel
                  ->hourly();
        
         $schedule->command('coba:cron')
+                 ->everyMinute();
+        $schedule->command('keranjang:hapus')
                  ->everyMinute();
         /*$schedule->command('trans:bat')
                  ->everyMinute();*/

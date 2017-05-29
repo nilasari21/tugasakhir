@@ -39,7 +39,7 @@ class CobaCron extends Command
      */
     public function handle()
     {
-         $waktu = Carbon::now()->subHour(5);
+         $waktu = Carbon::now()->subHour(24);
          $detail=DB::table('detail_transaksi')->get();
          foreach ($detail as $key ) {
             $trans= DB::table('transaksi')
@@ -53,23 +53,7 @@ class CobaCron extends Command
             ->update(['produk_ukuran.stock'=>$key->jumlah_beli+'produk_ukuran.stock']); 
          }
         
-         /* foreach ($trans as $detail) {
-                $tr=DB::table('detail_transaksi')
-                ->where('id_transaksi','=',$detail)
-                ->select('id_produk_ukuran')
-                ->get();
-                $produk = DB::table('produk_ukuran')
-                        ->where('id_produk_ukuran','=',$tr)
-                        ->join('produk','produk.id','produk_ukuran.produk_id')
-                        ->where('produk.jenis','=','Ready Stock')
-                        
-                        ->update([
-                                'produk_ukuran.Stock'=>$tr->jumlah_beli+'produk_ukuran.Stock'
-                            ]);
-               
-              
-            }
-                */
+        
 
            $produk= DB::table('transaksi')
             ->join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
@@ -77,7 +61,7 @@ class CobaCron extends Command
             ->join('produk','produk.id','produk_ukuran.produk_id')
             ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
             ->where('transaksi.status_bayar','=','Belum lunas')
-            ->where('produk.jenis','=','Ready Stock')
+            // ->where('produk.jenis','=','Ready Stock')
             ->where('transaksi.updated_at','<=',$waktu)->update(['status_pesan'=>'Batal']);
        
       
