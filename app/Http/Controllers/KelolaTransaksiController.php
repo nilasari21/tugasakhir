@@ -52,21 +52,7 @@ public function __construct(){
                         ->where('detail_transaksi.status_pesan','=','Pending')
                         ->get();
                         // dd($data);
- $waktu = Carbon::now()->subHour(5);
-         $detail=DB::table('detail_transaksi')->get();
-         // dd($detail);
-         foreach ($detail as $key ) {
-            $trans= DB::table('transaksi')
-            ->join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
-            ->join('produk_ukuran','detail_transaksi.id_produk_ukuran','produk_ukuran.id_produk_ukuran')
-            ->join('produk','produk.id','produk_ukuran.produk_id')
-            ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
-            ->where('transaksi.status_bayar','=','Belum lunas')
-            ->where('detail_transaksi.id_detail_transaksi','=',$key->id_detail_transaksi)
-            ->where('produk.jenis','=','Ready Stock')
-            ->update(['produk_ukuran.stock'=>3]); 
-            dd($trans);
-         }
+
         
             // dd()
 /*$trans2= Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
@@ -125,8 +111,18 @@ public function __construct(){
                         ->where('transaksi.status_bayar','=','Lunas')
                         ->where('detail_transaksi.status_pesan','=','Selesai')
                         ->get();
+      $batal = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
+                        
+                        ->leftjoin('users','users.id','transaksi.id_user')
+                        ->leftjoin('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
+                        ->leftjoin('produk','produk.id','produk_ukuran.produk_id')
+                        ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
+                        ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
+                        ->where('transaksi.status_bayar','=','Belum lunas')
+                        ->where('detail_transaksi.status_pesan','=','Batal')
+                        ->get();
                        
-        return view('admin.transaksi.kelola_transaksi')->with(compact('data',$data,'produksi',$produksi,'packing',$packing,'pengiriman',$pengiriman,'selesai',$selesai,'tunggu',$tunggu));
+        return view('admin.transaksi.kelola_transaksi')->with(compact('data',$data,'produksi',$produksi,'packing',$packing,'pengiriman',$pengiriman,'selesai',$selesai,'tunggu',$tunggu,'batal',$batal));
        //
     }
      public function transReseller() {

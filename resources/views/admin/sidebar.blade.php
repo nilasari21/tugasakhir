@@ -59,10 +59,11 @@
             </li>
             <li><a href="{{ url('testimoniadmin')}}"> <i class="fa fa-commenting"></i> <span>Testimoni</span></a></li>
             <li><a href="{{ url('machikokstore')}}">  <i class="fa fa-home"></i><span>Toko</span></a></li>
-        </ul> 
+        </ul>
+        
 </section>
     
-    --><!-- /.sidebar-menu
+    <!-- /.sidebar-menu
     </section>
     <!-- /.sidebar -->
 </aside>

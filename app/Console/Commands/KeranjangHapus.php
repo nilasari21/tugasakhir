@@ -39,7 +39,7 @@ class KeranjangHapus extends Command
     public function handle()
     {
         
-         $waktu = Carbon::now()->subHour(24);
+         $waktu = Carbon::now(8)->subHour(4);
          $detail=DB::table('keranjang')
          ->where('updated_at','<=',$waktu)->get();
          foreach ($detail as $key ) {

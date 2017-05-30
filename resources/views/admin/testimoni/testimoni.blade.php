@@ -2,6 +2,7 @@
 
 
 @section('content')
+<div><div>
 <div class="panel panel-card" >
   <h2 tyle="align:center"><b >Daftar Testimoni</b><br/></h2>
 
@@ -46,5 +47,6 @@
       </tbody>
     </table>
     </div>
-  </div>
+  </div></div>
+</div>
     @endsection

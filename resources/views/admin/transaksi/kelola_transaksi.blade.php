@@ -37,6 +37,7 @@
               <li><a href="#settings" data-toggle="tab">Packing</a></li>
               <li><a href="#pengiriman" data-toggle="tab">Pengiriman</a></li>
               <li><a href="#selesai" data-toggle="tab">Selesai</a></li>
+              <li><a href="#batal" data-toggle="tab">Batal</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
@@ -329,6 +330,53 @@
                       <td>
                          <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
                         <a class="btn btn-default2" data-id="{{ $row->id_detail_transaksi  }}" data-idt="{{ $row->id_transaksi }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
+                     </td>
+                    </tr>
+                   @endforeach
+                   <!--  -->
+                  </tbody>
+                </table>
+              </div>
+              </div>
+              <div class="tab-pane" id="batal">
+                <span>Merupakan daftar transaksi yang dibatalkan</span>
+                <div class="box-body table-responsive margin">                   
+                <table id="data8" class="table table-bordered table-hover dataTable table-striped">
+                  <thead>
+                    <tr>
+                      <th>Id Transaksi</th>
+                      <th>Tanggal Pesan</th>
+                      <th>Nama Pemesan</th>
+                      <th>Nama Produk</th>
+                      <th>Ukuran</th>
+                      <th>Jumlah</th>
+                      <th>Pembayaran</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   @foreach ($batal as $row)
+                    <tr>
+                      
+                      <td>{{ $row->id_transaksi }}</td>
+                      <td>{{ $row->tgl_transaksi  }}</td>
+                      <td>{{ $row->name }} {{ $row->id_detail_transaksi  }}</td>
+                      <td>{{ $row->nama_produk }}</td>
+                      <?php 
+                      if(count($row->nama_ukuran)==0){?>
+                      <td>-</td>
+                      <?php
+                      }else{?>
+                      <td>{{ $row->nama_ukuran }}</td>
+                      <?php
+                      }
+                      ?>
+                      
+                      <td>{{ $row->jumlah_beli }}</td>
+                      <td>{{ $row->status_bayar }}</td>
+                      <td>
+                         <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                        <!-- <a class="btn btn-default2" data-id="{{ $row->id_detail_transaksi  }}" data-idt="{{ $row->id_transaksi }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
                      </td>
                     </tr>
                    @endforeach

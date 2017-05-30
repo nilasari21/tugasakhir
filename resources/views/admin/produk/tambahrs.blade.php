@@ -1,6 +1,22 @@
 @extends('admin.admin_template')
 <!--  -->
-
+@section('css')
+<style >
+.aside.main-sidebar, {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    padding-top: 50px !important;
+    min-height: 168% !important;
+    width: 230px !important;
+    z-index: 810 !important;
+    -webkit-transition: -webkit-transform .3s ease-in-out,width .3s ease-in-out;
+    -moz-transition: -moz-transform .3s ease-in-out,width .3s ease-in-out;
+    -o-transition: -o-transform .3s ease-in-out,width .3s ease-in-out;
+    transition: transform .3s ease-in-out,width .3s ease-in-out;
+}
+</style>
+@endsection
 @section('content')
 @if(session()->has('message'))
     <div class="alert alert-danger">
