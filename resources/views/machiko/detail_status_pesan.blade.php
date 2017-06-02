@@ -19,7 +19,7 @@
 @section('content')
 <p id="demo"></p>
 <div class="single-product-area">
-        <div class="zigzag-bottom"></div>
+        <!-- <div class="zigzag-bottom"></div> -->
         <div class="container ">
              <div class="col-md-12 animated infinite slideInUp" style="animation-iteration-count: inherit;">
                                 <div class="product-content-right">

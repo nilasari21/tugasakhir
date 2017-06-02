@@ -100,7 +100,7 @@ public function __construct(){
       // $produk->stock_total= $request->stock_total;
       $produk->berat= $request->berat;
       $produk->minimal_beli= $request->minimal_beli;
-      $produk->batas_jam= $request->batas_jam;
+      // $produk->batas_jam= $request->batas_jam;
       $produk->jenis="Ready Stock";
       $produk->foto=$imageName;
       $produk->id_kategori=$request->id_kategori;

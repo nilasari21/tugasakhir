@@ -165,7 +165,7 @@
                                           {{ csrf_field() }}
                                           <div class="col-md-12" >
                                             <input type="hidden" name="idkonfirm" id="idkonfirm" value="">
-                                            <input type="text" name="iduser" id="iduser" value="">
+                                            <input type="hidden" name="iduser" id="iduser" value="">
                                               <div class="form-group">
                                                   <label for="exampleInputFile">Pilih persetujuan</label><br/>
                                                      <select class="form-control" style="width: 100%;" id="status_pesan" name="status_pesan" onChange="a()" data-toggle="modal" required/>

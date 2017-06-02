@@ -37,7 +37,7 @@
     <div class="col-sm-12">       
             <div class="form-group">
             <div class="panel panel-default">
-            <div class="panel-heading" align="center" style="font-size:20px;background:#66CC99;font-family:Raleway"><b>Rekapitulasi pembelian</b></div>
+            <div class="panel-heading" align="center" style="font-size:20px;background:#66CC99;font-family:Raleway"><b>Rekapitulasi pemesanan</b></div>
                 <div class="panel-body">
                 
                 <div class="row" style="margin-top:15px">
@@ -122,16 +122,18 @@
                             </div> 
                             <br/>
                              @foreach($transak as $trans)
+                             <span>Catatan : Silahkan upload bukti pembayaran maksimal 48 jam setelah chekout. 
+                              Jika dalam 48 jam belum ada bukti yang di upload, maka transaksi otomatis dibatalkan</span><br/>
                     <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Nomor Transaksi</label>
                         <span> {{$data->id_transaksi}}</span>
                       </div>
-                      <br/>
+                      
                      <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Jenis Pemesanan</label>
                         <span>{{$trans->jenis_pemesanan}}</span>
                       </div>
-                      <br/>
+                      
                       <?php 
                       if($trans->jenis_pemesanan == "Dropshipper"){?>
                        <div class="form-group">
@@ -154,9 +156,7 @@
                           
                         </div>
                         </div>
-                        <br/>
-                        <br/>
-                        <br/><br/>
+                        
                        <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Metode pembayaran</label><br/>
                         <span>{{$trans->metode}}</span>
@@ -167,42 +167,22 @@
                         @elseif($trans->jenis=="COD")
                         (Silahkan koordinasi lokasi pembayaran dengan admin di nomor 085640235938)
                         @endif
-                      </div><br/>
+                      </div>
                       <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Ongkos Kirim</label>
                         <span>{{$trans->ongkir}}</span>
-                      </div><br/>
+                      </div>
                         <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Kurir</label>
                         <span>JNE  {{$trans->kurir}}</span>
-                      </div><br/>
+                      </div>
                           <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Total pembayaran</label>
                         <span>{{$trans->total_bayar}}</span>
                       </div>
                      
                 @endforeach
-  <!-- </div>
-<a href="#PATH_TO_PDF.pdf" target="_blank"  onclick="window.print()"> print PDF </a>
-</div> -->
-<!-- </body> -->
-<div class="row no-print">
-        <div class="col-xs-12">
-          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-         <!--  <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
-          </button>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Generate PDF
-          </button> -->
-        </div>
-      </div>
-<!-- @endsection
 
-@section('js')
-<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 
-    @endsection
-
- -->
  </body>
 </html>

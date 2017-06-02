@@ -31,7 +31,7 @@
                                 <div class="product-content-right">
                                     <div class="woocommerce">
                                         <form method="post" action="#" name="autoSumForm">
-                                            <div class="table-responsive" style="display:block">
+                                            <div class="table-responsive" style="display:none">
                                             <table cellspacing="0" class="shop_table cart" style="width:100%;align:center" >
                                                 <thead >
                                                     <tr >
@@ -126,10 +126,10 @@
                 <form class="form-horizontal" action="{{ url('checkout/simpan') }}" method="post">
                   {{ csrf_field() }}
                 <input type="hidden" class="form-control" id="berat" name="berat" value="{{ $b->berat }} " readonly>  
-                    <input type="text" class="form-control" id="level" name="level" value="{{$data->level}}">
-                    <input type="text" class="form-control" id="status" name="status" value="">
-                    <input type="text" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
-                    <input type="text" class="form-control" id="konfirm_admin" name="konfirm_admin" value="{{Auth::user()->konfirm_admin}}">
+                    <input type="hidden" class="form-control" id="level" name="level" value="{{$data->level}}">
+                    <input type="hidden" class="form-control" id="status" name="status" value="">
+                    <input type="hidden" class="form-control" id="user" name="nama_produk" value="{{$data->id}}">
+                    <input type="hidden" class="form-control" id="konfirm_admin" name="konfirm_admin" value="{{Auth::user()->konfirm_admin}}">
                     <div class="form-group">
                      <!--  <div class="col-sm-3 control-label"> -->
                       <!-- <label for="inputName" class="col-sm-3 control-label" >Jenis pemesanan</label>   -->
@@ -146,7 +146,7 @@
                        
                               
                             </div> --> 
-{{Auth::user()->level}}
+<!-- {{Auth::user()->level}} -->
                         <div class="col-sm-4"  id="toko">
                           <input style="display:none" type="text" class="form-control" id="nama_toko" name="nama_toko" placeholder="Nama Toko" >
 
@@ -170,8 +170,8 @@
                       <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Tujuan Pengiriman</label>
                       <div class="col-sm-8">
-                          <input type="text" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$data2->id_penerima}}" class="form-control"/>
-                          <textarea id="alamat" rows='5'style="border: 1px;width:100%;" value="" disabled >{{$data2->nama_penerima}}&#13;&#10;{{$data2->no_hp_penerima}},&#13;&#10;{{$data2->alamat_lengkap}}, {{$data2->kabupaten}}, {{$data2->provinsi}} </textarea>
+                          <input type="hidden" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$data2->id_penerima}}" class="form-control"/>
+                          <textarea id="alamat" rows='3'style="border: 1px;width:100%;" value="" disabled >{{$data2->nama_penerima}}&#13;&#10;{{$data2->no_hp_penerima}},&#13;&#10;{{$data2->alamat_lengkap}}, {{$data2->kabupaten}}, {{$data2->provinsi}} </textarea>
                           <input type="hidden" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$data2->kabupaten}}" class="form-control"/>
                           <input type="hidden" id="kota_asal"  name="kota_asal" value="" />
                         </div>
@@ -181,7 +181,7 @@
                       <div class="col-sm-3 control-label">
                       </div>
                       <div class="col-sm-4">
-                        <select class="form-control" style="width: 100%;" onChange="getAlamat();getOngkir()" id="alamat_pilih" name="alamat_pilih" />
+                        <select class="form-control" style="width: 100%;" onChange="getAlamat();getOngkir();cod()" id="alamat_pilih" name="alamat_pilih" />
                             <option>Pilih alamat lain</option>
                               @foreach($penerima as $row)
                                     <option value="{{$row->kabupaten}}" >
@@ -259,15 +259,15 @@
                       
                       
                     </div>
-                    <input type="text" id="kurir" name="kurir"  value="" class="ongkir">
+                    <input type="hidden" id="kurir" name="kurir"  value="" class="ongkir" style="display:none">
                     @foreach($beratharga as $d)
                     <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Total pembayaran</label>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control" id="total1" name="total" value="{{$d->total}}" readonly>
-                        <input type="text" class="form-control" id="total2" name="total" value="{{$d->total}}" readonly>
+                        <input type="hidden" class="form-control" id="total1" name="total" value="{{$d->total}}" readonly>
+                        <input type="hidden" class="form-control" id="total2" name="total" value="{{$d->total}}" readonly>
                         <input type="text" class="form-control" id="total" name="total" value="{{$d->total}}" readonly>
-                        <input type="text" class="form-control" id="total3" name="total3" value="{{$d->total}}" readonly>
+                        <input type="hidden" class="form-control" id="total3" name="total3" value="{{$d->total}}" readonly>
                       </div>
                       
                     </div>
@@ -469,6 +469,24 @@ if(level=="Reseller" && option=="Reseller"){
              
         
     </script>
+    <script type="text/javascript">
+function cod() {
+      
+      
+
+     var asal=$('#kota_asal').val();
+     console.log(asal);
+                if(asal==39 || asal==501 ||asal==419 ||asal==210 ||asal==135 ){
+                  document.getElementById('ongkos2').style.display = 'block';
+                  
+                } else{
+                  document.getElementById('ongkos2').style.display = 'none';
+                  document.getElementById('co').style.display = 'none';
+                }
+        
+
+            };
+</script>
      <script type="text/javascript">
 function b() {
       event.preventDefault();
@@ -547,7 +565,7 @@ function span() {
     <script type="text/javascript">
 $(document).ready(function (){
  getOngkir();      
-
+cod();
      
             });
 </script>

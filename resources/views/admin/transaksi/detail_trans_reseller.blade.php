@@ -57,11 +57,11 @@
    <form action="{{ url('/transaksi_reseller/detail/update/') }}" method="post">
       {{ csrf_field() }}
                       
-                       <input type="text" class="form-control" name="idtrans" value="{{$row->id_transaksi}}">
-                       <input type="text" class="form-control" name="total1" value="{{$row->total_bayar}}">
+                       <input type="hidden" class="form-control" name="idtrans" value="{{$row->id_transaksi}}">
+                       <input type="hidden" class="form-control" name="total1" value="{{$row->total_bayar}}">
                       <label for="inputName" class="col-sm-3 control-label" >Pilih persetujuan</label>  
                       <!-- </div> -->
-        <table>
+        <table style="display:none">
           
           <tr>
           <th>Id produk ukuran</td>

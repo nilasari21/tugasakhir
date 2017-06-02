@@ -72,13 +72,7 @@
     <br />
 <div class="box box-solid">
                     <div class="box-header with-border">
-   <!--  <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        This section contains a wealth of information, related to <strong>PrepBootstrap</strong> and its store. If you cannot find an answer to your question, 
-        make sure to contact us. 
-    </div> -->
-
-    <br />
+  
 
     <div class="panel-group" id="accordion">
         <!-- <div class="faqHeader">General questions</div> -->
@@ -156,15 +150,16 @@
                 </div>
             </div>
         </div>
-       <!--  <div class="panel panel-default">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">How much do I get from each sale?</a>
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Mengapa barang saya tiba-tiba hilang dari keranjang?</a>
                 </h4>
             </div>
             <div id="collapseFive" class="panel-collapse collapse">
                 <div class="panel-body">
-                    Here, at <strong>PrepBootstrap</strong>, we offer a great, 70% rate for each seller, regardless of any restrictions, such as volume, date of entry, etc.
+                    Anda dapat menyimpan belanja anda dalam keranjang sebelum melakukan checkout. Akan tetapi kami memberikan batas waktu hingga 24 jam untuk melakukan checkout barang tersebut.
+                    Apabila barang dalam keranjang belum di checkout dalam 24 jam, maka barang akan otomatis terhapus dari keranjang. Pastikan anda segera melakukan checkout barang anda.
                     <br />
                 </div>
             </div>
@@ -172,74 +167,58 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Why sell my items here?</a>
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Saya sudah melakukan checkout, tapi mengapa status barang saya Batal saat akan upload bukti bayar?</a>
                 </h4>
             </div>
             <div id="collapseSix" class="panel-collapse collapse">
                 <div class="panel-body">
-                    There are a number of reasons why you should join us:
-                    <ul>
-                        <li>A great 70% flat rate for your items.</li>
-                        <li>Fast response/approval times. Many sites take weeks to process a theme or template. And if it gets rejected, there is another iteration. We have aliminated this, and made the process very fast. It only takes up to 72 hours for a template/theme to get reviewed.</li>
-                        <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>, as well as on any other marketplate, and thus increase your earning potential.</li>
-                    </ul>
+                    Barang yang sudah dicheckout akan kami <i>keep</i> atas nama anda. Akan tetapi barang tersebut harus dikonfirmasi pemayarannya maksimal 48 jam setelah melakukan checkout (khusus untuk reseller
+                    , 48 jam setelah transaksi disetujui oleh admin). Apabila dalam 48 jam anda belum melakukan konfirmasi pembayaran, maka barang anda akan otomatis berstatus Batal. Anda tidak dapat melakukan konfirmasi lagi.
                 </div>
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">What are the payment options?</a>
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">Saya sudah terlanjur melakukan pembayaran, tetapi belum konfirmasi dalam kurun waktu 48 jam?</a>
                 </h4>
             </div>
             <div id="collapseEight" class="panel-collapse collapse">
                 <div class="panel-body">
-                    The best way to transfer funds is via Paypal. This secure platform ensures timely payments and a secure environment. 
-                </div>
+                    Apabila anda sudah terlanjur melakukan pembayaran melalu ATM atau pulsa akan tetapi belum konfirmasi dalam 48 jam, barang tersebut tetap ber status Batal.
+                    Segera hubungi admin dan tunjukkan bukti pembayaran agar dapat dilakukan proses refund oleh admin.
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">When do I get paid?</a>
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">Berapa lama barang sampai di alamat saya?</a>
                 </h4>
             </div>
             <div id="collapseNine" class="panel-collapse collapse">
                 <div class="panel-body">
-                    Our standard payment plan provides for monthly payments. At the end of each month, all accumulated funds are transfered to your account. 
-                    The minimum amount of your balance should be at least 70 USD. 
+                    Proses pengiriman barang dilakukan oleh pihak ketiga yaitu JNE, lama pengiriman barang tergantung dari jenis ongkos kirim yang anda gunakan. 
+                    Apabila dalam 2 minggu barang anda belum sampai di tempat, segera hubungi admin untuk dapat memproses ke kurir yang bersangkutan. Kami juga telah menyantumkan nomor resi
+                    pada status pemesanan barang anda. Harap secara berkala cek resi tersebut pada website kurir yang bersangkutan untuk melacak lokasi barang anda.
                 </div>
             </div>
         </div>
 
-        <div class="faqHeader">Buyers</div>
+        <!-- <div class="faqHeader">Buyers</div> -->
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">I want to buy a theme - what are the steps?</a>
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Saya ingin membeli produk ready stock dan pre order dalam paket yang berbeda, bagaimana caranya?</a>
                 </h4>
             </div>
             <div id="collapseFour" class="panel-collapse collapse">
                 <div class="panel-body">
-                    Buying a theme on <strong>PrepBootstrap</strong> is really simple. Each theme has a live preview. 
-                    Once you have selected a theme or template, which is to your liking, you can quickly and securely pay via Paypal.
-                    <br />
-                    Once the transaction is complete, you gain full access to the purchased product. 
+                    Apabila anda membeli banyak barang dalam sekali checkout, maka barang otomatis akan dikirim menjadi 1 paket. Apabila anda ingin barang dikirim dalam beda paket,
+                    maka lakukan checkout secara terpisah. Maka barang akan dikirim sesuai daftar barang yang anda checkout saat itu.
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Is this the latest version of an item</a>
-                </h4>
-            </div>
-            <div id="collapseSeven" class="panel-collapse collapse">
-                <div class="panel-body">
-                    Each item in <strong>PrepBootstrap</strong> is maintained to its latest version. This ensures its smooth operation.
-                </div>
-            </div>
-        </div> -->
+       
     </div>
 </div>
 

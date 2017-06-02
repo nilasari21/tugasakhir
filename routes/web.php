@@ -20,9 +20,7 @@ Route::get('/home', 'ProdukControllerMachiko@index');
 Route::get('/forbidden', function () {
     return view('admin.salahHakAkses');
 });
-Route::get('cetak', function () {
-    return view('machiko.cetak_invoice');
-});
+
 Route::get('about', function () {
     return view('machiko.tentang_kami');
 });
@@ -157,6 +155,7 @@ Route::post('checkout/simpan2', 'TransaksiControllerMachiko@tambah2');
 Route::get('checkout/metode/{metode}', 'TransaksiControllerMachiko@metode');
 Route::get('checkout/alamatbaru/metode/{metode}', 'TransaksiControllerMachiko@metode');
 Route::get('rekap_pemesanan', 'TransaksiControllerMachiko@rekap');
+Route::get('cetak', 'TransaksiControllerMachiko@cetak');
 
 Route::get('cekongkir', 'CekongkirControllerMachiko@index');
 Route::get('cekongkir/hasil/{kota_tujuan}/{berat}', 'CekongkirControllerMachiko@hasil');

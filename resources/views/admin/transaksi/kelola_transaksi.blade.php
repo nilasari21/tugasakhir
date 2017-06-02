@@ -407,8 +407,8 @@
                                       <div class="row">
                                           {{ csrf_field() }}
                                           <div class="col-md-12" >
-                                            <input class="form-control"type="text" name="iddetail" id="iddetail" value="">
-                                            <input class="form-control"type="text" name="idtrans" id="idtrans" value="">
+                                            <input class="form-control"type="hidden" name="iddetail" id="iddetail" value="">
+                                            <input class="form-control"type="hidden" name="idtrans" id="idtrans" value="">
                                             <!-- <input type="hidden" name="idkonfirm" id="idkonfirm" value=""> -->
                                               <div class="form-group">
                                                   <label for="exampleInputFile">Pilih Status</label><br/>

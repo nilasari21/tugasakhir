@@ -215,7 +215,7 @@
                                           {{ csrf_field() }}
                                           <div class="col-md-12">
                                             
-                                            <input type="text" id="idtrans" name="idtrans">
+                                            <input type="hidden" id="idtrans" name="idtrans">
                                             <div class="form-group">
                                                 <label for="exampleInputFile">Upload bukti</label>
                                                 <input id="input-2" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">
@@ -278,7 +278,7 @@
                                           {{ csrf_field() }}
                                           <div class="col-md-12">
                                             
-                                            <input type="text" id="idtrans2" name="idtrans2">
+                                            <input type="hidden" id="idtrans2" name="idtrans2">
                                             <div class="form-group">
                                                 <label for="exampleInputFile">Upload bukti</label>
                                                 <input id="input-3" type="file" name='image' multiple=true class="file-loading" data-show-upload="false">

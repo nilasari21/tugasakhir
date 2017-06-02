@@ -321,7 +321,7 @@ hr {
             </div>
         </div>
  
-    <div class="row animated infinite slideInUp" style="animation-iteration-count: inherit;padding-top:50px;" >
+    <div class="row animated infinite slideInUp" style="animation-iteration-count: inherit;padding: 60px 130px 130px !important;" style="">
         <!-- <div class="col-md-2" >
         </div> -->
             <!-- Profile Image -->

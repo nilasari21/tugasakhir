@@ -93,8 +93,8 @@
     <label>Minimal beli (Reseller)</label>
         <input type="text" class="form-control" name="minimal_beli" placeholder="minimal beli" required>
     
-    <label>Batas Akhir Pembayaran</label>
-    <input type="text" class="form-control" name="batas_jam" placeholder="Batas bayar(nominal jumlah jam)" required> 
+    <!-- <label>Batas Akhir Pembayaran</label>
+    <input type="text" class="form-control" name="batas_jam" placeholder="Batas bayar(nominal jumlah jam)" required>  -->
     <label>Metode Pembayaran</label>
     <br/>
     @foreach($metode as $metode)

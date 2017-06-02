@@ -84,7 +84,7 @@
                                                     $i=1
                                                     @endphp
                                                     @foreach ($data as $row)
-                                                    <input name="level" type="text" id="level"  value="{{$row->level}}" style="width:100px">
+                                                    <input name="level" type="hidden" id="level"  value="{{$row->level}}" style="width:100px">
                                                     <tr class="cart_item">
                                                         <td class="product-remove">
                                                             <a title="Remove this item" class="remove" href="{{ url('keranjang/delete/'.$row->id_keranjang) }}" onclick="return confirm('Anda yakin ingin menghapus .$row->nama_produk?')">×</a> 
@@ -95,11 +95,11 @@
                                                         </td>
 
                                                         <td class="product-name">
-                                                            <a href="#">{{ $row->nama_produk }}</a> 
-                                                            <input name="status[]" type="text" id="status"  value="{{$row->jenis}}" style="width:100px"readonly>
-                                                            <input name="idproduk[{{$i}}]" type="text" id="idproduk"  value="{{$row->id_produk_ukuran}}" style="width:100px"readonly>
-                                                            <input name="min_beli" type="text" id="min_beli{{$i}}"  value="{{$row->minimal_beli}}" style="width:100px"readonly>
-                                                            <input name="stock" type="text" id="stock"  value="{{$row->stock}}" style="width:100px"readonly>
+                                                            <span>{{ $row->nama_produk }}</span> 
+                                                            <input name="status[]" type="hidden" id="status"  value="{{$row->jenis}}" style="width:100px"readonly>
+                                                            <input name="idproduk[{{$i}}]" type="hidden" id="idproduk"  value="{{$row->id_produk_ukuran}}" style="width:100px"readonly>
+                                                            <input name="min_beli" type="hidden" id="min_beli{{$i}}"  value="{{$row->minimal_beli}}" style="width:100px"readonly>
+                                                            <input name="stock" type="hidden" id="stock"  value="{{$row->stock}}" style="width:100px"readonly>
                                                         </td>
                                                        <?php 
                                                            if(count($row->nama_ukuran)==0){
@@ -141,14 +141,14 @@
                                                             <div class="quantity buttons_added">
                                                                 
                                                                 <input type="number" id="nilai1{{$i}}" name="jumlah1[]" class="item_quantity" min="1"  max="{{$row->stock_total}}" value="{{ $row->jumlah }}">
-                                                                <input name="jumlahawal[]" type="text" id="jumlahawal"  value="{{$row->jumlah}}" style="width:100px"readonly>
-                                                                <input name="jumlah2" type="text" id="jumlah2{{$i}}"  value="{{$row->jumlah}}" style="width:100px"readonly>
+                                                                <input name="jumlahawal[]" type="hidden" id="jumlahawal"  value="{{$row->jumlah}}" style="width:100px"readonly>
+                                                                <input name="jumlah2" type="hidden" id="jumlah2{{$i}}"  value="{{$row->jumlah}}" style="width:100px"readonly>
                                                             </div>
                                                         </td>
                                                         <td class="product-name">
                                                             
                                                             <span class="amount" ><input name="berat[]" type="text" id="berat{{$i}}"  value="{{ $row->berat }} " style="width:70px" readonly></span> 
-                                                            <span class="amount" ><input name="berat2[]" type="text" id="beratto{{$i}}"  value="" style="width:70px" readonly></span> 
+                                                            <span class="amount" ><input name="berat2[]" type="hidden" id="beratto{{$i}}"  value="" style="width:70px" readonly></span> 
                                                         </td>
                                                        <td class="product-subtotal" >
                                                             <span class="amount" ><input name="total[]" type="text" id="total{{$i}}"  value="" style="width:100px" readonly></span> 

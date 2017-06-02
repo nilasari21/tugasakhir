@@ -25,7 +25,7 @@
     <div class="col-sm-12">       
             <div class="form-group">
             <div class="panel panel-default">
-            <div class="panel-heading" align="center" style="font-size:20px;background:#66CC99;font-family:Raleway"><b>Rekapitulasi pembelian</b></div>
+            <div class="panel-heading" align="center" style="font-size:20px;background:#66CC99;font-family:Raleway"><b>Rekapitulasi pemesanan</b></div>
                 <div class="panel-body">
                 
                 <div class="row" style="margin-top:15px">
@@ -110,6 +110,8 @@
                             </div> 
                             <br/>
                              @foreach($transak as $trans)
+                             <span>Catatan : Silahkan upload bukti pembayaran maksimal 48 jam setelah chekout. 
+                              Jika dalam 48 jam belum ada bukti yang di upload, maka transaksi otomatis dibatalkan</span><br/>
                     <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Nomor Transaksi</label>
                         <span> {{$data->id_transaksi}}</span>
@@ -155,7 +157,7 @@
                         @elseif($trans->jenis=="COD")
                         (Silahkan koordinasi lokasi pembayaran dengan admin di nomor 085640235938)
                         @endif
-                      </div><br/>
+                      </div>
                       <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Ongkos Kirim</label>
                         <span>{{$trans->ongkir}}</span>
@@ -174,7 +176,7 @@
 <a href="#PATH_TO_PDF.pdf" target="_blank"  onclick="window.print()"> print PDF </a>
 </div> -->
 <!-- </body> -->
-<div class="row no-print">
+<div class="row no-print" style="text-align:center">
         <div class="col-xs-12">
           <a href="{{url('cetak')}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
          <!--  <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment

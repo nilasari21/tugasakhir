@@ -77,13 +77,13 @@
     <label>Minimal beli (Reseller)</label>
         <input type="text" class="form-control" name="minimal_beli" placeholder="minimal beli" required>
     
-    <label>Batas Akhir Pembayaran</label>
+   <!--  <label>Batas Akhir Pembayaran</label>
     <div class='input-group date' >
                         <input type='text' name="batas_bayar" class="form-control" id="tanggal3" required >
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
-                    </div>
+                    </div> -->
     <label>Metode Pembayaran</label>
     <br/>
     @foreach($metode as $metode)
