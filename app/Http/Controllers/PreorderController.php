@@ -77,7 +77,7 @@ public function __construct(){
       $produk->tgl_akhir_po= $request->tgl_akhir_po;
       $produk->berat= $request->berat;
       $produk->minimal_beli= $request->minimal_beli;
-      // $produk->batas_waktu_bayar= $request->batas_bayar;
+      $produk->jumlah_minimal_produksi= $request->min_produksi;
       $produk->jenis="PreOrder";
       $produk->foto=$imageName;
       $produk->id_kategori=$request->id_kategori;
@@ -144,7 +144,7 @@ public function __construct(){
       $produk->tgl_akhir_po= $request->tgl_akhir_po;
       $produk->berat= $request->berat;
       $produk->minimal_beli= $request->minimal_beli;
-      // $produk->batas_waktu_bayar= $request->batas_bayar;
+     $produk->jumlah_minimal_produksi= $request->min_produksi;
       $produk->jenis="PreOrder";
       $produk->foto=$imageName;
       $produk->keterangan=$request->editor1;
@@ -270,7 +270,7 @@ public function simpanukurandetail(Request $request)
         $produk->tgl_akhir_po= $request->tgl_akhir_po;
         $produk->berat= $request->berat;
         $produk->minimal_beli= $request->minimal_beli;
-        // $produk->batas_waktu_bayar= $request->batas_bayar;
+       $produk->jumlah_minimal_produksi= $request->min_produksi;
         
         
         $produk->keterangan=$request->editor1;

@@ -86,27 +86,8 @@
                             <input type="text" class="form-control" name="nohp" placeholder="Nomor Handphone" required/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-3 control-label">Jenis Kelamin</label>
-                        <div class="col-sm-8">
-                        <select class="form-control" style="width: 100%;" name="jenis_kelamin" required/>
-                            <option>Laki-laki</option>
-                            <option>Perempuan</option>
-                        </select>  
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-3 control-label">Tanggal Lahir</label>
-                        <div class="col-sm-8">
-                            <div class='input-group date' >
-                        <input type='text'name="tgl_lahir" class="form-control" id="datepicker" required >
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                        </div>
-                    </div>
+                   <input type="hidden" class="form-control" name="konfirm" value="Terima" />
+                   <input type="hidden" class="form-control" name="level" value="Customer" />
                     <div class="form-group">
                         <div class="col-sm-8">
                             <input type="hidden" class="form-control" name="level" value="Customer">

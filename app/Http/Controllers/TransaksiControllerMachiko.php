@@ -254,6 +254,7 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->jenis_pemesanan="Customer";
       $transaksi->status_jenis_pesan=$request->status;
       $transaksi->total_berat=$request->berat;
+      $transaksi->status_pemesanan_produk="Pending";
       $transaksi->ongkir=$request->ongkir;
       $transaksi->kurir=$request->kurir;
       $transaksi->total_bayar=$request->total;
@@ -283,6 +284,7 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_berat=$request->berat;
       $transaksi->ongkir=$request->ongkir;
       $transaksi->kurir=$request->kurir;
+      $transaksi->status_pemesanan_produk="Pending";
       $transaksi->total_bayar=$request->total;
       $transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);
@@ -299,7 +301,7 @@ class TransaksiControllerMachiko extends Controller {
           $detailtransaksi->id_transaksi = $transaksi->id_transaksi;
           // $detailtransaksi->id_produk = $key->produk_id;
           $detailtransaksi->id_produk_ukuran = $key->id_produk_ukuran;
-          $detailtransaksi->status_pesan= "Pending";
+          // $detailtransaksi->status_pesan= "Pending";
           $detailtransaksi->jumlah_beli= $key->jumlah;
           $detailtransaksi->save();
           $data = Keranjang::where('user_id','=',Auth::user()->id);
@@ -363,6 +365,7 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_bayar=$request->total;
       $transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);
+      $transaksi->status_pemesanan_produk="Pending";
       if($transaksi->save()){
        
         $admin=User::where('level', '=', 'Admin')->get();
@@ -386,6 +389,7 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_berat=$request->berat;
       $transaksi->ongkir=$request->ongkoskirim;
       $transaksi->kurir=$request->kurir;
+      $transaksi->status_pemesanan_produk="Pending";
       $transaksi->total_bayar=$request->total;
       $transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);
@@ -408,7 +412,7 @@ class TransaksiControllerMachiko extends Controller {
           $detailtransaksi->id_transaksi = $transaksi->id_transaksi;
           // $detailtransaksi->id_produk = $key->produk_id;
           $detailtransaksi->id_produk_ukuran = $key->id_produk_ukuran;
-          $detailtransaksi->status_pesan= "Pending";
+          // $detailtransaksi->status_pesan= "Pending";
           $detailtransaksi->jumlah_beli= $key->jumlah;
           $detailtransaksi->save();
           $data = Keranjang::where('user_id','=',Auth::user()->id);

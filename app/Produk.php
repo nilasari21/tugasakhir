@@ -21,7 +21,7 @@ class Produk extends Model
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = ['id','id_kategori','nama_produk','berat','minimal_beli','jenis',
-    'tgl_awal_po','tgl_akhir_po','batas_waktu_bayar','batas_jam','foto','keterangan'];
+    'tgl_awal_po','tgl_akhir_po','jumlah_minimal_produksi','foto','keterangan'];
 
     // protected $hidden = [];
     // protected $dates = [];
@@ -35,6 +35,12 @@ class Produk extends Model
     {
          return $this->belongsToMany('App\Ukuran')
                     ->withPivot('produk_id','ukuran_id','stock','harga_tambah')
+                    ->withTimestamps();
+     }
+     public function status()
+    {
+         return $this->belongsToMany('App\Produk')
+                    ->withPivot('id_produk','id_status_po')
                     ->withTimestamps();
      }
     /*

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+// use App\Http\Controllers\HeaderController;
 use App\Produk;
 use App\Kategori;
 use App\ProdukUkuran;

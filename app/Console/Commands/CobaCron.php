@@ -39,7 +39,7 @@ class CobaCron extends Command
      */
     public function handle()
     {
-         $waktu = Carbon::now()->subHour(24);
+         $waktu = Carbon::now()->subHour(48);
          $detail=DB::table('detail_transaksi')->get();
          foreach ($detail as $key ) {
             $trans= DB::table('transaksi')
@@ -62,7 +62,7 @@ class CobaCron extends Command
             ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*')
             ->where('transaksi.status_bayar','=','Belum lunas')
             // ->where('produk.jenis','=','Ready Stock')
-            ->where('transaksi.updated_at','<=',$waktu)->update(['status_pesan'=>'Batal']);
+            ->where('transaksi.updated_at','<=',$waktu)->update(['status_pemesanan_produk'=>'Batal']);
        
       
                

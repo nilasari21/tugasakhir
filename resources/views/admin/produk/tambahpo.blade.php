@@ -76,6 +76,8 @@
         <input type="text" class="form-control" name="berat" placeholder="Berat" required>
     <label>Minimal beli (Reseller)</label>
         <input type="text" class="form-control" name="minimal_beli" placeholder="minimal beli" required>
+    <label>Jumlah minimal produksi</label>
+        <input type="text" class="form-control" name="min_produksi" placeholder="jumlah minimal produksi" required>
     
    <!--  <label>Batas Akhir Pembayaran</label>
     <div class='input-group date' >

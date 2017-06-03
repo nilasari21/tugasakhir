@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Transaksi;
+use App\Produk;
 use App\Users;
 use Illuminate\Http\Request;
 
@@ -26,10 +27,9 @@ class BerandaController extends Controller {
                         ->leftjoin('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
                         ->leftjoin('produk','produk.id','produk_ukuran.produk_id')
                         ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
-                        // ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
-                        ->where('detail_transaksi.status_pesan','=','Pending')
-                        ->count('detail_transaksi.id_detail_transaksi');
+                        ->where('transaksi.status_pemesanan_produk','=','Pending')
+                        ->count('transaksi.id_transaksi');
         $data2 = Transaksi::join('konfirmasi','konfirmasi.id_konfirmasi','transaksi.id_konfirmasi')
                         ->join('users','transaksi.id_user','users.id')
                         ->select('transaksi.id_transaksi','transaksi.total_bayar','users.name','konfirmasi.*')
@@ -37,11 +37,31 @@ class BerandaController extends Controller {
                         ->count('konfirmasi.id_konfirmasi');
         $data3 = Transaksi::leftjoin('users','users.id','transaksi.id_user')
                         ->join('metode','transaksi.id_metode','metode.id')
-                        // ->select('transaksi.*','users.*')
                         ->where('transaksi.status_bayar','=','Belum lunas')
                         ->where('metode.jenis','=','COD')
                         ->count('transaksi.id_transaksi');
-        return view('admin.beranda.beranda')->with(compact('countTrans',$countTrans,'data',$data,'tunggu',$tunggu,'data2',$data2,'data3',$data3));
+        $produk= Produk::join('produk_ukuran','produk_ukuran.produk_id','produk.id')
+                        ->leftjoin('detail_transaksi','detail_transaksi.id_produk_ukuran','produk_ukuran.id_produk_ukuran')
+                        // ->join('transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
+                        ->where('produk.jenis','=','PreOrder')
+                        ->select('produk.*', 
+                            (DB::raw ('SUM(detail_transaksi.jumlah_beli) as total')))
+                        ->groupby('produk.id')
+                        ->orderby('produk.id','desc')
+                        ->get();
+       /* $produk=Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
+                         ->leftjoin('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
+                        ->leftjoin('produk','produk.id','produk_ukuran.produk_id')
+                        ->where('produk.jenis','=','PreOrder')
+                        ->select('produk.*','detail_transaksi.*',
+                            (DB::raw ('SUM(detail_transaksi.jumlah_beli) as total')))
+                        ->groupby('produk.id')
+                        ->orderby('produk.id','desc')
+                        ->get();*/
+                        // dd($produk);
+        
+        return view('admin.beranda.beranda')->with(compact('countTrans',$countTrans,'data',$data,'tunggu',$tunggu,
+            'data2',$data2,'data3',$data3,'produk',$produk));
     }
 
 }

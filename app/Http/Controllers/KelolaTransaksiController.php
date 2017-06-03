@@ -39,7 +39,8 @@ public function __construct(){
                         ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Belum lunas')
-                        ->where('detail_transaksi.status_pesan','=','Pending')
+                        ->where('transaksi.status_pemesanan_produk','=','Pending')
+                        ->where('transaksi.status_jenis_pesan','=','Terima')
                         ->get();
     // dd( );
       $tunggu = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
@@ -49,7 +50,7 @@ public function __construct(){
                         ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
-                        ->where('detail_transaksi.status_pesan','=','Pending')
+                        ->where('transaksi.status_pemesanan_produk','=','Pending')
                         ->get();
                         // dd($data);
 
@@ -79,7 +80,7 @@ public function __construct(){
                         ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
-                        ->where('detail_transaksi.status_pesan','=','Produksi')
+                        ->where('transaksi.status_pemesanan_produk','=','Produksi')
                         ->get();
       $packing = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
@@ -89,7 +90,7 @@ public function __construct(){
                         ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
-                        ->where('detail_transaksi.status_pesan','=','Packing')
+                        ->where('transaksi.status_pemesanan_produk','=','Packing')
                         ->get();
       $pengiriman = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
@@ -99,7 +100,7 @@ public function __construct(){
                         ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
-                        ->where('detail_transaksi.status_pesan','=','Pengiriman')
+                        ->where('transaksi.status_pemesanan_produk','=','Pengiriman')
                         ->get();
       $selesai = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
@@ -109,7 +110,7 @@ public function __construct(){
                         ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
-                        ->where('detail_transaksi.status_pesan','=','Selesai')
+                        ->where('transaksi.status_pemesanan_produk','=','Selesai')
                         ->get();
       $batal = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
@@ -119,7 +120,7 @@ public function __construct(){
                         ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Belum lunas')
-                        ->where('detail_transaksi.status_pesan','=','Batal')
+                        ->where('transaksi.status_pemesanan_produk','=','Batal')
                         ->get();
                        
         return view('admin.transaksi.kelola_transaksi')->with(compact('data',$data,'produksi',$produksi,'packing',$packing,'pengiriman',$pengiriman,'selesai',$selesai,'tunggu',$tunggu,'batal',$batal));

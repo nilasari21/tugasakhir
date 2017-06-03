@@ -10,10 +10,13 @@
                            
 
                             <li><a href="{{ url('machikokstore') }}"><img src="{{asset("/machikoo/img/mauedit.png")}}" width="60px" height="60px" ><span>  Machiko K-Store</span></a></li>
-                           
+                           @if (Auth::guest())
+                           <li><a href="{{ url('wishlist') }}"><i class="fa fa-heart"></i> Wishlist</a></li>
+                            <li><a href="{{ url('keranjang') }}"><i class="fa fa-shopping-cart"></i> Keranjang (0)</a></li>
+                            @else
                             <li><a href="{{ url('wishlist') }}"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="{{ url('keranjang') }}"><i class="fa fa-shopping-cart"></i> Keranjang</a></li>
-                           
+                            <li><a href="{{ url('keranjang') }}"><i class="fa fa-shopping-cart"></i> Keranjang ({{App\Keranjang::where('user_id','=',Auth::user()->id)->count()}})</a></li>
+                           @endif
                         </ul>
                     </div>
                 </div>

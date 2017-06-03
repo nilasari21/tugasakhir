@@ -595,9 +595,16 @@ function getOngkir() {
             $('#ongkos').empty();
             $.each(hasil, function(index, hasil){
               console.log(hasil.costs.length);
-              if(hasil.costs.length == 0){
+              if(hasil.costs.length == 0 && (kota_tujuan!=135||kota_tujuan!=419||kota_tujuan!=210)){
+                $('#ongkos').append('<tr><tdPengiriman dari Yogyakarta Tidak Tersedia</td></tr>')
+              }if(hasil.costs.length == 0 && (kota_tujuan==135 ||  kota_tujuan==210)){
+                $('#ongkos').append('<tr><td colspan="5">Pengiriman melalui kurir tidak ada</td></tr>')
+                
+              }
+              
+              /*if(hasil.costs.length == 0){
                 $('#ongkos').append('<p>Pengiriman dari Yogyakarta Tidak Tersedia</p>')
-              }else{
+              }*/else{
                 $.each(hasil.costs, function(index, hasil){
                   service = hasil.service;
                   des = hasil.description;

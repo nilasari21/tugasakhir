@@ -391,6 +391,7 @@
                                    Mohon Tunggu proses untuk memilih Kurir                        
                             </td>
                           </tr>
+
                       </tbody>
                        <!-- <tbody id="ongkos2" style="display:block"> -->
                           <!-- <tr>
@@ -400,18 +401,19 @@
                                    COD                         
                             </td>
                           </tr> -->
-                          <tr><td id="ongkos2" style="display:none"><input type="radio" id="ongkir" name="ongkir"  onChange="pecah2();getTotal();"value="0,COD" class="ongkir"></td></td>
-                    <td style="color:#000" id="co"colspan="4" style="display:none">COD</td>
+                        <tbody id="ongkos3">
+                          <tr><td id="ongkos2" style="display:none"><input type="radio" id="ongkir" name="ongkir"  onChange="pecah2();getTotal();"value="0,COD" class="ongkir"></td>
+                    <td style="color:#000" colspan="4" style="display:none">COD</td>
                     </tr>
-                      <!-- </tbody> -->
+                      </tbody>
                     </table>
                   </div>
                       </div>
                       
                       
                     </div>
-                    <input type="hidden" id="ongkoskirim" name="ongkoskirim"  value="" class="ongkir">
-                     <input type="hidden" id="kurir" name="kurir"  value="" class="ongkir">
+                    <input type="text" id="ongkoskirim" name="ongkoskirim"  value="" class="ongkir">
+                     <input type="text" id="kurir" name="kurir"  value="" class="ongkir">
                     @foreach($beratharga as $d)
                     <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Total pembayaran</label>
@@ -505,11 +507,14 @@ function cod() {
      var asal=$('#kota_asal').val();
      console.log(asal);
                 if(asal==39 || asal==501 ||asal==419 ||asal==210 ||asal==135 ){
+                  // document.getElementById('ongkos3').style.display = 'block';
                   document.getElementById('ongkos2').style.display = 'block';
+                  // document.getElementById('co').style.display = 'block';
                   
                 } else{
-                  document.getElementById('ongkos2').style.display = 'none';
-                  document.getElementById('co').style.display = 'none';
+                  document.getElementById('ongkos3').style.display = 'none';
+                  // document.getElementById('ongkos2').style.display = 'none';
+                  // document.getElementById('co').style.display = 'none';
                 }
         
 
@@ -660,17 +665,14 @@ function getOngkir() {
               console.log(hasil.costs.length);
               if(hasil.costs.length == 0 && (kota_tujuan!=135||kota_tujuan!=419||kota_tujuan!=210)){
                 $('#ongkos').append('<tr><tdPengiriman dari Yogyakarta Tidak Tersedia</td></tr>')
-              }if(hasil.costs.length == 0 && (kota_tujuan==135 ||  kota_tujuan==210)){
+              }/*if(hasil.costs.length == 0 && (kota_tujuan==135 ||  kota_tujuan==210)){
                 $('#ongkos').append('<tr><td colspan="5">Pengiriman melalui kurir tidak ada</td></tr>')
                 
               }
-              /*if(hasil.costs.length != 0 && kota_tujuan==419){
-                $('#ongkos').append('<tr><td colspan="5">Pengiriman melalui kurir tidak ada</td></tr>')
                 
-              }*/
               if(hasil.costs.length == 0){
                 $('#ongkos').append('<p>Pengiriman dari Yogyakarta Tidak Tersedia</p>')
-              }else{
+              }*/else{
                 $.each(hasil.costs, function(index, hasil){
                   service = hasil.service;
                   des = hasil.description;
@@ -682,7 +684,7 @@ function getOngkir() {
                     '<td style="color:#000">'+service+' '+'</td>'+
                     '<td>'+des+'</td>'+
                     '<td>'+hasil.etd+'</td>'+
-                    '<td>'+(hasil.value)+'</td></tr>'
+                    '<td>'+(hasil.value)+'</td></tr>>'
                      
                     );
                   });

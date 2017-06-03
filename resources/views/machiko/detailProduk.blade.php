@@ -85,7 +85,7 @@
                         <input type="hidden"  name="status" value="{{ $data->jenis }}">
                     
                         
-               <div class="alert alert-success" style="font-family:Roboto;padding-bottom: 100px;padding-left: 15px;">
+               <div class="alert alert-success" style="font-family:Roboto;padding-bottom: 125px;padding-left: 15px;">
                 {{ $data->status }}
                  <?php 
                         if( $data->jenis =="Ready Stock"){ ?>

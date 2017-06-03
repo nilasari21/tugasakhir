@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Auth;
+// use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Keranjang extends Model
+class RiwayatPo extends Model
 {
-    
+    // use CrudTrait;
 
      /*
     |--------------------------------------------------------------------------
@@ -15,12 +16,11 @@ class Keranjang extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'keranjang';
-    protected $primaryKey = 'id_keranjang';
+    protected $table = 'riwayat_po';
+    protected $primaryKey = 'id_riwayat_po';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id_keranjang','user_id','id_produk_ukuran',
-    'jumlah'];
+    protected $fillable = ['id_riwayat_po','id_produk','id_status_po'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -29,29 +29,24 @@ class Keranjang extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-// $model = Keranjang::where('user_id','=',Auth::user()->id);
-// View::make('view')->withModel($model);
-/*public function a(){
-    return $model = Keranjang::where('user_id','=',Auth::user()->id);
-}*/
+    
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    
-     public function produk()
+    /*public function produk()
     {
-        return $this->belongsTo('App\Produk','produk_id');
-     } 
-     public function user()
+        return $this->belongsTo('App\Models\Produk');
+     }
+     public function ukuran()
     {
-        return $this->belongsTo('App\User','user_id');
-     }  
-     public function produk_ukuran()
+        return $this->belongsTo('App\Models\Ukuran');
+     }*/
+     /* public function keranjang()
     {
-        return $this->belongsTo('App\ProdukUkuran','id_produk_ukuran');
-     } 
+        return $this->hasMany('App\keranjang');
+     }*/
     /*
     |--------------------------------------------------------------------------
     | SCOPES

@@ -18,7 +18,7 @@
                       <th >Harga</th>
                       <th >Harga Tambah</th> -->
                       <th >Minimal beli produk</th>
-                      <th >Jumlah</th>
+                      <th >Jumlah pembelian</th>
                       <th >Keterangan</th>
                       
         </tr>
@@ -31,11 +31,11 @@
         
         <tr>
            <td >{{$row->nama_produk}} <input type="hidden" id="id_produk_ukuran{{$i}}" value="{{$row->minimal_beli}}"></td>
-           <!-- <td >{{$row->nama_ukuran}}</td>
-           <td >{{ "Rp ".number_format($row->harga_pokok,2, ',', '.') }}</td>
-           <td >{{ "Rp ".number_format($row->harga_tambah,2, ',', '.') }}</td> -->
+           
            <td >{{$row->minimal_beli}}<input type="hidden" id="min_beli{{$i}}" value="{{$row->minimal_beli}}"></td>
+          
            <td >{{$row->jumlah_beli}}<input type="hidden" id="jumlah{{$i}}" value="{{$row->jumlah_beli}}"></td>
+           
            <td ><span id="keterangan{{$i}}"  ></span></td>
         </tr>
          @php

@@ -87,7 +87,7 @@
                                                     <input name="level" type="hidden" id="level"  value="{{$row->level}}" style="width:100px">
                                                     <tr class="cart_item">
                                                         <td class="product-remove">
-                                                            <a title="Remove this item" class="remove" href="{{ url('keranjang/delete/'.$row->id_keranjang) }}" onclick="return confirm('Anda yakin ingin menghapus .$row->nama_produk?')">×</a> 
+                                                            <a title="Remove this item" class="remove" href="{{ url('keranjang/delete/'.$row->id_keranjang) }}" onclick="return confirm('Anda yakin ingin menghapus ?')">×</a> 
                                                         </td>
 
                                                         <td class="product-thumbnail">

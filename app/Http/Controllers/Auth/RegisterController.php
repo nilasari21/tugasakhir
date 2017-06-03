@@ -94,10 +94,9 @@ class RegisterController extends Controller
             'password' => Hash::make(Input::get('password')),
             'confirmation_code' => $confirmation_code,
             'no_hp' => Input::get ('nohp'),
-            'jenis_kelamin' => Input::get('jenis_kelamin'),
-            'tgl_lahir' =>Input::get ('tgl_lahir'),
+            
             'konfirm_admin' => Input::get('konfirm'),
-            'level' => Input::get('customer'),
+            'level' => Input::get('level'),
             ]);
       Mail::send('auth.verify', ['confirmation_code' => $confirmation_code], function($m) {
             $m->from('admin1@admin.com', 'Toko');
