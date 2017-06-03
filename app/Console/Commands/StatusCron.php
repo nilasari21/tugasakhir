@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
+use Carbon\Carbon;
+use DB;
+use App\RiwayatPo;
 class StatusCron extends Command
 {
     /**
@@ -37,6 +39,10 @@ class StatusCron extends Command
      */
     public function handle()
     {
-        //
+        /*$waktu = Carbon::now(8);
+        $produk= DB::table('produk')
+                ->where('')
+        $data = new RiwayatPo;*/
+
     }
 }

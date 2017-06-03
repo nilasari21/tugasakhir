@@ -14,14 +14,14 @@ class Transaksi extends Model
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-
+public $timestamps = false;
     protected $table = 'transaksi';
     protected $primaryKey = 'id_transaksi';
     // public $timestamps = false;
     // protected $guarded = ['id'];
     protected $fillable = ['id_transaksi','id_user','tgl_transaksi','id_metode',
     'id_konfirmasi','id_penerima','status_bayar','jenis_pemesanan','status_jenis_pesan','total_berat','ongkir','total_bayar',
-    'resi'];
+    'resi','updated_at'];
     // protected $hidden = [];
     // protected $dates = [];
 

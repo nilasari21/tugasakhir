@@ -37,12 +37,12 @@ class Produk extends Model
                     ->withPivot('produk_id','ukuran_id','stock','harga_tambah')
                     ->withTimestamps();
      }
-     public function status()
+     /*public function status()
     {
-         return $this->belongsToMany('App\Produk')
+         return $this->belongsToMany('App\StatusPo')
                     ->withPivot('id_produk','id_status_po')
                     ->withTimestamps();
-     }
+     }*/
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

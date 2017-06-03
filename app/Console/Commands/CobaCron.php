@@ -39,7 +39,7 @@ class CobaCron extends Command
      */
     public function handle()
     {
-         $waktu = Carbon::now()->subHour(48);
+         $waktu = Carbon::now(8)->subHour(48);
          $detail=DB::table('detail_transaksi')->get();
          foreach ($detail as $key ) {
             $trans= DB::table('transaksi')

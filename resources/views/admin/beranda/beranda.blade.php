@@ -82,6 +82,8 @@
        
       </div>
       <div class="panel panel-card" >
+        <span>Produk pre-order beserta total pembelian yang telah lunas</span><br/>
+        <span>Perubahan status dari pengiriman menjadi selesai hanya dapat dilakukan pada halaman kelola transaksi</span>
        <div class="box-body table-responsive margin">                   
                 <table id="data" class="table table-bordered table-hover dataTable table-striped">
                   <thead>
@@ -91,8 +93,8 @@
            
                       <th >Batas minimal produksi</th>
                       <th >Jumlah beli</th>
-                       <!-- <th >Status pre-order</th> -->
-                      <th >Aksi</th>
+                       <th >Status pre-order</th>
+                      <th >Aksi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
            
                       
         </tr>
@@ -113,8 +115,37 @@
            @else
            <td >{{$row->total}}<input type="hidden" id="jumlah" value="{{$row->total}}"></td>
            @endif
+           <input type="hidden" {!! $status=App\RiwayatPo::join('status_po','status_po.id_status_po','riwayat_po.id_status_po')->where('id_produk','=',$row->id)->orderby('id_riwayat_po','desc')->select('nama_status','riwayat_po.id_status_po')->first();!!}/>
            <td>
-            <a class="btn btn-default2" style="border:1px solid #999 !important" href="#"><i class="fa fa-edit"></i>   edit status </a>
+            {{$status->nama_status}}
+           </td>
+           <td>
+            @if($status->nama_status=="Open")
+            <form method="post" action="{{ url('admin/status/'.$row->id) }}">
+              {{ csrf_field() }}
+              <input class="form-control"type="hidden" name="status"  value="Produksi">
+              <button type="submit"  class="btn btn-default" style="border:1px solid #999 !important">  Produksi</button>
+            </form>
+            &nbsp;
+            <form method="post" action="{{ url('admin/batal/'.$row->id) }}">
+              {{ csrf_field() }}
+              <input class="form-control"type="hidden" name="status"  value="Batal">
+              <button type="submit"  class="btn btn-default" style="border:1px solid #999 !important"> Batal</button>
+            </form>
+            @elseif($status->nama_status=="Produksi")
+            <form method="post" action="{{ url('admin/status/'.$row->id) }}">
+              {{ csrf_field() }}
+              <input class="form-control"type="hidden" name="status"  value="Packing">
+              <button type="submit"  class="btn btn-default" style="border:1px solid #999 !important">  Packing</button>
+            </form>
+            @elseif($status->nama_status=="Packing")
+            <form method="post" action="{{ url('admin/status/'.$row->id) }}">
+              {{ csrf_field() }}
+              <input class="form-control"type="hidden" name="status"  value="Pengiriman">
+              <button type="submit"  class="btn btn-default" style="border:1px solid #999 !important">  Pengiriman</button>
+            </form>
+            
+            @endif
            </td>
         </tr>
          @php
@@ -126,6 +157,7 @@
                 </table>
               </div>
             </div>
+           
     @endsection
     @section('js')
     
@@ -166,4 +198,14 @@
       @endphp
    });
 </script>-->
+<script type="text/javascript">
+        $(document).ready(function(){
+          $(".btn-default2").click(function(){
+          $('#idpro').val($(this).data('proid'));
+          $('#status').val($(this).data('status'));
+          $('#modal3').modal('show');
+        });
+        });
+           
+    </script>
     @endsection

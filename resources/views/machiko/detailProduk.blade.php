@@ -88,62 +88,103 @@
                <div class="alert alert-success" style="font-family:Roboto;padding-bottom: 125px;padding-left: 15px;">
                 {{ $data->status }}
                  <?php 
-                        if( $data->jenis =="Ready Stock"){ ?>
+                        if( $data->jenis =="Ready Stock" && $b->st !=0){ ?>
                          
                          <div class="col-md-12">
                           <strong>Stok</strong><br/>
-                        @foreach($ukuran as $row)  
-                        <!-- {{ $data->stock }} item -->
+                        @foreach($ukuran2 as $row)  
+                        
+                        @if($row->nama_ukuran=="Tidak ada ukuran")
+                        {{$row->stock}} <br/>
+                        @else
                         {{$row->nama_ukuran}}  :  {{$row->stock}} <br/>
+                        @endif
                         @endforeach
                         </div>   
                         <?php
-                        }else{ ?>
+                        } if( $data->jenis =="Ready Stock" && $b->st ==0){ ?>
+                         
+                         <div class="col-md-12">
+                          <strong>Stok Habis</strong><br/>
+                        
+                        </div>   
+                        <?php
+                        }if(  $data->jenis=="PreOrder"&& count($a)!=0 ){ ?>
                         <div class="col-md-12">
                           <strong>Pre Order</strong><br/>
                         {{ $data->tgl_awal_po }} sampai {{ $data->tgl_akhir_po }}
                         </div> 
                     <?php
+                        }if(  $data->jenis=="PreOrder"&& count($a)==0 ){ ?>
+                         
+                         <div class="col-md-12">
+                          <strong>Masa Pre-Order habis</strong><br/>
+                        
+                        </div>   
+                        <?php
                         }
                     ?>
                     <br/><br/>
                </div>
                
-               
-                    <div id="ukuran" style="display:block">
+                   <div id="ukuran" style="display:block">
+                  @if($b->st != 0 && $data->jenis=="Ready Stock")              
                     <div class="col-md-6"style="font-family:Roboto;padding-left:0px">
+                      
                         Pilih Ukuran
+
                     </div>
                         <div class="col-md-4" style="padding-left:0px">
 
                             <div class="quantity buttons_added">
-                                
+                               
                                 <select class="form-control" name="id_produk_ukuran" style="border: 1px solid #66CC99;font-family:Roboto">
                                     @foreach($ukuran as $row)
-                                    <?php if($row->stock != 0 && $data->jenis=="Ready Stock"){?>
-                                    
+
+                                     
                                     <option value="{{$row->id_produk_ukuran}}" >
+
                                         {{$row->nama_ukuran}}
                                         
                                     </option>
-
                                     
-                                    <?php } ?>
-                                    <?php if( $data->jenis=="PreOrder"){?>
                                     
-                                    <option value="{{$row->id_produk_ukuran}}" >
-                                        {{$row->nama_ukuran}}
-                                        
-                                    </option>
-
-                                    
-                                    <?php } ?>
                                     @endforeach    
                                 </select>
                             </div>
                             
                         </div>
                          </div>
+                          @elseif($b->st == 0 && $data->jenis=="Ready Stock")
+                          <!-- kosong               -->
+                                    @elseif(  $data->jenis=="PreOrder"&& count($a)==0 )
+                                    @else
+                                    <div class="col-md-6"style="font-family:Roboto;padding-left:0px">
+                      
+                        Pilih Ukuran
+
+                    </div>
+                        <div class="col-md-4" style="padding-left:0px">
+
+                            <div class="quantity buttons_added">
+                               
+                                <select class="form-control" name="id_produk_ukuran" style="border: 1px solid #66CC99;font-family:Roboto">
+                                    @foreach($ukuran as $row)
+
+                                     
+                                    <option value="{{$row->id_produk_ukuran}}" >
+
+                                        {{$row->nama_ukuran}}
+                                        
+                                    </option>
+                                   
+                                    @endforeach    
+                                </select>
+                            </div>
+                            
+                        </div>
+                         </div>
+                                    @endif
                          @php
                          $i=1;
                          @endphp
@@ -178,7 +219,7 @@
                                     <?php if($b->st == 0 && $data->jenis=="Ready Stock"){?>
                                     
                                     <!-- <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Masukan Ke Keranjang</button> -->
-                                    <span>Stock Habis</span>
+                                    <!-- <span>Stock Habis</span> -->
                                     
                                     <?php } ?>
                                     <?php if( $data->jenis=="PreOrder"&& count($a)!=0){?>
@@ -191,7 +232,7 @@
                                     <?php if( $data->jenis=="PreOrder"&& count($a)==0){?>
                                     
                                    <!-- <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Masukan Ke Keranjang</button> -->
-                                   <span>Masa Pre-Order habis</span>
+                                   <!-- <span>Masa Pre-Order habis</span> -->
                                     
                                     <?php } ?>
                                      

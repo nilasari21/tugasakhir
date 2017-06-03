@@ -37,6 +37,7 @@ Route::get('toko', 'TestControllerMachiko@index');
 
 Route::get('admin', 'BerandaController@index');
 Route::get('beranda', 'BerandaController@index');
+Route::post('admin/status/{id}', 'BerandaController@postUpdate');
 
 // Route::get('testmachiko', 'ProdukController@index');
 

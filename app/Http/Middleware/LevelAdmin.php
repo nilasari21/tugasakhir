@@ -18,7 +18,17 @@ class LevelAdmin
         if(Auth::user()){
             if(Auth::user()->level != "Admin"){
                 return redirect ('/forbidden');
-            }
+            } /*if(!Auth::user()->confirmed){
+                $notification = array(
+                    'message' => 'Email belum diverifikasi', 
+                    'alert-type' => 'danger'
+                );
+        
+        
+        return redirect('masuk')
+                
+                ->with($notification);
+            }*/
         }if(Auth::guest() ){
                 return redirect ('/forbidden')->send();
             }

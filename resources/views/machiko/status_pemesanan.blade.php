@@ -44,9 +44,9 @@
                                                         
                                                         <th class="product-name" style="background:#66CC99">Id Transaksi</th>
                                                         <th class="product-price" style="background:#66CC99">Tanggal transaksi</th>
-                                                        <th class="product-price" style="background:#66CC99">Jenis pemesanan</th>
+                                                        <th class="product-price" style="background:#66CC99">Status pemesanan</th>
                                                         <th class="product-price" style="background:#66CC99">No resi</th>
-                                                        \
+                                                        
                                                         <th class="product-price" style="background:#66CC99" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                                         
                                                     </tr>
@@ -71,9 +71,13 @@
                                                         <td class="product-name">
                                                             {{ $row->tgl_transaksi}}
                                                         </td>
+                                                        @if($row->status_bayar=="Belum lunas")
+                                                        <td> <span style="font-size:16px !important">Silahkan upload bukti bayar di halaman konfirmasi bayar</span></td>
+                                                        @else
                                                         <td class="product-name">
-                                                            {{ $row->jenis_pemesanan}}
+                                                            {{ $row->status_pemesanan_produk}}
                                                         </td>
+                                                        @endif
                                                         <?php 
                                                         if(count($row->resi)==0){?>
                                                         <td class="product-name">

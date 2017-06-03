@@ -56,12 +56,12 @@ class ProdukControllerMachiko extends Controller {
         $data = Produk::where('id',$id)
                         ->first();
         $waktu=Carbon::now(8);
-        // dd($waktu);
+        
         $a=Produk::where('jenis','=','PreOrder')
                 ->where('id',$id)
                 ->where('tgl_akhir_po','>=',$waktu)
                 ->first();
-                // dd($a);
+        
         $kat=Produk::where('id','=',$id)
                     ->select('id_kategori')
                     ->get();
@@ -75,13 +75,19 @@ class ProdukControllerMachiko extends Controller {
                             ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                             ->select('produk_ukuran.*','ukuran.*')
                             ->get();
+        $ukuran2= ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
+                            ->where('produk_ukuran.stock','!=','0')
+                            ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
+                            ->select('produk_ukuran.*','ukuran.*')
+                            ->get();
 
                             // dd($ukuran);
         $harga_pokok=ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
                             ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                             ->first();
        
-        return view('machiko.detailProduk')->with(compact('data',$data,'ukuran',$ukuran,'harga_pokok',$harga_pokok,'a',$a,'b',$b));
+        return view('machiko.detailProduk')->with(compact('data',$data,'ukuran',$ukuran,'harga_pokok',$harga_pokok,
+            'a',$a,'b',$b,'ukuran2',$ukuran2));
     }
     public function search(Request $request){
         
