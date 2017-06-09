@@ -32,7 +32,7 @@ class KonfirmasiControllerMachiko extends Controller {
                       // ->join('users','users.id','transaksi.id_user')
                       ->where('transaksi.id_user','=',Auth::user()->id)
                       ->where('transaksi.status_bayar','Belum lunas')
-                      ->where('transaksi.status_pemesanan_produk','!=','Batal')
+                      // ->where('transaksi.status_pemesanan_produk','!=','Batal')
                       // ->where('transaksi.status_jenis_pesan','!=','Tolak')
                       ->get();
                          // dd($data);
@@ -71,14 +71,15 @@ class KonfirmasiControllerMachiko extends Controller {
 //dd($data);
           $transaksi->id_konfirmasi=$konfirmasi->id_konfirmasi;
           // dd($konfirmasi->id);
-           if($transaksi->save()){
+          $transaksi->save();
+          /* if($transaksi->save()){
        
         $admin=User::where('level', '=', 'Admin')->get();
          foreach ($admin as $admin) {
-        // $transaksi;
+       
         \Notification::send($admin, new KonfirmasiPembayaran($transaksi));
        }  
-      }
+      }*/
      return redirect('konfirmasi');
 
        //

@@ -22,6 +22,12 @@ hr {
      padding-left: 0px !important; 
      padding-right: 0px !important; 
 }
+
+
+.autocomplete-suggestion {
+    background: white!important;
+}
+
 </style>
 @endsection
 
@@ -63,7 +69,7 @@ hr {
                                             </div>
                                             </div>
                                             <br/>
-                                           <div class="form-group">
+                                        <!--    <div class="form-group">
                                             <label for="inputName" class="col-sm-6 control-label">Tanggal lahir</label><br/>
                                             <div class="col-sm-12">
                                                 <div class='input-group date' >
@@ -87,7 +93,7 @@ hr {
                                                 <?php endif; ?>
                                                  </select>
                                         </div>
-                                            </div>
+                                            </div> -->
                                             </div>
                                             
                                          </div>
@@ -194,7 +200,7 @@ hr {
                                       <div class="row">
                                           {{ csrf_field() }}
                                           <div class="col-md-12" >
-                                            <input type="text" name="idpenerima" id="idpenerima" value="">
+                                            <input type="hidden" name="idpenerima" id="idpenerima" value="">
                                               <div class="form-group">
                                             <label for="inputName" class="col-sm-6 control-label">Nama Alamat</label><br/>
                                             <div class="col-sm-12">
@@ -465,17 +471,7 @@ hr {
                                 <td><h5> : </h5></td>
                                 <td><h5> {{$data->email}}</h5></td>
                             </tr>
-                            <tr>
-                                <td><h5>Jenis Kelamin </h5></td>
-                                <td><h5> : </h5></td>
-                                <td><h5>{{$data->jenis_kelamin}}</h5></td>
-                            </tr>
                             
-                            <tr>
-                                <td><h5>Tanggal Lahir</h5></td>
-                                <td><h5> : </h5></td>
-                                <td><h5>{{$data->tgl_lahir}} </h5></td>
-                            </tr>
                             
                             
                         </table>

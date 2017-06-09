@@ -98,9 +98,9 @@
                         <div class="product-upper">
                             <div class=" col-md-4 col-sm-6 ">
             <div class="thumbnail">
-                <div class="hover01 column"> 
+                <div class="hover01 column" > 
                     <figure> <img src="{{asset('.img/produk/client/'.$row->foto) }}" class="animated infinite slideInUp" style="width:200%;animation-iteration-count: inherit;transition-duration: 3s;"></figure>   
-
+                    <p style="font-family:Roboto;color:#66CC99;">{{ $row->jenis }}</p>
                 </div>
                 <div class="caption">
                 </br>

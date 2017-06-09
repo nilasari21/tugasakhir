@@ -98,13 +98,13 @@ class RegisterController extends Controller
             'konfirm_admin' => Input::get('konfirm'),
             'level' => Input::get('level'),
             ]);
-      Mail::send('auth.verify', ['confirmation_code' => $confirmation_code], function($m) {
+     /* Mail::send('auth.verify', ['confirmation_code' => $confirmation_code], function($m) {
             $m->from('admin1@admin.com', 'Toko');
             $m->to(Input::get('email'), Input::get('name'))
                 ->subject('Konfirmasi alamat email anda');
         });
- 
-        Session::flash('message', 'Terima kasih telah mendaftar! Silahkan cek email anda untuk konfirmasi.');
+ */
+        Session::flash('message', 'Terima kasih telah mendaftar! Silahkan login.');
         // ]);
         return Redirect::to('daftar');
     }

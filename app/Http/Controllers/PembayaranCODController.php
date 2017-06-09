@@ -27,7 +27,9 @@ public function __construct(){
                         ->join('metode','transaksi.id_metode','metode.id')
                         ->select('transaksi.*','users.*')
                         ->where('transaksi.status_bayar','=','Belum lunas')
-                        ->where('metode.jenis','=','COD')
+                        ->where('transaksi.status_pemesanan_produk','!=','Batal')
+                        ->ORwhere('metode.jenis','=','COD')
+                        ->where('transaksi.kurir','=','COD')
                         ->get();
       // dd($data);
         return view('admin.transaksi.pembayaran_cod')->with('data',$data);
@@ -37,6 +39,7 @@ public function __construct(){
     {
         // proses update data
         $data = Transaksi::where('id_transaksi','=',$id)->first();
+        // dd($data);
         $data->status_bayar=$request->lunas;
         $data->save();
         

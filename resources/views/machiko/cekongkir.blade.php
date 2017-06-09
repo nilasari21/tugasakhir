@@ -2,6 +2,12 @@
 @section('css')
 
 <link rel="stylesheet" href="{{asset("/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
+<style type="text/css">
+
+.autocomplete-suggestion {
+    background: white!important;
+}
+</style>
 @endsection
 
 @section('content')
@@ -49,7 +55,7 @@
                        <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Kota tujuan</label>
                       <div class="col-sm-8">
-                          <input type="text" placeholder="ex : Bandung" name="kota" required="" id="autocomplete" class="form-control"/>
+                          <input type="text" placeholder="ex : Bandung" name="kota" required="" id="autocomplete" class="form-control" required/>
                           <input type="hidden" id="kota_asal" name="kota_asal" value="" />
 
                         </div>
@@ -57,7 +63,7 @@
                        <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Berat</label>
                       <div class="col-sm-5">
-                          <input type="text" placeholder="ex :1700" name="berat" id="berat" required="" autocomplete="off" class="form-control"/>
+                          <input type="text" placeholder="ex :1700" name="berat" id="berat" required="" autocomplete="off" class="form-control" required/>
                          </div>
                      
                         <p>gram</p>

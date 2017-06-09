@@ -50,11 +50,11 @@
                     <tr>
                       <th>Id Transaksi</th>
                       <th>Tanggal Pesan</th>
-                      <th>Jenis produk</th>
+                      <!-- <th>Jenis produk</th> -->
                       <th>Nama Pemesan</th>
-                      <th>Nama Produk</th>
-                      <th>Ukuran</th>
-                      <th>Jumlah</th>
+                      <!-- <th>Nama Produk</th> -->
+                      <!-- <th>Ukuran</th> -->
+                      <!-- <th>Jumlah</th> -->
                       <th>Pembayaran</th>
                       <th>Aksi</th>
                     </tr>
@@ -65,10 +65,10 @@
                       
                       <td>{{ $row->id_transaksi }}</td>
                       <td>{{ $row->tgl_transaksi  }}</td>
-                      <td>{{ $row->jenis }}</td>
-                      <td>{{ $row->name }} {{ $row->id_detail_transaksi  }}</td>
-                      <td>{{ $row->nama_produk }}</td>
-                      <?php 
+                      <!-- <td>{{ $row->jenis }}</td> -->
+                      <td>{{ $row->name }} </td>
+                      <!-- <td>{{ $row->nama_produk }}</td> -->
+                      <!--<?php 
                       if(count($row->nama_ukuran)==0){?>
                       <td>-</td>
                       <?php
@@ -76,13 +76,13 @@
                       <td>{{ $row->nama_ukuran }}</td>
                       <?php
                       }
-                      ?>
+                      ?>-->
                       
-                      <td>{{ $row->jumlah_beli }}</td>
+                      <!-- <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
                       <td>
                          <a class="btn btn-default" style="border:1px solid #999 !important" href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
-                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}"style="border:1px solid #999 !important" href="#"><i class="fa fa-edit"></i>   edit status </a>
+                        <!-- <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}"style="border:1px solid #999 !important" href="#"><i class="fa fa-edit"></i>   edit status </a> -->
                         
                      </td>
                     </tr>
@@ -102,13 +102,13 @@
                     <tr>
                       <th>Id Transaksi</th>
                       <th>Tanggal Pesan</th>
-                      <th>Jenis produk</th>
+                      <!-- <th>Jenis produk</th> -->
                       <th>Nama Pemesan</th>
-                      <th>Nama Produk</th>
-                      <th>Ukuran</th>
-                      <th>Jumlah</th>
+                      <!-- <th>Nama Produk</th> -->
+                      <!-- <th>Ukuran</th>
+                      <th>Jumlah</th> -->
                       <th>Pembayaran</th>
-                      <th>Aksi</th>
+                      <th >Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -117,10 +117,10 @@
                       
                       <td>{{ $row->id_transaksi }}</td>
                       <td>{{ $row->tgl_transaksi  }}</td>
-                      <td>{{ $row->jenis }}</td>
+                      <!-- <td>{{ $row->jenis }}</td> -->
                       <td>{{ $row->name }}</td>
-                      <td>{{ $row->nama_produk }}</td>
-                      <?php 
+                      <!-- <td>{{ $row->nama_produk }}</td> -->
+                      <!--<?php 
                       if(count($row->nama_ukuran)==0){?>
                       <td>-</td>
                       <?php
@@ -130,12 +130,25 @@
                       }
                       ?>
                       
-                      <td>{{ $row->jumlah_beli }}</td>
+                      <!-- <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
                       <td>
                          <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
-                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
-                        
+                        <!-- <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
+                        <form method="post" action="{{ url('transaksi/ubah') }}">
+                        {{ csrf_field() }}
+                        <input class="form-control"type="hidden" name="idtrans" id="idtrans" value="{{ $row->id_transaksi }}">
+                        <input class="form-control"type="hidden" name="status_pesan"  value="Produksi" style="display:none">
+                        <!-- <a class="btn btn-default3"type="submit" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
+                        <button type="submit"  class="btn btn-default3" style="border:1px solid #999 !important"><i class="fa fa-edit"></i>  Produksi</button>
+                      </form>
+                       <form method="post" action="{{ url('transaksi/ubah') }}">
+                        {{ csrf_field() }}
+                        <input class="form-control"type="hidden" name="idtrans" id="idtrans" value="{{ $row->id_transaksi }}">
+                        <input class="form-control"type="hidden" name="status_pesan"  value="Batal" style="display:none">
+                        <!-- <a class="btn btn-default3"type="submit" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
+                        <button type="submit"  class="btn btn-default3" style="border:1px solid #999 !important"><i class="fa fa-edit"></i>  Packing</button>
+                      </form>
                      </td>
                     </tr>
                    @endforeach
@@ -155,9 +168,9 @@
                       <th>Id Transaksi</th>
                       <th>Tanggal Pesan</th>
                       <th>Nama Pemesan</th>
-                      <th>Nama Produk</th>
-                      <th>Ukuran</th>
-                      <th>Jumlah</th>
+                      <!-- <th>Nama Produk</th> -->
+                      <!-- <th>Ukuran</th>
+                      <th>Jumlah</th> -->
                       <th>Pembayaran</th>
                       <th>Aksi</th>
                     </tr>
@@ -169,7 +182,7 @@
                       <td>{{ $row->id_transaksi }}</td>
                       <td>{{ $row->tgl_transaksi  }}</td>
                       <td>{{ $row->name }}</td>
-                      <td>{{ $row->nama_produk }}</td>
+                      <!-- <td>{{ $row->nama_produk }}</td>
                       <?php 
                       if(count($row->nama_ukuran)==0){?>
                       <td>-</td>
@@ -180,11 +193,18 @@
                       }
                       ?>
                       
-                      <td>{{ $row->jumlah_beli }}</td>
+                      <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
                       <td>
                          <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
-                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
+                        <!-- <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
+                        <form method="post" action="{{ url('transaksi/ubah') }}">
+                        {{ csrf_field() }}
+                        <input class="form-control"type="hidden" name="idtrans" id="idtrans" value="{{ $row->id_transaksi }}">
+                        <input class="form-control"type="hidden" name="status_pesan"  value="Packing" style="display:none">
+                        <!-- <a class="btn btn-default3"type="submit" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
+                        <button type="submit"  class="btn btn-default3" style="border:1px solid #999 !important"><i class="fa fa-edit"></i>  Packing</button>
+                      </form>
                      </td>
                     </tr>
                    @endforeach
@@ -204,9 +224,9 @@
                       <th>Id Transaksi</th>
                       <th>Tanggal Pesan</th>
                       <th>Nama Pemesan</th>
-                      <th>Nama Produk</th>
-                      <th>Ukuran</th>
-                      <th>Jumlah</th>
+                      <!-- <th>Nama Produk</th> -->
+                      <!-- <th>Ukuran</th>
+                      <th>Jumlah</th> -->
                       <th>Pembayaran</th>
                       <th>Aksi</th>
                     </tr>
@@ -218,7 +238,7 @@
                       <td>{{ $row->id_transaksi }}</td>
                       <td>{{ $row->tgl_transaksi  }}</td>
                       <td>{{ $row->name }}</td>
-                      <td>{{ $row->nama_produk }}</td>
+                      <!-- <td>{{ $row->nama_produk }}</td>
                       <?php 
                       if(count($row->nama_ukuran)==0){?>
                       <td>-</td>
@@ -229,11 +249,18 @@
                       }
                       ?>
                       
-                      <td>{{ $row->jumlah_beli }}</td>
+                      <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
                       <td>
                          <a class="btn btn-default"style="border:1px solid #999 !important" href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
-                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
+                        <!-- <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
+                     <form method="post" action="{{ url('transaksi/ubah') }}">
+                        {{ csrf_field() }}
+                        <input class="form-control"type="hidden" name="idtrans" id="idtrans" value="{{ $row->id_transaksi }}">
+                        <input class="form-control"type="hidden" name="status_pesan"  value="Pengiriman" style="display:none">
+                        <!-- <a class="btn btn-default3"type="submit" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
+                        <button type="submit"  class="btn btn-default3" style="border:1px solid #999 !important"><i class="fa fa-edit"></i>  Pengiriman</button>
+                      </form>
                      </td>
                     </tr>
                    @endforeach
@@ -252,9 +279,9 @@
                       <th>Id Transaksi</th>
                       <th>Tanggal Pesan</th>
                       <th>Nama Pemesan</th>
-                      <th>Nama Produk</th>
+                      <!-- <th>Nama Produk</th>
                       <th>Ukuran</th>
-                      <th>Jumlah</th>
+                      <th>Jumlah</th> -->
                       <th>Pembayaran</th>
                       <th>Aksi</th>
                     </tr>
@@ -266,7 +293,7 @@
                       <td>{{ $row->id_transaksi }}</td>
                       <td>{{ $row->tgl_transaksi  }}</td>
                       <td>{{ $row->name }}</td>
-                      <td>{{ $row->nama_produk }}</td>
+                      <!-- <td>{{ $row->nama_produk }}</td>
                       <?php 
                       if(count($row->nama_ukuran)==0){?>
                       <td>-</td>
@@ -277,11 +304,12 @@
                       }
                       ?>
                       
-                      <td>{{ $row->jumlah_beli }}</td>
+                      <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
                       <td>
                          <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
-                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
+                        <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_transaksi }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   Selesai</a>
+                     
                      </td>
                     </tr>
                    @endforeach
@@ -300,10 +328,11 @@
                       <th>Id Transaksi</th>
                       <th>Tanggal Pesan</th>
                       <th>Nama Pemesan</th>
-                      <th>Nama Produk</th>
+                      <!-- <th>Nama Produk</th>
                       <th>Ukuran</th>
-                      <th>Jumlah</th>
+                      <th>Jumlah</th> -->
                       <th>Pembayaran</th>
+                      <th>Resi</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -313,8 +342,8 @@
                       
                       <td>{{ $row->id_transaksi }}</td>
                       <td>{{ $row->tgl_transaksi  }}</td>
-                      <td>{{ $row->name }} {{ $row->id_detail_transaksi  }}</td>
-                      <td>{{ $row->nama_produk }}</td>
+                      <td>{{ $row->name }} </td>
+                      <!-- <td>{{ $row->nama_produk }}</td>
                       <?php 
                       if(count($row->nama_ukuran)==0){?>
                       <td>-</td>
@@ -325,11 +354,12 @@
                       }
                       ?>
                       
-                      <td>{{ $row->jumlah_beli }}</td>
+                      <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
+                      <td>{{ $row->resi }}</td>
                       <td>
                          <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
-                        <a class="btn btn-default2" data-id="{{ $row->id_detail_transaksi  }}" data-idt="{{ $row->id_transaksi }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a>
+                        <!-- <a class="btn btn-default2" data-id="{{ $row->id_transaksi }}" data-idt="{{ $row->id_transaksi }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
                      </td>
                     </tr>
                    @endforeach
@@ -347,9 +377,9 @@
                       <th>Id Transaksi</th>
                       <th>Tanggal Pesan</th>
                       <th>Nama Pemesan</th>
-                      <th>Nama Produk</th>
+                     <!--  <th>Nama Produk</th>
                       <th>Ukuran</th>
-                      <th>Jumlah</th>
+                      <th>Jumlah</th> -->
                       <th>Pembayaran</th>
                       <th>Aksi</th>
                     </tr>
@@ -360,8 +390,8 @@
                       
                       <td>{{ $row->id_transaksi }}</td>
                       <td>{{ $row->tgl_transaksi  }}</td>
-                      <td>{{ $row->name }} {{ $row->id_detail_transaksi  }}</td>
-                      <td>{{ $row->nama_produk }}</td>
+                      <td>{{ $row->name }} </td>
+                     <!--  <td>{{ $row->nama_produk }}</td>
                       <?php 
                       if(count($row->nama_ukuran)==0){?>
                       <td>-</td>
@@ -372,8 +402,9 @@
                       }
                       ?>
                       
-                      <td>{{ $row->jumlah_beli }}</td>
+                      <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
+
                       <td>
                          <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
                         <!-- <a class="btn btn-default2" data-id="{{ $row->id_detail_transaksi  }}" data-idt="{{ $row->id_transaksi }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
@@ -399,7 +430,7 @@
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Edit Status</h4>
+                                      <h4 class="modal-title">Tambah nomor resi</h4>
                                     </div>
                                     <div class="modal-body">
                                      
@@ -411,28 +442,18 @@
                                             <input class="form-control"type="hidden" name="idtrans" id="idtrans" value="">
                                             <!-- <input type="hidden" name="idkonfirm" id="idkonfirm" value=""> -->
                                               <div class="form-group">
-                                                  <label for="exampleInputFile">Pilih Status</label><br/>
-                                                     <select class="form-control" style="width: 100%;" id="status_pesan" name="status_pesan" onChange="a()" data-toggle="modal" required/>
-                                                        <option>Pilih Status </option>
-                                                          <option value="Pending">Pending</option>
-                                                          <!-- <option value="Menunggu" >Menunggu</option> -->
-                                                          <option value="Produksi" >Produksi</option>
-                                                          <option value="Packing" >Packing</option>
-                                                          <option value="Pengiriman" >Pengiriman</option>
-                                                          <option value="Selesai" >Selesai</option>
-                                                          <option value="Batal" >Batal</option>
-                                                    </select>
+                                                  <input class="form-control"type="hidden" name="status_pesan"  value="Selesai" style="display:none">
                                             
                                         </div>
-                                        <div class="form-group" id="resi" style="display:none">
+                                        <div class="form-group" >
                                           <label for="exampleInputFile">Nomor resi</label><br/>
                                           <input type="text" style="width: 100%;" name="resi" id="resi" value="">
                                         </div>
-                                        <div class="form-group" id="editor1" >
+                                       <!--  <div class="form-group" id="editor1" >
                                           <label for="exampleInputFile">Keterangan</label><br/>
                                         <textarea  name="keterangan" rows="10"  style="border: 1px solid #DF5E96;width:100%;">
                                             </textarea>
-                                          </div>
+                                          </div> -->
                                          </div>
 
                                     </div>

@@ -13,6 +13,18 @@
     text-align: center;
     width: 97%;
 }
+.add_to_cart_button2 {
+    background: none repeat scroll 0 0 #66CC99;
+    border: medium none;
+    color: #fff;
+    padding: 6px 25px;display: inline-block
+}
+.add_to_cart_button1 {
+    background: none repeat scroll 0 0 #66CC99;
+    border: medium none;
+    color: #fff;
+    padding: 6px 25px;display: inline-block
+}
 </style>
 @endsection
 
@@ -84,7 +96,7 @@
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
-                                                            <a class="add_to_cart_button" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a>
+                                                            <a class="add_to_cart_button1" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a>
                                                             
                                                         </td>
                                                         <?php
@@ -111,7 +123,7 @@
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
-                                                            <a class="add_to_cart_button" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a>
+                                                            <a class="add_to_cart_button2" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a>
                                                             
                                                         </td>
                                                         <?php
@@ -338,7 +350,16 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function(){
-          $("#konfirmbukti").click(function(){
+          $(".add_to_cart_button2").click(function(){
+          $('#idtrans').val($(this).data('id'));
+        $('#modal3').modal('show');
+        });
+        });
+        
+    </script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $(".add_to_cart_button1").click(function(){
           $('#idtrans').val($(this).data('id'));
         $('#modal3').modal('show');
         });

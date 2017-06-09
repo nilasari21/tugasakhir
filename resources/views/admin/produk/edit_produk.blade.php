@@ -57,14 +57,16 @@
     <label>Minimal beli (Reseller)</label>
         <input type="text" class="form-control" value="{{$data->minimal_beli}}" name="minimal_beli" placeholder="minimal beli" required>
     
-    <label>Batas Akhir Pembayaran</label>
+    <label>Harga pokok</label>
     <div class='input-group date' >
-                        <input type='text' name="batas_bayar" class="form-control" id="tanggal3" value="{{$data->batas_waktu_bayar}}"required >
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                        <input type='text' name="harga" class="form-control"  value="{{$harga->harga_pokok}}"required >
+                        
                     </div>
-    
+    <label>Jumlah minimal dapat diproduksi</label>
+    <div class='input-group date' >
+                        <input type='text' name="jum_minim" class="form-control"  value="{{$data->jumlah_minimal_produksi}}"required >
+                        
+                    </div>
   <div class="form-group">
          <label>Deskripsi Produk</label><br/>
          <textarea id="editor1" name="editor1" rows="10" cols="80" >

@@ -44,7 +44,7 @@ Route::post('admin/status/{id}', 'BerandaController@postUpdate');
 Route::get('kategori', 'KategoriController@index');
 Route::post('kategori/simpan', 'KategoriController@tambah');
 Route::get('kategori/edit/{id}', 'KategoriController@showEdit');
-Route::post('kategori/update/{id}', 'KategoriController@postUpdate');
+Route::post('kategori/update/{id_kategori}', 'KategoriController@postUpdate');
 
 Route::get('ukuran', 'UkuranController@index');
 Route::post('ukuran/simpan', 'UkuranController@tambah');
@@ -85,6 +85,7 @@ Route::post('readystock/status/{id}', 'ReadystockController@postUpdate');
 Route::get('readystock/tambahrs', 'ReadystockController@tambah');
 Route::post('readystock/simpannonukuran', 'ReadystockController@simpannonukuran');
 Route::post('readystock/simpanukuran', 'ReadystockController@simpanukuran');
+Route::post('readystock/simpan', 'ReadystockController@simpanukurandetail');
 
 Route::get('testimonimachiko', 'TestimoniControllerMachiko@index');
 

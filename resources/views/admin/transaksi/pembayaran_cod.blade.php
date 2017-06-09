@@ -48,6 +48,7 @@
              
             <button type="submit"  class="btn btn-default"><i class="fa  fa-check-square-o"></i>  Lunas</button>
             </form>
+            <button type="submit"  class="btn btn-default"><i class="fa  fa-eye"></i>  Detail</button>
          </td>
         </tr>
         @php

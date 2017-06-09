@@ -2,6 +2,12 @@
 @section('css')
 
 <link rel="stylesheet" href="{{asset("/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
+<style type="text/css">
+
+.autocomplete-suggestion {
+    background: white!important;
+}
+</style>
 @endsection
 @section('content')
 <div class="product-big-title-area">

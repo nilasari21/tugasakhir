@@ -33,10 +33,8 @@ class ProfilControllerMachiko extends Controller {
                       ->first();
         $data->name=$request->nama;
         $data->no_hp=$request->nohp;
-        $data->tgl_lahir=$request->tgl_lahir;
-        $data->email=$request->email;
-        $data->jenis_kelamin=$request->jenis_kelamin;
-        $data->save();
+       $data->email=$request->email;
+       $data->save();
        
         return redirect('profil');
     }
@@ -47,14 +45,8 @@ class ProfilControllerMachiko extends Controller {
         $data->level=$request->level;
         $data->konfirm_admin="Pending";
         $data->toko=$request->nama_toko;
-       if($data->save()){
+        $data->save();
        
-        $admin=User::where('level', '=', 'Admin')->get();
-         foreach ($admin as $admin) {
-        // $transaksi;
-        \Notification::send($admin, new PermintaanUpgrade($data));
-       }  
-      }
         return redirect('profil');
     }
     public function alamat(Request $request) {

@@ -17,7 +17,7 @@
                       <th >Minimal beli produk</th>
                       <th >Jumlah</th>
                       <th >Status</th>
-                      <th >Keterangan status</th>
+                      <!-- <th >Keterangan status</th> -->
                       
         </tr>
       </thead>
@@ -33,8 +33,8 @@
            <td >{{ "Rp ".number_format($row->harga_tambah,2, ',', '.') }}</td> -->
            <td >{{$row->minimal_beli}}</td>
            <td >{{$row->jumlah_beli}}</td>
-           <td >{{$row->status_pesan}}</span></td>
-           <td >{{$row->keterangan_status}}</span></td>
+           <td >{{$row->status_pemesanan_produk}}</span></td>
+           <!-- <td >{{$row->keterangan_status}}</span></td> -->
         </tr>
          @php
          $i++
@@ -106,7 +106,7 @@
         @endif
         <tr >
           <th >Tujuan Pengiriman</th>
-          <td  >   {{$penerima->nama_penerima}}<br/>{{$penerima->no_hp_penerima}},<br/> {{$penerima->kabupaten}}, {{$penerima->provinsi}} </td>
+          <td  >   {{$penerima->nama_penerima}}<br/>{{$penerima->no_hp_penerima}},<br/> {{$penerima->alamat_lengkap}},{{$penerima->kabupaten}}, {{$penerima->provinsi}} </td>
 
         </tr>
       </tbody>

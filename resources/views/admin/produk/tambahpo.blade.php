@@ -94,7 +94,7 @@
         <br/>
     @endforeach
   <div class="form-group">
-         <label>Deskripsi Produk</label>
+         <label>Deskripsi Produk</label><br/>
          <textarea id="editor1" name="editor1" rows="10" cols="80" >
                                             
                     </textarea>

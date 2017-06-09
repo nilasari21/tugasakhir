@@ -36,7 +36,7 @@ public function __construct(){
     public function tambah()
     {
         $kategori = Kategori::all()-> where('status','=','Aktif');
-        $ukuran = Ukuran::all()-> where('status','=','Aktif');
+        $ukuran = Ukuran::all()-> where('status','=','Aktif')->where('nama_ukuran','!=','Tidak ada ukuran');
         $metode = Metode::all();
         
         return view('admin.produk.tambahpo')->with(compact('kategori',$kategori,'ukuran',$ukuran,'metode',$metode));
@@ -201,16 +201,17 @@ public function __construct(){
                         ->where('id',$id)
                         ->select('produk.*','kategori_produk.*')
                         ->first();
-
-        /*$kat=Produk::where('id','=',$id)
-                    ->select('id_kategori')
-                    ->get();
-        */            
+          
         $ukuran= ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
                             
                             ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                             ->select('produk_ukuran.*','ukuran.*')
                             ->get();
+        $harga= ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
+                            
+                            ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
+                            ->select('produk_ukuran.harga_pokok')
+                            ->first();
         $metode= MetodeProduk::where('metode_produk.produk_id','=',$id)
                             
                             ->join('metode','metode.id','=','metode_produk.metode_id')
@@ -218,7 +219,7 @@ public function __construct(){
                             ->get();
 
                 
-        return view('admin.produk.detail_produk')->with(compact('data',$data,'ukuran',$ukuran,'metode',$metode));
+        return view('admin.produk.detail_produk')->with(compact('data',$data,'ukuran',$ukuran,'metode',$metode,'harga',$harga));
     }
      public function showEdit($id)
     {
@@ -228,19 +229,20 @@ public function __construct(){
                     ->select('produk.*','kategori_produk.*')
                     ->first();
        $kategori = Kategori::all()-> where('status','=','Aktif');
-        
-        return view('admin.produk.edit_produk')->with(compact('data',$data,'kategori',$kategori));
+        $harga=ProdukUkuran::where('produk_id','=',$id)
+                            ->select('harga_pokok')
+                            ->first();
+        return view('admin.produk.edit_produk')->with(compact('data',$data,'kategori',$kategori,'harga',$harga));
     }
 public function simpanukurandetail(Request $request)
     {
      
       $ukuran = ProdukUkuran::where('id_produk_ukuran','=',$request->idkonfirm)->first();
-// dd($request->id);
-          $ukuran->harga_pokok=$request->hargap;
+
           $ukuran->harga_tambah=$request->hargat;
           $ukuran->save();
           $id=$request->id;
-          // $url="{{ url('preorder/detail/'.$id ) }}";
+
      return redirect()->action(
     'PreorderController@detail', ['id' => $id]
 );
@@ -248,13 +250,13 @@ public function simpanukurandetail(Request $request)
 
     public function postUpdate($id, Request $request)
     {
-        // proses update data
+
         $data = MetodeProduk::where('id_metode','=',$id)->first();
         $data->status=$request->status;
         $data->save();
         
        $id=$request->idpp;
-          // $url="{{ url('preorder/detail/'.$id ) }}";
+
      return redirect()->action(
     'PreorderController@detail', ['id' => $id]
 );
@@ -262,7 +264,7 @@ public function simpanukurandetail(Request $request)
 
    public function edit($id, Request $request)
     {
-        // proses update data
+
         $produk = Produk::where('id','=',$id)->first();
        $produk->nama_produk= $request->nama_produk;
      
@@ -270,15 +272,18 @@ public function simpanukurandetail(Request $request)
         $produk->tgl_akhir_po= $request->tgl_akhir_po;
         $produk->berat= $request->berat;
         $produk->minimal_beli= $request->minimal_beli;
-       $produk->jumlah_minimal_produksi= $request->min_produksi;
+       $produk->jumlah_minimal_produksi= $request->jum_minim;
         
         
         $produk->keterangan=$request->editor1;
         $produk->id_kategori=$request->id_kategori;
           $produk->save();
         
-       $id=$request->idpp;
-          // $url="{{ url('preorder/detail/'.$id ) }}";
+       $hargaa=$request->harga;
+       
+         $harga=ProdukUkuran::where('produk_id','=',$id)
+                            ->update(['harga_pokok'=>$hargaa]);
+
      return redirect('preorder');
     
 

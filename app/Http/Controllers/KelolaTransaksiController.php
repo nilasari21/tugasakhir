@@ -41,6 +41,7 @@ public function __construct(){
                         ->where('transaksi.status_bayar','=','Belum lunas')
                         ->where('transaksi.status_pemesanan_produk','=','Pending')
                         ->where('transaksi.status_jenis_pesan','=','Terima')
+                        ->groupby('transaksi.id_transaksi')
                         ->get();
     // dd( );
       $tunggu = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
@@ -51,6 +52,7 @@ public function __construct(){
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
                         ->where('transaksi.status_pemesanan_produk','=','Pending')
+                        ->groupby('transaksi.id_transaksi')
                         ->get();
                         // dd($data);
 
@@ -81,6 +83,7 @@ public function __construct(){
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
                         ->where('transaksi.status_pemesanan_produk','=','Produksi')
+                        ->groupby('transaksi.id_transaksi')
                         ->get();
       $packing = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
@@ -91,6 +94,7 @@ public function __construct(){
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
                         ->where('transaksi.status_pemesanan_produk','=','Packing')
+                        ->groupby('transaksi.id_transaksi')
                         ->get();
       $pengiriman = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
@@ -101,6 +105,7 @@ public function __construct(){
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
                         ->where('transaksi.status_pemesanan_produk','=','Pengiriman')
+                        ->groupby('transaksi.id_transaksi')
                         ->get();
       $selesai = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
@@ -111,6 +116,7 @@ public function __construct(){
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Lunas')
                         ->where('transaksi.status_pemesanan_produk','=','Selesai')
+                        ->groupby('transaksi.id_transaksi')
                         ->get();
       $batal = Transaksi::join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                         
@@ -121,6 +127,7 @@ public function __construct(){
                         ->select('transaksi.*','produk.*','detail_transaksi.*','users.*','produk_ukuran.*','ukuran.*')
                         ->where('transaksi.status_bayar','=','Belum lunas')
                         ->where('transaksi.status_pemesanan_produk','=','Batal')
+                        ->groupby('transaksi.id_transaksi')
                         ->get();
                        
         return view('admin.transaksi.kelola_transaksi')->with(compact('data',$data,'produksi',$produksi,'packing',$packing,'pengiriman',$pengiriman,'selesai',$selesai,'tunggu',$tunggu,'batal',$batal));
@@ -205,26 +212,14 @@ public function __construct(){
 
     public function postUpdate(Request $request)
     {
-        // dd($request->idtrans);
-        // proses update data
       if($request->status_pesan == "Terima"){
-        // dd($request->total1);
         $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
         $data->total_bayar=($request->total1 - $request->diskon);
-        $data->status_jenis_pesan = $request->status_pesan;
-        // $transaksi->created_at= Carbon::now(7);
       $data->updated_at= Carbon::now(7);
         $data->save();
       }if($request->status_pesan == "Tolak"){
-        
-
-        $det=DetailTransaksi::where('id_transaksi',$request->idtrans)
-                            
-                            ->update([
-                                'status_pesan'=>"Batal"
-                            ]);
-                            
-       
+        $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
+        $data->status_pemesanan_produk = "Batal";
         foreach ($request->iduser as $key=>$val ) {
           $keranjang = new Keranjang();
           $keranjang->user_id = $val;
@@ -235,20 +230,9 @@ public function __construct(){
           $keranjang->created_at= Carbon::now(7);
           $keranjang->updated_at= Carbon::now(7);
           $keranjang->save();
-         /* if( $keranjang->save()){
-       
-        $user=User::all();
-       foreach ($user as $user) {
-           
-       
-       \Notification::send($user, new ResellerTolak($keranjang));
-       
-      }
-  }*/
-      }
+            }
         }
        $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
-       // dd($data->name);
         $data->status_jenis_pesan = $request->status_pesan;
        $data->save();
         
@@ -263,20 +247,18 @@ public function __construct(){
         // dd($request->keterangan);
         // proses update data
       if($request->status_pesan == "Selesai"){
-        $data = DetailTransaksi::where('id_detail_transaksi',$request->iddetail)->first();
-        // $data->s=$request->total - $request->diskon;
-        $data->status_pesan = $request->status_pesan;
-        $data->keterangan_status = $request->keterangan;
+        $data = Transaksi::where('id_transaksi',$request->iddetail)->first();
+       
+        $data->status_pemesanan_produk = "Selesai";
+        $data->resi= $request->resi;
         $data->save();
 
-        $transaksi=Transaksi:: where('id_transaksi',$data->id_transaksi)->first();
-        $transaksi->resi= $request->resi;
-        $transaksi->save();
+        
       }else{
-        $data = DetailTransaksi::where('id_detail_transaksi',$request->iddetail)->first();
-        // $data->s=$request->total - $request->diskon;
-        $data->status_pesan = $request->status_pesan;
-        $data->keterangan_status = $request->keterangan;
+        $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
+       
+        $data->status_pemesanan_produk = $request->status_pesan;
+        // $transaksi->resi= $request->resi;
         $data->save();
         
       }

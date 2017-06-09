@@ -24,7 +24,7 @@
         <tr>
           <th>ID</th>
           <th>Nama</th>
-          <th>Jenis Kelamin</th>
+          <!-- <th>Jenis Kelamin</th> -->
           <th>No Handphone</th>
           <th>Email</th>
           <th>Level</th>
@@ -38,7 +38,7 @@
         <tr>
           <td>{{ $row->id }}</td>
           <td>{{ $row->name }}</td>
-          <td>{{ $row->jenis_kelamin }}</td>
+          <!-- <td>{{ $row->jenis_kelamin }}</td> -->
           <td>{{ $row->no_hp }}</td>
           <td>{{ $row->email }}</td>
           <td>{{ $row->level }}</td>

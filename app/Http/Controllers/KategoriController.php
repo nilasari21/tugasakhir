@@ -39,6 +39,7 @@ public function __construct(){
     {
         // proses update data
         $data = Kategori::where('id_kategori',$id_kategori)->first();
+        // dd($data);
         $data->nama_kategori = $request->nama_kategori;
         $data->status = $request->status;
         $data->save();

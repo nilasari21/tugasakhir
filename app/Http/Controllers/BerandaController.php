@@ -9,6 +9,7 @@ use App\Produk;
 use App\Users;
 use App\RiwayatPo;
 use Carbon\Carbon;
+// use DB;
 use Illuminate\Http\Request;
 
 class BerandaController extends Controller {
@@ -73,16 +74,164 @@ class BerandaController extends Controller {
     }
     public function postUpdate($id, Request $request){
         if($request->status=="Produksi"){
-        $data=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
+        $data1=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
                         ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
                         ->join('produk','produk.id','produk_ukuran.produk_id')
-                        // ->select('transaksi.*')
-                        ->where('produk.id','=',$id)
+                       ->where('produk.id','=',$id)
+                        ->where('produk.jenis','=','PreOrder')
                         ->where('transaksi.status_bayar','=','Lunas')
-                        ->update(['status_pemesanan_produk'=>'Produksi']);
+                        ->select('transaksi.id_transaksi')
+                        ->get();
+                        
+        foreach ($data1 as $key ) {
+            $data2=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
+                        
+                        ->where('transaksi.id_transaksi','=',$key->id_transaksi)
+                        ->select('detail_transaksi.id_transaksi',(DB::raw ('count(detail_transaksi.id_detail_transaksi)as b')))
+                        ->get();
+            foreach ($data2 as $key ) {
+            
+            if($key->b==1){
+              $data=Transaksi::where('id_transaksi','=',$key->id_transaksi)
+                            ->where('status_bayar','=','Lunas')
+                        ->first();
+                $data->status_pemesanan_produk="Produksi";
+                $data->save();
+                        
+            }else{
+                $data=Transaksi::where('id_transaksi','=',$key->id_transaksi)
+                                ->where('status_bayar','=','Lunas')
+                                ->first();
+                        
+                        $data->status_pemesanan_produk="Pending";
+                $data->save();
+            }
+        }
+        
+                        
+        }
+        // dd($data2);
+        
         $status= new RiwayatPo;
         $status->id_produk=$id;
         $status->id_status_po=2;
+        $status->updated_at=Carbon::now(8);
+        $status->save();    
+        }
+        if($request->status=="Packing"){
+        $data1=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
+                        ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
+                        ->join('produk','produk.id','produk_ukuran.produk_id')
+                       ->where('produk.id','=',$id)
+                        ->where('produk.jenis','=','PreOrder')
+                        ->where('transaksi.status_bayar','=','Lunas')
+                        ->select('transaksi.id_transaksi')
+
+                        ->get();
+                        
+        foreach ($data1 as $key ) {
+            $data2=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
+                        
+                        ->where('transaksi.id_transaksi','=',$key->id_transaksi)
+                        ->select('detail_transaksi.id_transaksi',(DB::raw ('count(detail_transaksi.id_detail_transaksi)as b')))
+                        ->get();
+                        // dd($data2);
+            foreach ($data2 as $key ) {
+            // dd($data2);
+            if($key->b==1){
+              $data=Transaksi::where('id_transaksi','=',$key->id_transaksi)
+                            ->where('status_bayar','=','Lunas')
+                        ->first();
+                        // dd($data);
+                $data->status_pemesanan_produk="Packing";
+                $data->save();
+                        
+            }
+        }
+        
+                        
+        }
+        // dd($data2);
+        
+        $status= new RiwayatPo;
+        $status->id_produk=$id;
+        $status->id_status_po=3;
+        $status->updated_at=Carbon::now(8);
+        $status->save();    
+        }
+        if($request->status=="Pengiriman"){
+        $data1=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
+                        ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
+                        ->join('produk','produk.id','produk_ukuran.produk_id')
+                       ->where('produk.id','=',$id)
+                        ->where('produk.jenis','=','PreOrder')
+                        ->where('transaksi.status_bayar','=','Lunas')
+                        ->select('transaksi.id_transaksi')
+                        ->get();
+                        
+        foreach ($data1 as $key ) {
+            $data2=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
+                        
+                        ->where('transaksi.id_transaksi','=',$key->id_transaksi)
+                        ->select('detail_transaksi.id_transaksi',(DB::raw ('count(detail_transaksi.id_detail_transaksi)as b')))
+                        ->get();
+            foreach ($data2 as $key ) {
+            
+            if($key->b==1){
+              $data=Transaksi::where('id_transaksi','=',$key->id_transaksi)
+                            ->where('status_bayar','=','Lunas')
+                        ->first();
+                $data->status_pemesanan_produk="Pengiriman";
+                $data->save();
+                        
+            }
+        }
+        
+                        
+        }
+        // dd($data2);
+        
+        $status= new RiwayatPo;
+        $status->id_produk=$id;
+        $status->id_status_po=4;
+        $status->updated_at=Carbon::now(8);
+        $status->save();    
+        }
+        if($request->status=="Batal"){
+        $data1=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
+                        ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
+                        ->join('produk','produk.id','produk_ukuran.produk_id')
+                       ->where('produk.id','=',$id)
+                        ->where('produk.jenis','=','PreOrder')
+                        ->where('transaksi.status_bayar','=','Lunas')
+                        ->select('transaksi.id_transaksi')
+                        ->get();
+                        
+        foreach ($data1 as $key ) {
+            $data2=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
+                        
+                        ->where('transaksi.id_transaksi','=',$key->id_transaksi)
+                        ->select('detail_transaksi.id_transaksi',(DB::raw ('count(detail_transaksi.id_detail_transaksi)as b')))
+                        ->get();
+            foreach ($data2 as $key ) {
+            
+            if($key->b==1){
+              $data=Transaksi::where('id_transaksi','=',$key->id_transaksi)
+                            ->where('status_bayar','=','Lunas')
+                        ->first();
+                $data->status_pemesanan_produk="Batal";
+                $data->save();
+                        
+            }
+        }
+        
+                        
+        }
+        // dd($data2);
+        
+        $status= new RiwayatPo;
+        $status->id_produk=$id;
+        $status->id_status_po=6;
         $status->updated_at=Carbon::now(8);
         $status->save();    
         }

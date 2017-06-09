@@ -44,9 +44,9 @@
     <label>Minimal beli (Reseller)</label>
         <input type="text" class="form-control" value="{{$data->minimal_beli}}" name="minimal_beli" placeholder="minimal beli" required>
     
-    <label>Batas Akhir Pembayaran (Jam)</label>
+    <label>Harga pokok</label>
     
-                        <input type='text' name="batas_bayar" class="form-control"  value="{{$data->batas_jam}}"required >
+                        <input type='text' name="harga" class="form-control"  value="{{$harga->harga_pokok}}"required >
                        
                     </div>
     

@@ -103,7 +103,7 @@
                                 <td><h5> {{$data->minimal_beli}}</h5></td>
                             </tr>
                             
-                              @if($data->jenis=="PreOrder")
+                              
                               <tr>
                                 <td><h5>Mulai Pre Order </h5></td>
                                 <td><h5> : </h5></td>
@@ -115,17 +115,15 @@
                                 <td><h5>{{$data->tgl_akhir_po}}</h5></td>
                               </tr>
                               <tr>
-                                <td><h5>Batas waktu bayar </h5></td>
+                                <td><h5>Harga pokok</h5></td>
                                 <td><h5> : </h5></td>
-                                <td><h5>{{$data->batas_waktu_bayar}}</h5></td>
+                                <td><h5>{{$harga->harga_pokok}}</h5></td>
                               </tr>
-                              @else
                               <tr>
-                                <td><h5>Batas waktu bayar </h5></td>
+                                <td><h5>Jumlah minimal dapat diproduksi</h5></td>
                                 <td><h5> : </h5></td>
-                                <td><h5>{{$data->batas_jam}} Jam</h5></td>
+                                <td><h5>{{$data->jumlah_minimal_produksi}}</h5></td>
                               </tr>
-                              @endif
                             
                             
                             <tr>
@@ -136,79 +134,35 @@
                             
                             
                         </table>
-                        @if($data->jenis=="Ready Stock")
-                       <table id="example1" class="table dataTable table-striped"style="width: 80%;margin-left: 15%;" >
+                       @php
+                         $i=1;
+                         @endphp
+                         @foreach($ukuran as $row)
+                         <input type="hidden" name="ukuuu" id="ukuuu{{$i}}" value="{{$row->nama_ukuran}}">
+                         @php
+                         $i++;
+                         @endphp
+                         @endforeach
+                       <table id="example2" class="table dataTable table-striped"style="width: 80%;margin-left: 15%;display:block" >
                             <thead>
                               <th>Nama Ukuran</th>
-                              <th>Stock</th>
-                              <th>Harga pokok</th>
+                              
+                              <!-- <th>Harga pokok</th> -->
                               <th>Harga tambah</th>
                               <th>Aksi</th>
                             </thead>
                             @foreach($ukuran as $row)
                             <tr>
-                              <td>{{$row->nama_ukuran}}</td>
-                              <td>{{$row->stock}}</td>
-                              <td>{{$row->harga_pokok}}</td>
+                              <td>{{$row->nama_ukuran}} </td>
+                              
+                              <!-- <td>{{$row->harga_pokok}}</td> -->
                               <td>{{$row->harga_tambah}}</td>
-                              <td><a class="btn btn-default2" border="1 solid #999" data-s="{{$row->stock}}" data-hp="{{$row->harga_pokok}}" data-ht="{{$row->harga_tambah}}" data-id="{{$row->id_produk_ukuran}}" id="buttoncheckout" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{url('profil/edit/'.$data->id)}}"><i class="fa fa-edit"></i>   Edit Produk</a></td>
+                              <td><a class="btn btn-default2" border="1 solid #999"   data-idp="{{$data->id}}" data-id="{{$row->id_produk_ukuran}}" data-hp="{{$row->harga_pokok}}" data-ht="{{$row->harga_tambah}}" id="editukuran" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#"><i class="fa fa-edit"></i>   Edit ukuran</a></td>
                             </tr>
                             @endforeach
                         </table>
-                        @else
-
-                       <table id="example1" class="table dataTable table-striped"style="width: 80%;margin-left: 15%;" >
-                            <thead>
-                              <th>Nama Ukuran</th>
-                              
-                              <th>Harga pokok</th>
-                              <th>Harga tambah</th>
-                              <th>Aksi</th>
-                            </thead>
-                            @foreach($ukuran as $row)
-                            <tr>
-                              <td>{{$row->nama_ukuran}} {{$row->id_produk_ukuran}}</td>
-                              
-                              <td>{{$row->harga_pokok}}</td>
-                              <td>{{$row->harga_tambah}}</td>
-                              <td><a class="btn btn-default2"   data-idp="{{$data->id}}" data-id="{{$row->id_produk_ukuran}}" data-hp="{{$row->harga_pokok}}" data-ht="{{$row->harga_tambah}}" id="editukuran" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#"><i class="fa fa-edit"></i>   Edit ukuran</a></td>
-                            </tr>
-                            @endforeach
-                        </table>
-                        @endif
-                      <!-- <table id="example1" class="table dataTable table-striped"style="width: 80%;margin-left: 15%;" >
-                            <thead>
-                              <th>Nama Metode</th>
-                              
-                              <th>Status</th>
-                              <th>Aksi</th>
-                              
-                            </thead>
-                            @foreach($metode as $row)
-                            <tr>
-                              <td>{{$row->metode}}  {{$row->id_metode}}</td>
-                              
-                              <td>{{$row->status}}</td>
-                              <td>
-                               @if($row->status=="Aktif")
-                              <form method="post" action="{{ url('preorder/status/'.$row->id_metode) }}">
-                                {{ csrf_field() }}
-                                <input type="text" name="idpp" value="{{$data->id}}">
-                                <input type="hidden" name="status" value="Tidak Aktif">
-                              <button type="submit"  class="btn btn-default"><i class="fa  fa-check-square-o"></i>  Tidak Aktif</button>
-                              </form>
-                              @else
-                              <form method="post" action="{{ url('preorder/status/'.$row->id_metode) }}">
-                                {{ csrf_field() }}
-                                <input type="text" name="idpp" value="{{$data->id}}">
-                                <input type="hidden" name="status" value="Aktif">
-                              <button type="submit"  class="btn btn-default"><i class="fa  fa-check-square-o"></i>  Aktif</button>
-                              </form>
-                              @endif
-                            </td>
-                            </tr>
-                            @endforeach
-                        </table> -->
+                       
+                      
                         <hr>
                         </div>
             </div>
@@ -233,13 +187,13 @@
                                       <div class="row">
                                           {{ csrf_field() }}
                                           <div class="col-md-12" >
-                                            <input type="text" name="id" id="id" value="">
-                                            <input type="text" name="idkonfirm" id="idkonfirm" value="">
-                                              <div class="form-group">
+                                            <input type="hidden" name="id" id="id" value="">
+                                            <input type="hidden" name="idkonfirm" id="idkonfirm" value="">
+                                              <!-- <div class="form-group">
                                                   <label for="exampleInputFile">Harga Pokok</label><br/>
                                                   <input type="text" name="hargap" id="hargap" value="" class="form-control">
                                             
-                                        </div>
+                                        </div> -->
                                         <div class="form-group">
                                                   <label for="exampleInputFile">Harga tambah</label><br/>
                                                   <input type="text" name="hargat" id="hargat" value="" class="form-control">
@@ -268,7 +222,7 @@
         $(document).ready(function(){
           $(".btn-default2").click(function(){
           $('#idkonfirm').val($(this).data('id'));
-          $('#hargap').val($(this).data('hp'));
+          // $('#hargap').val($(this).data('hp'));
           $('#hargat').val($(this).data('ht'));
           $('#id').val($(this).data('idp'));
         $('#modal3').modal('show');
@@ -277,5 +231,38 @@
            
     </script>
 
-   
+<script type="text/javascript">
+            $(document).ready(function (){
+       
+      var pembanding=false;
+@php
+            $i=1;
+            
+            @endphp
+             
+      var ukuuu = $('#ukuuu{{$i}}').val();
+      // var status_pesan = $('#status_pesan').val();
+      console.log(ukuuu);
+     if(ukuuu=="Tidak ada ukuran"){
+
+        pembanding = true;
+      }
+      console.log(pembanding);
+      
+        
+       @php
+             $i++;
+             
+             @endphp
+             if(pembanding==true){
+              document.getElementById('example2').style.display = 'none';
+             }if(pembanding==false ){
+              document.getElementById('example2').style.display = 'block';
+             }
+             
+     
+
+            });
+        
+    </script>   
     @endsection

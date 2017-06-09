@@ -40,40 +40,28 @@ public function __construct(){
     
     public function tambah(Request $request)
     {
-        
-        // dd($status);
         $keranjang= Keranjang::where('user_id','=',Auth::user()->id)
-                            ->where('id_produk_ukuran','=',$request->id_produk_ukuran)
-                            ->first();
-        // dd($request->jumlah, $request->id_produk_ukuran);
+                            ->where('id_produk_ukuran','=',$request->id_produk_ukuran)->first();
         $status=$request->status;
         if($status=="Ready Stock"){
             $produk= ProdukUkuran::where('id_produk_ukuran','=',$request->id_produk_ukuran)->first();
-            // dd($produk);
             $produk->stock= $produk->stock- $request->jumlah;
             $produk->save();
-
         }  else{
             $produk= ProdukUkuran::where('id_produk_ukuran','=',$request->id_produk_ukuran)->first();
-            // dd($produk);
             $produk->stock="NULL";
             $produk->save();
         }
         if(count($keranjang)!=0){
             $keranjang1= Keranjang::where('user_id','=',Auth::user()->id)
-                            ->where('id_produk_ukuran','=',$request->id_produk_ukuran)
-                            ->first();
+                            ->where('id_produk_ukuran','=',$request->id_produk_ukuran)->first();
             $keranjang1->jumlah=$keranjang1->jumlah + $request->jumlah;
+            // $keranjang1->berat_total=$keranjang1->berat_total + $request->
             $keranjang->created_at= Carbon::now(7);
           $keranjang->updated_at= Carbon::now(7);
             $keranjang1->save();
-            
-            // dd($status);
-            
         }else{
-          $data = new Keranjang; // new Model
-
-        // $data->produk_id = $request->produk_id;
+          $data = new Keranjang; 
         $data->user_id = Auth::user()->id;
         $data->id_produk_ukuran = $request->id_produk_ukuran;
         $data->jumlah = $request->jumlah;
@@ -81,44 +69,24 @@ public function __construct(){
         $berat= Produk::where('id','=',$request->produk_id)
                     ->first();
         $data->berat_total=$berat->berat*$request->jumlah;
-        // $hargatambah=0;
         $produkukuran= ProdukUkuran::where('id_produk_ukuran','=',$request->id_produk_ukuran)
-                    ->first();
-                    // dd($produkukuran);
+                    ->first();            
         $hargatambah=$produkukuran->harga_tambah;
         
         $data->Total_harga=($produkukuran->harga_pokok * $request->jumlah)+$hargatambah;
         $data->created_at= Carbon::now(7);
           $data->updated_at= Carbon::now(7);
         $data->save();
-        // dd();
         $status=$request->status;
-        // dd($status);
-        /*if($status=="Ready Stock"){
-            $produk= ProdukUkuran::where('id_produk_ukuran','=',$request->id_produk_ukuran)->first();
-            $produk->stock=$produk->stock - 1;
-            $produk->save();
-
-        }  else{
-            $produk= ProdukUkuran::where('id_produk_ukuran','=',$request->id_produk_ukuran)->first();
-            // dd($produk);
-            $produk->stock="NULL";
-            $produk->save();
-        }*/
         }
         $notification = array(
                     'message' => 'Produk berhasil disimpan di keranjang', 
                     'alert-type' => 'success'
                 );
-        
-        // $request->session()->flash('alert-success', 'User was successful added!');
         return redirect()
                 ->back()
                 ->with($notification);
-                
-
-       //
-    }
+      }
 
     public function getDelete($id)
     {

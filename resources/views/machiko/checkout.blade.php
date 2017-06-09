@@ -2,6 +2,12 @@
 @section('css')
 
 <link rel="stylesheet" href="{{asset("/machikoo/bootstrap-3.2.0/dist/css/bootstrap.min.css")}}">
+<style type="text/css">
+
+.autocomplete-suggestion {
+    background: white!important;
+}
+</style>
 @endsection
 @section('content')
 <!--  -->
@@ -31,7 +37,7 @@
                                 <div class="product-content-right">
                                     <div class="woocommerce">
                                         <form method="post" action="#" name="autoSumForm">
-                                            <div class="table-responsive" style="display:none">
+                                            <div class="table-responsive" style="display:block">
                                             <table cellspacing="0" class="shop_table cart" style="width:100%;align:center" >
                                                 <thead >
                                                     <tr >

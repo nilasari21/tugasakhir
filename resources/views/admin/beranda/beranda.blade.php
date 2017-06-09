@@ -15,7 +15,7 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="{{ url('transaksi_reseller') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ url('transaksi_reseller') }}" class="small-box-footer">Lihat detail <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -30,7 +30,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="{{ url('transaksi') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ url('transaksi') }}" class="small-box-footer">Lihat detail <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -45,7 +45,7 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="{{ url('upgrade_user') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ url('upgrade_user') }}" class="small-box-footer">Lihat detail <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -60,7 +60,7 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="{{ url('konfirmasibayar') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ url('konfirmasibayar') }}" class="small-box-footer">Lihat detail <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
@@ -74,7 +74,7 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="{{ url('pembayaran_cod') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ url('pembayaran_cod') }}" class="small-box-footer">Lihat detail <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

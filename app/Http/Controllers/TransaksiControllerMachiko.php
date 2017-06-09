@@ -261,14 +261,14 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);
       
-     /* if($transaksi->save()){
+      if($transaksi->save()){
        
         $admin=User::where('level', '=', 'Admin')->get();
          foreach ($admin as $admin) {
         
         \Notification::send($admin, new PostNewNotification($transaksi));
        }  
-      }*/
+      }
       }else{
         $transaksi = new Transaksi; 
      
@@ -286,8 +286,8 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->kurir=$request->kurir;
       $transaksi->status_pemesanan_produk="Pending";
       $transaksi->total_bayar=$request->total;
-      $transaksi->created_at= Carbon::now(7);
-      $transaksi->updated_at= Carbon::now(7);
+      // $transaksi->created_at= Carbon::now(7);
+      // $transaksi->updated_at= Carbon::now(7);
       $transaksi->save();
       
       }

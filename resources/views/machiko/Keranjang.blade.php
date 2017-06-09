@@ -147,8 +147,8 @@
                                                         </td>
                                                         <td class="product-name">
                                                             
-                                                            <span class="amount" ><input name="berat[]" type="text" id="berat{{$i}}"  value="{{ $row->berat }} " style="width:70px" readonly></span> 
-                                                            <span class="amount" ><input name="berat2[]" type="hidden" id="beratto{{$i}}"  value="" style="width:70px" readonly></span> 
+                                                            <span class="amount" ><input name="berat[]" type="hidden" id="berat{{$i}}"  value="{{ $row->berat }} " style="width:70px" readonly></span> 
+                                                            <span class="amount" ><input name="berat2[]" type="text" id="beratto{{$i}}"  value="" style="width:70px" readonly></span> 
                                                         </td>
                                                        <td class="product-subtotal" >
                                                             <span class="amount" ><input name="total[]" type="text" id="total{{$i}}"  value="" style="width:100px" readonly></span> 
