@@ -110,8 +110,8 @@
                             </div> 
                             <br/>
                              @foreach($transak as $trans)
-                             <span>Catatan : Silahkan upload bukti pembayaran maksimal 48 jam setelah chekout. 
-                              Jika dalam 48 jam belum ada bukti yang di upload, maka transaksi otomatis dibatalkan</span><br/>
+                             <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Catatan : Silahkan upload bukti pembayaran maksimal 48 jam setelah chekout. 
+                              Jika dalam 48 jam belum ada bukti yang di upload, maka transaksi otomatis dibatalkan (Kecuali COD)</span><br/>
                     <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Nomor Transaksi</label>
                         <span> {{$data->id_transaksi}}</span>
@@ -165,6 +165,11 @@
                         <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Kurir</label>
                         <span>JNE  {{$trans->kurir}}</span>
+                        @if($trans->kurir =="COD")
+                        (Silahkan koordinasi lokasi pembayaran dengan admin di nomor 085640235938)
+                        @else
+
+                        @endif
                       </div><br/>
                           <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Total pembayaran</label>
@@ -178,7 +183,7 @@
 <!-- </body> -->
 <div class="row no-print" style="text-align:center">
         <div class="col-xs-12">
-          <a href="{{url('cetak')}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <!-- <a href="{{url('cetak')}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
          <!--  <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
           </button>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">

@@ -150,8 +150,8 @@
                                 </div>
                               </div>
 <div class="single-product-area">
-    <div class="zigzag-bottom">
-    </div>
+    <!-- <div class="zigzag-bottom">
+    </div> -->
     <div class="container animated infinite slideInUp" style="animation-iteration-count: inherit;">
     <div class="col-sm-12">       
             <div class="form-group">
@@ -418,8 +418,8 @@
                       
                       
                     </div>
-                    <input type="text" id="ongkoskirim" name="ongkoskirim"  value="" class="ongkir">
-                     <input type="text" id="kurir" name="kurir"  value="" class="ongkir">
+                    <input type="hidden" id="ongkoskirim" name="ongkoskirim"  value="" class="ongkir">
+                     <input type="hidden" id="kurir" name="kurir"  value="" class="ongkir">
                     @foreach($beratharga as $d)
                     <div class="form-group">
                       <label for="inputName" class="col-sm-3 control-label" >Total pembayaran</label>
@@ -515,7 +515,7 @@ function cod() {
                 if(asal==39 || asal==501 ||asal==419 ||asal==210 ||asal==135 ){
                   // document.getElementById('ongkos3').style.display = 'block';
                   document.getElementById('ongkos2').style.display = 'block';
-                  // document.getElementById('co').style.display = 'block';
+                  document.getElementById('co').style.display = 'block';
                   
                 } else{
                   document.getElementById('ongkos3').style.display = 'none';

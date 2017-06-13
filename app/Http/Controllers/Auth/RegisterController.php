@@ -92,7 +92,7 @@ class RegisterController extends Controller
             'name' => Input::get('name'),
             'email' => Input::get('email'),
             'password' => Hash::make(Input::get('password')),
-            'confirmation_code' => $confirmation_code,
+            // 'confirmation_code' => $confirmation_code,
             'no_hp' => Input::get ('nohp'),
             
             'konfirm_admin' => Input::get('konfirm'),

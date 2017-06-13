@@ -33,7 +33,7 @@
            <td >{{ "Rp ".number_format($row->harga_tambah,2, ',', '.') }}</td> -->
            <td >{{$row->minimal_beli}}</td>
            <td >{{$row->jumlah_beli}}</td>
-           <td >{{$row->status_pemesanan_produk}}</span></td>
+           <td >{{$row->c}}</span></td>
            <!-- <td >{{$row->keterangan_status}}</span></td> -->
         </tr>
          @php

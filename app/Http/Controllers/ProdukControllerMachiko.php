@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 // use App\Http\Controllers\HeaderController;
 use App\Produk;
 use App\Kategori;
+use App\RiwayatPo;
 use App\ProdukUkuran;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -61,7 +62,7 @@ class ProdukControllerMachiko extends Controller {
                 ->where('id',$id)
                 ->where('tgl_akhir_po','>=',$waktu)
                 ->first();
-        
+        // dd($a);
         $kat=Produk::where('id','=',$id)
                     ->select('id_kategori')
                     ->get();
@@ -80,14 +81,18 @@ class ProdukControllerMachiko extends Controller {
                             ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                             ->select('produk_ukuran.*','ukuran.*')
                             ->get();
-
+        $riwayat= RiwayatPo::where('id_produk','=',$id)
+                            ->orderby('id_riwayat_po','desc')
+                            ->select('*')
+                            ->first();
+// dd($riwayat);
                             // dd($ukuran);
         $harga_pokok=ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
                             ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
                             ->first();
        
         return view('machiko.detailProduk')->with(compact('data',$data,'ukuran',$ukuran,'harga_pokok',$harga_pokok,
-            'a',$a,'b',$b,'ukuran2',$ukuran2));
+            'a',$a,'b',$b,'ukuran2',$ukuran2,'riwayat',$riwayat));
     }
     public function search(Request $request){
         

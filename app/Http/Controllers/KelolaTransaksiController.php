@@ -149,6 +149,7 @@ public function __construct(){
       $data=Transaksi::leftjoin('users','users.id','transaksi.id_user')
                         ->where('transaksi.jenis_pemesanan','=','Reseller')
                         ->where('transaksi.status_jenis_pesan','=','Tunggu')
+                        ->where('transaksi.status_pemesanan_produk','!=','Batal')
                         ->select('transaksi.*','users.*')
                         ->get();
 
@@ -191,7 +192,7 @@ public function __construct(){
                         ->leftjoin('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
                         ->leftjoin('produk','produk.id','produk_ukuran.produk_id')
                         ->leftjoin('ukuran','produk_ukuran.ukuran_id','ukuran.id')
-                        ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*','ukuran.*',(DB::raw ('SUM((detail_transaksi.jumlah_beli)) as jumlah_beli')))
+                        ->select('transaksi.*','produk.*','detail_transaksi.*','produk_ukuran.*','ukuran.*',(DB::raw ('SUM((detail_transaksi.jumlah_beli)) as jumlah_beli')), 'detail_transaksi.status as c')
                         ->groupby('produk_ukuran.produk_id')
                         // ->distinct()
                         ->where('transaksi.id_transaksi','=',$id)
@@ -215,7 +216,7 @@ public function __construct(){
       if($request->status_pesan == "Terima"){
         $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
         $data->total_bayar=($request->total1 - $request->diskon);
-      $data->updated_at= Carbon::now(7);
+      $data->updated_at= Carbon::now(8);
         $data->save();
       }if($request->status_pesan == "Tolak"){
         $data = Transaksi::where('id_transaksi',$request->idtrans)->first();

@@ -17,9 +17,9 @@ class DetailTransaksi extends Model
 
     protected $table = 'detail_transaksi';
     protected $primaryKey = 'id_detail_transaksi';
-    // public $timestamps = false;
+    public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id_detail_transaksi','id_transaksi','id_produk_ukuran','status_pesan','keterangan_status',
+    protected $fillable = ['id_detail_transaksi','id_transaksi','id_produk_ukuran','status','keterangan_status',
     'jumlah_beli','keterangan'];
     // protected $hidden = [];
     // protected $dates = [];

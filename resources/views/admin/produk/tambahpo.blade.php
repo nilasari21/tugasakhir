@@ -47,20 +47,27 @@
     </div>
     <div class="harga_pokok" id="harga_pokok"  >
            
-            <input type="text" id="harga_pokok" name="harga_pokok" placeholder="harga pokok produk" style="padding:5px; width:25%;" >
+            <input type="text" id="harga_pokok2" name="harga_pokok2" placeholder="harga pokok produk" style="padding:5px; width:25%;" >
             </div>
     <div class="formukuran" id="ukuran1" style="display:none" >
+        @php
+                                                    $i=1
+                                                    @endphp
         @foreach($ukuran as $ukuran)    
             <input type="checkbox" name="id[]" value="{{$ukuran->id}}" > &nbsp;
             {{$ukuran->nama_ukuran}} </input>
-            
+            <!-- <input type="text" id="harga_pokok{{$i}}" name="harga_pokok" placeholder="harga pokok produk" style="padding:5px; width:25%;" > -->
             <input type="text" name="harga_tambah[]" placeholder="harga tambah dari harga pokok produk" style="padding:5px; width:25%" >
             <br/><br/>
-        @endforeach     
+            @php
+                                                    $i++
+                                                    @endphp
+        @endforeach 
+
     </div>
     <label>Mulai Preorder</label>
         <div class='input-group date' >
-                        <input type='text' name="tgl_awal_po" class="form-control" id="tanggal" required >
+                        <input type='text' name="tgl_awal_po" class="form-control" id="tanggal" onChange="b()"required >
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -131,4 +138,21 @@
     }
   @endif
 </script>
+@endsection
+@section('js')
+<script type="text/javascript">
+        function b(){
+            event.preventDefault();
+        var harga=$('#harga_pokok2').val();
+        console.log(harga);
+         @php
+            $i=1;
+            
+            @endphp
+        $('#harga_pokok2').val(harga);
+        @php
+             $i++;
+             
+             @endphp
+       </script>
 @endsection

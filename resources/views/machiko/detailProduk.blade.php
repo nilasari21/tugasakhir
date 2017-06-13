@@ -139,7 +139,7 @@
                             <div class="quantity buttons_added">
                                
                                 <select class="form-control" name="id_produk_ukuran" style="border: 1px solid #66CC99;font-family:Roboto">
-                                    @foreach($ukuran as $row)
+                                    @foreach($ukuran2 as $row)
 
                                      
                                     <option value="{{$row->id_produk_ukuran}}" >

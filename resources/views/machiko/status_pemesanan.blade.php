@@ -117,9 +117,12 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
-
-                                      
+                                        <p>Keterangan status</p><br/>
+                                        1. Pending, kondisi dimana produk dalam transaksi sedang menunggu diproduksi/dipacking <br/>
+                                        2. Produksi, kondisi dimana produk dalam transaksi sedang diproduksi<br/>
+                                        3. Packing, kondisi dimana produk dalam transaksi sedang dipacking<br/>
+                                        4. Pengiriman, kondisi dimana produk dalam transaksi sudah diambil oleh kurir JNE akan tetapi belum terdapat nomor resi<br/>
+                                        5. Selesai, kondisi dimana produk dalam transaksi sudah dikirim oleh kurir dan sudah terdapat nomor resi<br/>
                                     </div>                        
                                 </div>                    
                             </div>

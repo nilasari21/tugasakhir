@@ -160,11 +160,25 @@
                                                         </td>
                                                         <td class="product-name">
                                                             {{$row->alasan_tolak}}<br/>
-                                                            Silahkan upload bukti yang seuai.
+                                                            Silahkan upload bukti yang sesuai.
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
                                                             <a class="add_to_cart_button"  id="ubahbukti" data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="#">Ubah bukti</a>
+                                                            
+                                                        </td>
+                                                        <?php
+                                                      }if(count($row->id_konfirmasi)==1 && $row->status=="Terima"){?>
+                                                        <td class="product-name">
+                                                            {{$row->status}}
+                                                        </td>
+                                                        <td class="product-name">
+                                                            Bukti pembayaran anda telah diterima, silahkan kunjungi menu status pemesanan untuk
+                                                            melihat status pemesanan produk anda.
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <!-- <a class="add_to_cart_button"  id="ubahbukti" data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="#">Ubah bukti</a> -->
                                                             
                                                         </td>
                                                         <?php

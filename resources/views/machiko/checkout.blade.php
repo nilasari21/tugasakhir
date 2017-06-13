@@ -10,6 +10,28 @@
 </style>
 @endsection
 @section('content')
+<div class="modal fade" id="cod" role="dialog" style="padding-top:100px" aria-hidden="true">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Pemberitahuan</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                      
+                                      <p>Mohon maaf, metode pembayaran melalui COD hanya berlaku untuk wilayah Daerah Istimewa Yogyakarta. Silahkan pilih metode pembayaran lain. Terimakasih</p>
+                                      
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-success" data-dismiss="modal">Ya</button>
+                                      
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            </div>
 <!--  -->
 <div class="product-big-title-area">
             <div class="container">
@@ -22,6 +44,14 @@
                 </div>
             </div>
         </div>
+        @if(session()->has('message'))
+    <!-- <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div> -->
+    <div class="alert alert-danger">
+        {{ session()->get('message') }}
+    </div>
+@endif
 <div class="single-product-area">
     <!-- <div class="zigzag-bottom">
     </div> -->
@@ -96,7 +126,7 @@
                                                             <div class="quantity buttons_added">
                                                                 {{ $b->jumlah }}
                                                                 <input type="hidden" id="jumlah{{$i}}" value="{{ $b->jumlah }}" readonly>
-                                                                <input type="text" id="minimal_beli{{$i}}" value="{{ $b->minimal_beli }}">
+                                                                <input type="hidden" id="minimal_beli{{$i}}" value="{{ $b->minimal_beli }}">
                                                                 
                                                             </div>
                                                         </td>
@@ -207,7 +237,7 @@
                         <input type="hidden" class="form-control" id="jenis_metode" name="jenis_metode" value="">
                         <div class="col-sm-4">
                         <select class="form-control" style="width: 100%;" onChange="b();span();getTotal()" id="metode" name="metode" required/>
-                            <option>Pilih metode pembayaran</option>
+                            <option value="Pilih">Pilih metode pembayaran</option>
                               @foreach($metodebanyak as $row)
                                     <option value="{{$row->id}}" >
                                         {{$row->metode}}
@@ -246,18 +276,14 @@
                           <tr>
                               <td colspan="9">
                                                             
-                                   Belum Cek ongkir                         
+                                   Mohon tunggu untuk menampilkan kurir                        
                             </td>
                           </tr>
                       </tbody>
-                      <tbody id="ongkos2" >
-                          <tr>
-                            <td><input type="radio" id="ongkir" name="ongkir"  onChange="pecah2();getTotal();"value="0,COD" class="ongkir"></td>
-                              <td colspan="9">
-                                                            
-                                   COD                         
-                            </td>
-                          </tr>
+                      <tbody id="ongkos3">
+                          <tr><td id="ongkos2" style="display:none"><input type="radio" id="ongkir" name="ongkir"  onChange="pecah2();getTotal();"value="0,COD" class="ongkir"></td>
+                    <td style="color:#000" colspan="4" style="display:none">COD</td>
+                    </tr>
                       </tbody>
                     </table>
                   </div>
@@ -475,7 +501,7 @@ if(level=="Reseller" && option=="Reseller"){
              
         
     </script>
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
 function cod() {
       
       
@@ -483,16 +509,18 @@ function cod() {
      var asal=$('#kota_asal').val();
      console.log(asal);
                 if(asal==39 || asal==501 ||asal==419 ||asal==210 ||asal==135 ){
+                  
                   document.getElementById('ongkos2').style.display = 'block';
+                  document.getElementById('co').style.display = 'block';
                   
                 } else{
-                  document.getElementById('ongkos2').style.display = 'none';
-                  document.getElementById('co').style.display = 'none';
+                  document.getElementById('ongkos3').style.display = 'none';
+                  
                 }
         
 
             };
-</script>
+</script>-->
      <script type="text/javascript">
 function b() {
       event.preventDefault();
@@ -539,9 +567,10 @@ function span() {
       
       
 
-     var jenis=$('#jenis_metode').val();
+     var jenis=document.getElementById('jenis_metode').value;
      console.log(jenis);
                 var kota_tujuan=$('#kota_asal').val();
+                console.log(kota_tujuan);
      console.log(jenis);
                 if(jenis == "COD" && (kota_tujuan!=135||kota_tujuan!=419||kota_tujuan!=210||kota_tujuan!=39||kota_tujuan!=501)){
                   document.getElementById('span').style.display = 'none';
@@ -694,7 +723,7 @@ function getAlamat() {
             // $.each(hasil, function(index, hasil){
             $('#alamat').empty();
             
-                $('#alamat').val(hasil.nama_penerima+'\n'+hasil.no_hp_penerima+'\n'+hasil.alamat_lengkap+','+hasil.kecamatan+','+hasil.kabupaten+','+hasil.provinsi);
+                $('#alamat').val(hasil.nama_penerima+'\n'+hasil.no_hp_penerima+'\n'+hasil.alamat_lengkap+','+hasil.kabupaten+','+hasil.provinsi);
                 $('#kota').val(hasil.kabupaten);
                 $('#idpenerima').val(hasil.id_penerima);
                 $('#kota_asal').val(idalamat())

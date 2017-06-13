@@ -31,7 +31,7 @@ class KonfirmasiControllerMachiko extends Controller {
                       // ->join('detail_transaksi','detail_transaksi.id_transaksi','transaksi.id_transaksi')
                       // ->join('users','users.id','transaksi.id_user')
                       ->where('transaksi.id_user','=',Auth::user()->id)
-                      ->where('transaksi.status_bayar','Belum lunas')
+                      // ->where('transaksi.status_bayar','Belum lunas')
                       // ->where('transaksi.status_pemesanan_produk','!=','Batal')
                       // ->where('transaksi.status_jenis_pesan','!=','Tolak')
                       ->get();

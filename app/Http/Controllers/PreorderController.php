@@ -8,6 +8,7 @@ use App\Produk;
 use App\Kategori;
 use App\Metode;
 use App\Ukuran;
+use App\RiwayatPo;
 use Image;
 // cause Illuminate\Support\Fades\Input;
 use App\ProdukUkuran;
@@ -93,6 +94,10 @@ public function __construct(){
           $ProdukUkuran->harga_tambah= 0;
           $ProdukUkuran->save();
 
+      $riwayat= new RiwayatPo();
+      $riwayat->id_produk= $produk->id;
+      $riwayat->id_status_po=1;
+      $riwayat->save();
       return redirect()
                 ->back()
                 ->with('status', 'Gambar Berhasil di Upload');
@@ -169,15 +174,18 @@ public function __construct(){
       //     $ProdukUkuran->save();
       //   } 
       // }else{
+      
         foreach ($request->id as $key=>$val ) {
           $ProdukUkuran = new ProdukUkuran();
           $ProdukUkuran->produk_id = $produk->id;
           $ProdukUkuran->ukuran_id = $val;
-          $ProdukUkuran->harga_pokok = $request->harga_pokok;
+          $ProdukUkuran->harga_pokok = $request->harga_pokok2;
           $ProdukUkuran->stock = 0;
           $ProdukUkuran->harga_tambah= $request->harga_tambah[$key];
           $ProdukUkuran->save();
+          
       }
+
       
       // $pivotData = array($produkId => array('stock' => $stock, 'harga_tambah' => $harga_tambah));
 
@@ -189,6 +197,10 @@ public function __construct(){
       
 
       $produk->metode()->attach($request->metode_id);
+      $riwayat= new RiwayatPo();
+      $riwayat->id_produk= $produk->id;
+      $riwayat->id_status_po=1;
+      $riwayat->save();
       return redirect()
                 ->back()
                 ->with('succes', 'Gambar Berhasil di Upload');

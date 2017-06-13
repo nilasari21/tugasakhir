@@ -57,16 +57,20 @@ class TransaksiControllerMachiko extends Controller {
                           ->first();
         $penerima = Penerima::where('penerima.id_user','=',$id)
                         ->get();
-       $metodebanyak=  MetodeProduk::select('*',(DB::raw ('count(metode_produk.metode_id)')))
-                              ->join ('metode','metode_produk.metode_id','=','metode.id' )
-                              ->join('produk_ukuran','produk_ukuran.produk_id','=','metode_produk.produk_id')
+       $metodebanyak=  MetodeProduk::join ('metode','metode_produk.metode_id','=','metode.id' )
+                              ->join('produk','metode_produk.produk_id','produk.id')
+                              ->join('produk_ukuran','produk_ukuran.produk_id','=','produk.id')
                               ->JOIN ('keranjang' ,'produk_ukuran.id_produk_ukuran','=','keranjang.id_produk_ukuran')
+                              
+                              // ->where('produk_ukuran.produk_id','=','produk.id')
                               ->where('keranjang.user_id','=',$id)
                               ->where('metode.status','=','Aktif')
-                              ->GROUPBY ('metode.metode','metode.id')
+                              ->select('metode.id','metode.metode')
+                              // ->GROUPBY ('metode.metode','metode.id')
                               ->HAVING ((DB::raw ('count(metode_produk.metode_id)')) ,'=',
                                 (DB::raw ('count(keranjang.id_produk_ukuran)')))
                               ->get();
+                              // dd($metodebanyak);
         $kota = RajaOngkir::Kota()->all();
         
          return view('machiko.checkout')->with(compact('data2',$data2,'keranjang','data',$data,$keranjang,
@@ -234,7 +238,15 @@ class TransaksiControllerMachiko extends Controller {
 
     }
     public function tambah(Request $request)
-    {
+    {if($request->id_metode=="Pilih"){
+       $notification = array(
+                    'message' => 'Anda belum memilih metode', 
+                    'alert-type' => 'warning'
+                );
+        return redirect()
+                ->back()
+                ->with($notification);  
+      }else{
       if($request->jenis_pesan=="Dropshipper"){
       $toko= Users::where('id','=',Auth::user()->id)
                   ->first();
@@ -258,8 +270,8 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->ongkir=$request->ongkir;
       $transaksi->kurir=$request->kurir;
       $transaksi->total_bayar=$request->total;
-      $transaksi->created_at= Carbon::now(7);
-      $transaksi->updated_at= Carbon::now(7);
+      /*$transaksi->created_at= Carbon::now(7);
+      $transaksi->updated_at= Carbon::now(7);*/
       
       if($transaksi->save()){
        
@@ -294,15 +306,27 @@ class TransaksiControllerMachiko extends Controller {
       
 
       $keranjang = Keranjang::where('user_id','=',Auth::user()->id)
+                  ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','keranjang.id_produk_ukuran')
+                  ->join('produk','produk.id','produk_ukuran.produk_id')
                          ->get();
+                         // dd($keranjang);
     // dd($transaksi);
+
         foreach ($keranjang as $key ) {
+          // dd($key->jenis);
           $detailtransaksi = new DetailTransaksi();
           $detailtransaksi->id_transaksi = $transaksi->id_transaksi;
           // $detailtransaksi->id_produk = $key->produk_id;
           $detailtransaksi->id_produk_ukuran = $key->id_produk_ukuran;
           // $detailtransaksi->status_pesan= "Pending";
           $detailtransaksi->jumlah_beli= $key->jumlah;
+          if($key->jenis=='Ready Stock'){
+            $detailtransaksi->status="Siap";
+          }if($key->jenis=='PreOrder'){
+            $detailtransaksi->status="Menunggu";
+          }
+          $detailtransaksi->created_at=Carbon::now(8);
+          $detailtransaksi->updated_at=Carbon::now(8);
           $detailtransaksi->save();
           $data = Keranjang::where('user_id','=',Auth::user()->id);
           // ;
@@ -326,6 +350,7 @@ class TransaksiControllerMachiko extends Controller {
                 
        //
     }
+  }
      public function tambah2(Request $request)
     // { dd($request->ongkoskirim);
      {

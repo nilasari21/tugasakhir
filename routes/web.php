@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'ProdukControllerMachiko@index');
-Route::get('/home', 'ProdukControllerMachiko@index');
+// Route::get('/home', 'ProdukControllerMachiko@index');
 
 /*Route::get('admin', function () {
     return view('admin.beranda.beranda');
@@ -109,7 +109,10 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index');
 
 
-
+// Password Reset Routes...
+$this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+$this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+$this->post('password/reset', 'Auth\PasswordController@reset');
 
 // front end
 

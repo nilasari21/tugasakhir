@@ -65,7 +65,7 @@ public function __construct(){
         $data->user_id = Auth::user()->id;
         $data->id_produk_ukuran = $request->id_produk_ukuran;
         $data->jumlah = $request->jumlah;
-        $data->keterangan = $request->keterangan;
+        // $data->keterangan = $request->keterangan;
         $berat= Produk::where('id','=',$request->produk_id)
                     ->first();
         $data->berat_total=$berat->berat*$request->jumlah;
