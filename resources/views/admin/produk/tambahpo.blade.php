@@ -50,20 +50,24 @@
             <input type="text" id="harga_pokok2" name="harga_pokok2" placeholder="harga pokok produk" style="padding:5px; width:25%;" >
             </div>
     <div class="formukuran" id="ukuran1" style="display:none" >
-        @php
-                                                    $i=1
-                                                    @endphp
-        @foreach($ukuran as $ukuran)    
-            <input type="checkbox" name="id[]" value="{{$ukuran->id}}" > &nbsp;
-            {{$ukuran->nama_ukuran}} </input>
-            <!-- <input type="text" id="harga_pokok{{$i}}" name="harga_pokok" placeholder="harga pokok produk" style="padding:5px; width:25%;" > -->
-            <input type="text" name="harga_tambah[]" placeholder="harga tambah dari harga pokok produk" style="padding:5px; width:25%" >
-            <br/><br/>
-            @php
-                                                    $i++
-                                                    @endphp
-        @endforeach 
-
+ <div id="initRow" class="form-group">
+        
+           
+            <select class="form-control" name="id[]" style="padding:5px; width:30%">
+                        <option>Pilih jenis ukuran</option>
+                        @foreach($ukuran as $ukuran) 
+                        <option value="{{$ukuran->id}}" >
+                            {{$ukuran->nama_ukuran}} 
+                        </option>
+                        @endforeach 
+        </select>
+        
+             
+            <input type="text" name="harga_tambah[]" placeholder="harga tambah dari harga pokok produk" style="padding:5px; width:25%" > &nbsp;
+            
+            </input>
+            <button type="button" class="btn btn-fw btn-info waves-effect waves-effect">Tambah</button> 
+ </div>
     </div>
     <label>Mulai Preorder</label>
         <div class='input-group date' >
@@ -138,21 +142,44 @@
     }
   @endif
 </script>
-@endsection
-@section('js')
+
+
+       
 <script type="text/javascript">
-        function b(){
-            event.preventDefault();
-        var harga=$('#harga_pokok2').val();
-        console.log(harga);
-         @php
-            $i=1;
-            
-            @endphp
-        $('#harga_pokok2').val(harga);
-        @php
-             $i++;
-             
-             @endphp
-       </script>
+function addRow(section, initRow) {
+    var newRow = initRow.clone().removeAttr('id').addClass('new').insertBefore(initRow),
+        deleteRow = $('<a class="rowDelete"><img src="http://i.imgur.com/ZSoHl.png"></a>');
+   
+    newRow
+        .append(deleteRow)
+        .on('click', 'a.rowDelete', function() {
+            removeRow(newRow);
+        })
+        .slideDown(300, function() {
+            $(this)
+                .find('button').focus();
+        })
+}
+        
+function removeRow(newRow) {
+    newRow
+        .slideUp(200, function() {
+            $(this)
+                .next('div:not(#initRow)')
+                    .find('button').focus()
+                    .end()
+                .end()
+                .remove();
+        });
+}
+
+$(function () {
+    var initRow = $('#initRow'),
+        section = initRow.parent('section');
+    
+    initRow.on('focus', 'button', function() {
+        addRow(section, initRow);
+    });
+});
+</script>
 @endsection

@@ -73,7 +73,7 @@ Rp {{ $row->harga_pokok }},00
 </div>
 @endforeach
 
-        {{ session('id') }} 
+        
 </div>
 </div>
 

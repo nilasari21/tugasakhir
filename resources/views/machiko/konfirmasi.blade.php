@@ -49,7 +49,7 @@
                                     <div class="woocommerce">
                                         
                                             <div class="table-responsive">
-                                            <table cellspacing="0" class="shop_table cart" style="width:100%;align:center;font-size:12px" >
+                                            <table cellspacing="0" class="shop_table cart" style="width:100%;align:center;font-size:15px" >
                                                 <thead >
                                                     <tr >
                                                         
@@ -182,7 +182,20 @@
                                                             
                                                         </td>
                                                         <?php
-                                                      }if(count($row->id_konfirmasi)==0 && $row->status=="Pending" && $row->jenis=="COD"){?>
+                                                      }if(count($row->id_konfirmasi)==0 && $row->jenis=="COD" && $row->status_bayar=="Lunas"){?>
+                                                        <td class="product-name">
+                                                            {{$row->status}}
+                                                        </td>
+                                                        <td class="product-name">
+                                                            Pembayaran anda telah lunas
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <!-- <a class="add_to_cart_button"  id="ubahbukti" data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="#">Ubah bukti</a> -->
+                                                            
+                                                        </td>
+                                                        <?php
+                                                      }if(count($row->id_konfirmasi)==0 && $row->jenis=="COD" && $row->status_bayar=="Lunas"){?>
                                                         <td class="product-name">
                                                             {{$row->status}}
                                                         </td>

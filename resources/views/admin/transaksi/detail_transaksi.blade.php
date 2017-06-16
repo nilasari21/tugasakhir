@@ -11,6 +11,7 @@
         <tr>
           <!-- <th>Id Transaksi</th> -->
                       <th >Produk</th>
+                      <th >Jenis produk</th>
                       <!-- <th >Ukuran</th>
                       <th >Harga</th>
                       <th >Harga Tambah</th> -->
@@ -28,6 +29,7 @@
        @foreach ($data as $row)
         <tr>
            <td >{{$row->nama_produk}}</td>
+           <td >{{$row->jenis}}</td>
            <!-- <td >{{$row->nama_ukuran}}</td>
            <td >{{ "Rp ".number_format($row->harga_pokok,2, ',', '.') }}</td>
            <td >{{ "Rp ".number_format($row->harga_tambah,2, ',', '.') }}</td> -->
@@ -70,8 +72,11 @@
         </tr>
         <tr >
            <th >Kurir </th>
+           @if($detail->kurir=="COD")
+          <td  >  {{$detail->kurir}} </td>
+          @else
           <td  >  JNE {{$detail->kurir}} </td>
-
+          @endif
         </tr>
         @if(count($detail->resi)==0)
         <tr >

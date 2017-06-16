@@ -101,6 +101,7 @@ Route::get('konfirmasibayar', 'KonfirmasiPembayaranController@index');
 Route::post('konfirmasibayar/simpan', 'KonfirmasiPembayaranController@simpan');
 Route::get('pembayaran_cod', 'PembayaranCODController@index');
 Route::post('pembayaran_cod/lunas/{id}', 'PembayaranCODController@postUpdate');
+Route::post('admin/statusbatal/{id}', 'PembayaranCODController@postUpdate2');
 
 
 

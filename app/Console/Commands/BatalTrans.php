@@ -57,7 +57,7 @@ class BatalTrans extends Command
                 $produk = ProdukUkuran::find($detail->id_produk_ukuran);
                 $produk->stock = $produk->stock + $detail->jumlah_beli;
                 $produk->save();
-                $trans->update(['status_pesan'=>'Batal']);
+                $trans->update(['status'=>'Batal']);
             }
         
         // DB::table('detail_transaksi')->where('id_transaksi','=',$trans->id_transaksi)

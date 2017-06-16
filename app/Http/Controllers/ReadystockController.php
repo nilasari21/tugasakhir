@@ -192,6 +192,9 @@ public function __construct(){
       //   } 
       // }else{
         foreach ($request->id as $key=>$val ) {
+          if($val==null){
+            continue;
+          }
           $ProdukUkuran = new ProdukUkuran();
           $ProdukUkuran->produk_id = $produk->id;
           $ProdukUkuran->ukuran_id = $val;
@@ -232,7 +235,7 @@ public function __construct(){
         $harga= ProdukUkuran::where('produk_ukuran.produk_id','=',$id)
                             
                             ->join('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
-                            ->select('produk_ukuran.harga_pokok')
+                            ->select('produk_ukuran.harga_pokok','produk_ukuran.stock')
                             ->first();
         $metode= MetodeProduk::where('metode_produk.produk_id','=',$id)
                             

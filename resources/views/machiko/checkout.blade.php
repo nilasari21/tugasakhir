@@ -199,8 +199,15 @@
 
                         </div>
                       </div>
+                      <div class="col-sm-3 control-label">
+                      </div>
+
                          <div class="col-sm-4">
                         <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="{{ url('checkout/alamatbaru/'.Auth::user()->id) }}">Tujuan pengiriman baru</a>
+                      </div>
+                      <div class="col-sm-4 control-label">
+                      </div>
+                      <div class="col-sm-12 control-label">
                       </div>
                       @else
                       <div class="form-group">
@@ -209,7 +216,8 @@
                           <input type="hidden" placeholder="ex : Bandung" name="idpenerima" id="idpenerima" required="" value="{{$data2->id_penerima}}" class="form-control"/>
                           <textarea id="alamat" rows='3'style="border: 1px;width:100%;" value="" disabled >{{$data2->nama_penerima}}&#13;&#10;{{$data2->no_hp_penerima}},&#13;&#10;{{$data2->alamat_lengkap}}, {{$data2->kabupaten}}, {{$data2->provinsi}} </textarea>
                           <input type="hidden" placeholder="ex : Bandung" name="kota" id="kota" required="" value="{{$data2->kabupaten}}" class="form-control"/>
-                          <input type="hidden" id="kota_asal"  name="kota_asal" value="" />
+                          <input type="hidden" id="kota_asal" name="kota_asal" value="" />
+                          <input type="hidden" id="kabu"  name="kabu" value="{{$data2->kabupaten}}" />
                         </div>
                         </div>
 
@@ -217,7 +225,7 @@
                       <div class="col-sm-3 control-label">
                       </div>
                       <div class="col-sm-4">
-                        <select class="form-control" style="width: 100%;" onChange="getAlamat();getOngkir();cod()" id="alamat_pilih" name="alamat_pilih" />
+                        <select class="form-control" style="width: 100%;" onChange="getAlamat();getOngkir();" id="alamat_pilih" name="alamat_pilih" />
                             <option>Pilih alamat lain</option>
                               @foreach($penerima as $row)
                                     <option value="{{$row->kabupaten}}" >
@@ -236,7 +244,7 @@
                         <input type="hidden" class="form-control" id="metode_pilih" name="metode_pilih" value="">
                         <input type="hidden" class="form-control" id="jenis_metode" name="jenis_metode" value="">
                         <div class="col-sm-4">
-                        <select class="form-control" style="width: 100%;" onChange="b();span();getTotal()" id="metode" name="metode" required/>
+                        <select class="form-control" style="width: 100%;" onChange="b();span();getTotal();" id="metode" name="metode" required/>
                             <option value="Pilih">Pilih metode pembayaran</option>
                               @foreach($metodebanyak as $row)
                                     <option value="{{$row->id}}" >
@@ -280,10 +288,14 @@
                             </td>
                           </tr>
                       </tbody>
-                      <tbody id="ongkos3">
-                          <tr><td id="ongkos2" style="display:none"><input type="radio" id="ongkir" name="ongkir"  onChange="pecah2();getTotal();"value="0,COD" class="ongkir"></td>
-                    <td style="color:#000" colspan="4" style="display:none">COD</td>
+
+                     
+                      <!-- <tbody id="ongkos3" colspan="4" style="display:none"> -->
+                          <tr><td id="ongkos2"  ><input type="radio" id="ongkir" name="ongkir" colspan="5" onChange="pecah2();getTotal();"value="0,COD" class="ongkir"></td>
+                    <!-- <td></td> -->
+                    <td style="color:#000" colspan="4" >COD (Hanya berlaku untuk Yogyakarta dan sekitarnya)</td>
                     </tr>
+                    
                       </tbody>
                     </table>
                   </div>
@@ -304,10 +316,16 @@
                       
                     </div>
                     @endforeach
-                    
+                    <div class="col-sm-2">
                     </div>
+                    <div class="col-sm-6">
+                    <span>Silahkan cek kembali daftar belanja dan form yang anda isi sebelum memilih tombol Checkout</span>
+                  </div>
+                    </div>
+
                       <div class="form-group">
                         <div class="col-sm-offset-5 col-sm-2">
+
                             <button type="submit" class="btn btn-success btn-block" style="background:#66CC99;font-family:Raleway">Checkout</button>
                         </div>
                     </div>
@@ -501,26 +519,68 @@ if(level=="Reseller" && option=="Reseller"){
              
         
     </script>
-    <!--<script type="text/javascript">
-function cod() {
-      
-      
-
-     var asal=$('#kota_asal').val();
-     console.log(asal);
+    </script>
+    <script type="text/javascript">
+/*$(document).ready(function (){
+ var asal=$('#kota_asal').val();
+     
                 if(asal==39 || asal==501 ||asal==419 ||asal==210 ||asal==135 ){
-                  
+     console.log(asal);             
                   document.getElementById('ongkos2').style.display = 'block';
-                  document.getElementById('co').style.display = 'block';
+                  // document.getElementById('co').style.display = 'block';
+                  document.getElementById('ongkos3').style.display = 'block';
                   
                 } else{
                   document.getElementById('ongkos3').style.display = 'none';
+                  document.getElementById('ongkos2').style.display = 'none';
+                }
+     
+            });*/
+</script>
+    <script type="text/javascript">
+function cod(){
+      // event.preventDefault();
+      
+
+     var asal=$('#kabu').val();
+     console.log(asal);
+                if(asal=="sleman" || asal=="Yogyakarta" ||asal=="kulon progo" ||asal=="gunung kidul" ||asal=="bantul" ){
                   
+                  document.getElementById('ongkos3').style.display = 'block';
+                  document.getElementById('ongkos2').style.display = 'block';
+                  // document.getElementById('co').style.display = 'block';
+                  
+                  
+                } else{
+                  document.getElementById('ongkos3').style.display = 'none';
+                  document.getElementById('ongkos2').style.display = 'none';
                 }
         
 
             };
-</script>-->
+</script>
+   <script type="text/javascript">
+function co() {
+      event.preventDefault();
+       var asal=$('#kabu').val();
+     console.log(asal);
+                if(asal=="sleman" || asal=="Yogyakarta" ||asal=="kulon progo" ||asal=="gunung kidul" ||asal=="bantul" ){
+                  
+                  document.getElementById('ongkos3').style.display = 'block';
+                  document.getElementById('ongkos2').style.display = 'block';
+                  // document.getElementById('co').style.display = 'block';
+                  
+                  
+                } else{
+                  document.getElementById('ongkos3').style.display = 'none';
+                  document.getElementById('ongkos2').style.display = 'none';
+                }
+        
+
+      
+
+            };
+</script>
      <script type="text/javascript">
 function b() {
       event.preventDefault();
@@ -600,7 +660,19 @@ function span() {
     <script type="text/javascript">
 $(document).ready(function (){
  getOngkir();      
-cod();
+ var asal=$('#kabu').val();
+     console.log(asal);
+                if(asal=="sleman" || asal=="Yogyakarta" ||asal=="kulon progo" ||asal=="gunung kidul" ||asal=="bantul" ){
+                  
+                  document.getElementById('ongkos3').style.display = 'block';
+                  document.getElementById('ongkos2').style.display = 'block';
+                  // document.getElementById('co').style.display = 'block';
+                  
+                  
+                } else{
+                  document.getElementById('ongkos3').style.display = 'none';
+                  document.getElementById('ongkos2').style.display = 'none';
+                }
      
             });
 </script>
@@ -727,6 +799,7 @@ function getAlamat() {
                 $('#kota').val(hasil.kabupaten);
                 $('#idpenerima').val(hasil.id_penerima);
                 $('#kota_asal').val(idalamat())
+                $('#kabu').val(hasil.kabupaten);
               console.log(hasil);
               // });
             });

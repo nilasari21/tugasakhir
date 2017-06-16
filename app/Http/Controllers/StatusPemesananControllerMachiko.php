@@ -34,7 +34,7 @@ class StatusPemesananControllerMachiko extends Controller {
                            ->leftJoin('produk_ukuran','produk_ukuran.id_produk_ukuran','=','detail_transaksi.id_produk_ukuran')
                            ->leftjoin('produk','produk.id','produk_ukuran.produk_id')
                          ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
-                         ->select('transaksi.*','detail_transaksi.*','produk.*','produk_ukuran.*','ukuran.*')
+                         ->select('transaksi.*','detail_transaksi.*','produk.*','produk_ukuran.*','ukuran.*','detail_transaksi.status as statusd')
                          ->where('transaksi.id_transaksi','=',$id)
                          ->where('detail_transaksi.id_transaksi','=',$id)
                          ->get();

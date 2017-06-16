@@ -78,13 +78,29 @@
             </div>    
     <br/>
     <div class="formukuran" id="ukuran" style="display:none" >
-        @foreach($ukuran as $ukuran)    
-            <input type="checkbox" name="id[]" value="{{$ukuran->id}}" > &nbsp;
-            {{$ukuran->nama_ukuran}} </input>
-            <input type="text" name="stock_[]"  placeholder="stock" style="padding:5px; width:10%" >
-            <input type="text" name="harga_tambah[]" placeholder="harga tambah dari harga pokok produk" style="padding:5px; width:25%" >
-            <br/><br/>
-        @endforeach     
+         
+        <div id="initRow" class="form-group">
+        
+           
+            <select class="form-control" name="id[]" style="padding:5px; width:30%">
+                        <option>Pilih jenis ukuran</option>
+                        @foreach($ukuran as $ukuran) 
+                        <option value="{{$ukuran->id}}" >
+                            {{$ukuran->nama_ukuran}} 
+                        </option>
+                        @endforeach 
+        </select>
+        
+             <input type="text" name="stock_[]"  placeholder="stock" style="padding:5px; width:10%" >
+            <input type="text" name="harga_tambah[]" placeholder="harga tambah dari harga pokok produk" style="padding:5px; width:25%" > &nbsp;
+            
+            </input>
+            <button type="button" class="btn btn-fw btn-info waves-effect waves-effect">Tambah</button> 
+            <!-- <a class="btn btn-default" name="multifield" style="border:1px solid #999 !important"><i class="fa fa-eye"></i>   Tambah</a> -->
+            <!-- <input name="multifield" placeholder="Value"> -->
+            
+        
+    </div>
     </div>
     <!-- <label>Stock Total</label>
         <input type="text" class="form-control" name="stock_total" placeholder="Berat" required> -->
@@ -139,5 +155,42 @@
             break;
     }
   @endif
+</script>
+<script type="text/javascript">
+function addRow(section, initRow) {
+    var newRow = initRow.clone().removeAttr('id').addClass('new').insertBefore(initRow),
+        deleteRow = $('<a class="rowDelete"><img src="http://i.imgur.com/ZSoHl.png"></a>');
+   
+    newRow
+        .append(deleteRow)
+        .on('click', 'a.rowDelete', function() {
+            removeRow(newRow);
+        })
+        .slideDown(300, function() {
+            $(this)
+                .find('button').focus();
+        })
+}
+        
+function removeRow(newRow) {
+    newRow
+        .slideUp(200, function() {
+            $(this)
+                .next('div:not(#initRow)')
+                    .find('button').focus()
+                    .end()
+                .end()
+                .remove();
+        });
+}
+
+$(function () {
+    var initRow = $('#initRow'),
+        section = initRow.parent('section');
+    
+    initRow.on('focus', 'button', function() {
+        addRow(section, initRow);
+    });
+});
 </script>
 @endsection

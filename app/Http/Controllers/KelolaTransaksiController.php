@@ -253,12 +253,19 @@ public function __construct(){
         $data->status_pemesanan_produk = "Selesai";
         $data->resi= $request->resi;
         $data->save();
-
+        $data2=DetailTransaksi::where('id_transaksi',$request->iddetail)
+                            ->where('status','!=','Batal')
+                            ->update(['status'=>'Selesai']);
         
       }else{
+        $data2=DetailTransaksi::where('id_transaksi',$request->idtrans)
+        // dd($data2);
+        ->where('status','!=','Batal')
+                            ->update(['status'=>$request->status_pesan]);
         $data = Transaksi::where('id_transaksi',$request->idtrans)->first();
        
         $data->status_pemesanan_produk = $request->status_pesan;
+
         // $transaksi->resi= $request->resi;
         $data->save();
         

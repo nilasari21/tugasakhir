@@ -37,11 +37,14 @@
     <!-- <div class="zigzag-bottom">
     </div> -->
     <div class="container ">
+      @if (Auth::guest())
+      @else
         <div class="row">
             <div class="col-md-12 col-sm-12 animated infinite slideInUp" style="animation-iteration-count: inherit;">
                 <a class="add_to_cart_button" onClick="a()" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#">Buat Testimoni</a>
             </div>
         </div>
+      @endif
         <br/>
        <div class="row animated infinite slideInUp" style="animation-iteration-count: inherit;">
                 @foreach ($data as $row)

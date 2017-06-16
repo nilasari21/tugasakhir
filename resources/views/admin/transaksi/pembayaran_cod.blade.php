@@ -48,7 +48,12 @@
              
             <button type="submit"  class="btn btn-default"><i class="fa  fa-check-square-o"></i>  Lunas</button>
             </form>
-            <button type="submit"  class="btn btn-default"><i class="fa  fa-eye"></i>  Detail</button>
+            <a class="btn btn-default" style="border:1px solid #999 !important" href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+            <form method="post" action="{{ url('admin/statusbatal/'.$row->id_transaksi) }}">
+              {{ csrf_field() }}
+              <input class="form-control"type="hidden" name="status"  value="Batal">
+              <button type="submit"  class="btn btn-default" style="border:1px solid #999 !important"><i class="fa fa-remove"></i>    Batal</button>
+            </form>
          </td>
         </tr>
         @php

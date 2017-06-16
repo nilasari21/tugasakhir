@@ -133,7 +133,7 @@
                       <!-- <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
                       <td>
-                         <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                         <a class="btn btn-default" style="border:1px solid #999 !important;    float: left; margin-right: 10px;"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
                         <!-- <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
                         <form method="post" action="{{ url('transaksi/ubah') }}">
                         {{ csrf_field() }}
@@ -145,7 +145,7 @@
                        <form method="post" action="{{ url('transaksi/ubah') }}">
                         {{ csrf_field() }}
                         <input class="form-control"type="hidden" name="idtrans" id="idtrans" value="{{ $row->id_transaksi }}">
-                        <input class="form-control"type="hidden" name="status_pesan"  value="Batal" style="display:none">
+                        <input class="form-control"type="hidden" name="status_pesan"  value="Packing" style="display:none">
                         <!-- <a class="btn btn-default3"type="submit" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
                         <button type="submit"  class="btn btn-default3" style="border:1px solid #999 !important"><i class="fa fa-edit"></i>  Packing</button>
                       </form>
@@ -196,7 +196,7 @@
                       <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
                       <td>
-                         <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                         <a class="btn btn-default" style="border:1px solid #999 !important;    float: left; margin-right: 10px;"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
                         <!-- <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
                         <form method="post" action="{{ url('transaksi/ubah') }}">
                         {{ csrf_field() }}
@@ -252,7 +252,7 @@
                       <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
                       <td>
-                         <a class="btn btn-default"style="border:1px solid #999 !important" href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                         <a class="btn btn-default"style="border:1px solid #999 !important;    float: left; margin-right: 10px;" href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
                         <!-- <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_detail_transaksi  }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
                      <form method="post" action="{{ url('transaksi/ubah') }}">
                         {{ csrf_field() }}
@@ -307,7 +307,7 @@
                       <td>{{ $row->jumlah_beli }}</td> -->
                       <td>{{ $row->status_bayar }}</td>
                       <td>
-                         <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                         <a class="btn btn-default"style="border:1px solid #999 !important;    float: left; margin-right: 10px;" href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
                         <a class="btn btn-default2" data-idt="{{ $row->id_transaksi }}" data-id="{{ $row->id_transaksi }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   Selesai</a>
                      
                      </td>
@@ -358,7 +358,7 @@
                       <td>{{ $row->status_bayar }}</td>
                       <td>{{ $row->resi }}</td>
                       <td>
-                         <a class="btn btn-default" style="border:1px solid #999 !important"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
+                         <a class="btn btn-default" style="border:1px solid #999 !important;    float: left; margin-right: 10px;"href="{{ url('/transaksi/detail/'.$row->id_transaksi ) }}"><i class="fa fa-eye"></i>   Detail</a>
                         <!-- <a class="btn btn-default2" data-id="{{ $row->id_transaksi }}" data-idt="{{ $row->id_transaksi }}" style="border:1px solid #999 !important"href="#"><i class="fa fa-edit"></i>   edit status</a> -->
                      </td>
                     </tr>
@@ -482,7 +482,7 @@
         });
            
     </script>
-<script type="text/javascript">
+<!--<script type="text/javascript">
     function a(){
        var status=$('#status_pesan').val();
        console.log(status);
@@ -496,6 +496,6 @@
     }
              
         
-    </script>
+    </script>-->
    
     @endsection

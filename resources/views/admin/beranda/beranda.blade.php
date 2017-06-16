@@ -131,15 +131,10 @@
             @elseif($status->nama_status=="Produksi")
             <form method="post" action="{{ url('admin/status/'.$row->id) }}">
               {{ csrf_field() }}
-              <input class="form-control"type="hidden" name="status"  value="Packing">
-              <button type="submit"  class="btn btn-default" style="border:1px solid #999 !important">  Packing</button>
+              <input class="form-control"type="hidden" name="status"  value="Selesai produksi">
+              <button type="submit"  class="btn btn-default" style="border:1px solid #999 !important">  Selesai produksi</button>
             </form>
-            @elseif($status->nama_status=="Packing")
-            <form method="post" action="{{ url('admin/status/'.$row->id) }}">
-              {{ csrf_field() }}
-              <input class="form-control"type="hidden" name="status"  value="Pengiriman">
-              <button type="submit"  class="btn btn-default" style="border:1px solid #999 !important">  Pengiriman</button>
-            </form>
+           
             
             @endif
            </td>

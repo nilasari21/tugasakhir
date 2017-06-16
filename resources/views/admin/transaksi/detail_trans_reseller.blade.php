@@ -110,7 +110,7 @@
                             </div> 
                       <div class="col-sm-3" style="display:none" id="diskon">
                         
-                       <input type="text" class="form-control" id="diskon" name="diskon"placeholder="Masukkan jumlah diskon">
+                       Rp <input type="text" class="form-control" id="diskon" name="diskon"placeholder="Masukkan jumlah diskon angka saja">
 
                        
                               

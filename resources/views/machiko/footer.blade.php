@@ -17,9 +17,9 @@
                         <div class="footer-social">
                             <a href="#" target="_blank"><i class="fa fa-instagram"></i></a> machiko.kstore
                             <a href="#" target="_blank"><i class="fa fa-whatsapp"></i></a> 085640235938<br/>
-                            <a href="#" target="_blank"><i class="fa fa-whatsapp"></i></a> 085640235938
+                            <a href="#" target="_blank"><i class="fa fa-whatsapp"></i></a> 082227384289 
                             <a href="#" target="_blank"><i class="fa fa-envelope-o"></i></a> info@machikokstore.com<br/>
-                            
+                            <!-- <img src="{{asset("/machikoo/img/line.png")}}"  >@ogm5420o -->
                         </div>                     
                     </div>
                 </div>

@@ -102,7 +102,7 @@
                                 <td><h5> : </h5></td>
                                 <td><h5> {{$harga->harga_pokok}}</h5></td>
                             </tr>
-                              
+                            
                             
                             <tr>
                                 <td><h5>Deskripsi produk</h5></td>
@@ -271,9 +271,11 @@
              
              @endphp
              if(pembanding==true){
-              document.getElementById('example2').style.display = 'none';
+              document.getElementById('example2').style.display = 'block';
+              // document.getElementById('stockk').style.display = 'block';
              }if(pembanding==false ){
               document.getElementById('example2').style.display = 'block';
+              // document.getElementById('stockk').style.display = 'none';
              }
              
      

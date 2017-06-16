@@ -108,9 +108,9 @@ hr {
          Whatsapp : 082227384289, 085640235938 <br/>
 <br/>
 <br/>   
-         Pembayaran :<br/>
+         <!-- Pembayaran :<br/>
          BRI : 
-
+ -->
             </div>
             </div>
     </div>

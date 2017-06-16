@@ -149,6 +149,14 @@
                                   
                                 </div>
                               </div>
+ @if(session()->has('message'))
+    <!-- <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div> -->
+    <div class="alert alert-danger">
+        {{ session()->get('message') }}
+    </div>
+@endif                              
 <div class="single-product-area">
     <!-- <div class="zigzag-bottom">
     </div> -->
@@ -223,7 +231,7 @@
                                                             <div class="quantity buttons_added">
                                                                 {{ $b->jumlah }}
                                                                 <input type="hidden" id="jumlah{{$i}}" value="{{ $b->jumlah }}" readonly>
-                                                                <input type="text" id="minimal_beli{{$i}}" value="{{ $b->minimal_beli }}">
+                                                                <input type="hidden" id="minimal_beli{{$i}}" value="{{ $b->minimal_beli }}">
                                                                 
                                                             </div>
                                                         </td>
@@ -325,7 +333,7 @@
                           <input type="hidden" id="provinsi_asal" name="provinsi_asal" value="" />
                           </div>
                       <div class="col-sm-4">
-                          <input type="text" placeholder="Kabupaten/kota" onChange="getOngkir();cod()" name="kabupaten" id="kabupaten" required="" value="" class="form-control"/>
+                          <input type="text" placeholder="Kabupaten/kota" onChange="getOngkir();" name="kabupaten" id="kabupaten" required="" value="" class="form-control"/>
                           <input type="hidden" id="kota_asal" name="kota_asal" value="" />
                           </div>
                       
@@ -353,7 +361,7 @@
                         <input type="hidden" class="form-control" id="jenis_metode" name="jenis_metode" value="">
                         <div class="col-sm-4">
                         <select class="form-control" style="width: 100%;" onChange="b();span();getTotal()" id="metode" name="metode" required/>
-                            
+                            <option value="Pilih">Pilih metode pembayaran</option>
                               @foreach($metodebanyak as $row)
                                     <option value="{{$row->id}}" >
                                         {{$row->metode}}
@@ -407,9 +415,11 @@
                                    COD                         
                             </td>
                           </tr> -->
+                          <!-- <td></td> -->
                         <tbody id="ongkos3">
-                          <tr><td id="ongkos2" style="display:none"><input type="radio" id="ongkir" name="ongkir"  onChange="pecah2();getTotal();"value="0,COD" class="ongkir"></td>
-                    <td style="color:#000" colspan="4" style="display:none">COD</td>
+                          
+                          <tr><td id="ongkos2" ><input type="radio" id="ongkir" name="ongkir"  onChange="pecah2();getTotal();"value="0,COD" class="ongkir"></td>
+                    <td style="color:#000" colspan="4" >COD (Hanya berlaku untuk wilayah Yogyakarta dan sekitarnya)</td>
                     </tr>
                       </tbody>
                     </table>
@@ -431,7 +441,11 @@
                       
                     </div>
                     @endforeach
-                    
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-6">
+                    <span>Silahkan cek kembali daftar belanja dan form yang anda isi sebelum memilih tombol Checkout</span>
+                  </div>
                     </div>
                       <div class="form-group">
                         <div class="col-sm-offset-5 col-sm-2">
@@ -513,9 +527,9 @@ function cod() {
      var asal=$('#kota_asal').val();
      console.log(asal);
                 if(asal==39 || asal==501 ||asal==419 ||asal==210 ||asal==135 ){
-                  // document.getElementById('ongkos3').style.display = 'block';
+                  document.getElementById('ongkos3').style.display = 'block';
                   document.getElementById('ongkos2').style.display = 'block';
-                  document.getElementById('co').style.display = 'block';
+                  // document.getElementById('co').style.display = 'block';
                   
                 } else{
                   document.getElementById('ongkos3').style.display = 'none';

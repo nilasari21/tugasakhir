@@ -112,6 +112,7 @@
                              @foreach($transak as $trans)
                              <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Catatan : Silahkan upload bukti pembayaran maksimal 48 jam setelah chekout. 
                               Jika dalam 48 jam belum ada bukti yang di upload, maka transaksi otomatis dibatalkan (Kecuali COD)</span><br/>
+                              Klik <a href="{{ url('konfirmasi') }}">disini </a> untuk ke halaman konfirmasi pembayaran.
                     <div class="form-group">
                         <label for="inputName" class="col-sm-3 control-label" >Nomor Transaksi</label>
                         <span> {{$data->id_transaksi}}</span>
@@ -166,7 +167,7 @@
                         <label for="inputName" class="col-sm-3 control-label" >Kurir</label>
                         <span>JNE  {{$trans->kurir}}</span>
                         @if($trans->kurir =="COD")
-                        (Silahkan koordinasi lokasi pembayaran dengan admin di nomor 085640235938)
+                        (Silahkan koordinasi lokasi serah terima barang dengan admin di nomor 085640235938)
                         @else
 
                         @endif

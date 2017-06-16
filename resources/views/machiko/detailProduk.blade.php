@@ -109,16 +109,23 @@
                         
                         </div>   
                         <?php
-                        }if(  $data->jenis=="PreOrder"&& count($a)!=0 ){ ?>
+                        }if(  $data->jenis=="PreOrder"&& count($a)!=0 && $riwayat->id_status_po == 1){ ?>
                         <div class="col-md-12">
                           <strong>Pre Order</strong><br/>
                         {{ $data->tgl_awal_po }} sampai {{ $data->tgl_akhir_po }}
                         </div> 
                     <?php
-                        }if(  $data->jenis=="PreOrder"&& count($a)==0 ){ ?>
+                        }if(  $data->jenis=="PreOrder"&& count($a)==0 && $riwayat->id_status_po != 1){ ?>
                          
                          <div class="col-md-12">
-                          <strong>Masa Pre-Order habis</strong><br/>
+                          <strong>Pre order sudah tidak dibuka oleh admin</strong><br/>
+                        
+                        </div>   
+                        <?php
+                        }if(  $data->jenis=="PreOrder"&& count($a)!=0 && $riwayat->id_status_po != 1){ ?>
+                         
+                         <div class="col-md-12">
+                          <strong>Pre order sudah tidak dibuka oleh admin</strong><br/>
                         
                         </div>   
                         <?php
@@ -157,7 +164,8 @@
                          </div>
                           @elseif($b->st == 0 && $data->jenis=="Ready Stock")
                           <!-- kosong               -->
-                                    @elseif(  $data->jenis=="PreOrder"&& count($a)==0 )
+                                    @elseif(  $data->jenis=="PreOrder"&& count($a)==0 && $riwayat->id_status_po !=1)
+                                    @elseif(  $data->jenis=="PreOrder"&& count($a)!=0 && $riwayat->id_status_po !=1)
                                     @else
                                     <div class="col-md-6"style="font-family:Roboto;padding-left:0px">
                       
@@ -222,14 +230,14 @@
                                     <!-- <span>Stock Habis</span> -->
                                     
                                     <?php } ?>
-                                    <?php if( $data->jenis=="PreOrder"&& count($a)!=0){?>
+                                    <?php if( $data->jenis=="PreOrder"&& count($a)!=0 && $riwayat->id_status_po == 1){?>
                                     <label>Jumlah:</label>
                                     <input type="number" name="jumlah" class="item_quantity" min="1"  value="1">
                                    <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Masukan Ke Keranjang</button>
 
                                     
                                     <?php } ?>
-                                    <?php if( $data->jenis=="PreOrder"&& count($a)==0){?>
+                                    <?php if( $data->jenis=="PreOrder"&& count($a)==0 && $riwayat->id_status_po != 1){?>
                                     
                                    <!-- <button type="submit" value="Submit" class="item_add btn btn-fefault cart" style="background:#66CC99">Masukan Ke Keranjang</button> -->
                                    <!-- <span>Masa Pre-Order habis</span> -->

@@ -549,7 +549,11 @@ hr {
                         <div class="col-sm-offset-1 col-xs-10">
                         
                         <div class="col-xs-8">
-                        <span>{{$data->level}}</span>
+                        <span>{{$data->level}}
+                        
+                        
+                        
+                        </span>
                         </div>
                         <div class="col-xs-4">
                         <a class="add_to_cart_button"  style="padding: 6px 10px;" id="upgrade" data-id="{{$data->id}}"  rel="nofollow" href="#">  Upgrade user</a>
@@ -575,6 +579,10 @@ hr {
                         
                         <div class="col-xs-8">
                         <span>{{$data->level}}</span>
+                        @if($data->konfirm_admin=="Pending")
+                        (Menunggu persetujuan admin)
+                        @else
+                        @endif
                         </div>
                         <div class="col-xs-4">
                         

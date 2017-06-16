@@ -100,7 +100,7 @@ class BerandaController extends Controller {
                         ->get();
                         
         foreach ($data1 as $key ) {
-                // dd($key);
+             
             $data2=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
                         ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
                         ->join('produk','produk.id','produk_ukuran.produk_id')
@@ -110,9 +110,9 @@ class BerandaController extends Controller {
                          ->where('detail_transaksi.status','=','Menunggu')
                         ->select('transaksi.id_transaksi',(DB::raw ('count(detail_transaksi.id_detail_transaksi)as b')))
                         ->get();
-                        // dd($data2);
+             
             foreach ($data2 as $a ) {
-             // dd($a)
+             
 
             if($a->b==0){
               $data=Transaksi::where('id_transaksi','=',$a->id_transaksi)
@@ -147,7 +147,7 @@ class BerandaController extends Controller {
         $status->updated_at=Carbon::now(8);
         $status->save();    
         }
-        if($request->status=="Packing"){
+        if($request->status=="Selesai produksi"){
        $data1=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
                         ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
                         ->join('produk','produk.id','produk_ukuran.produk_id')
@@ -158,27 +158,27 @@ class BerandaController extends Controller {
                         ->get();
                         
         foreach ($data1 as $key ) {
-                // dd($key);
+             
             $data2=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
                         ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
                         ->join('produk','produk.id','produk_ukuran.produk_id')
                        ->where('produk.id','!=',$id)
                         ->where('produk.jenis','=','PreOrder')
                         ->where('transaksi.id_transaksi','=',$key->id_transaksi)
-                         // ->Orwhere('detail_transaksi.status','=','Menunggu')
+             
                          ->where('detail_transaksi.status','=','Produksi')
                         ->select('transaksi.id_transaksi',(DB::raw ('count(detail_transaksi.id_detail_transaksi)as b')))
                         ->get();
                         
-                        // dd($data2);
+             
             foreach ($data2 as $a ) {
-             // dd($a)
+             
 
             if($a->b==0){
               $data=Transaksi::where('id_transaksi','=',$a->id_transaksi)
                             ->where('status_bayar','=','Lunas')
                         ->first();
-                $data->status_pemesanan_produk="Packing";
+                $data->status_pemesanan_produk="Produksi";
                 $data->save();
                         
             }
@@ -204,11 +204,11 @@ class BerandaController extends Controller {
         
         $status= new RiwayatPo;
         $status->id_produk=$id;
-        $status->id_status_po=3;
+        $status->id_status_po=5;
         $status->updated_at=Carbon::now(8);
         $status->save();    
         }
-        if($request->status=="Pengiriman"){
+        /*if($request->status=="Pengiriman"){
         $data1=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
                         ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
                         ->join('produk','produk.id','produk_ukuran.produk_id')
@@ -219,7 +219,7 @@ class BerandaController extends Controller {
                         ->get();
                         
         foreach ($data1 as $key ) {
-                // dd($key);
+             
             $data2=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
                         ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
                         ->join('produk','produk.id','produk_ukuran.produk_id')
@@ -232,9 +232,9 @@ class BerandaController extends Controller {
                         ->select('transaksi.id_transaksi',(DB::raw ('count(detail_transaksi.id_detail_transaksi)as b')))
                         ->get();
                         
-                        // dd($data2);
+             
             foreach ($data2 as $a ) {
-             // dd($a)
+             
 
             if($a->b==0){
               $data=Transaksi::where('id_transaksi','=',$a->id_transaksi)
@@ -262,7 +262,7 @@ class BerandaController extends Controller {
                         
         }
         
-        // dd($data2);
+        
         
         $status= new RiwayatPo;
         $status->id_produk=$id;
@@ -288,48 +288,32 @@ class BerandaController extends Controller {
                        ->where('produk.id','!=',$id)
                         ->where('produk.jenis','=','PreOrder')
                         ->where('transaksi.id_transaksi','=',$key->id_transaksi)
-                         ->where('detail_transaksi.status','=','Batal')
+                         ->where('detail_transaksi.status','=','Menunggu')
+                         ->oRwhere('detail_transaksi.status','=','Produksi')
                          
+                         ->oRwhere('detail_transaksi.status','=','Siap')
                         ->select('transaksi.id_transaksi',(DB::raw ('count(detail_transaksi.id_detail_transaksi)as b')))
-                        ->get();
-                        
-                        // dd($data2);
-            $dataa=Transaksi::join('detail_transaksi','transaksi.id_transaksi','detail_transaksi.id_transaksi')
-                        ->join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
-                        ->join('produk','produk.id','produk_ukuran.produk_id')
-                       ->where('produk.id','!=',$id)
-                        ->where('produk.jenis','=','PreOrder')
-                        ->where('transaksi.id_transaksi','=',$key->id_transaksi)
-                        
-                        ->select(DB::raw ('count(transaksi.id_transaksi)as c'))
                         ->get();
             
                         
             foreach ($data2 as $a ) {
-             // dd($a)
+             
 
             if($a->b==0){
-              
+              $data=Transaksi::where('id_transaksi','=',$a->id_transaksi)
+                            ->where('status_bayar','=','Lunas')
+                        ->first();
+                $data->status_pemesanan_produk="Batal";
+                $data->save();
                         
-            }
-            elseif($a->b==$dataa->c){
-                
-                $data=Transaksi::where('id_transaksi','=',$a->id_transaksi)
-                            ->where('status_bayar','=','Lunas')
-                        ->first();
-                $data->status_pemesanan_produk="Batal";
-                $data->save();
-                
-            }elseif($a->b-$dataa->c==0){
-                
-                $data=Transaksi::where('id_transaksi','=',$a->id_transaksi)
-                            ->where('status_bayar','=','Lunas')
-                        ->first();
-                $data->status_pemesanan_produk="Batal";
-                $data->save();
-                
+            
+           
             }else{
-
+                $data=Transaksi::where('id_transaksi','=',$a->id_transaksi)
+                            ->where('status_bayar','=','Lunas')
+                        ->first();
+                // $data->status_pemesanan_produk="Packing";
+                $data->save();
             }
             $data1=DetailTransaksi::join('produk_ukuran','produk_ukuran.id_produk_ukuran','detail_transaksi.id_produk_ukuran')
                         ->join('produk','produk.id','produk_ukuran.produk_id')
@@ -345,7 +329,7 @@ class BerandaController extends Controller {
         $status->id_status_po=6;
         $status->updated_at=Carbon::now(8);
         $status->save();    
-        }
+        }*/
         return redirect('beranda');
         
     }

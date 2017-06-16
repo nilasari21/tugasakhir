@@ -44,6 +44,7 @@ class TransaksiControllerMachiko extends Controller {
                          ->select('keranjang.*','produk.*','produk_ukuran.*','ukuran.*')
                          ->where('user_id','=',$id)
                          ->get();
+                         // dd($keranjang);
          $beratharga = Keranjang::leftJoin('produk_ukuran','produk_ukuran.id_produk_ukuran','=','keranjang.id_produk_ukuran')
                         ->join('produk','produk.id','=','produk_ukuran.produk_id')
                          ->leftjoin('ukuran','ukuran.id','=','produk_ukuran.ukuran_id')
@@ -57,22 +58,28 @@ class TransaksiControllerMachiko extends Controller {
                           ->first();
         $penerima = Penerima::where('penerima.id_user','=',$id)
                         ->get();
+        $ker= Keranjang::where('user_id','=',$id)
+                        ->select(DB::raw ('count(keranjang.id_keranjang) as c'))
+                        ->first();
+                        // dd($ker);
+
        $metodebanyak=  MetodeProduk::join ('metode','metode_produk.metode_id','=','metode.id' )
-                              ->join('produk','metode_produk.produk_id','produk.id')
-                              ->join('produk_ukuran','produk_ukuran.produk_id','=','produk.id')
+                              // ->join('produk','metode_produk.produk_id','produk.id')
+                              ->join('produk_ukuran','produk_ukuran.produk_id','=','metode_produk.produk_id')
                               ->JOIN ('keranjang' ,'produk_ukuran.id_produk_ukuran','=','keranjang.id_produk_ukuran')
                               
                               // ->where('produk_ukuran.produk_id','=','produk.id')
                               ->where('keranjang.user_id','=',$id)
                               ->where('metode.status','=','Aktif')
-                              ->select('metode.id','metode.metode')
-                              // ->GROUPBY ('metode.metode','metode.id')
+                              ->select('metode.id','metode.metode',(DB::raw ('count(keranjang.id_keranjang)')))
+                              ->GROUPBY ('metode.id','metode.metode')
                               ->HAVING ((DB::raw ('count(metode_produk.metode_id)')) ,'=',
-                                (DB::raw ('count(keranjang.id_produk_ukuran)')))
+                                $ker->c
+                                )
                               ->get();
                               // dd($metodebanyak);
         $kota = RajaOngkir::Kota()->all();
-        
+        // dd($kota);
          return view('machiko.checkout')->with(compact('data2',$data2,'keranjang','data',$data,$keranjang,
           'penerima',$penerima,'metodebanyak',$metodebanyak,'beratharga',$beratharga,'kota',$kota));
     }
@@ -103,23 +110,33 @@ class TransaksiControllerMachiko extends Controller {
        // dd($penerima);
 
                         // return $jumlahkeranjang;
-       $metodebanyak=  MetodeProduk::select('*',(DB::raw ('count(metode_produk.metode_id)')))
-                              ->join ('metode','metode_produk.metode_id','=','metode.id' )
+        $ker= Keranjang::where('user_id','=',$id)
+                        ->select(DB::raw ('count(keranjang.id_keranjang) as c'))
+                        ->first();
+                        // dd($ker);
+
+       $metodebanyak=  MetodeProduk::join ('metode','metode_produk.metode_id','=','metode.id' )
+                              // ->join('produk','metode_produk.produk_id','produk.id')
                               ->join('produk_ukuran','produk_ukuran.produk_id','=','metode_produk.produk_id')
                               ->JOIN ('keranjang' ,'produk_ukuran.id_produk_ukuran','=','keranjang.id_produk_ukuran')
+                              
+                              // ->where('produk_ukuran.produk_id','=','produk.id')
                               ->where('keranjang.user_id','=',$id)
                               ->where('metode.status','=','Aktif')
-                              // ->ORwhere('metode_produk.status','=','Aktif')
-                              ->GROUPBY ('metode.metode','metode.id')
-                              ->HAVING ((DB::raw ('count(metode_produk.metode_id)')) ,'=',(DB::raw ('count(keranjang.id_produk_ukuran)')))
+                              ->select('metode.id','metode.metode',(DB::raw ('count(keranjang.id_keranjang)')))
+                              ->GROUPBY ('metode.id','metode.metode')
+                              ->HAVING ((DB::raw ('count(metode_produk.metode_id)')) ,'=',
+                                $ker->c
+                                )
                               ->get();
-                              
+                              // dd($metodebanyak);
          $user=Users::where('id','=',$id)
                     ->first();
+                    // dd($user);
          $kota = RajaOngkir::Kota()->all();
          $prov = RajaOngkir::Provinsi()->all();
         // return $hasil;
-                        
+                        // dd($kota);
         return view('machiko.tambahalamat')->with(compact('keranjang',$keranjang,'data',$data,'metodebanyak',$metodebanyak,'beratharga',$beratharga,'kota',$kota,'prov',$prov,
                                               'user',$user));
     }
@@ -238,9 +255,29 @@ class TransaksiControllerMachiko extends Controller {
 
     }
     public function tambah(Request $request)
-    {if($request->id_metode=="Pilih"){
+
+    {
+      // dd($request->ongkir);
+      if($request->metode=="Pilih"){
        $notification = array(
                     'message' => 'Anda belum memilih metode', 
+                    'alert-type' => 'warning'
+                );
+        return redirect()
+                ->back()
+                ->with($notification);  
+      }if($request->ongkir==null){
+       $notification = array(
+                    'message' => 'Anda belum memilih kurir', 
+                    'alert-type' => 'warning'
+                );
+        return redirect()
+                ->back()
+                ->with($notification);  
+      }if(!($request->kota_asal==135 || $request->kota_asal==419 ||
+        $request->kota_asal==210 || $request->kota_asal==39 || $request->kota_asal==501) && $request->kurir=="COD"){
+       $notification = array(
+                    'message' => 'COD hanya berlaku untuk wilayah yogyakarta dan sekitarnya', 
                     'alert-type' => 'warning'
                 );
         return redirect()
@@ -354,6 +391,32 @@ class TransaksiControllerMachiko extends Controller {
      public function tambah2(Request $request)
     // { dd($request->ongkoskirim);
      {
+      if($request->metode=="Pilih"){
+       $notification = array(
+                    'message' => 'Anda belum memilih metode', 
+                    'alert-type' => 'warning'
+                );
+        return redirect()
+                ->back()
+                ->with($notification);  
+      }if($request->ongkoskirim==null){
+       $notification = array(
+                    'message' => 'Anda belum memilih kurir', 
+                    'alert-type' => 'warning'
+                );
+        return redirect()
+                ->back()
+                ->with($notification);  
+      }if(!($request->kota_asal==135 || $request->kota_asal==419 ||
+        $request->kota_asal==210 || $request->kota_asal==39 || $request->kota_asal==501) && $request->kurir=="COD"){
+       $notification = array(
+                    'message' => 'COD hanya berlaku untuk wilayah yogyakarta dan sekitarnya', 
+                    'alert-type' => 'warning'
+                );
+        return redirect()
+                ->back()
+                ->with($notification);  
+      }else{
       if($request->jenis_pesan=="Dropshipper"){
 
       $toko= Users::where('id','=',Auth::user()->id)
@@ -439,21 +502,21 @@ class TransaksiControllerMachiko extends Controller {
           $detailtransaksi->id_produk_ukuran = $key->id_produk_ukuran;
           // $detailtransaksi->status_pesan= "Pending";
           $detailtransaksi->jumlah_beli= $key->jumlah;
+          if($key->jenis=='Ready Stock'){
+            $detailtransaksi->status="Siap";
+          }if($key->jenis=='PreOrder'){
+            $detailtransaksi->status="Menunggu";
+          }
           $detailtransaksi->save();
           $data = Keranjang::where('user_id','=',Auth::user()->id);
           $data->delete();
       }
-      
-     
-      
-      
-
-      
       return redirect('rekap_pemesanan');
                 
                 
        //
     }
+}    
 }
 /*join('produk_ukuran','produk_ukuran.produk_id','=','produk.id')
                         ->select('produk.*','produk_ukuran.*')*/

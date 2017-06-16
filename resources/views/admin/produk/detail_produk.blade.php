@@ -119,6 +119,7 @@
                                 <td><h5> : </h5></td>
                                 <td><h5>{{$harga->harga_pokok}}</h5></td>
                               </tr>
+                              
                               <tr>
                                 <td><h5>Jumlah minimal dapat diproduksi</h5></td>
                                 <td><h5> : </h5></td>

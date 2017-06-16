@@ -28,8 +28,8 @@ public function __construct(){
                         ->select('transaksi.*','users.*')
                         ->where('transaksi.status_bayar','=','Belum lunas')
                         ->where('transaksi.status_pemesanan_produk','!=','Batal')
-                        ->ORwhere('metode.jenis','=','COD')
-                        ->where('transaksi.kurir','=','COD')
+                        ->where('metode.jenis','=','COD')
+                        // ->where('transaksi.kurir','=','COD')
                         ->get();
       // dd($data);
         return view('admin.transaksi.pembayaran_cod')->with('data',$data);
@@ -43,6 +43,23 @@ public function __construct(){
         $data->status_bayar=$request->lunas;
         $data->save();
         
+        return redirect('pembayaran_cod');
+    }
+    public function postUpdate2($id, Request $request)
+    {
+        // proses update data
+        $data = Transaksi::where('id_transaksi','=',$id)->first();
+        // dd($data);
+        $data->status_pemesanan_produk=$request->status;
+        $data->save();
+        $detail=DB::table('detail_transaksi')
+         ->where('id_transaksi','=',$data->id_transaksi)->get();
+         foreach ($detail as $key ) {
+            $produk=DB::table('produk_ukuran')
+            ->join('produk','produk.id','produk_ukuran.produk_id')
+            ->where('id_produk_ukuran','=',$key->id_produk_ukuran)
+            ->update(['produk_ukuran.stock'=>$key->jumlah_beli+'produk_ukuran.stock']);
+         }
         return redirect('pembayaran_cod');
     }
 }
