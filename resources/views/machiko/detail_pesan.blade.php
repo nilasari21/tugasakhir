@@ -54,7 +54,7 @@
                                                         <th class="product-quantity" style="background:#66CC99;font-family:Raleway">Harga</th>
                                                         <th class="product-price" style="background:#66CC99;font-family:Raleway">Harga Tambah</th>
                                                         <th class="product-price" style="background:#66CC99;font-family:Raleway">Jumlah</th>
-                                                        <th class="product-price" style="background:#66CC99;font-family:Raleway">Status</th>
+                                                        <!-- <th class="product-price" style="background:#66CC99;font-family:Raleway">Status</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -103,12 +103,7 @@
                                                                 
                                                             </div>
                                                         </td>
-                                                        <td class="product-quantity">
-                                                            <div class="quantity buttons_added">
-                                                                {{ $b->statusd }}
-                                                                
-                                                            </div>
-                                                        </td>
+                                                       
                                                     </tr></tr>
                                                                                                        
                                                    @endforeach
@@ -126,9 +121,7 @@
                                 </div>                    
                             </div> 
                             <br/>
-                            <span>Catatan : Jika terdapat produk yang berstatus <b>Batal</b>, anda akan dihubungi oleh admin untuk prosedur refund.
-                              Jika dalam 2x24 jam anda belum dihubungi oleh admin, maka silahkan kontak admin melalui kontak yang telah tersedia.</span><br/>
-                            <br/>
+                           
                              @foreach($transak as $trans)
                              @if($trans->status_bayar=="Belum lunas")
                              <span>Catatan : Silahkan upload bukti pembayaran maksimal 48 jam setelah chekout. 

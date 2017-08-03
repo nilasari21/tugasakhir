@@ -19,7 +19,7 @@
     {{ csrf_field() }}
     <div class="col-lg-4 col-md-4 col-sm-4">
       <label> Nama Kategori</label>
-    <input type="text" class="form-control" name="nama_kategori"value="{{ $data->nama_kategori }}" required>
+    <input type="text" class="form-control" name="nama_kategori"value="{{ $data->nama_kategori }}" placeholder="Nama Kategori (maksimal 50 karakter)" maxlength=50 required>
 <br/>
   </div>
 </div>

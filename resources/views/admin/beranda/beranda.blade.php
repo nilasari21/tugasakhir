@@ -83,7 +83,7 @@
       </div>
      <div class="panel panel-card" >
         <span>Produk pre-order beserta total pembelian yang telah lunas</span><br/>
-        <span>Perubahan status dari pengiriman menjadi selesai hanya dapat dilakukan pada halaman kelola transaksi</span>
+        
        <div class="box-body table-responsive margin">                   
                 <table id="data" class="table table-bordered table-hover dataTable table-striped">
                   <thead>

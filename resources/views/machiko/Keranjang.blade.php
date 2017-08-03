@@ -161,7 +161,7 @@
                                                     <tr>
                                                         <td colspan="9">
                                                             <strong>Total(belum termasuk ongkos kirim)</strong>
-                                                            <input name="totalb" type="text" id="jumlah"  value="" style="width:100px"readonly>
+                                                            <input name="totalb" type="text" id="jumlah"  value="" style="width:150px"readonly>
 
                                                     </tr>
                                                      <tr>
@@ -223,7 +223,8 @@
 
              console.log(hasil);
              total=total+( parseInt(satu)* parseInt(dua))+ (parseInt(tiga)*parseInt(satu));
-             document.getElementById("jumlah").value=total;
+             document.getElementById("jumlah").value='Rp '+(total/1000).toFixed(3)+',00';
+             
              console.log(total);
              berat_total=berat_total+( parseInt(beratto));
              document.getElementById("total_berat").value=berat_total;

@@ -59,6 +59,7 @@
                                                         <th class="product-price" style="background:#66CC99">Total yang harus dibayarkan</th>
                                                         <th class="product-price" style="background:#66CC99">Status</th>
                                                         <th class="product-price" style="background:#66CC99">Keterangan</th>
+                                                         <th class="product-price" style="background:#66CC99">Detail</th>
                                                         <th class="product-price" style="background:#66CC99" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                                         
                                                     </tr>
@@ -96,6 +97,11 @@
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
+                                                            <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="{{ url('konfirmasi/detail/'.$row->id_transaksi) }}">Lihat Detail</a>
+                                                            
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
                                                             <a class="add_to_cart_button1" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a>
                                                             
                                                         </td>
@@ -110,6 +116,11 @@
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
+                                                            <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="{{ url('konfirmasi/detail/'.$row->id_transaksi) }}">Lihat Detail</a>
+                                                            
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
                                                             <!-- <a class="add_to_cart_button" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a> -->
                                                             
                                                         </td>
@@ -120,6 +131,11 @@
                                                         </td>
                                                         <td class="product-name">
                                                             Silahkan upload bukti transfer dengan memilih tombol konfirmasi. Cek total harga yang harus anda bayarkan. 
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="{{ url('konfirmasi/detail/'.$row->id_transaksi) }}">Lihat Detail</a>
+                                                            
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
@@ -137,6 +153,11 @@
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
+                                                            <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="{{ url('konfirmasi/detail/'.$row->id_transaksi) }}">Lihat Detail</a>
+                                                            
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
                                                             <!-- <a class="add_to_cart_button" id="konfirmbukti" data-quantity="1" data-product_sku="" data-id="{{$row->id_transaksi}}" data-product_id="70" rel="nofollow" href="#">Konfirmasi</a> -->
                                                             
                                                         </td>
@@ -147,6 +168,11 @@
                                                         </td>
                                                         <td class="product-name">
                                                             Bukti berhasil diupload, silahkan tunggu persetujuan admin.
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="{{ url('konfirmasi/detail/'.$row->id_transaksi) }}">Lihat Detail</a>
+                                                            
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
@@ -164,6 +190,11 @@
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
+                                                            <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="{{ url('konfirmasi/detail/'.$row->id_transaksi) }}">Lihat Detail</a>
+                                                            
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
                                                             <a class="add_to_cart_button"  id="ubahbukti" data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="#">Ubah bukti</a>
                                                             
                                                         </td>
@@ -175,6 +206,11 @@
                                                         <td class="product-name">
                                                             Bukti pembayaran anda telah diterima, silahkan kunjungi menu status pemesanan untuk
                                                             melihat status pemesanan produk anda.
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="{{ url('konfirmasi/detail/'.$row->id_transaksi) }}">Lihat Detail</a>
+                                                            
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
@@ -191,6 +227,11 @@
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
+                                                            <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="{{ url('konfirmasi/detail/'.$row->id_transaksi) }}">Lihat Detail</a>
+                                                            
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
                                                             <!-- <a class="add_to_cart_button"  id="ubahbukti" data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="#">Ubah bukti</a> -->
                                                             
                                                         </td>
@@ -201,6 +242,11 @@
                                                         </td>
                                                         <td class="product-name">
                                                             Silahkan hubungi contact admin yang tersedia untuk koordinasi tempat dan waktu pembayaran.
+                                                        </td>
+                                                        <td class="product-subtotal"colspan="2">
+                                                        
+                                                            <a class="add_to_cart_button"  data-id="{{$row->id_transaksi}}" data-quantity="1" data-product_sku=""  data-product_id="70" rel="nofollow" href="{{ url('konfirmasi/detail/'.$row->id_transaksi) }}">Lihat Detail</a>
+                                                            
                                                         </td>
                                                         <td class="product-subtotal"colspan="2">
                                                         
@@ -271,6 +317,14 @@
                                             <!-- </div> -->
                                         </div>
                                         <div class="form-group">
+                                                <label for="exampleInputFile">Nama rekeing(jika pembayaran melalui ATM/Bank)</label>
+                                               <input  type="text" name="nama_rekening" class="form-control" placeholder="isi (-) bila pembayaran pulsa" required> 
+                                            </div> 
+                                        <div class="form-group">
+                                                <label for="exampleInputFile">Nomor rekening (jika pembayaran melalui ATM/Bank)</label>
+                                               <input  type="text" name="nomor_rekening" class="form-control" placeholder="isi (-) bila pembayaran pulsa" required> 
+                                            </div>     
+                                        <div class="form-group">
                                                 <label for="exampleInputFile">Total transfer</label>
                                                <input  type="number" name="total_transfer" class="form-control" placeholder="Total transfer" min=1 required> 
                                             </div>   
@@ -333,6 +387,13 @@
                                         </div>
                                             <!-- </div> -->
                                         </div>
+                                          <div class="form-group">
+                                                <label for="exampleInputFile">Nama rekeing(jika pembayaran melalui ATM/Bank)</label>
+                                               <input  type="text" name="nama_rekening" class="form-control" placeholder="isi (-) bila pembayaran pulsa" required> 
+                                            </div> 
+                                        <div class="form-group">
+                                                <label for="exampleInputFile">Nomor rekening (jika pembayaran melalui ATM/Bank)</label>
+                                               <in
                                         <div class="form-group">
                                                 <label for="exampleInputFile">Total transfer</label>
                                                <input  type="number" name="total_transfer" class="form-control" placeholder="Total transfer" min=1 required> 

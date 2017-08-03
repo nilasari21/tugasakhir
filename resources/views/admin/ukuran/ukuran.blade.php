@@ -15,7 +15,7 @@
          <form method="post" action="{{ url('ukuran/simpan') }}" style="margin-left:10px">
     {{ csrf_field() }}
     <div class="col-lg-10 col-md-10 col-sm-10">
-    <input type="text" class="form-control" name="nama_ukuran"placeholder="Nama Ukuran" required>
+    <input type="text" class="form-control" name="nama_ukuran"placeholder="Nama ukuran (maksimal 50 karakter)" maxlength=50 required>
 
   </div>
 

@@ -108,6 +108,8 @@
           <th>Foto</th>
           <th>Total transfer</th>
           <th>Total harus bayar</th>
+          <th>Nama rekening</th>
+          <th>Nomor rekening</th>
           <th>Status</th>
           <th>Aksi</th>
         </tr>
@@ -133,6 +135,8 @@
           
           <td>{{ $row->total_transfer }}</td>
           <td>{{ $row->total_bayar }}</td>
+          <td>{{ $row->nama_rekening }}</td>
+          <td>{{ $row->nomor_rekening }}</td>
           <td>{{ $row->status }}</td>
           
 

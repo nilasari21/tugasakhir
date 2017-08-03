@@ -92,19 +92,19 @@ class RegisterController extends Controller
             'name' => Input::get('name'),
             'email' => Input::get('email'),
             'password' => Hash::make(Input::get('password')),
-            // 'confirmation_code' => $confirmation_code,
+            'confirmation_code' => $confirmation_code,
             'no_hp' => Input::get ('nohp'),
             
             'konfirm_admin' => Input::get('konfirm'),
             'level' => Input::get('level'),
             ]);
-     /* Mail::send('auth.verify', ['confirmation_code' => $confirmation_code], function($m) {
+      Mail::send('auth.verify', ['confirmation_code' => $confirmation_code], function($m) {
             $m->from('admin1@admin.com', 'Toko');
             $m->to(Input::get('email'), Input::get('name'))
                 ->subject('Konfirmasi alamat email anda');
         });
- */
-        Session::flash('message', 'Terima kasih telah mendaftar! Silahkan login.');
+ 
+        Session::flash('message', 'Terima kasih telah mendaftar! Silahkan cek email anda untuk melakukan Konfirmasi.');
         // ]);
         return Redirect::to('daftar');
     }

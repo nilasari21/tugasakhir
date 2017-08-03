@@ -100,6 +100,10 @@
                                 </button>
                             </div>
                         </div>
+                        <div align="center" style="font-size:15px; margin:20px">  
+                        Dengan menekan Daftar , saya mengkonfirmasi telah menyetujui 
+    <a href="{{ url('syarat') }}">Syarat dan Ketentuan </a> Machiko K-Store.
+ </div>
                 </form>   
                 <div align="center" style="font-size:15px; margin:20px">  
         	      Sudah memiliki akun Machiko K-Store? Masuk <a href="{{ url('masuk') }}"> disini </a>

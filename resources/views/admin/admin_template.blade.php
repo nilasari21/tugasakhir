@@ -392,7 +392,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
     })
      });
     </script>
-   
+    <script>
+  $(function () {
+   $('#laporan').datepicker({
+    format: 'yyyy-mm-dd',
+    // startDate: '-3d'
+    })
+     });
+    </script>
+    <script>
+  $(function () {
+   $('#laporan2').datepicker({
+    format: 'yyyy-mm-dd',
+    // startDate: '-3d'
+    })
+     });
+    </script>
+    <script>
 <!-- <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> -->
 </body>
 </html>

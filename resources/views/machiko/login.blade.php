@@ -22,6 +22,10 @@
                 <div class="panel-body">
                 <!--  -->
                 <div class="row" style="margin-top:15px">
+                    @if (Session::has('message'))
+                            <div class="alert {{ Session::get('alert-class', 'alert-success') }}">
+                            {{ Session::get('message') }}</div>
+                            @endif
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 

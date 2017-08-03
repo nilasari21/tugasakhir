@@ -80,7 +80,16 @@
                         <li ><a href="{{ url('cekongkir') }}">Ongkos Kirim</a></li>
                         <li><a href="{{ url('testimoni') }}">Testimoni</a></li>
                         <li><a href="{{ url('about') }}">Tentang Kami</a></li>
-                        <li><a href="{{ url('faq') }}">Bantuan</a></li>
+                        <!-- <li><a href="{{ url('faq') }}">Bantuan</a></li> -->
+                        <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">Bantuan </span><b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="    background: none repeat scroll 0 0 #F09BA0;">
+                                    <li><a href="{{ url('faq') }}">Bantuan</a></li>
+                                    <li><a href="{{ url('syarat') }}">Syarat & ketentuan </a></li>
+                                    <!-- <li><a href="{{ url('status_pesan') }}">Status pemesanan</a></li> -->
+                                   
+                                    </ul>
+                            </li>
                         <li>
                             <div class="col-sm-4" style="float:right" >
                                 <form action="{{ url('pencarian') }}" method="GET" style="margin-top:8px; width:300px">

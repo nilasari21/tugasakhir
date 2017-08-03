@@ -15,7 +15,7 @@
          <form method="post" action="{{ url('kategori/simpan') }}" style="margin-left:10px">
     {{ csrf_field() }}
     <div class="col-lg-10 col-md-10 col-sm-10">
-    <input type="text" class="form-control" name="kategori"placeholder="Nama Kategori" required>
+    <input type="text" class="form-control" name="kategori"placeholder="Nama Kategori (maksimal 50 karakter)" maxlength=50 required>
 
   </div>
 

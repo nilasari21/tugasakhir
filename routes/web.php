@@ -27,6 +27,9 @@ Route::get('about', function () {
 Route::get('faq', function () {
     return view('machiko.faq');
 });
+Route::get('syarat', function () {
+    return view('machiko.syarat');
+});
 
 /*Route::get('machiko', function () {
     return view('machiko.test');
@@ -90,6 +93,9 @@ Route::post('readystock/simpan', 'ReadystockController@simpanukurandetail');
 Route::get('testimonimachiko', 'TestimoniControllerMachiko@index');
 
 Route::get('transaksi', 'KelolaTransaksiController@index');
+Route::get('laporan', 'LaporanTransaksi@index');
+Route::post('laporan/tanggal', 'LaporanTransaksi@Laporan');
+
 Route::get('/transaksi/detail/{id}', 'KelolaTransaksiController@detailtrans');
 Route::get('/transaksi/detailNotif/{id}', 'KelolaTransaksiController@detailtrans');
 Route::post('/transaksi/ubah', 'KelolaTransaksiController@ubahstatus');
@@ -123,7 +129,7 @@ Route::get('/daftar', function () {
 Route::get('/masuk', function () {
     return view('machiko.login');
 });
-
+Route::post('login','FrontController@postLogin');
 Route::get('profil', 'ProfilControllerMachiko@index');
 Route::post('profil/simpan', 'ProfilControllerMachiko@store');
 Route::post('profil/alamat', 'ProfilControllerMachiko@alamat');
@@ -173,7 +179,7 @@ Route::get('checkout/hasil/{kota_tujuan}/{radio}/{berat}', 'TransaksiControllerM
 Route::get('konfirmasi', 'KonfirmasiControllerMachiko@index');
 Route::post('konfirmasi/simpan', 'KonfirmasiControllerMachiko@simpan');
 Route::post('konfirmasi/ubahBukti', 'KonfirmasiControllerMachiko@ubahbukti');
-
+Route::get('konfirmasi/detail/{id}', 'KonfirmasiControllerMachiko@detail');
 Route::get('pencarian', 'ProdukControllerMachiko@search');
 Route::get('carikategori/{id}', 'ProdukControllerMachiko@showKategori');
 

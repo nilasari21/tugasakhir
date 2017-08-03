@@ -310,8 +310,8 @@
                       <div class="col-sm-4">
                         <input type="hidden" class="form-control" id="total1" name="total" value="{{$d->total}}" readonly>
                         <input type="hidden" class="form-control" id="total2" name="total" value="{{$d->total}}" readonly>
-                        <input type="text" class="form-control" id="total" name="total" value="{{$d->total}}" readonly>
-                        <input type="hidden" class="form-control" id="total3" name="total3" value="{{$d->total}}" readonly>
+                        <input type="hidden" class="form-control" id="total" name="total" value="{{$d->total}}" readonly>
+                        <input type="text" class="form-control" id="total3" name="total3" value="{{$d->total}}" readonly>
                       </div>
                       
                     </div>
@@ -847,14 +847,14 @@ function getAlamat() {
               if(ongkir){
               console.log('hai');
               var hasil = document.getElementById("total").value=( (parseFloat(total1)+ parseFloat(b))*parseFloat(rate)).toFixed(0);
-              var hasil = document.getElementById("total3").value=( (parseFloat(total1)+ parseFloat(b))*parseFloat(rate)).toFixed(0);  
+              var hasil = document.getElementById("total3").value='Rp '+((( (parseFloat(total1)+ parseFloat(b))*parseFloat(rate)).toFixed(0) )/1000).toFixed(3)+',00';  
               }
               
             }if(jenis=="Pulsa" ){
               if(!ongkir){
               console.log('hallo');
               var hasil = document.getElementById("total").value=( (parseFloat(total1)+ 0)*parseFloat(rate)).toFixed(0);
-              var hasil = document.getElementById("total3").value=( (parseFloat(total1)+ 0)*parseFloat(rate)).toFixed(0);  
+              var hasil = document.getElementById("total3").value='Rp '+((( (parseFloat(total1)+ 0)*parseFloat(rate)).toFixed(0))/1000).toFixed(3)+',00';  
               }
               
             }
@@ -862,7 +862,7 @@ function getAlamat() {
               if(ongkir){
               console.log('hallo haa');
               var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(b));
-              var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(b));  
+              var hasil = document.getElementById("total3").value='Rp '+((( parseFloat(total1)+ parseFloat(b)))/1000).toFixed(3)+',00';  
               }
               
             }
@@ -871,7 +871,7 @@ function getAlamat() {
               if(ongkir){
               console.log('hallo hahaha');
               var hasil = document.getElementById("total").value=( parseFloat(total1)+ parseFloat(ongkir));
-              var hasil = document.getElementById("total3").value=( parseFloat(total1)+ parseFloat(ongkir));  
+              var hasil = document.getElementById("total3").value='Rp '+((( parseFloat(total1)+ parseFloat(ongkir)))/1000).toFixed(3)+',00';  
               }
               
             }

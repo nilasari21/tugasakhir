@@ -19,7 +19,7 @@
                       <th >Harga Tambah</th> -->
                       <th >Minimal beli produk</th>
                       <th >Jumlah pembelian</th>
-                      <th >Keterangan</th>
+                      <!-- <th >Keterangan</th> -->
                       
         </tr>
       </thead>
@@ -36,7 +36,7 @@
           
            <td >{{$row->jumlah_beli}}<input type="hidden" id="jumlah{{$i}}" value="{{$row->jumlah_beli}}"></td>
            
-           <td ><span id="keterangan{{$i}}"  ></span></td>
+           <!-- <td ><span id="keterangan{{$i}}"  ></span></td> -->
         </tr>
          @php
          $i++

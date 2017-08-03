@@ -45,6 +45,7 @@
                     <li><a href="{{ url('konfirmasibayar') }}">Kelola pembayaran</a></li>
                     <li><a href="{{ url('transaksi_reseller') }}">Transaksi reseller</a></li>
                     <li><a href="{{ url('pembayaran_cod') }}">Pembayaran COD</a></li>
+                    <li><a href="{{ url('laporan') }}">Laporan transaksi</a></li>
                 </ul>
             </li>
             <li><a href="{{ url('metode') }}"> <i class="fa fa-credit-card" ></i> <span>Metode Bayar</span></a></li>

@@ -257,7 +257,7 @@ class TransaksiControllerMachiko extends Controller {
     public function tambah(Request $request)
 
     {
-      // dd($request->ongkir);
+      // dd($request->status);
       if($request->metode=="Pilih"){
        $notification = array(
                     'message' => 'Anda belum memilih metode', 
@@ -301,6 +301,7 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->id_penerima=$request->idpenerima;
       $transaksi->status_bayar="Belum lunas";
       $transaksi->jenis_pemesanan="Customer";
+      // if()
       $transaksi->status_jenis_pesan=$request->status;
       $transaksi->total_berat=$request->berat;
       $transaksi->status_pemesanan_produk="Pending";
@@ -309,7 +310,7 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_bayar=$request->total;
       /*$transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);*/
-      
+      // $transaksi->save();
       if($transaksi->save()){
        
         $admin=User::where('level', '=', 'Admin')->get();
@@ -329,7 +330,12 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->id_penerima=$request->idpenerima;
       $transaksi->status_bayar="Belum lunas";
       $transaksi->jenis_pemesanan=$request->level;
-      $transaksi->status_jenis_pesan=$request->status;
+      if($request->level=="Reseller"){
+      $transaksi->status_jenis_pesan="Tunggu";  
+      }else{
+      $transaksi->status_jenis_pesan=$request->status;  
+      }
+      
       $transaksi->total_berat=$request->berat;
       $transaksi->ongkir=$request->ongkir;
       $transaksi->kurir=$request->kurir;
@@ -367,14 +373,15 @@ class TransaksiControllerMachiko extends Controller {
           $detailtransaksi->save();
           $data = Keranjang::where('user_id','=',Auth::user()->id);
           // ;
-          if($data->delete()){
+          $data->delete();
+          /*if($data->delete()){
        
         $admin=User::where('level', '=', 'Admin')->get();
          foreach ($admin as $admin) {
         
         \Notification::send($admin, new PostNewNotification($data));
        }  
-      }
+      }*/
       }
       
      
@@ -454,14 +461,15 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);
       $transaksi->status_pemesanan_produk="Pending";
-      if($transaksi->save()){
+      $transaksi->save();
+      /*if($transaksi->save()){
        
         $admin=User::where('level', '=', 'Admin')->get();
          foreach ($admin as $admin) {
-        // $transaksi;
+        
         \Notification::send($admin, new PostNewNotification($transaksi));
        }  
-      }
+      }*/
     }else{
       $transaksi = new Transaksi; 
      
@@ -481,14 +489,15 @@ class TransaksiControllerMachiko extends Controller {
       $transaksi->total_bayar=$request->total;
       $transaksi->created_at= Carbon::now(7);
       $transaksi->updated_at= Carbon::now(7);
-      if($transaksi->save()){
+      $transaksi->save();
+      /*if($transaksi->save()){
        
         $admin=User::where('level', '=', 'Admin')->get();
          foreach ($admin as $admin) {
-        // $transaksi;
+        
         \Notification::send($admin, new PostNewNotification($transaksi));
        }  
-      }
+      }*/
     }
       
 
